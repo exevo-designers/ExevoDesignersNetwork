@@ -6,10 +6,8 @@
     <title>Join the Network | Exevo Designers Network</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
-    <!-- International Telephone Input -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@24.5.0/build/css/intlTelInput.css">
     <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@24.5.0/build/js/intlTelInput.min.js"></script>
-    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@0.321.0/dist/umd/lucide.min.js"></script>
     <style>
         :root {
@@ -72,12 +70,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .guideline-section {
-            border-bottom: 1px solid #f1f5f9;
-            padding-bottom: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
         .locked-btn {
             background: #e2e8f0;
             color: #94a3b8;
@@ -98,6 +90,29 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 64px;
+            left: 0;
+            right: 0;
+            background: white;
+            border-bottom: 1px solid #f1f5f9;
+            padding: 1rem;
+            z-index: 40;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .font-display {
+                letter-spacing: -0.02em;
+            }
+        }
     </style>
 </head>
 <body class="bg-white">
@@ -105,46 +120,53 @@
     <!-- Navigation -->
     <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 md:h-20 flex items-center justify-between">
-            <a href="html.index" class="group flex items-center space-x-2 md:space-x-3">
+            <a href="index.html" class="group flex items-center space-x-2 md:space-x-3">
                 <img src="Exevo Logo/Exevo Symbol@300x.png" alt="Exevo Logo" 
                      class="h-7 md:h-9 lg:h-10 w-auto object-contain transition-transform group-hover:scale-105" 
                      onerror="this.style.display='none'">
-                <div class="font-display font-bold text-sm sm:text-lg md:text-xl tracking-tighter flex items-center">
-                    EXEVO <span class="text-purple-600 ml-1 hidden xs:inline">DESIGNERS</span>
+                <div class="font-display font-bold text-sm sm:text-base md:text-xl tracking-tighter flex items-center">
+                    EXEVO <span class="text-purple-600 ml-1 hidden sm:inline">DESIGNERS</span>
                 </div>
             </a>
             <div class="hidden md:flex items-center space-x-6 text-[11px] font-semibold uppercase tracking-[0.2em] text-gray-500">
                 <button onclick="openGuidelines()" class="hover:text-black transition">Guidelines</button>
                 <a href="#" class="px-5 py-2.5 bg-black text-white rounded-full hover:bg-purple-600 transition-all shadow-lg shadow-black/5">Member Login</a>
             </div>
+            <button onclick="toggleMobileMenu()" class="md:hidden p-2">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+        <div id="mobileMenu" class="mobile-menu">
+            <button onclick="openGuidelines()" class="block w-full text-left py-2 text-sm font-semibold text-gray-700">Guidelines</button>
+            <a href="#" class="block w-full text-left py-2 text-sm font-semibold text-gray-700">Member Login</a>
         </div>
     </nav>
 
-    <main class="pt-32 pb-20 px-6">
-        <div class="max-w-5xl mx-auto grid lg:grid-cols-2 gap-16 items-start">
+    <main class="pt-24 md:pt-32 pb-12 md:pb-20 px-4 sm:px-6">
+        <div class="max-w-5xl mx-auto grid lg:grid-cols-2 gap-8 md:gap-16 items-start">
             
             <!-- Left Side -->
-            <div class="space-y-8 fade-in">
+            <div class="space-y-6 md:space-y-8 fade-in">
                 <div class="inline-block px-4 py-1.5 bg-purple-100 text-purple-600 text-[10px] font-black uppercase tracking-[0.2em] rounded-full">
                     Join the Network
                 </div>
-                <h1 class="text-5xl md:text-6xl font-display font-black leading-tight">
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-display font-black leading-tight">
                     Grow with <br><span class="text-purple-600">Exevo</span>.
                 </h1>
-                <p class="text-gray-500 text-lg max-w-md">
+                <p class="text-gray-500 text-base md:text-lg max-w-md">
                     Apply to join a creative hub where designers earn 80% of project fees and collaborate on premium global projects.
                 </p>
                 
                 <div class="grid grid-cols-1 gap-4 pt-4">
-                    <div class="flex items-start space-x-4 p-4 rounded-2xl bg-slate-50 border border-slate-100">
-                        <i data-lucide="check-circle-2" class="w-6 h-6 text-purple-600 mt-1"></i>
+                    <div class="flex items-start space-x-3 md:space-x-4 p-4 rounded-2xl bg-slate-50 border border-slate-100">
+                        <i data-lucide="check-circle-2" class="w-5 h-5 md:w-6 md:h-6 text-purple-600 mt-1 flex-shrink-0"></i>
                         <div>
                             <span class="font-bold text-sm block">80/20 Revenue Share</span>
                             <span class="text-xs text-gray-400">Keep 80% of what the client pays. No hidden fees.</span>
                         </div>
                     </div>
-                    <div class="flex items-start space-x-4 p-4 rounded-2xl bg-slate-50 border border-slate-100">
-                        <i data-lucide="shield-check" class="w-6 h-6 text-purple-600 mt-1"></i>
+                    <div class="flex items-start space-x-3 md:space-x-4 p-4 rounded-2xl bg-slate-50 border border-slate-100">
+                        <i data-lucide="shield-check" class="w-5 h-5 md:w-6 md:h-6 text-purple-600 mt-1 flex-shrink-0"></i>
                         <div>
                             <span class="font-bold text-sm block">Professional Integrity</span>
                             <span class="text-xs text-gray-400">Strict zero-tolerance for client poaching or plagiarism.</span>
@@ -155,377 +177,68 @@
 
             <!-- Form -->
             <div class="bg-white">
-                <form id="signupForm" action="https://formsubmit.co/exevodesigners@gmail.com" method="POST" class="space-y-6">
+                <form id="signupForm" action="https://formsubmit.co/exevodesigners@gmail.com" method="POST" class="space-y-5 md:space-y-6">
                     <input type="hidden" name="_subject" value="Exevo Designer Application">
                     <input type="hidden" name="_template" value="table">
                     <input type="hidden" name="_captcha" value="false">
                     <input type="hidden" name="upload_confirmation" id="upload_confirmation" value="PENDING">
+                    <input type="hidden" name="phone_country" id="phone_country">
 
                     <div class="space-y-2">
                         <label class="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-1">Full Name</label>
-                        <input type="text" name="name" id="userName" required placeholder="Full Name" class="form-input p-4 rounded-xl font-bold">
+                        <input type="text" name="name" required placeholder="John Doe" class="form-input p-3 md:p-4 rounded-xl font-bold text-sm md:text-base">
                     </div>
 
                     <div class="space-y-2">
                         <label class="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-1">Alias Name</label>
-                        <input type="text" name="alias" required placeholder="e.g. CyberPunk99" class="form-input p-4 rounded-xl font-bold w-full">
+                        <input type="text" name="alias" required placeholder="e.g. Maverick" class="form-input p-3 md:p-4 rounded-xl font-bold text-sm md:text-base">
                     </div>
 
-<div class="space-y-2 mb-6">
-    <label class="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-1">Alias Name</label>
-    <input type="text" name="alias" required placeholder="e.g. Maverick" class="form-input w-full p-4 rounded-xl font-bold border-gray-200">
-</div>
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-1">Country</label>
+                        <div class="relative">
+                            <select name="country" id="countrySelect" required class="form-select p-3 md:p-4 rounded-xl font-bold text-sm md:text-base appearance-none bg-white cursor-pointer">
+                                <option value="" disabled selected>Select your country</option>
+                            </select>
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-400">
+                                <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" /></svg>
+                            </div>
+                        </div>
+                    </div>
 
-<div class="space-y-2 mb-6">
-    <label class="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-1">Country</label>
-    <input list="countries" name="country" required placeholder="Type to search countries..." class="form-input w-full p-4 rounded-xl font-bold border-gray-200">
-    <datalist id="countries">
-        <option value="Afghanistan">
-        <option value="Albania">
-        <option value="Algeria">
-        <option value="American Samoa">
-        <option value="Andorra">
-        <option value="Angola">
-        <option value="Anguilla">
-        <option value="Antarctica">
-        <option value="Antigua and Barbuda">
-        <option value="Argentina">
-        <option value="Armenia">
-        <option value="Aruba">
-        <option value="Australia">
-        <option value="Austria">
-        <option value="Azerbaijan">
-        <option value="Bahamas">
-        <option value="Bahrain">
-        <option value="Bangladesh">
-        <option value="Barbados">
-        <option value="Belarus">
-        <option value="Belgium">
-        <option value="Belize">
-        <option value="Benin">
-        <option value="Bermuda">
-        <option value="Bhutan">
-        <option value="Bolivia">
-        <option value="Bosnia and Herzegovina">
-        <option value="Botswana">
-        <option value="Brazil">
-        <option value="British Indian Ocean Territory">
-        <option value="Brunei Darussalam">
-        <option value="Bulgaria">
-        <option value="Burkina Faso">
-        <option value="Burundi">
-        <option value="Cambodia">
-        <option value="Cameroon">
-        <option value="Canada">
-        <option value="Cape Verde">
-        <option value="Cayman Islands">
-        <option value="Central African Republic">
-        <option value="Chad">
-        <option value="Chile">
-        <option value="China">
-        <option value="Christmas Island">
-        <option value="Cocos (Keeling) Islands">
-        <option value="Colombia">
-        <option value="Comoros">
-        <option value="Congo">
-        <option value="Cook Islands">
-        <option value="Costa Rica">
-        <option value="Croatia">
-        <option value="Cuba">
-        <option value="Cyprus">
-        <option value="Czech Republic">
-        <option value="Denmark">
-        <option value="Djibouti">
-        <option value="Dominica">
-        <option value="Dominican Republic">
-        <option value="Ecuador">
-        <option value="Egypt">
-        <option value="El Salvador">
-        <option value="Equatorial Guinea">
-        <option value="Eritrea">
-        <option value="Estonia">
-        <option value="Ethiopia">
-        <option value="Falkland Islands">
-        <option value="Faroe Islands">
-        <option value="Fiji">
-        <option value="Finland">
-        <option value="France">
-        <option value="French Guiana">
-        <option value="French Polynesia">
-        <option value="Gabon">
-        <option value="Gambia">
-        <option value="Georgia">
-        <option value="Germany">
-        <option value="Ghana">
-        <option value="Gibraltar">
-        <option value="Greece">
-        <option value="Greenland">
-        <option value="Grenada">
-        <option value="Guadeloupe">
-        <option value="Guam">
-        <option value="Guatemala">
-        <option value="Guinea">
-        <option value="Guinea-Bissau">
-        <option value="Guyana">
-        <option value="Haiti">
-        <option value="Honduras">
-        <option value="Hong Kong">
-        <option value="Hungary">
-        <option value="Iceland">
-        <option value="India">
-        <option value="Indonesia">
-        <option value="Iran">
-        <option value="Iraq">
-        <option value="Ireland">
-        <option value="Israel">
-        <option value="Italy">
-        <option value="Jamaica">
-        <option value="Japan">
-        <option value="Jordan">
-        <option value="Kazakhstan">
-        <option value="Kenya">
-        <option value="Kiribati">
-        <option value="Kuwait">
-        <option value="Kyrgyzstan">
-        <option value="Lao People's Democratic Republic">
-        <option value="Latvia">
-        <option value="Lebanon">
-        <option value="Lesotho">
-        <option value="Liberia">
-        <option value="Libya">
-        <option value="Liechtenstein">
-        <option value="Lithuania">
-        <option value="Luxembourg">
-        <option value="Macao">
-        <option value="Madagascar">
-        <option value="Malawi">
-        <option value="Malaysia">
-        <option value="Maldives">
-        <option value="Mali">
-        <option value="Malta">
-        <option value="Marshall Islands">
-        <option value="Martinique">
-        <option value="Mauritania">
-        <option value="Mauritius">
-        <option value="Mayotte">
-        <option value="Mexico">
-        <option value="Micronesia">
-        <option value="Moldova">
-        <option value="Monaco">
-        <option value="Mongolia">
-        <option value="Montenegro">
-        <option value="Montserrat">
-        <option value="Morocco">
-        <option value="Mozambique">
-        <option value="Myanmar">
-        <option value="Namibia">
-        <option value="Nauru">
-        <option value="Nepal">
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-1">Work Email</label>
+                        <input type="email" name="email" required placeholder="email@address.com" class="form-input p-3 md:p-4 rounded-xl font-bold text-sm md:text-base">
+                    </div>
 
-
-<div class="space-y-2">
-    <label class="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-1">Social Presence</label>
-    <div class="flex flex-col sm:f<div class="space-y-2 mb-6">
-    <label class="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-1">Country</label>
-    <div class="relative">
-        <select name="country" required class="form-input w-full p-4 rounded-xl font-bold border-gray-200 appearance-none bg-white cursor-pointer focus:ring-2 focus:ring-blue-500">
-            <option value="" disabled selected>Select your country</option>
-            <option value="Afghanistan">Afghanistan</option>
-            <option value="Albania">Albania</option>
-            <option value="Algeria">Algeria</option>
-            <option value="Andorra">Andorra</option>
-            <option value="Angola">Angola</option>
-            <option value="Antigua and Barbuda">Antigua and Barbuda</option>
-            <option value="Argentina">Argentina</option>
-            <option value="Armenia">Armenia</option>
-            <option value="Australia">Australia</option>
-            <option value="Austria">Austria</option>
-            <option value="Azerbaijan">Azerbaijan</option>
-            <option value="Bahamas">Bahamas</option>
-            <option value="Bahrain">Bahrain</option>
-            <option value="Bangladesh">Bangladesh</option>
-            <option value="Barbados">Barbados</option>
-            <option value="Belarus">Belarus</option>
-            <option value="Belgium">Belgium</option>
-            <option value="Belize">Belize</option>
-            <option value="Benin">Benin</option>
-            <option value="Bermuda">Bermuda</option>
-            <option value="Bhutan">Bhutan</option>
-            <option value="Bolivia">Bolivia</option>
-            <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
-            <option value="Botswana">Botswana</option>
-            <option value="Brazil">Brazil</option>
-            <option value="Brunei Darussalam">Brunei Darussalam</option>
-            <option value="Bulgaria">Bulgaria</option>
-            <option value="Burkina Faso">Burkina Faso</option>
-            <option value="Burundi">Burundi</option>
-            <option value="Cambodia">Cambodia</option>
-            <option value="Cameroon">Cameroon</option>
-            <option value="Canada">Canada</option>
-            <option value="Cape Verde">Cape Verde</option>
-            <option value="Central African Republic">Central African Republic</option>
-            <option value="Chad">Chad</option>
-            <option value="Chile">Chile</option>
-            <option value="China">China</option>
-            <option value="Colombia">Colombia</option>
-            <option value="Comoros">Comoros</option>
-            <option value="Congo">Congo</option>
-            <option value="Costa Rica">Costa Rica</option>
-            <option value="Croatia">Croatia</option>
-            <option value="Cuba">Cuba</option>
-            <option value="Cyprus">Cyprus</option>
-            <option value="Czech Republic">Czech Republic</option>
-            <option value="Denmark">Denmark</option>
-            <option value="Djibouti">Djibouti</option>
-            <option value="Dominica">Dominica</option>
-            <option value="Dominican Republic">Dominican Republic</option>
-            <option value="Ecuador">Ecuador</option>
-            <option value="Egypt">Egypt</option>
-            <option value="El Salvador">El Salvador</option>
-            <option value="Equatorial Guinea">Equatorial Guinea</option>
-            <option value="Eritrea">Eritrea</option>
-            <option value="Estonia">Estonia</option>
-            <option value="Ethiopia">Ethiopia</option>
-            <option value="Fiji">Fiji</option>
-            <option value="Finland">Finland</option>
-            <option value="France">France</option>
-            <option value="Gabon">Gabon</option>
-            <option value="Gambia">Gambia</option>
-            <option value="Georgia">Georgia</option>
-            <option value="Germany">Germany</option>
-            <option value="Ghana">Ghana</option>
-            <option value="Greece">Greece</option>
-            <option value="Grenada">Grenada</option>
-            <option value="Guatemala">Guatemala</option>
-            <option value="Guinea">Guinea</option>
-            <option value="Guyana">Guyana</option>
-            <option value="Haiti">Haiti</option>
-            <option value="Honduras">Honduras</option>
-            <option value="Hungary">Hungary</option>
-            <option value="Iceland">Iceland</option>
-            <option value="India">India</option>
-            <option value="Indonesia">Indonesia</option>
-            <option value="Iran">Iran</option>
-            <option value="Iraq">Iraq</option>
-            <option value="Ireland">Ireland</option>
-            <option value="Israel">Israel</option>
-            <option value="Italy">Italy</option>
-            <option value="Jamaica">Jamaica</option>
-            <option value="Japan">Japan</option>
-            <option value="Jordan">Jordan</option>
-            <option value="Kazakhstan">Kazakhstan</option>
-            <option value="Kenya">Kenya</option>
-            <option value="Kuwait">Kuwait</option>
-            <option value="Kyrgyzstan">Kyrgyzstan</option>
-            <option value="Latvia">Latvia</option>
-            <option value="Lebanon">Lebanon</option>
-            <option value="Lesotho">Lesotho</option>
-            <option value="Liberia">Liberia</option>
-            <option value="Libya">Libya</option>
-            <option value="Liechtenstein">Liechtenstein</option>
-            <option value="Lithuania">Lithuania</option>
-            <option value="Luxembourg">Luxembourg</option>
-            <option value="Madagascar">Madagascar</option>
-            <option value="Malawi">Malawi</option>
-            <option value="Malaysia">Malaysia</option>
-            <option value="Maldives">Maldives</option>
-            <option value="Mali">Mali</option>
-            <option value="Malta">Malta</option>
-            <option value="Mexico">Mexico</option>
-            <option value="Moldova">Moldova</option>
-            <option value="Monaco">Monaco</option>
-            <option value="Mongolia">Mongolia</option>
-            <option value="Montenegro">Montenegro</option>
-            <option value="Morocco">Morocco</option>
-            <option value="Mozambique">Mozambique</option>
-            <option value="Namibia">Namibia</option>
-            <option value="Nepal">Nepal</option>
-            <option value="Netherlands">Netherlands</option>
-            <option value="New Zealand">New Zealand</option>
-            <option value="Nicaragua">Nicaragua</option>
-            <option value="Niger">Niger</option>
-            <option value="Nigeria">Nigeria</option>
-            <option value="North Korea">North Korea</option>
-            <option value="Norway">Norway</option>
-            <option value="Oman">Oman</option>
-            <option value="Pakistan">Pakistan</option>
-            <option value="Panama">Panama</option>
-            <option value="Paraguay">Paraguay</option>
-            <option value="Peru">Peru</option>
-            <option value="Philippines">Philippines</option>
-            <option value="Poland">Poland</option>
-            <option value="Portugal">Portugal</option>
-            <option value="Qatar">Qatar</option>
-            <option value="Romania">Romania</option>
-            <option value="Russian Federation">Russian Federation</option>
-            <option value="Rwanda">Rwanda</option>
-            <option value="Saudi Arabia">Saudi Arabia</option>
-            <option value="Senegal">Senegal</option>
-            <option value="Serbia">Serbia</option>
-            <option value="Singapore">Singapore</option>
-            <option value="Slovakia">Slovakia</option>
-            <option value="Slovenia">Slovenia</option>
-            <option value="Somalia">Somalia</option>
-            <option value="South Africa">South Africa</option>
-            <option value="South Korea">South Korea</option>
-            <option value="Spain">Spain</option>
-            <option value="Sri Lanka">Sri Lanka</option>
-            <option value="Sudan">Sudan</option>
-            <option value="Sweden">Sweden</option>
-            <option value="Switzerland">Switzerland</option>
-            <option value="Syrian Arab Republic">Syrian Arab Republic</option>
-            <option value="Taiwan">Taiwan</option>
-            <option value="Tanzania">Tanzania</option>
-            <option value="Thailand">Thailand</option>
-            <option value="Tunisia">Tunisia</option>
-            <option value="Turkey">Turkey</option>
-            <option value="Uganda">Uganda</option>
-            <option value="Ukraine">Ukraine</option>
-            <option value="United Arab Emirates">United Arab Emirates</option>
-            <option value="United Kingdom">United Kingdom</option>
-            <option value="United States">United States</option>
-            <option value="Uruguay">Uruguay</option>
-            <option value="Uzbekistan">Uzbekistan</option>
-            <option value="Venezuela">Venezuela</option>
-            <option value="Viet Nam">Viet Nam</option>
-            <option value="Yemen">Yemen</option>
-            <option value="Zambia">Zambia</option>
-            <option value="Zimbabwe">Zimbabwe</option>
-        </select>
-        
-        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-400">
-            <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" /></svg>
-        </div>
-    </div>
-</div>
-lex-row gap-2">
-        <select name="platform" class="form-input p-4 rounded-xl font-bold bg-gray-50 border-gray-200 cursor-pointer focus:ring-2 focus:ring-blue-500">
-            <option value="instagram">Instagram</option>
-            <option value="x">X / Twitter</option>
-            <option value="linkedin">LinkedIn</option>
-            <option value="github">GitHub</option>
-            <option value="dribbble">Dribbble</option>
-        </select>
-        <input type="text" name="social_url" required placeholder="@username or link" class="form-input flex-1 p-4 rounded-xl font-bold border-gray-200">
-    </div>
-</div>
-
-                    
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div class="space-y-2">
-                            <label class="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-1">Work Email</label>
-                            <input type="email" name="email" id="userEmail" required placeholder="email@address.com" class="form-input p-4 rounded-xl font-bold">
+                            <label class="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-1">Country Code</label>
+                            <input type="text" id="countryCode" readonly class="form-input p-3 md:p-4 rounded-xl font-bold text-sm md:text-base bg-gray-100 cursor-not-allowed" placeholder="+1">
                         </div>
                         <div class="space-y-2">
                             <label class="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-1">Phone Number</label>
-                            <input type="tel" id="phone" name="phone_full" required class="form-input p-4 rounded-xl font-bold">
+                            <input type="tel" id="phone" name="phone_full" required class="form-input p-3 md:p-4 rounded-xl font-bold text-sm md:text-base" placeholder="123 456 7890">
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-1">Social Media</label>
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <select name="platform" class="form-select p-3 md:p-4 rounded-xl font-bold text-sm md:text-base bg-gray-50 border-gray-200 cursor-pointer">
+                                <option value="instagram">Instagram</option>
+                                <option value="twitter">X (Twitter)</option>
+                                <option value="linkedin">LinkedIn</option>
+                                <option value="github">GitHub</option>
+                                <option value="discord">Discord</option>
+                            </select>
+                            <input type="text" name="social_handle" required placeholder="@username" class="form-input p-3 md:p-4 rounded-xl font-bold text-sm md:text-base flex-1">
                         </div>
                     </div>
 
                     <div class="space-y-2">
                         <label class="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-1">Primary Skill</label>
-                        <select name="role" required class="form-select p-4 rounded-xl font-bold h-[58px]">
+                        <select name="role" required class="form-select p-3 md:p-4 rounded-xl font-bold text-sm md:text-base">
                             <option value="" disabled selected>Select discipline</option>
                             <option value="UI/UX">UI/UX Design</option>
                             <option value="Branding">Branding & Identity</option>
@@ -537,43 +250,28 @@ lex-row gap-2">
 
                     <div class="space-y-2">
                         <label class="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-1">Portfolio Link</label>
-                        <input type="url" name="portfolio" required placeholder="https://behance.net/..." class="form-input p-4 rounded-xl font-bold">
+                        <input type="url" name="portfolio" required placeholder="https://behance.net/..." class="form-input p-3 md:p-4 rounded-xl font-bold text-sm md:text-base">
                     </div>
-<div class="space-y-2">
-    <label class="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-1">Social Media</label>
-    <div class="flex flex-col sm:flex-row gap-3">
-        <select name="platform" class="form-input p-4 rounded-xl font-bold bg-gray-50 border-gray-200 cursor-pointer">
-            <option value="instagram">Instagram</option>
-            <option value="twitter">X (Twitter)</option>
-            <option value="linkedin">LinkedIn</option>
-            <option value="github">GitHub</option>
-            <option value="discord">Discord</option>
-        </select>
-        
-        <input type="text" name="social_handle" required placeholder="@username" class="form-input p-4 rounded-xl font-bold flex-1">
-    </div>
-</div>
-
 
                     <!-- Enhanced Verification -->
                     <div class="pt-2">
-                        <div id="uploadBox" class="p-6 border-2 border-dashed border-slate-200 rounded-2xl bg-slate-50 transition-all">
-                            <div class="flex items-center space-x-4">
-                                <div class="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center border border-slate-100">
+                        <div id="uploadBox" class="p-4 md:p-6 border-2 border-dashed border-slate-200 rounded-2xl bg-slate-50 transition-all">
+                            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
+                                <div class="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center border border-slate-100 flex-shrink-0">
                                     <i data-lucide="upload-cloud" class="w-6 h-6 text-purple-600"></i>
                                 </div>
-                                <div class="flex-1">
+                                <div class="flex-1 min-w-0">
                                     <p class="font-bold text-sm">Asset Submission Required</p>
                                     <p class="text-[10px] text-gray-400 uppercase tracking-wider leading-none mt-1">Submit files via Google Form</p>
                                 </div>
-                                <a href="https://forms.gle/VC6tRr8gCzEMWvjd6" target="_blank" onclick="showUnlockStep()" class="px-4 py-2 bg-purple-600 text-white text-[10px] font-bold uppercase tracking-widest rounded-lg hover:bg-black transition-colors">
+                                <a href="https://forms.gle/VC6tRr8gCzEMWvjd6" target="_blank" onclick="showUnlockStep()" class="w-full sm:w-auto px-4 py-2 bg-purple-600 text-white text-[10px] font-bold uppercase tracking-widest rounded-lg hover:bg-black transition-colors text-center flex-shrink-0">
                                     Open Form
                                 </a>
                             </div>
 
                             <div id="step2Verify" class="hidden mt-6 pt-6 border-t border-slate-200 space-y-4">
                                 <div class="flex items-start space-x-3">
-                                    <i data-lucide="check-circle" class="w-5 h-5 text-green-500 mt-0.5"></i>
+                                    <i data-lucide="check-circle" class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0"></i>
                                     <div class="text-xs">
                                         <p class="font-bold text-slate-900 uppercase tracking-tighter">Finalize Verification</p>
                                         <p class="text-slate-500 mt-1">Once you have submitted the Google Form, click the button below to unlock your application.</p>
@@ -585,14 +283,14 @@ lex-row gap-2">
                             </div>
 
                             <div id="uploadStatus" class="mt-4 flex items-center text-[10px] font-bold text-red-500 uppercase tracking-widest">
-                                <i data-lucide="lock" class="w-3.5 h-3.5 mr-1.5"></i>
-                                Upload assets to unlock submission
+                                <i data-lucide="lock" class="w-3.5 h-3.5 mr-1.5 flex-shrink-0"></i>
+                                <span>Upload assets to unlock submission</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="pt-2 space-y-4">
-                        <div class="p-5 bg-slate-50 border border-slate-200 rounded-2xl">
+                        <div class="p-4 md:p-5 bg-slate-50 border border-slate-200 rounded-2xl">
                             <div class="flex items-start space-x-3">
                                 <div class="relative flex items-center h-5 mt-1">
                                     <input id="guidelines" name="guidelines_agreed" type="checkbox" required class="w-5 h-5 text-purple-600 border-gray-300 rounded focus:ring-purple-500 cursor-pointer">
@@ -605,8 +303,7 @@ lex-row gap-2">
                         </div>
                     </div>
 
-                    <input type="hidden" name="phone_country" id="phone_country">
-                    <button type="submit" id="submitBtn" class="locked-btn w-full py-5 text-xs font-black uppercase tracking-widest rounded-full shadow-xl transition-all flex items-center justify-center space-x-2">
+                    <button type="submit" id="submitBtn" class="locked-btn w-full py-4 md:py-5 text-xs font-black uppercase tracking-widest rounded-full shadow-xl transition-all flex items-center justify-center space-x-2">
                         <span>Complete Submission</span>
                     </button>
                 </form>
@@ -614,33 +311,29 @@ lex-row gap-2">
         </div>
     </main>
 
-    <!-- Detailed Guidelines Modal -->
+    <!-- Guidelines Modal -->
     <div id="guidelinesModal" class="modal-overlay">
-        <div class="bg-white max-w-4xl w-full rounded-3xl overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300 ease-out flex flex-col max-h-[90vh]">
-            <!-- Header -->
-            <div class="p-8 border-b border-gray-100 flex justify-between items-center bg-slate-50">
-                <div>
-                    <h2 class="text-xl font-display font-black">Community Guidelines</h2>
+        <div class="bg-white max-w-4xl w-full mx-4 rounded-3xl overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300 ease-out flex flex-col max-h-[90vh]">
+            <div class="p-6 md:p-8 border-b border-gray-100 flex justify-between items-start md:items-center bg-slate-50">
+                <div class="flex-1 min-w-0 pr-4">
+                    <h2 class="text-lg md:text-xl font-display font-black">Community Guidelines</h2>
                     <p class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] mt-1">Exevo Designers Network — Standards of Excellence</p>
                 </div>
-                <button onclick="closeGuidelines()" class="p-2 hover:bg-gray-200 rounded-full transition"><i data-lucide="x" class="w-6 h-6"></i></button>
+                <button onclick="closeGuidelines()" class="p-2 hover:bg-gray-200 rounded-full transition flex-shrink-0"><i data-lucide="x" class="w-6 h-6"></i></button>
             </div>
             
-            <!-- Content -->
-            <div class="p-8 overflow-y-auto custom-scrollbar text-sm bg-white space-y-10">
-                
-                <div class="p-6 bg-purple-50 rounded-2xl border border-purple-100">
-                    <p class="italic text-purple-900 font-medium leading-relaxed">
+            <div class="p-6 md:p-8 overflow-y-auto custom-scrollbar text-sm bg-white space-y-8 md:space-y-10">
+                <div class="p-4 md:p-6 bg-purple-50 rounded-2xl border border-purple-100">
+                    <p class="italic text-purple-900 font-medium leading-relaxed text-sm">
                         At Exevo Designers Network, we are building a professional, ethical, and growth-driven creative ecosystem. These guidelines define how designers are expected to operate within our platform and represent the Exevo brand.
                     </p>
                 </div>
 
-                <div class="grid md:grid-cols-2 gap-x-12 gap-y-10">
-                    <!-- Column 1 -->
-                    <div class="space-y-10">
+                <div class="grid md:grid-cols-2 gap-x-8 md:gap-x-12 gap-y-8 md:gap-y-10">
+                    <div class="space-y-8 md:space-y-10">
                         <section>
                             <h3 class="font-black text-[11px] uppercase tracking-widest text-purple-600 mb-3">Professionalism First</h3>
-                            <p class="text-gray-500 text-xs leading-relaxed">All designers must communicate and operate with respect, integrity, and accountability. Any form of harassment, discrimination, or unprofessional conduct is not tolerated. Your behavior reflects not only you, but the Exevo Designers Network as a whole.</p>
+                            <p class="text-gray-500 text-xs leading-relaxed">All designers must communicate and operate with respect, integrity, and accountability. Any form of harassment, discrimination, or unprofessional conduct is not tolerated.</p>
                         </section>
 
                         <section>
@@ -654,21 +347,20 @@ lex-row gap-2">
 
                         <section>
                             <h3 class="font-black text-[11px] uppercase tracking-widest text-purple-600 mb-3">Quality Standards</h3>
-                            <p class="text-gray-500 text-xs leading-relaxed">Designers are expected to deliver work that meets professional design standards and follows the project brief precisely. Revisions should be completed promptly and professionally.</p>
+                            <p class="text-gray-500 text-xs leading-relaxed">Designers are expected to deliver work that meets professional design standards and follows the project brief precisely.</p>
                         </section>
 
                         <section>
                             <h3 class="font-black text-[11px] uppercase tracking-widest text-purple-600 mb-3">Payment & Revenue Model</h3>
-                            <p class="text-gray-500 text-xs leading-relaxed mb-2">Designers earn <span class="font-bold text-slate-900">80%</span> of the total project fee. Exevo retains <span class="font-bold text-slate-900">20%</span> as agency share for acquisition and growth.</p>
-                            <p class="text-[10px] text-gray-400 font-bold uppercase italic">Payments released after client payment, work approval, and quality verification.</p>
+                            <p class="text-gray-500 text-xs leading-relaxed mb-2">Designers earn <span class="font-bold text-slate-900">80%</span> of the total project fee. Exevo retains <span class="font-bold text-slate-900">20%</span> as agency share.</p>
+                            <p class="text-[10px] text-gray-400 font-bold uppercase italic">Payments released after client payment and work approval.</p>
                         </section>
                     </div>
 
-                    <!-- Column 2 -->
-                    <div class="space-y-10">
+                    <div class="space-y-8 md:space-y-10">
                         <section>
                             <h3 class="font-black text-[11px] uppercase tracking-widest text-purple-600 mb-3">Client Ownership & Protection</h3>
-                            <p class="text-gray-500 text-xs leading-relaxed mb-2">All clients provided by Exevo belong to the agency. Designers must not contact clients privately or negotiate independent side deals.</p>
+                            <p class="text-gray-500 text-xs leading-relaxed mb-2">All clients provided by Exevo belong to the agency. Designers must not contact clients privately.</p>
                             <div class="bg-red-50 text-red-700 p-3 rounded-lg text-[10px] font-bold uppercase tracking-tighter">
                                 Bypassing Exevo results in immediate removal.
                             </div>
@@ -676,48 +368,47 @@ lex-row gap-2">
 
                         <section>
                             <h3 class="font-black text-[11px] uppercase tracking-widest text-purple-600 mb-3">Accountability & Confidentiality</h3>
-                            <p class="text-gray-500 text-xs leading-relaxed">Designers must respect deadlines. All client information, project materials, and Exevo internal processes are strictly confidential.</p>
+                            <p class="text-gray-500 text-xs leading-relaxed">Designers must respect deadlines. All client information and project materials are strictly confidential.</p>
                         </section>
 
                         <section>
                             <h3 class="font-black text-[11px] uppercase tracking-widest text-purple-600 mb-3">Community Culture</h3>
-                            <p class="text-gray-500 text-xs leading-relaxed">Exevo is a creative hub. Designers are encouraged to support one another, share knowledge, and build a growth-focused environment.</p>
+                            <p class="text-gray-500 text-xs leading-relaxed">Exevo is a creative hub. Designers are encouraged to support one another and share knowledge.</p>
                         </section>
 
-                        <section class="bg-slate-900 text-white p-5 rounded-2xl">
+                        <section class="bg-slate-900 text-white p-4 md:p-5 rounded-2xl">
                             <h3 class="font-black text-[10px] uppercase tracking-[0.2em] text-purple-400 mb-2">Zero Tolerance Policy</h3>
-                            <p class="text-[10px] leading-relaxed opacity-80">Immediate suspension and loss of earnings for: Client Poaching, Plagiarism, Fraud/Dishonesty, or Breach of Confidentiality.</p>
+                            <p class="text-[10px] leading-relaxed opacity-80">Immediate suspension for: Client Poaching, Plagiarism, Fraud/Dishonesty, or Breach of Confidentiality.</p>
                         </section>
                     </div>
                 </div>
             </div>
 
-            <!-- Footer -->
-            <div class="p-6 border-t border-gray-100 bg-slate-50">
-                <button onclick="closeGuidelines()" class="w-full py-4 bg-black text-white text-xs font-black uppercase tracking-widest rounded-full hover:bg-purple-600 transition-all">I Accept the Guidelines</button>
+            <div class="p-4 md:p-6 border-t border-gray-100 bg-slate-50">
+                <button onclick="closeGuidelines()" class="w-full py-3 md:py-4 bg-black text-white text-xs font-black uppercase tracking-widest rounded-full hover:bg-purple-600 transition-all">I Accept the Guidelines</button>
             </div>
         </div>
     </div>
 
     <!-- Success Modal -->
     <div id="successModal" class="modal-overlay">
-        <div class="bg-white max-w-md w-full rounded-3xl overflow-hidden shadow-2xl p-10 text-center fade-in">
-            <div class="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                <i data-lucide="party-popper" class="w-10 h-10"></i>
+        <div class="bg-white max-w-md w-full mx-4 rounded-3xl overflow-hidden shadow-2xl p-8 md:p-10 text-center fade-in">
+            <div class="w-16 h-16 md:w-20 md:h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                <i data-lucide="party-popper" class="w-8 h-8 md:w-10 md:h-10"></i>
             </div>
-            <h2 class="text-2xl font-display font-black mb-2">Submission Received</h2>
+            <h2 class="text-xl md:text-2xl font-display font-black mb-2">Submission Received</h2>
             <p class="text-gray-500 text-sm leading-relaxed mb-8">
                 Your application has been successfully queued for review. Our team will verify your assets and get back to you within 48 hours.
             </p>
-            <div class="p-5 bg-slate-50 rounded-2xl border border-slate-100 text-left mb-8">
+            <div class="p-4 md:p-5 bg-slate-50 rounded-2xl border border-slate-100 text-left mb-8">
                 <p class="text-[10px] font-black uppercase tracking-widest text-purple-600 mb-2">What's Next?</p>
                 <ul class="text-xs text-gray-600 space-y-2">
-                    <li class="flex items-center"><i data-lucide="mail" class="w-3 h-3 mr-2"></i> Check your inbox for confirmation</li>
-                    <li class="flex items-center"><i data-lucide="search" class="w-3 h-3 mr-2"></i> Portfolio & asset verification</li>
-                    <li class="flex items-center"><i data-lucide="message-square" class="w-3 h-3 mr-2"></i> Onboarding interview invitation</li>
+                    <li class="flex items-center"><i data-lucide="mail" class="w-3 h-3 mr-2 flex-shrink-0"></i> Check your inbox for confirmation</li>
+                    <li class="flex items-center"><i data-lucide="search" class="w-3 h-3 mr-2 flex-shrink-0"></i> Portfolio & asset verification</li>
+                    <li class="flex items-center"><i data-lucide="message-square" class="w-3 h-3 mr-2 flex-shrink-0"></i> Onboarding interview invitation</li>
                 </ul>
             </div>
-            <a href="index.html" class="block w-full py-4 bg-black text-white text-xs font-black uppercase tracking-widest rounded-full hover:bg-purple-600 transition-all">Back to Home</a>
+            <a href="index.html" class="block w-full py-3 md:py-4 bg-black text-white text-xs font-black uppercase tracking-widest rounded-full hover:bg-purple-600 transition-all">Back to Home</a>
         </div>
     </div>
 
@@ -725,20 +416,107 @@ lex-row gap-2">
         let uploadLinkOpened = false;
         let iti;
 
+        const countries = [
+            "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Argentina", "Armenia", "Australia", 
+            "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", 
+            "Belize", "Benin", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", 
+            "Brunei Darussalam", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", 
+            "Cape Verde", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", 
+            "Congo", "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", 
+            "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", 
+            "Eritrea", "Estonia", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", 
+            "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guyana", "Haiti", "Honduras", 
+            "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", 
+            "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kuwait", "Kyrgyzstan", "Latvia", 
+            "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", 
+            "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Mexico", "Moldova", "Monaco", 
+            "Mongolia", "Montenegro", "Morocco", "Mozambique", "Namibia", "Nepal", "Netherlands", 
+            "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "Norway", "Oman", "Pakistan", 
+            "Panama", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", 
+            "Russian Federation", "Rwanda", "Saudi Arabia", "Senegal", "Serbia", "Singapore", 
+            "Slovakia", "Slovenia", "Somalia", "South Africa", "South Korea", "Spain", "Sri Lanka", 
+            "Sudan", "Sweden", "Switzerland", "Syrian Arab Republic", "Taiwan", "Tanzania", "Thailand", 
+            "Tunisia", "Turkey", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", 
+            "United States", "Uruguay", "Uzbekistan", "Venezuela", "Viet Nam", "Yemen", "Zambia", "Zimbabwe"
+        ];
+
         document.addEventListener('DOMContentLoaded', function() {
             lucide.createIcons();
             
+            // Populate country dropdown
+            const countrySelect = document.getElementById('countrySelect');
+            countries.forEach(country => {
+                const option = document.createElement('option');
+                option.value = country;
+                option.textContent = country;
+                countrySelect.appendChild(option);
+            });
+
+            // Initialize phone input
             const phoneInput = document.querySelector("#phone");
+            const countryCodeInput = document.getElementById('countryCode');
+            
             iti = window.intlTelInput(phoneInput, {
                 initialCountry: "auto",
                 geoIpLookup: callback => {
                     fetch("https://ipapi.co/json")
                         .then(res => res.json())
-                        .then(data => callback(data.country_code))
-                        .catch(() => callback("us"));
+                        .then(data => {
+                            callback(data.country_code);
+                            // Update country code display after initial load
+                            setTimeout(() => {
+                                const countryData = iti.getSelectedCountryData();
+                                countryCodeInput.value = '+' + countryData.dialCode;
+                            }, 100);
+                        })
+                        .catch(() => {
+                            callback("us");
+                            setTimeout(() => {
+                                const countryData = iti.getSelectedCountryData();
+                                countryCodeInput.value = '+' + countryData.dialCode;
+                            }, 100);
+                        });
                 },
                 utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@24.5.0/build/js/utils.js",
                 separateDialCode: true
+            });
+
+            // Sync country dropdown with phone country code
+            phoneInput.addEventListener('countrychange', function() {
+                const countryData = iti.getSelectedCountryData();
+                const countryName = countryData.name;
+                const countrySelect = document.getElementById('countrySelect');
+                
+                // Update country code display
+                countryCodeInput.value = '+' + countryData.dialCode;
+                
+                // Find and select matching country in dropdown
+                for (let i = 0; i < countrySelect.options.length; i++) {
+                    if (countrySelect.options[i].value === countryName) {
+                        countrySelect.selectedIndex = i;
+                        break;
+                    }
+                }
+                
+                document.getElementById('phone_country').value = countryName;
+            });
+
+            // Update phone country when country dropdown changes
+            countrySelect.addEventListener('change', function() {
+                const selectedCountry = this.value;
+                // Try to set the phone input to match
+                const countryData = window.intlTelInputGlobals.getCountryData();
+                const matchingCountry = countryData.find(c => c.name === selectedCountry);
+                if (matchingCountry) {
+                    iti.setCountry(matchingCountry.iso2);
+                    countryCodeInput.value = '+' + matchingCountry.dialCode;
+                }
+                
+                // Add visual feedback that country was selected
+                countrySelect.classList.add('border-green-500');
+                setTimeout(() => {
+                    countrySelect.classList.remove('border-green-500');
+                }, 1000);
             });
 
             const form = document.getElementById('signupForm');
@@ -747,7 +525,7 @@ lex-row gap-2">
             window.showUnlockStep = function() {
                 uploadLinkOpened = true;
                 document.getElementById('step2Verify').classList.remove('hidden');
-                document.getElementById('uploadStatus').innerHTML = '<i data-lucide="alert-circle" class="w-3.5 h-3.5 mr-1.5"></i> Waiting for upload confirmation...';
+                document.getElementById('uploadStatus').innerHTML = '<i data-lucide="alert-circle" class="w-3.5 h-3.5 mr-1.5 flex-shrink-0"></i><span>Waiting for upload confirmation...</span>';
                 lucide.createIcons();
             };
 
@@ -762,7 +540,7 @@ lex-row gap-2">
                 uploadBox.classList.remove('border-slate-200', 'bg-slate-50');
                 uploadBox.classList.add('border-green-500', 'bg-green-50');
                 
-                uploadStatus.innerHTML = '<i data-lucide="check-circle" class="w-3.5 h-3.5 mr-1.5"></i> Assets verified by applicant. Form unlocked.';
+                uploadStatus.innerHTML = '<i data-lucide="check-circle" class="w-3.5 h-3.5 mr-1.5 flex-shrink-0"></i><span>Assets verified by applicant. Form unlocked.</span>';
                 uploadStatus.classList.remove('text-red-500');
                 uploadStatus.classList.add('text-green-600');
 
@@ -778,7 +556,7 @@ lex-row gap-2">
                 e.preventDefault();
                 
                 const originalContent = submitBtn.innerHTML;
-                submitBtn.innerHTML = '<div class="loading-spinner"></div><span>Sending...</span>';
+                submitBtn.innerHTML = '<div class="loading-spinner"></div><span class="ml-2">Sending...</span>';
                 submitBtn.disabled = true;
 
                 document.getElementById('phone_country').value = iti.getSelectedCountryData().name;
@@ -794,6 +572,7 @@ lex-row gap-2">
                 .then(response => {
                     if (response.ok) {
                         document.getElementById('successModal').style.display = 'flex';
+                        lucide.createIcons();
                     } else {
                         throw new Error('Submission failed');
                     }
@@ -809,6 +588,7 @@ lex-row gap-2">
                 const modal = document.getElementById('guidelinesModal');
                 modal.style.display = 'flex';
                 setTimeout(() => modal.querySelector('div').classList.add('scale-100'), 10);
+                lucide.createIcons();
             };
 
             window.closeGuidelines = function() {
@@ -816,9 +596,12 @@ lex-row gap-2">
                 modal.querySelector('div').classList.remove('scale-100');
                 setTimeout(() => modal.style.display = 'none', 300);
             };
+
+            window.toggleMobileMenu = function() {
+                const menu = document.getElementById('mobileMenu');
+                menu.classList.toggle('active');
+            };
         });
     </script>
 </body>
-
 </html>
-
