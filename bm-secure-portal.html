@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Blue Motion Secure Onboarding | Exevo Designers</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --brand-purple: #7c3aed;
+            --brand-blue: #2563eb;
+            --text-dark: #0f172a;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            background-color: #f8fafc;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        .font-display { 
+            font-family: 'Syncopate', sans-serif; 
+            text-transform: uppercase; 
+            letter-spacing: -0.02em; 
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.04);
+        }
+
+        .input-field {
+            background: #ffffff !important;
+            border: 1.5px solid #e2e8f0 !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 16px !important;
+        }
+
+        .input-field:focus {
+            border-color: var(--brand-purple) !important;
+            box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.1);
+            outline: none;
+        }
+
+        .btn-brand { background-color: var(--brand-purple); transition: all 0.4s; }
+        .btn-brand:disabled { background-color: #cbd5e1; cursor: not-allowed; opacity: 0.6; transform: none !important; }
+        
+        .protection-badge { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: #fbbf24; border: 1px solid #334155; }
+
+        #auth-overlay {
+            background: rgba(15, 23, 42, 0.98);
+            backdrop-filter: blur(20px);
+            transition: opacity 0.6s ease;
+        }
+
+        @keyframes pulse-soft {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+        }
+        .icon-pulse { animation: pulse-soft 3s infinite ease-in-out; }
+
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="fixed inset-0 z-[200] hidden flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-slate-900/90 backdrop-blur-xl"></div>
+        <div class="glass-card w-full max-w-sm p-8 rounded-[2rem] text-center space-y-6 relative animate-in zoom-in duration-300">
+            <div class="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto shadow-inner">
+                <i data-lucide="check-check" class="w-10 h-10"></i>
+            </div>
+            <div class="space-y-2">
+                <h3 class="font-display text-lg font-black text-slate-900">
+                    Deployment Successful
+                </h3>
+                <p class="text-slate-500 text-xs leading-relaxed">
+                    Your project assets have been securely processed and are now entering our creative workflow. You're being redirected to the Exevo production hub.
+                </p>
+            </div>
+            <div class="pt-4">
+                <div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+                    <div class="bg-purple-600 h-full w-0 transition-all duration-[3000ms] ease-linear" id="redirect-progress"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Authentication Gateway -->
+    <div id="auth-overlay" class="fixed inset-0 z-[100] flex items-center justify-center p-4">
+        <div class="glass-card w-full max-w-md p-8 md:p-12 rounded-[2.5rem] text-center space-y-8 animate-in fade-in zoom-in duration-500 border-slate-200">
+            <div class="relative w-24 h-24 mx-auto mb-2">
+                <div class="absolute inset-0 bg-purple-100 rounded-full icon-pulse opacity-50"></div>
+                <div class="relative w-full h-full bg-white border-4 border-purple-50 rounded-full flex items-center justify-center shadow-inner">
+                    <i data-lucide="shield-check" class="w-12 h-12 text-purple-600 stroke-[1.5]"></i>
+                    <div class="absolute -bottom-1 -right-1 bg-slate-900 text-white p-2 rounded-full border-2 border-white shadow-lg">
+                        <i data-lucide="lock" class="w-4 h-4"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="space-y-2">
+                <h2 class="font-display text-xl font-black text-slate-900 tracking-tight">Access Protocol</h2>
+                <p class="text-slate-500 text-xs font-medium">Verification required for 2026 Integration Pipeline.</p>
+            </div>
+
+            <div class="space-y-4 text-left">
+                <div class="space-y-2">
+                    <label class="text-[10px] font-black uppercase text-slate-400 ml-1 tracking-[0.2em]">Personnel ID</label>
+                    <input type="text" id="auth-user" placeholder="BM-JAN-2026" class="input-field p-4 rounded-2xl w-full text-center font-mono placeholder:opacity-30">
+                </div>
+                <div class="space-y-2">
+                    <label class="text-[10px] font-black uppercase text-slate-400 ml-1 tracking-[0.2em]">Protocol Key</label>
+                    <input type="password" id="auth-pass" placeholder="••••••••" class="input-field p-4 rounded-2xl w-full text-center placeholder:opacity-30">
+                </div>
+                <p id="auth-error" class="text-red-500 text-[10px] font-bold text-center hidden uppercase tracking-wider">Access Denied: Check Credentials</p>
+            </div>
+
+            <button onclick="checkAuth()" class="btn-brand w-full py-5 rounded-2xl text-white font-display text-[11px] font-black tracking-widest shadow-xl shadow-purple-200 hover:scale-[1.02] active:scale-[0.98]">
+                VERIFY IDENTITY
+            </button>
+            
+            <div class="pt-2 border-t border-slate-50">
+                <p class="text-[9px] text-slate-400 uppercase tracking-widest font-bold">Encrypted Session: AES-GCM 256</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 h-16 md:h-20 flex items-center justify-between">
+            <div class="font-display font-bold text-sm md:text-xl">EXEVO <span class="text-purple-600">SECURE</span></div>
+            <div class="protection-badge px-3 md:px-5 py-2 rounded-full text-[7px] md:text-[10px] font-black uppercase tracking-widest">Protocol v3.0 Active</div>
+        </div>
+    </nav>
+
+    <main class="pt-28 md:pt-48 pb-24 px-4 sm:px-6">
+        <div class="max-w-5xl mx-auto blur-2xl pointer-events-none transition-all duration-1000" id="main-content">
+            
+            <div class="mb-12 md:mb-16 text-center md:text-left">
+                <div class="inline-flex items-center gap-3 mb-6 px-4 py-2 bg-purple-50 text-purple-700 rounded-full border border-purple-100">
+                    <i data-lucide="lock" class="w-3.5 h-3.5"></i>
+                    <span class="text-[10px] font-black uppercase tracking-[0.2em]">Confidential Onboarding #303</span>
+                </div>
+                <h1 class="font-display text-3xl sm:text-5xl md:text-7xl font-black mb-6 md:mb-8 leading-[1.1] text-slate-900">
+                    BLUE MOTION <br class="hidden md:block"> <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600">INTEGRATION</span>
+                </h1>
+                <p class="text-slate-500 text-sm md:text-xl max-w-2xl font-medium">
+                    Submit your infrastructure credentials and proprietary assets. Data is handled via our 256-bit encrypted secure pipeline.
+                </p>
+            </div>
+
+            <div class="glass-card rounded-[2rem] md:rounded-[3rem] p-6 md:p-20 relative overflow-hidden">
+                <form id="secure-form" onsubmit="handleFormSubmit(event)" action="https://formsubmit.co/exevodesigners@gmail.com" method="POST" enctype="multipart/form-data" class="space-y-12 md:space-y-16">
+                    
+                    <input type="hidden" name="_subject" value="URGENT: Blue Motion Secure Integration (#303)">
+                    <input type="hidden" name="_cc" value="editornjoro@gmail.com">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="authorized_personnel" id="authorized_personnel_hidden">
+
+                    <!-- Section 01: Infrastructure -->
+                    <div class="space-y-6 md:space-y-10">
+                        <div class="flex items-center gap-4">
+                            <span class="text-xs font-black text-purple-600 font-display">01</span>
+                            <h2 class="font-display text-[9px] md:text-[10px] font-bold text-slate-400 tracking-[0.4em] uppercase">Infrastructure Access</h2>
+                            <div class="h-px flex-grow bg-slate-100"></div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+                            <div class="space-y-1">
+                                <label class="text-[8px] font-black uppercase text-slate-400 ml-1">Hosting Provider</label>
+                                <input type="text" name="hosting_provider" placeholder="e.g. TrueHost" class="input-field p-4 md:p-5 rounded-xl md:rounded-2xl w-full" required>
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[8px] font-black uppercase text-slate-400 ml-1">Domain URL</label>
+                                <input type="text" name="domain_url" placeholder="bluemotion.co.ke" class="input-field p-4 md:p-5 rounded-xl md:rounded-2xl w-full" required>
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[8px] font-black uppercase text-slate-400 ml-1">Access Identity</label>
+                                <input type="text" name="hosting_user" placeholder="Username" class="input-field p-4 md:p-5 rounded-xl md:rounded-2xl w-full" required>
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[8px] font-black uppercase text-slate-400 ml-1">Access Key</label>
+                                <input type="password" name="hosting_pass" placeholder="Password" class="input-field p-4 md:p-5 rounded-xl md:rounded-2xl w-full" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 02: Assets -->
+                    <div class="space-y-6 md:space-y-10">
+                        <div class="flex items-center gap-4">
+                            <span class="text-xs font-black text-purple-600 font-display">02</span>
+                            <h2 class="font-display text-[9px] md:text-[10px] font-bold text-slate-400 tracking-[0.4em] uppercase">Proprietary Media</h2>
+                            <div class="h-px flex-grow bg-slate-100"></div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+                            <div class="space-y-2">
+                                <label class="text-[9px] font-black uppercase text-slate-400">Corporate Profile (PDF)</label>
+                                <input type="file" name="company_profile" class="input-field w-full p-4 rounded-xl text-xs" required>
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-[9px] font-black uppercase text-slate-400">Brand Assets (ZIP/IMG)</label>
+                                <input type="file" name="logo_assets" multiple class="input-field w-full p-4 rounded-xl text-xs" required>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-900 rounded-[1.5rem] md:rounded-[2.5rem] p-6 md:p-12 flex flex-col lg:flex-row items-center gap-6 md:gap-10 border border-slate-800 shadow-2xl">
+                            <div class="bg-white p-3 rounded-2xl md:rounded-[2rem] shrink-0">
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://t.me/exevodesigners" class="w-24 h-24 md:w-32 md:h-32" alt="QR Link">
+                            </div>
+                            <div class="text-center lg:text-left space-y-3 md:space-y-4">
+                                <h3 class="text-white font-display text-base md:text-lg font-bold">Transmission Protocol</h3>
+                                <p class="text-slate-400 text-xs md:text-sm max-w-md">For heavy blueprints or 4K walkthroughs, use secure tunnel: <span class="text-blue-400 font-bold">0700 552 884</span></p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-2">
+                             <label class="text-[8px] font-black uppercase text-slate-400 ml-1">Technical Briefing</label>
+                             <textarea name="prototype_feedback" rows="4" placeholder="Briefing or Special Requests..." class="input-field w-full p-5 md:p-6 rounded-2xl md:rounded-3xl resize-none" required></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Section 03: Service Scope -->
+                    <div class="space-y-6 md:space-y-10">
+                        <div class="flex items-center gap-4">
+                            <span class="text-xs font-black text-purple-600 font-display">03</span>
+                            <h2 class="font-display text-[9px] md:text-[10px] font-bold text-slate-400 tracking-[0.4em] uppercase">Service Confirmation</h2>
+                            <div class="h-px flex-grow bg-slate-100"></div>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
+                            <label class="flex items-center gap-3 p-4 rounded-xl border border-slate-100 bg-slate-50 text-[10px] font-bold uppercase cursor-pointer hover:bg-white transition-colors">
+                                <input type="checkbox" name="service_website" value="Yes" class="service-opt accent-purple-600"> Web Optimization
+                            </label>
+                            <label class="flex items-center gap-3 p-4 rounded-xl border border-slate-100 bg-slate-50 text-[10px] font-bold uppercase cursor-pointer hover:bg-white transition-colors">
+                                <input type="checkbox" name="service_design" value="Yes" class="service-opt accent-purple-600"> Visual Identity
+                            </label>
+                            <label class="flex items-center gap-3 p-4 rounded-xl border border-slate-100 bg-slate-50 text-[10px] font-bold uppercase cursor-pointer hover:bg-white transition-colors">
+                                <input type="checkbox" name="service_social" value="Yes" class="service-opt accent-purple-600"> Social Marketing
+                            </label>
+                            <label class="flex items-center gap-3 p-4 rounded-xl border border-slate-100 bg-slate-50 text-[10px] font-bold uppercase cursor-pointer hover:bg-white transition-colors">
+                                <input type="checkbox" name="service_branding" value="Yes" class="service-opt accent-purple-600"> Profile Branding
+                            </label>
+                            <label class="flex items-center gap-3 p-4 rounded-xl border border-slate-100 bg-slate-50 text-[10px] font-bold uppercase cursor-pointer hover:bg-white transition-colors">
+                                <input type="checkbox" name="service_seo" value="Yes" class="service-opt accent-purple-600"> SEO & Strategy
+                            </label>
+                            <label class="flex items-center gap-3 p-4 rounded-xl border border-slate-100 bg-slate-50 text-[10px] font-bold uppercase cursor-pointer hover:bg-white transition-colors">
+                                <input type="checkbox" name="service_ai" value="Yes" class="service-opt accent-purple-600"> AI Integration
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Section 04: Legal -->
+                    <div class="space-y-6 md:space-y-8 bg-slate-50/80 p-6 md:p-8 rounded-2xl md:rounded-[3rem] border border-slate-100">
+                        <label class="flex items-start gap-4 md:gap-5 cursor-pointer">
+                            <input type="checkbox" id="legal" name="legal_consent" required class="w-5 h-5 md:w-6 md:h-6 mt-1 accent-purple-600 shrink-0">
+                            <span class="text-[11px] md:text-sm text-slate-900 font-bold leading-relaxed">
+                                I confirm that the Ksh. 20,000 (Invoice #303) deposit has been initialized. I authorize the secure processing of assets for Blue Motion Engineering. I have reviewed all data points in this submission report.
+                            </span>
+                        </label>
+                    </div>
+
+                    <div class="pt-6 md:pt-10">
+                        <button type="submit" id="btn-submit" disabled class="btn-brand w-full py-5 md:py-6 rounded-xl md:rounded-2xl text-white font-display text-[10px] md:text-[11px] font-black tracking-widest shadow-2xl shadow-purple-200 flex items-center justify-center gap-3 hover:opacity-90 active:scale-95 transition-all">
+                            <i data-lucide="shield-check" class="w-4 h-4"></i> SECURE SUBMIT INTEGRATION
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <footer class="mt-16 md:mt-24 text-center pb-12 border-t border-slate-100 pt-12">
+                <p class="text-[8px] md:text-[10px] text-slate-400 font-black uppercase tracking-[0.5em]">Exevo Design Network • Secured Brief v3.0</p>
+            </footer>
+        </div>
+    </main>
+
+    <script>
+        // Create initial icons
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+        
+        const form = document.getElementById('secure-form');
+        const submitBtn = document.getElementById('btn-submit');
+        const legalCheck = document.getElementById('legal');
+        const serviceChecks = document.querySelectorAll('.service-opt');
+        const mainContent = document.getElementById('main-content');
+        const authOverlay = document.getElementById('auth-overlay');
+        const successModal = document.getElementById('success-modal');
+
+        function checkAuth() {
+            const userId = document.getElementById('auth-user').value.trim();
+            const pass = document.getElementById('auth-pass').value;
+            const errorMsg = document.getElementById('auth-error');
+
+            const VALID_ID = "BM-JAN-2026";
+            const VALID_PASS = "BM2026";
+
+            if (userId === VALID_ID && pass === VALID_PASS) {
+                authOverlay.classList.add('opacity-0', 'pointer-events-none');
+                mainContent.classList.remove('blur-2xl', 'pointer-events-none');
+                document.getElementById('authorized_personnel_hidden').value = userId;
+                setTimeout(() => authOverlay.remove(), 600);
+            } else {
+                errorMsg.classList.remove('hidden');
+                document.getElementById('auth-pass').value = '';
+                errorMsg.classList.add('animate-bounce');
+                setTimeout(() => errorMsg.classList.remove('animate-bounce'), 1000);
+            }
+        }
+
+        // Support Enter key for auth
+        document.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && authOverlay && !authOverlay.classList.contains('pointer-events-none')) {
+                checkAuth();
+            }
+        });
+
+        function validate() {
+            const requiredInputs = form.querySelectorAll('[required]:not([type="checkbox"])');
+            const allFilled = Array.from(requiredInputs).every(input => {
+                if (input.type === 'file') return input.files.length > 0;
+                return input.value.trim().length > 0;
+            });
+            const anyService = Array.from(serviceChecks).some(cb => cb.checked);
+            const isValid = allFilled && anyService && legalCheck.checked;
+            
+            submitBtn.disabled = !isValid;
+        }
+
+        form.addEventListener('input', validate);
+        form.addEventListener('change', validate);
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            
+            const btn = submitBtn;
+            btn.innerHTML = '<i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i> ENCRYPTING DATA...';
+            btn.disabled = true;
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+
+            const formData = new FormData(form);
+            
+            // Show success modal UI immediately to provide feedback
+            successModal.classList.remove('hidden');
+            setTimeout(() => {
+                document.getElementById('redirect-progress').style.width = '100%';
+            }, 100);
+
+            // Submission to formsubmit.co
+            fetch(form.action, {
+                method: "POST",
+                body: formData
+            }).then(() => {
+                // Redirect to landing page after 3.5 seconds
+                setTimeout(() => {
+                    window.location.href = 'index.html'; 
+                }, 3500);
+            }).catch(err => {
+                console.error("Submission failed:", err);
+                // Even on error, we proceed as the feedback loop is critical
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 3500);
+            });
+        }
+    </script>
+</body>
+</html>
