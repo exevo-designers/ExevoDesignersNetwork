@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Member Login | Exevo Designers Network</title>
+    <link rel="icon" href="Exevo Logo/exevo-logo-profile.png" type="image/png">
+    <link rel="apple-touch-icon" href="Exevo Logo/exevo-logo-profile.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@0.321.0/dist/umd/lucide.min.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <style>
+        :root {
+            --brand-purple: #7c3aed;
+            --text-dark: #0f172a;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            background-color: #ffffff;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .font-display {
+            font-family: 'Syncopate', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: -0.04em;
+        }
+
+        .form-input {
+            width: 100%;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #7c3aed;
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.1);
+        }
+
+        .fade-in { animation: fadeIn 0.4s ease-out forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .loading-spinner {
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 2px solid #fff;
+            width: 16px;
+            height: 16px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 64px;
+            left: 0;
+            right: 0;
+            background: white;
+            border-bottom: 1px solid #f1f5f9;
+            padding: 1rem;
+            z-index: 40;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .divider span {
+            padding: 0 1rem;
+            color: #94a3b8;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        /* Google Sign-In Button Styling */
+        #google-signin-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #google-signin-button:hover {
+            background: #f8fafc;
+            border-color: #cbd5e1;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        #google-signin-button svg {
+            margin-right: 0.75rem;
+        }
+
+        @media (max-width: 768px) {
+            .font-display {
+                letter-spacing: -0.02em;
+            }
+        }
+    </style>
+</head>
+<body class="bg-white">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 md:h-20 flex items-center justify-between">
+            <a href="index.html" class="group flex items-center space-x-2 md:space-x-3">
+                <img src="Exevo Logo/Exevo Symbol@300x.png" alt="Exevo Logo" 
+                     class="h-7 md:h-9 lg:h-10 w-auto object-contain transition-transform group-hover:scale-105" 
+                     onerror="this.style.display='none'">
+                <div class="font-display font-bold text-sm sm:text-base md:text-xl tracking-tighter flex items-center">
+                    EXEVO <span class="text-purple-600 ml-1 hidden sm:inline">DESIGNERS</span>
+                </div>
+            </a>
+            <div class="hidden md:flex items-center space-x-6 text-[11px] font-semibold uppercase tracking-[0.2em] text-gray-500">
+                <a href="sign-up.html" class="hover:text-black transition">Join Network</a>
+                <a href="login-page.html" class="px-5 py-2.5 bg-black text-white rounded-full hover:bg-purple-600 transition-all shadow-lg shadow-black/5">Member Login</a>
+            </div>
+            <button onclick="toggleMobileMenu()" class="md:hidden p-2">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+        <div id="mobileMenu" class="mobile-menu">
+            <a href="sign-up.html" class="block w-full text-left py-2 text-sm font-semibold text-gray-700">Join Network</a>
+            <a href="login-page.html" class="block w-full text-left py-2 text-sm font-semibold text-gray-700">Member Login</a>
+        </div>
+    </nav>
+
+    <main class="pt-24 md:pt-32 pb-12 md:pb-20 px-4 sm:px-6">
+        <div class="max-w-md mx-auto">
+            
+            <!-- Login Form -->
+            <div class="space-y-6 fade-in">
+                <div class="text-center space-y-3">
+                    <div class="inline-block px-4 py-1.5 bg-purple-100 text-purple-600 text-[10px] font-black uppercase tracking-[0.2em] rounded-full">
+                        Member Access
+                    </div>
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl font-display font-black leading-tight">
+                        Welcome <span class="text-purple-600">Back</span>.
+                    </h1>
+                    <p class="text-gray-500 text-sm md:text-base">
+                        Log in to access your dashboard and projects.
+                    </p>
+                </div>
+
+                <!-- Google Sign-In Button -->
+                <div class="pt-4">
+                    <button id="google-signin-button" onclick="handleGoogleSignIn()">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M19.6 10.227c0-.709-.064-1.39-.182-2.045H10v3.868h5.382a4.6 4.6 0 01-1.996 3.018v2.51h3.232c1.891-1.742 2.982-4.305 2.982-7.35z" fill="#4285F4"/>
+                            <path d="M10 20c2.7 0 4.964-.895 6.618-2.423l-3.232-2.509c-.895.6-2.04.955-3.386.955-2.605 0-4.81-1.76-5.595-4.123H1.064v2.59A9.996 9.996 0 0010 20z" fill="#34A853"/>
+                            <path d="M4.405 11.9c-.2-.6-.314-1.24-.314-1.9 0-.66.114-1.3.314-1.9V5.51H1.064A9.996 9.996 0 000 10c0 1.614.386 3.14 1.064 4.49l3.34-2.59z" fill="#FBBC05"/>
+                            <path d="M10 3.977c1.468 0 2.786.505 3.823 1.496l2.868-2.868C14.959.99 12.695 0 10 0 6.09 0 2.71 2.24 1.064 5.51l3.34 2.59C5.19 5.736 7.395 3.977 10 3.977z" fill="#EA4335"/>
+                        </svg>
+                        Continue with Google
+                    </button>
+                    <!-- Hidden div for Google One Tap -->
+                    <div id="g_id_onload"
+                         data-client_id="YOUR_GOOGLE_CLIENT_ID"
+                         data-callback="handleCredentialResponse"
+                         data-auto_prompt="false">
+                    </div>
+                </div>
+
+                <div class="divider">
+                    <span>or continue with email</span>
+                </div>
+
+                <!-- Email/Password Login Form -->
+                <form id="loginForm" class="space-y-5">
+                    <div>
+                        <label for="email" class="block text-xs font-bold uppercase tracking-[0.15em] text-gray-400 mb-2">
+                            Email Address
+                        </label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            required
+                            placeholder="designer@example.com"
+                            class="form-input px-4 py-3.5 rounded-xl text-sm"
+                        >
+                    </div>
+
+                    <div>
+                        <label for="password" class="block text-xs font-bold uppercase tracking-[0.15em] text-gray-400 mb-2">
+                            Password
+                        </label>
+                        <div class="relative">
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password" 
+                                required
+                                placeholder="Enter your password"
+                                class="form-input px-4 py-3.5 rounded-xl text-sm pr-12"
+                            >
+                            <button 
+                                type="button" 
+                                onclick="togglePassword()"
+                                class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition"
+                            >
+                                <i data-lucide="eye" id="eye-icon" class="w-5 h-5"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between text-sm">
+                        <label class="flex items-center cursor-pointer">
+                            <input type="checkbox" id="remember" name="remember" class="mr-2 rounded border-gray-300 text-purple-600 focus:ring-purple-600">
+                            <span class="text-gray-600">Remember me</span>
+                        </label>
+                        <a href="#" onclick="showForgotPassword(event)" class="text-purple-600 hover:text-purple-700 font-semibold">
+                            Forgot password?
+                        </a>
+                    </div>
+
+                    <button 
+                        type="submit" 
+                        id="loginBtn"
+                        class="w-full px-6 py-4 bg-black text-white rounded-xl text-sm font-bold uppercase tracking-[0.15em] hover:bg-purple-600 transition-all shadow-lg flex items-center justify-center"
+                    >
+                        Sign In
+                    </button>
+                </form>
+
+                <div class="text-center text-sm text-gray-600 pt-4">
+                    Don't have an account? 
+                    <a href="sign-up.html" class="text-purple-600 hover:text-purple-700 font-semibold">
+                        Join the network
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="fixed inset-0 z-[1000] bg-black/50 backdrop-blur-sm hidden items-center justify-center px-4">
+        <div class="bg-white rounded-2xl p-8 max-w-md w-full text-center space-y-4 transform scale-95 transition-all duration-300">
+            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
+                <i data-lucide="check" class="w-8 h-8 text-green-600"></i>
+            </div>
+            <h3 class="text-2xl font-display font-bold">Welcome Back!</h3>
+            <p class="text-gray-600">You've successfully logged in. Redirecting to your dashboard...</p>
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div id="forgotPasswordModal" class="fixed inset-0 z-[1000] bg-black/50 backdrop-blur-sm hidden items-center justify-center px-4">
+        <div class="bg-white rounded-2xl p-8 max-w-md w-full space-y-4 transform scale-95 transition-all duration-300">
+            <div class="flex items-center justify-between">
+                <h3 class="text-xl font-display font-bold">Reset Password</h3>
+                <button onclick="closeForgotPassword()" class="text-gray-400 hover:text-gray-600">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <p class="text-gray-600 text-sm">Enter your email address and we'll send you a link to reset your password.</p>
+            <form id="forgotPasswordForm" class="space-y-4">
+                <div>
+                    <label for="resetEmail" class="block text-xs font-bold uppercase tracking-[0.15em] text-gray-400 mb-2">
+                        Email Address
+                    </label>
+                    <input 
+                        type="email" 
+                        id="resetEmail" 
+                        name="resetEmail" 
+                        required
+                        placeholder="designer@example.com"
+                        class="form-input px-4 py-3.5 rounded-xl text-sm"
+                    >
+                </div>
+                <button 
+                    type="submit" 
+                    class="w-full px-6 py-4 bg-black text-white rounded-xl text-sm font-bold uppercase tracking-[0.15em] hover:bg-purple-600 transition-all"
+                >
+                    Send Reset Link
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            lucide.createIcons();
+
+            // Toggle Mobile Menu
+            window.toggleMobileMenu = function() {
+                const menu = document.getElementById('mobileMenu');
+                menu.classList.toggle('active');
+            };
+
+            // Toggle Password Visibility
+            window.togglePassword = function() {
+                const passwordInput = document.getElementById('password');
+                const eyeIcon = document.getElementById('eye-icon');
+                
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    eyeIcon.setAttribute('data-lucide', 'eye-off');
+                } else {
+                    passwordInput.type = 'password';
+                    eyeIcon.setAttribute('data-lucide', 'eye');
+                }
+                lucide.createIcons();
+            };
+
+            // Handle Email/Password Login
+            const loginForm = document.getElementById('loginForm');
+            const loginBtn = document.getElementById('loginBtn');
+
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const originalContent = loginBtn.innerHTML;
+                loginBtn.innerHTML = '<div class="loading-spinner"></div><span class="ml-2">Signing in...</span>';
+                loginBtn.disabled = true;
+
+                const formData = new FormData(loginForm);
+                const email = formData.get('email');
+                const password = formData.get('password');
+                const remember = formData.get('remember');
+
+                // Simulate API call - Replace with your actual authentication endpoint
+                setTimeout(() => {
+                    // Example: Successful login
+                    console.log('Login attempt:', { email, password, remember });
+                    
+                    // Show success modal
+                    const modal = document.getElementById('successModal');
+                    modal.classList.remove('hidden');
+                    modal.classList.add('flex');
+                    setTimeout(() => modal.querySelector('div').classList.add('scale-100'), 10);
+                    lucide.createIcons();
+
+                    // Redirect to dashboard after 2 seconds
+                    setTimeout(() => {
+                        // window.location.href = 'dashboard.html';
+                        console.log('Redirecting to dashboard...');
+                    }, 2000);
+
+                    /* 
+                    // Example: Failed login
+                    loginBtn.innerHTML = originalContent;
+                    loginBtn.disabled = false;
+                    alert('Invalid email or password. Please try again.');
+                    */
+                }, 1500);
+            });
+
+            // Forgot Password Modal
+            window.showForgotPassword = function(e) {
+                e.preventDefault();
+                const modal = document.getElementById('forgotPasswordModal');
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                setTimeout(() => modal.querySelector('div').classList.add('scale-100'), 10);
+                lucide.createIcons();
+            };
+
+            window.closeForgotPassword = function() {
+                const modal = document.getElementById('forgotPasswordModal');
+                modal.querySelector('div').classList.remove('scale-100');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                }, 300);
+            };
+
+            // Handle Forgot Password Form
+            const forgotPasswordForm = document.getElementById('forgotPasswordForm');
+            forgotPasswordForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = document.getElementById('resetEmail').value;
+                
+                // Simulate API call - Replace with your actual password reset endpoint
+                console.log('Password reset requested for:', email);
+                
+                alert('Password reset link sent! Please check your email.');
+                closeForgotPassword();
+                forgotPasswordForm.reset();
+            });
+        });
+
+        // Google Sign-In Handler
+        window.handleGoogleSignIn = function() {
+            // This will trigger Google's OAuth flow
+            // Replace YOUR_GOOGLE_CLIENT_ID with your actual Google OAuth client ID
+            
+            /* 
+            For production, initialize Google Sign-In like this:
+            
+            google.accounts.id.initialize({
+                client_id: 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com',
+                callback: handleCredentialResponse
+            });
+            
+            google.accounts.id.prompt(); // Display the One Tap dialog
+            */
+            
+            // Simulation for demo purposes
+            console.log('Google Sign-In initiated...');
+            alert('Google Sign-In would open here. Please configure your Google OAuth Client ID in production.');
+        };
+
+        // Handle Google Credential Response
+        window.handleCredentialResponse = function(response) {
+            // response.credential contains the JWT token from Google
+            console.log('Google credential received:', response.credential);
+            
+            // Send the token to your backend for verification
+            /*
+            fetch('/api/auth/google', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    token: response.credential
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    // Show success modal and redirect
+                    const modal = document.getElementById('successModal');
+                    modal.classList.remove('hidden');
+                    modal.classList.add('flex');
+                    setTimeout(() => modal.querySelector('div').classList.add('scale-100'), 10);
+                    lucide.createIcons();
+                    
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 2000);
+                } else {
+                    alert('Google authentication failed. Please try again.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred during Google sign-in.');
+            });
+            */
+        };
+    </script>
+
+    <!-- 
+    GOOGLE OAUTH SETUP INSTRUCTIONS:
+    
+    1. Go to Google Cloud Console: https://console.cloud.google.com/
+    2. Create a new project or select an existing one
+    3. Enable Google+ API
+    4. Go to Credentials > Create Credentials > OAuth 2.0 Client ID
+    5. Configure consent screen with your app information
+    6. Add authorized JavaScript origins (e.g., http://localhost:3000, https://yourdomain.com)
+    7. Add authorized redirect URIs
+    8. Copy your Client ID and replace 'YOUR_GOOGLE_CLIENT_ID' in this file
+    
+    Backend Implementation:
+    - Verify the Google token on your server using Google's token verification library
+    - Create a session or JWT token for your application
+    - Return user information and authentication status
+    
+    Example Node.js backend verification:
+    
+    const { OAuth2Client } = require('google-auth-library');
+    const client = new OAuth2Client(CLIENT_ID);
+    
+    async function verify(token) {
+        const ticket = await client.verifyIdToken({
+            idToken: token,
+            audience: CLIENT_ID,
+        });
+        const payload = ticket.getPayload();
+        const userid = payload['sub'];
+        // Use payload.email, payload.name, etc.
+    }
+    -->
+
+</body>
+</html>

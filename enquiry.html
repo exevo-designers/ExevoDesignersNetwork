@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Project Form | Exevo Designers Network</title>
+        <link rel="icon" href="ExevoLogo/exevo-logo-profile.png" type="image/png">
+    <link rel="apple-touch-icon" href="ExevoLogo/exevo-logo-profile.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+    <!-- International Telephone Input CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.10/build/css/intlTelInput.css">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@0.321.0/dist/umd/lucide.min.js"></script>
+    <style>
+        :root {
+            --brand-purple: #7c3aed;
+            --text-dark: #0f172a;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            background-color: #ffffff;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        .font-display {
+            font-family: 'Syncopate', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: -0.04em;
+        }
+
+        /* Form Styling */
+        .form-input, .form-textarea, .form-select {
+            width: 100%;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+            appearance: none;
+        }
+
+        .form-input:focus, .form-textarea:focus, .form-select:focus {
+            outline: none;
+            border-color: #7c3aed;
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.1);
+        }
+
+        /* International Phone Input Overrides */
+        .iti { width: 100%; display: block; }
+        .iti__country-list {
+            max-height: 250px;
+            width: 80vw;
+            max-width: 300px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+            z-index: 1000;
+        }
+        .iti--allow-dropdown input#phone { padding-left: 95px !important; }
+
+        /* Selection Cards */
+        .selection-card {
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid #e2e8f0;
+            position: relative;
+            background: #ffffff;
+            user-select: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .selection-card:hover { border-color: #7c3aed; transform: translateY(-2px); }
+        .selection-card.active {
+            border-color: #7c3aed;
+            background: #faf5ff;
+            box-shadow: 0 10px 15px -3px rgba(124, 58, 237, 0.1);
+        }
+
+        .selection-card input { position: absolute; opacity: 0; pointer-events: none; }
+
+        /* Progress Bar */
+        .progress-bar {
+            height: 4px;
+            background: #f1f5f9;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #7c3aed;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 0%;
+        }
+
+        /* Animations */
+        .fade-in { animation: fadeIn 0.4s ease-out forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .shake { animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both; }
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-1px, 0, 0); }
+            20%, 80% { transform: translate3d(2px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+            40%, 60% { transform: translate3d(4px, 0, 0); }
+        }
+
+        /* Responsive adjustments for narrow screens */
+        @media (max-width: 400px) {
+            .font-display { font-size: 1.5rem !important; }
+            .form-step p { font-size: 0.875rem !important; }
+        }
+    </style>
+</head>
+<body class="bg-white selection:bg-purple-100">
+
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 md:h-20 flex items-center justify-between">
+            <a href="index.html" class="group flex items-center space-x-2 md:space-x-3">
+                <img src="ExevoLogo/exevo-logo-png.png" alt="Exevo Logo" 
+                     class="h-7 md:h-9 lg:h-10 w-auto object-contain transition-transform group-hover:scale-105" 
+                     onerror="this.style.display='none'">
+                <div class="font-display font-bold text-sm sm:text-lg md:text-xl tracking-tighter flex items-center">
+                    EXEVO <span class="text-purple-600 ml-1 hidden xs:inline">DESIGNERS</span>
+                </div>
+
+            <!-- Desktop Nav -->
+            <div class="hidden md:flex items-center space-x-6 lg:space-x-10 text-[10px] lg:text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">
+                <a href="index.html" class="hover:text-purple-600 transition-colors">Home</a>
+                <a href="portfolio.html" class="hover:text-purple-600 transition-colors">Portfolio</a>
+                <a href="enquiry.html" class="px-5 py-2.5 bg-black text-white rounded-full hover:bg-purple-600 transition-all shadow-lg shadow-black/5">Enquiry</a>
+            </div>
+
+            <!-- Mobile Menu Trigger -->
+            <button class="md:hidden p-2 text-gray-900" id="menu-toggle">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Slide-out Menu -->
+    <div id="mobile-menu" class="fixed inset-0 z-[60] bg-white translate-x-full transition-transform duration-500 ease-in-out md:hidden">
+        <div class="flex flex-col h-full px-6 py-8">
+            <div class="flex justify-between items-center mb-12">
+                <div class="font-display font-bold text-lg tracking-tighter">
+                    EXEVO <span class="text-purple-600">DESIGNERS</span>
+                </div>
+                <button id="close-menu" class="p-2 text-gray-900">
+                    <i data-lucide="x" class="w-7 h-7"></i>
+                </button>
+            </div>
+            <nav class="flex flex-col space-y-6 text-2xl font-display font-black">
+                <a href="index.html" class="hover:text-purple-600">Home</a>
+                <a href="portfolio.html" class="hover:text-purple-600">Portfolio</a>
+                <a href="enquiry.html" class="text-purple-600">Enquiry</a>
+            </nav>
+            <div class="mt-auto border-t border-gray-100 pt-8">
+                <p class="text-xs uppercase tracking-widest text-gray-400 mb-4">Get in touch</p>
+                <a href="mailto:exevodesigners@gmail.com" class="text-lg text-gray-900 font-bold block mb-2 break-all">exevodesigners@gmail.com</a>
+                <a href="tel:+254700552884" class="text-lg text-gray-900 font-bold">+254 700 552 884</a>
+            </div>
+        </div>
+    </div>
+
+    <main class="pt-28 md:pt-40 pb-20 px-4 sm:px-6">
+        <div class="max-w-3xl mx-auto">
+            <form id="enquiryForm" action="https://formsubmit.co/exevodesigners@gmail.com" method="POST" class="space-y-8 md:space-y-12">
+                
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_subject" value="New Project Enquiry - Exevo Designers">
+                <input type="hidden" name="_template" value="table">
+
+                <!-- Step 1: Services -->
+                <div class="form-step fade-in" data-step="1">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-display font-black mb-4 md:mb-6 leading-tight">WHAT DO YOU NEED HELP WITH?</h2>
+                    <p class="text-gray-500 text-base md:text-lg mb-8 md:mb-10">Select at least one service to continue.</p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
+                        <div class="selection-card p-5 md:p-6 rounded-xl" data-type="checkbox">
+                            <input type="checkbox" name="services[]" value="Brand Design">
+                            <h3 class="font-bold text-lg md:text-xl mb-1">Graphic Design</h3>
+                            <p class="text-xs md:text-sm text-gray-400">Brand identity, flyer, and poster designs</p>
+                        </div>
+                        <div class="selection-card p-5 md:p-6 rounded-xl" data-type="checkbox">
+                            <input type="checkbox" name="services[]" value="Website Design & Development">
+                            <h3 class="font-bold text-lg md:text-xl mb-1">Website Design</h3>
+                            <p class="text-xs md:text-sm text-gray-400">UI/UX and high-performance code</p>
+                        </div>
+                        <div class="selection-card p-5 md:p-6 rounded-xl" data-type="checkbox">
+                            <input type="checkbox" name="services[]" value="Content Creation">
+                            <h3 class="font-bold text-lg md:text-xl mb-1">Content Creation</h3>
+                            <p class="text-xs md:text-sm text-gray-400">Photography, video, and storytelling</p>
+                        </div>
+                        <div class="selection-card p-5 md:p-6 rounded-xl" data-type="checkbox">
+                            <input type="checkbox" name="services[]" value="Digital Marketing">
+                            <h3 class="font-bold text-lg md:text-xl mb-1">Digital Marketing</h3>
+                            <p class="text-xs md:text-sm text-gray-400">Strategic growth and social presence</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Source -->
+                <div class="form-step hidden" data-step="2">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-display font-black mb-4 md:mb-6">HOW DID YOU FIND US?</h2>
+                    <p class="text-gray-500 text-base md:text-lg mb-8 md:mb-10">Please pick an option to proceed.</p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
+                        <div class="selection-card p-5 md:p-6 rounded-xl h-16 md:h-24" data-type="radio">
+                            <input type="radio" name="source" value="Instagram">
+                            <h3 class="font-bold text-lg md:text-xl">Instagram</h3>
+                        </div>
+                        <div class="selection-card p-5 md:p-6 rounded-xl h-16 md:h-24" data-type="radio">
+                            <input type="radio" name="source" value="LinkedIn">
+                            <h3 class="font-bold text-lg md:text-xl">LinkedIn</h3>
+                        </div>
+                        <div class="selection-card p-5 md:p-6 rounded-xl h-16 md:h-24" data-type="radio">
+                            <input type="radio" name="source" value="YouTube">
+                            <h3 class="font-bold text-lg md:text-xl">YouTube</h3>
+                        </div>
+                        <div class="selection-card p-5 md:p-6 rounded-xl h-16 md:h-24" data-type="radio">
+                            <input type="radio" name="source" value="Referral">
+                            <h3 class="font-bold text-lg md:text-xl">Referral</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Timeline -->
+                <div class="form-step hidden" data-step="3">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-display font-black mb-4 md:mb-6">YOUR TIMELINE</h2>
+                    <p class="text-gray-500 text-base md:text-lg mb-8 md:mb-10">When do you need this completed?</p>
+                    <input type="text" name="deadline" required placeholder="e.g. Next month / No rush" class="form-input p-4 md:p-5 rounded-xl font-bold text-lg">
+                </div>
+
+                <!-- Step 4: Budget -->
+                <div class="form-step hidden" data-step="4">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-display font-black mb-4 md:mb-6">BUDGET RANGE</h2>
+                    <p class="text-gray-500 text-base md:text-lg mb-8 md:mb-10">Help us set the right expectations.</p>
+                    <div class="relative">
+                        <select name="budget" required class="form-select p-4 md:p-5 rounded-xl font-bold text-lg cursor-pointer">
+                            <option value="" disabled selected>Select a range (KSh)...</option>
+                            <option value="Under 50k">Under KSh 50,000</option>
+                            <option value="50k-150k">KSh 50,000 — KSh 150,000</option>
+                            <option value="150k-500k">KSh 150,000 — KSh 500,000</option>
+                            <option value="500k-1m">KSh 500,000 — KSh 1,000,000</option>
+                            <option value="1m+">KSh 1,000,000+</option>
+                        </select>
+                        <div class="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
+                            <i data-lucide="chevron-down" class="w-5 h-5"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 5: Personal Info -->
+                <div class="form-step hidden" data-step="5">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-display font-black mb-4 md:mb-6">TELL US ABOUT YOU</h2>
+                    <p class="text-gray-500 text-base md:text-lg mb-8 md:mb-10">Final step! How can we reach you?</p>
+                    
+                    <div class="space-y-4 md:space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                            <input type="text" name="name" placeholder="Full Name *" required class="form-input p-4 rounded-xl font-bold">
+                            <input type="email" name="email" placeholder="Email Address *" required class="form-input p-4 rounded-xl font-bold">
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                            <div>
+                                <label class="block text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2 ml-1">Country *</label>
+                                <select id="countrySelect" name="country" required class="form-select p-4 rounded-xl font-bold h-[58px]"></select>
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2 ml-1">Phone Number *</label>
+                                <input type="tel" id="phone" name="phone" required class="form-input p-4 rounded-xl font-bold">
+                            </div>
+                        </div>
+
+                        <input type="text" name="company" placeholder="Company Name" class="form-input p-4 rounded-xl font-bold">
+                        <textarea name="message" placeholder="Project Description & Details *" required rows="4" class="form-textarea p-4 rounded-xl font-bold"></textarea>
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 md:pt-10">
+                    <button type="button" id="prevBtn" class="invisible order-2 sm:order-1 px-8 py-3 text-xs font-black uppercase tracking-widest text-gray-400 hover:text-black transition-colors">
+                        ← Previous
+                    </button>
+                    <div class="w-full sm:w-auto order-1 sm:order-2">
+                        <button type="button" id="nextBtn" class="w-full sm:w-auto px-10 md:px-12 py-4 md:py-5 bg-black text-white text-xs font-black uppercase tracking-widest rounded-full hover:bg-purple-600 transition-all transform active:scale-95 shadow-xl shadow-black/10">
+                            Next Step
+                        </button>
+                        <button type="submit" id="submitBtn" class="hidden w-full sm:w-auto px-10 md:px-12 py-4 md:py-5 bg-purple-600 text-white text-xs font-black uppercase tracking-widest rounded-full hover:bg-black transition-all transform active:scale-95 shadow-xl shadow-purple-200">
+                            Submit Enquiry
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Thank You Modal -->
+    <div id="thankYouModal" class="fixed inset-0 z-[1000] hidden bg-black/60 backdrop-blur-sm p-4 items-center justify-center">
+        <div class="bg-white max-w-md w-full rounded-3xl p-8 md:p-10 text-center shadow-2xl transform scale-95 transition-all duration-300" id="modalContent">
+            <div class="w-16 h-16 md:w-20 md:h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                <i data-lucide="check-circle-2" class="w-8 h-8 md:w-10 md:h-10"></i>
+            </div>
+            <h2 class="text-2xl md:text-3xl font-display font-black mb-4">ASANTE SANA!</h2>
+            <p class="text-gray-500 mb-8 leading-relaxed text-sm md:text-base">
+                Your enquiry has been received. Our team will review your project details and get back to you within 48 hours.
+            </p>
+            <button onclick="closeModal()" class="w-full py-4 bg-black text-white text-xs font-black uppercase tracking-widest rounded-full hover:bg-purple-600 transition-all">
+                Close
+            </button>
+        </div>
+    </div>
+<!-- Footer -->
+<footer class="bg-white border-t border-gray-100 py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-12">
+    <div class="max-w-7xl mx-auto">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 sm:gap-12 lg:gap-8 mb-16 sm:mb-20">
+            <div class="sm:col-span-2 lg:col-span-2 flex flex-col items-center sm:items-start text-center sm:text-left">
+                <a href="#" class="group flex items-center space-x-2 sm:space-x-3 mb-6 sm:mb-8">
+                    <img src="ExevoLogo/exevo-wordmark.png" alt="Exevo Logo" class="h-7 sm:h-8 md:h-10 w-auto" onerror="this.style.display='none'">
+                </a>
+                <p class="max-w-sm text-gray-500 mb-6 sm:mb-8 italic text-sm sm:text-base">Setting new benchmarks for digital creativity across the continent. Built on excellence, driven by results.</p>
+                
+                <!-- Official Social Media Icons -->
+                <div class="flex flex-wrap justify-center sm:justify-start gap-3 sm:gap-4">
+                    <a href="https://www.instagram.com/exevodesigners" class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-50 text-gray-400 rounded-full flex items-center justify-center hover:bg-purple-600 hover:text-white transition-all duration-300 group">
+                        <i data-lucide="instagram" class="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.5px]"></i>
+                    </a>
+                    <a href="https://www.facebook.com/share/17oXAWNWcZ/" class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-50 text-gray-400 rounded-full flex items-center justify-center hover:bg-purple-600 hover:text-white transition-all duration-300 group">
+                        <i data-lucide="facebook" class="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.5px]"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/exevo-designers-40122435a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-50 text-gray-400 rounded-full flex items-center justify-center hover:bg-purple-600 hover:text-white transition-all duration-300 group">
+                        <i data-lucide="linkedin" class="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.5px]"></i>
+                    </a>
+                    <a href="https://www.tiktok.com/@exevodesigners?_r=1&_t=ZS-93UpjDAoSQe " class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-50 text-gray-400 rounded-full flex items-center justify-center hover:bg-purple-600 hover:text-white transition-all duration-300 group">
+                        <!-- Standard TikTok representation -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 sm:w-5 sm:h-5"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
+                    </a>
+                    <a href="https://whatsapp.com/channel/0029Vb7kTDq3QxS1ffkZhe0J " class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-50 text-gray-400 rounded-full flex items-center justify-center hover:bg-green-600 hover:text-white transition-all duration-300 group">
+                        <i data-lucide="message-circle" class="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.5px]"></i>
+                    </a>
+                    <a href="mailto:exevodesigners@gmail.com" class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-50 text-gray-400 rounded-full flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all duration-300 group">
+                        <i data-lucide="mail" class="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.5px]"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="text-center sm:text-left">
+                <h4 class="font-black mb-6 sm:mb-8 uppercase tracking-widest text-[10px] text-gray-400">Navigation</h4>
+                <ul class="space-y-3 sm:space-y-4 text-gray-900 font-semibold text-sm">
+                    <li><a href="#home" class="hover:text-purple-600 transition-colors">Home</a></li>
+                    <li><a href="#about" class="hover:text-purple-600 transition-colors">About Us</a></li>
+                    <li><a href="#services" class="hover:text-purple-600 transition-colors">Services</a></li>
+                    <li><a href="#portfolio" class="hover:text-purple-600 transition-colors">Portfolio</a></li>
+                    <li><a href="sign-up.html" class="hover:text-purple-600 transition-colors">Join Community</a></li>
+                </ul>
+            </div>
+            
+            <div class="text-center sm:text-left">
+                <h4 class="font-black mb-6 sm:mb-8 uppercase tracking-widest text-[10px] text-gray-400">Legal</h4>
+                <ul class="space-y-3 sm:space-y-4 text-gray-500 font-medium text-sm">
+                    <li><a href="#" class="hover:text-purple-600 transition-colors">Privacy Policy</a></li>
+                    <li><a href="#" class="hover:text-purple-600 transition-colors">Terms of Service</a></li>
+                    <li><a href="digital-contract.html" class="hover:text-purple-600 transition-colors">Cookie Policy</a></li>
+                    <li><a href="bm-secure-portal.html" class="hover:text-purple-600 transition-colors">BM</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="pt-8 sm:pt-12 border-t border-gray-100 flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-6 text-[10px] sm:text-xs text-gray-400 uppercase tracking-[0.2em] font-bold text-center">
+            <p>© 2026 EXEVO DESIGNERS NETWORK. ALL RIGHTS RESERVED.</p>
+            <p class="flex items-center justify-center">DESIGNED WITH <i data-lucide="heart" class="w-3 h-3 text-red-500 mx-2"></i> IN AFRICA</p>
+        </div>
+    </div>
+</footer>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.10/build/js/intlTelInput.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            lucide.createIcons();
+
+            // Mobile Menu
+            const menuToggle = document.getElementById('menu-toggle');
+            const closeMenu = document.getElementById('close-menu');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            menuToggle.addEventListener('click', () => mobileMenu.classList.remove('translate-x-full'));
+            closeMenu.addEventListener('click', () => mobileMenu.classList.add('translate-x-full'));
+
+            // Phone Input
+            const phoneInput = document.querySelector("#phone");
+            const countrySelect = document.querySelector("#countrySelect");
+            let iti;
+
+            if (window.intlTelInput) {
+                iti = window.intlTelInput(phoneInput, {
+                    initialCountry: "ke",
+                    separateDialCode: true,
+                    utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.10/build/js/utils.js",
+                });
+
+                const countryData = window.intlTelInput.getCountryData();
+                countryData.forEach(country => {
+                    const opt = document.createElement("option");
+                    opt.value = country.iso2;
+                    opt.textContent = country.name;
+                    if(country.iso2 === 'ke') opt.selected = true;
+                    countrySelect.appendChild(opt);
+                });
+
+                countrySelect.addEventListener('change', () => iti.setCountry(countrySelect.value));
+                phoneInput.addEventListener('countrychange', () => {
+                    countrySelect.value = iti.getSelectedCountryData().iso2;
+                });
+            }
+
+            // Form Logic
+            const form = document.getElementById('enquiryForm');
+            const steps = document.querySelectorAll('.form-step');
+            const nextBtn = document.getElementById('nextBtn');
+            const prevBtn = document.getElementById('prevBtn');
+            const submitBtn = document.getElementById('submitBtn');
+            const progressFill = document.getElementById('progressFill');
+            const modal = document.getElementById('thankYouModal');
+            let currentStep = 1;
+
+            document.querySelectorAll('.selection-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const input = card.querySelector('input');
+                    if (card.dataset.type === 'radio') {
+                        document.querySelectorAll(`[name="${input.name}"]`).forEach(i => {
+                            i.checked = false;
+                            i.closest('.selection-card').classList.remove('active');
+                        });
+                        input.checked = true;
+                        card.classList.add('active');
+                    } else {
+                        input.checked = !input.checked;
+                        card.classList.toggle('active', input.checked);
+                    }
+                });
+            });
+
+            function showStep(s) {
+                steps.forEach((step, i) => step.classList.toggle('hidden', i + 1 !== s));
+                prevBtn.style.visibility = s === 1 ? 'hidden' : 'visible';
+                if (s === steps.length) {
+                    nextBtn.classList.add('hidden');
+                    submitBtn.classList.remove('hidden');
+                } else {
+                    nextBtn.classList.remove('hidden');
+                    submitBtn.classList.add('hidden');
+                }
+                progressFill.style.width = `${((s - 1) / (steps.length - 1)) * 100}%`;
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            function validate() {
+                const el = document.querySelector(`[data-step="${currentStep}"]`);
+                if (currentStep === 1) return el.querySelectorAll('input:checked').length > 0;
+                if (currentStep === 2) return !!el.querySelector('input:checked');
+                const fields = el.querySelectorAll('[required]');
+                for (let f of fields) {
+                    if (!f.value.trim()) return false;
+                    if (f.id === 'phone' && iti && !iti.isValidNumber()) return false;
+                }
+                return true;
+            }
+
+            nextBtn.addEventListener('click', () => {
+                if (validate()) {
+                    currentStep++;
+                    showStep(currentStep);
+                } else {
+                    nextBtn.classList.add('shake', 'bg-red-500');
+                    setTimeout(() => nextBtn.classList.remove('shake', 'bg-red-500'), 500);
+                }
+            });
+
+            prevBtn.addEventListener('click', () => {
+                currentStep--;
+                showStep(currentStep);
+            });
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                submitBtn.disabled = true;
+                submitBtn.innerText = 'SENDING...';
+                
+                try {
+                    const res = await fetch(form.action, {
+                        method: 'POST',
+                        body: new FormData(form),
+                        headers: { 'Accept': 'application/json' }
+                    });
+                    if (res.ok) {
+                        modal.style.display = 'flex';
+                        setTimeout(() => document.getElementById('modalContent').classList.add('scale-100'), 10);
+                        form.reset();
+                        document.querySelectorAll('.selection-card').forEach(c => c.classList.remove('active'));
+                        currentStep = 1;
+                        showStep(1);
+                    }
+                } catch (err) {
+                    submitBtn.innerText = 'Error! Try again';
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = 'Submit Enquiry';
+                }
+            });
+
+            window.closeModal = () => {
+                document.getElementById('modalContent').classList.remove('scale-100');
+                setTimeout(() => modal.style.display = 'none', 300);
+            };
+        });
+    </script>
+</body>
+</html>

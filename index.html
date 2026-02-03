@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Exevo Designers Network | Professional Design & Digital Marketing</title>
+    <meta name="description" content="Exevo Designers Network provides expert graphic design, digital marketing, and creative solutions. Connect with our professional design agency.">
+
+    <link rel="icon" href="ExevoLogo/exevo-logo-profile.png" type="image/png">
+    <link rel="apple-touch-icon" href="ExevoLogo/exevo-logo-profile.png">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Exevo Designers Network",
+      "url": "https://exevodesigners.online/",
+      "logo": "https://exevodesigners.online/ExevoLogo/exevo-logo-profile.png",
+      "image": "https://exevodesigners.online/ExevoLogo/exevo-logo-profile.png",
+      "sameAs": [
+        "https://www.linkedin.com/in/exevo-designers-40122435a",
+        "https://www.instagram.com/exevodesigners",
+        "https://www.facebook.com/share/17oXAWNWcZ/",
+        "https://www.tiktok.com/@exevodesigners",
+        "https://whatsapp.com/channel/0029Vb7kTDq3QxS1ffkZhe0J"
+      ]
+    }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --brand-purple: #7c3aed;
+            --text-dark: #0f172a;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            background-color: #ffffff;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        .font-display {
+            font-family: 'Syncopate', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: -0.04em;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 7.5rem);
+            line-height: 0.95;
+            letter-spacing: -0.05em;
+        }
+
+        .section-title {
+            font-size: clamp(1.75rem, 5vw, 4rem);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #7c3aed 0%, #d946ef 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .slider-container {
+            cursor: grab;
+            user-select: none;
+            scroll-behavior: smooth;
+        }
+        .slider-container:active { cursor: grabbing; }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        .animate-marquee {
+            display: flex;
+            width: fit-content;
+            animation: marquee 40s linear infinite;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--brand-purple);
+            transition: width 0.3s ease;
+        }
+        
+        @media (min-width: 768px) {
+            .nav-link:hover::after { width: 100%; }
+        }
+
+        /* Expandable Cards */
+        .expand-card {
+            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @media (min-width: 768px) {
+            .expand-card {
+                flex: 0 0 120px;
+            }
+            .expand-card.active {
+                flex: 1 1 auto;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .expand-card {
+                min-height: 250px;
+                transition: min-height 0.5s ease;
+            }
+            .expand-card.active {
+                min-height: 400px;
+            }
+        }
+
+        /* Mobile optimization */
+        @media (max-width: 640px) {
+            body {
+                font-size: 14px;
+            }
+        }
+
+        /* Prevent horizontal scroll */
+        * {
+            max-width: 100%;
+        }
+
+        img {
+            height: auto;
+        }
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+    </style>
+</head>
+<body class="bg-white">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 md:h-20 flex items-center justify-between">
+            <a href="#" class="group flex items-center space-x-2 md:space-x-3">
+                <img src="ExevoLogo/exevo-logo-png.png" alt="Exevo Logo" 
+                     class="h-7 md:h-9 lg:h-10 w-auto object-contain transition-transform group-hover:scale-105" 
+                     onerror="this.style.display='none'">
+                <div class="font-display font-bold text-sm sm:text-lg md:text-xl tracking-tighter flex items-center">
+                    EXEVO <span class="text-purple-600 ml-1 hidden xs:inline">DESIGNERS</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav -->
+            <div class="hidden md:flex items-center space-x-6 lg:space-x-12 text-[11px] lg:text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">
+                <a href="#home" class="nav-link text-gray-900">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#portfolio" class="nav-link">Portfolio</a>
+                <a href="#contact" class="px-5 lg:px-6 py-2.5 lg:py-3 bg-black text-white rounded-full hover:bg-purple-600 transition-all duration-300 shadow-lg shadow-black/5">Contact</a>
+            </div>
+
+            <!-- Mobile Menu Trigger -->
+            <button class="md:hidden p-2 text-gray-900 focus:outline-none" id="menu-toggle" aria-label="Toggle Menu">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Slide-out Menu -->
+    <div id="mobile-menu" class="fixed inset-0 z-[60] bg-white translate-x-full transition-transform duration-500 ease-in-out md:hidden">
+        <div class="flex flex-col h-full px-6 sm:px-8 py-8 sm:py-12">
+            <div class="flex justify-between items-center mb-12 sm:mb-16">
+                <div class="font-display font-bold text-lg sm:text-xl tracking-tighter">
+                    EXEVO <span class="text-purple-600">DESIGNERS</span>
+                </div>
+                <button id="close-menu" class="p-2 text-gray-900" aria-label="Close Menu">
+                    <i data-lucide="x" class="w-7 h-7 sm:w-8 sm:h-8"></i>
+                </button>
+            </div>
+            <nav class="flex flex-col space-y-6 sm:space-y-8 text-2xl sm:text-3xl font-display font-black">
+                <a href="#home" class="mobile-nav-link text-purple-600">Home</a>
+                <a href="#about" class="mobile-nav-link">About</a>
+                <a href="#services" class="mobile-nav-link">Services</a>
+                <a href="#portfolio" class="mobile-nav-link">Portfolio</a>
+                <a href="#contact" class="mobile-nav-link">Contact</a>
+            </nav>
+            <div class="mt-auto border-t border-gray-100 pt-6 sm:pt-8">
+                <p class="text-xs uppercase tracking-widest text-gray-400 mb-3 sm:mb-4">Get in touch</p>
+                <a href="mailto:exevodesigners@gmail.com" class="text-sm sm:text-base text-gray-900 font-bold block mb-2 break-all">exevodesigners@gmail.com</a>
+                <a href="tel:+254700552884" class="text-sm sm:text-base text-gray-900 font-bold">+254 700 552 884</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative pt-24 sm:pt-32 md:pt-48 pb-16 sm:pb-20 px-4 sm:px-6 lg:px-12 overflow-hidden">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                
+                <div class="flex flex-col items-center lg:items-start text-center lg:text-left order-1">
+                    <span class="inline-block px-3 sm:px-4 py-2 bg-purple-100 text-purple-700 rounded-full text-[9px] sm:text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase mb-6">
+                        Your Digital Transformation Partner
+                    </span>
+                    <h1 class="hero-title font-display font-black text-slate-900 mb-6 sm:mb-8 text-5xl md:text-7xl">
+                        CRAFTING<br>
+                        <span class="gradient-text">LEGACIES</span>
+                    </h1>
+                    
+                    <div class="lg:hidden w-full mb-8">
+                        <div class="relative h-64 bg-gray-100 rounded-2xl shadow-2xl overflow-hidden border border-gray-200">
+                            <div class="absolute bottom-0 right-10 w-64 h-80 bg-slate-400 rounded-lg shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-500 z-10 overflow-hidden border-4 border-white">
+                                <img src="images/February(Day1).jpeg" alt="UI Design" class="w-full h-full object-cover">
+                            </div>
+                            <div class="absolute bottom-0 right-10 w-64 h-80 bg-slate-400 rounded-lg shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-500 z-10 overflow-hidden border-4 border-white">
+                                <img src="images/February(Day1).jpeg" alt="UI Design" class="w-full h-full object-cover">
+                            </div>
+                            <div class="absolute bottom-0 right-10 w-64 h-80 bg-slate-400 rounded-lg shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-500 z-10 overflow-hidden border-4 border-white">
+                                <img src="images/February(Day1).jpeg" alt="UI Design" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="max-w-2xl text-base sm:text-lg md:text-xl text-gray-600 mb-8 md:mb-12 leading-relaxed">
+                        Exevo Designers is a premier design agency and community hub providing top-tier creative solutions for the modern African digital frontier.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
+                        <a href="portfolio.html" class="px-8 py-4 bg-black text-white rounded-full font-bold hover:bg-purple-600 hover:scale-105 transition-all text-center">
+                            Explore Our Work
+                        </a>
+                        <a href="#contact" class="px-8 py-4 border-2 border-black text-black rounded-full font-bold hover:bg-black hover:text-white transition-all text-center">
+                            Work With Us
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hidden lg:block order-2 relative">
+                    <div class="relative w-full h-[500px] perspective-1000">
+                        <div class="absolute top-0 right-0 w-64 h-80 bg-slate-200 rounded-lg shadow-2xl transform rotate-6 hover:rotate-0 transition-transform duration-500 z-30 overflow-hidden border-4 border-white">
+                            <img src="images/February(Day1).jpeg" alt="Poster Design" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute top-10 right-20 w-64 h-80 bg-slate-300 rounded-lg shadow-2xl transform -rotate-12 hover:rotate-0 transition-transform duration-500 z-20 overflow-hidden border-4 border-white">
+                            <img src="ExevoLogo/exevo-logo-profile(2).png" alt="Flyer Design" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute bottom-0 right-10 w-64 h-80 bg-slate-400 rounded-lg shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-500 z-10 overflow-hidden border-4 border-white">
+                            <img src="ExevoLogo/exevo-logo-profile.png" alt="UI Design" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+        <!-- Recent Works Showcase -->
+        <section id="recent-deployments" class="py-16 sm:py-20 md:py-24 bg-white overflow-hidden mt-12 sm:mt-16 md:mt-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 mb-8 sm:mb-12">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 md:gap-8">
+                    <div>
+                        <span class="text-purple-600 font-bold text-[10px] sm:text-xs uppercase tracking-[0.3em] mb-3 sm:mb-4 block text-center md:text-left">Live Deployments</span>
+                        <h2 class="font-display text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 text-center md:text-left">WEB <span class="gradient-text">SHOWCASE</span></h2>
+                    </div>
+                    <a href="case-studies.html" class="inline-flex items-center gap-2 text-purple-600 font-bold tracking-[0.2em] text-[10px] sm:text-xs uppercase hover:gap-4 transition-all duration-300 group mx-auto md:mx-0 mb-4 md:mb-0">
+                        View All Case Studies 
+                        <i data-lucide="arrow-right" class="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row min-h-[500px] md:h-[650px] w-full gap-3 sm:gap-4 px-4 sm:px-6 md:px-12">
+                
+                <div class="expand-card active group relative flex-1 overflow-hidden rounded-2xl sm:rounded-3xl md:rounded-[2.5rem] cursor-pointer shadow-xl" 
+                     onclick="handleExpand(this)">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent z-10 opacity-80"></div>
+                    <div class="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-110" style="background-image: url('images/LearnGermanwithLewisky.png')"></div>
+                    
+                    <div class="absolute bottom-6 sm:bottom-8 md:bottom-12 left-6 sm:left-8 md:left-10 z-20 opacity-0 group-[.active]:opacity-100 transition-all duration-500 delay-300 translate-y-4 group-[.active]:translate-y-0">
+                        <span class="text-purple-400 text-[9px] sm:text-[10px] uppercase font-black tracking-[0.3em] mb-2 block">Educational Platform</span>
+                        <h3 class="text-white text-xl sm:text-2xl md:text-3xl font-display font-bold mb-4 sm:mb-6">German With Lewisky</h3>
+                        <div class="flex gap-2 sm:gap-3">
+                            <a href="https://exevo-designers.github.io/LearnGermanWithLewisky/" target="_blank" class="inline-flex items-center bg-purple-600 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-full font-bold text-[10px] sm:text-xs uppercase tracking-widest hover:bg-white hover:text-black transition-all">
+                                Launch Site <i data-lucide="external-link" class="ml-1.5 sm:ml-2 w-3 h-3 sm:w-4 sm:h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="expand-card group relative flex-1 overflow-hidden rounded-2xl sm:rounded-3xl md:rounded-[2.5rem] cursor-pointer shadow-xl" 
+                     onclick="handleExpand(this)">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent z-10 opacity-80"></div>
+                    <div class="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-110" style="background-image: url('images/JeyahHaven.jpg')"></div>
+                    
+                    <div class="absolute bottom-6 sm:bottom-8 md:bottom-12 left-6 sm:left-8 md:left-10 z-20 opacity-0 group-[.active]:opacity-100 transition-all duration-500 delay-300 translate-y-4 group-[.active]:translate-y-0">
+                        <span class="text-pink-400 text-[9px] sm:text-[10px] uppercase font-black tracking-[0.3em] mb-2 block">E-Commerce</span>
+                        <h3 class="text-white text-xl sm:text-2xl md:text-3xl font-display font-bold mb-4 sm:mb-6">Jean Yarn Haven</h3>
+                        <a href="https://exevo-designers.github.io/JeanYarnHaven/" target="_blank" class="inline-flex items-center bg-white text-black px-4 sm:px-6 py-2.5 sm:py-3 rounded-full font-bold text-[10px] sm:text-xs uppercase tracking-widest hover:bg-pink-600 hover:text-white transition-all">
+                            Visit Store <i data-lucide="external-link" class="ml-1.5 sm:ml-2 w-3 h-3 sm:w-4 sm:h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="expand-card group relative flex-1 overflow-hidden rounded-2xl sm:rounded-3xl md:rounded-[2.5rem] cursor-pointer shadow-xl" 
+                     onclick="handleExpand(this)">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent z-10 opacity-80"></div>
+                    <div class="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-110" style="background-image: url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80')"></div>
+                    
+                    <div class="absolute bottom-6 sm:bottom-8 md:bottom-12 left-6 sm:left-8 md:left-10 z-20 opacity-0 group-[.active]:opacity-100 transition-all duration-500 delay-300 translate-y-4 group-[.active]:translate-y-0">
+                        <span class="text-blue-400 text-[9px] sm:text-[10px] uppercase font-black tracking-[0.3em] mb-2 block">Engineering</span>
+                        <h3 class="text-white text-xl sm:text-2xl md:text-3xl font-display font-bold mb-4 sm:mb-6">Blue Motion</h3>
+                        <a href="https://exevo-designers.github.io/BlueMotionEngineering/" target="_blank" class="inline-flex items-center bg-blue-600 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-full font-bold text-[10px] sm:text-xs uppercase tracking-widest hover:bg-white hover:text-black transition-all">
+                            View Platform <i data-lucide="external-link" class="ml-1.5 sm:ml-2 w-3 h-3 sm:w-4 sm:h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="expand-card group relative flex-1 overflow-hidden rounded-2xl sm:rounded-3xl md:rounded-[2.5rem] cursor-pointer shadow-xl" 
+                     onclick="handleExpand(this)">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent z-10 opacity-80"></div>
+                    <div class="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-110" style="background-image: url('images/AshleyWambu.png')"></div>
+                    
+                    <div class="absolute bottom-6 sm:bottom-8 md:bottom-12 left-6 sm:left-8 md:left-10 z-20 opacity-0 group-[.active]:opacity-100 transition-all duration-500 delay-300 translate-y-4 group-[.active]:translate-y-0">
+                        <span class="text-emerald-400 text-[9px] sm:text-[10px] uppercase font-black tracking-[0.3em] mb-2 block">Personal Brand</span>
+                        <h3 class="text-white text-xl sm:text-2xl md:text-3xl font-display font-bold mb-4 sm:mb-6">Wambo Ashley</h3>
+                        <a href="https://exevo-designers.github.io/WamboAshley/" target="_blank" class="inline-flex items-center bg-white text-black px-4 sm:px-6 py-2.5 sm:py-3 rounded-full font-bold text-[10px] sm:text-xs uppercase tracking-widest hover:bg-emerald-600 hover:text-white transition-all">
+                            Open Portfolio <i data-lucide="external-link" class="ml-1.5 sm:ml-2 w-3 h-3 sm:w-4 sm:h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="expand-card group relative flex-1 overflow-hidden rounded-2xl sm:rounded-3xl md:rounded-[2.5rem] cursor-pointer shadow-xl" 
+                     onclick="handleExpand(this)">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent z-10 opacity-80"></div>
+                    <div class="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-110" style="background-image: url('images/TheBrandCyberLogo.jpg')"></div>
+                    
+                    <div class="absolute bottom-6 sm:bottom-8 md:bottom-12 left-6 sm:left-8 md:left-10 z-20 opacity-0 group-[.active]:opacity-100 transition-all duration-500 delay-300 translate-y-4 group-[.active]:translate-y-0">
+                        <span class="text-orange-400 text-[9px] sm:text-[10px] uppercase font-black tracking-[0.3em] mb-2 block">Retail & Stationaries</span>
+                        <h3 class="text-white text-xl sm:text-2xl md:text-3xl font-display font-bold mb-4 sm:mb-6">The Brand Cyber</h3>
+                        <a href="https://exevo-designers.github.io/TheBrandCyberandStationery/" target="_blank" class="inline-flex items-center bg-orange-500 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-full font-bold text-[10px] sm:text-xs uppercase tracking-widest hover:bg-white hover:text-black transition-all">
+                            Explore Site <i data-lucide="external-link" class="ml-1.5 sm:ml-2 w-3 h-3 sm:w-4 sm:h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Scrolling Marquee -->
+        <div class="mt-16 sm:mt-24 md:mt-40 border-t border-b border-gray-100 py-6 sm:py-8 md:py-12 overflow-hidden bg-white">
+            <div class="animate-marquee whitespace-nowrap">
+                <span class="font-display text-xl sm:text-3xl md:text-5xl lg:text-7xl text-gray-100 mx-4 sm:mx-6 md:mx-12">GRAPHIC DESIGN</span>
+                <span class="font-display text-xl sm:text-3xl md:text-5xl lg:text-7xl text-gray-100 mx-4 sm:mx-6 md:mx-12">WEB DEVELOPMENT</span>
+                <span class="font-display text-xl sm:text-3xl md:text-5xl lg:text-7xl text-gray-100 mx-4 sm:mx-6 md:mx-12">DIGITAL MARKETING</span>
+                <span class="font-display text-xl sm:text-3xl md:text-5xl lg:text-7xl text-gray-100 mx-4 sm:mx-6 md:mx-12">CONTENT MAKING</span>
+                <span class="font-display text-xl sm:text-3xl md:text-5xl lg:text-7xl text-gray-100 mx-4 sm:mx-6 md:mx-12">BRANDING</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 sm:py-20 md:py-32 bg-slate-50 px-4 sm:px-6 lg:px-12">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-10 sm:gap-12 md:gap-20 lg:gap-32 items-center">
+                <div class="relative order-2 lg:order-1">
+                    <div class="aspect-square bg-purple-600 rounded-2xl sm:rounded-3xl md:rounded-[3rem] overflow-hidden shadow-2xl relative z-10">
+                         <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-purple-500 to-indigo-700 text-white p-6 sm:p-8 md:p-12 text-center">
+                            <div>
+                                <h3 class="font-display text-xl sm:text-2xl md:text-4xl mb-3 sm:mb-4">EXEVO</h3>
+                                <p class="text-purple-100 italic text-xs sm:text-sm md:text-base">"Design that inspires, technology that empowers."</p>
+                            </div>
+                         </div>
+                    </div>
+                    <div class="absolute -bottom-4 -right-4 sm:-bottom-6 sm:-right-6 md:-bottom-10 md:-right-10 bg-white p-4 sm:p-6 md:p-10 rounded-xl sm:rounded-2xl md:rounded-3xl shadow-2xl z-20 hidden xs:block">
+                        <p class="text-2xl sm:text-3xl md:text-5xl font-black text-purple-600">2026</p>
+                        <p class="text-[9px] sm:text-[10px] uppercase tracking-widest text-gray-400 font-bold">Established Vision</p>
+                    </div>
+                </div>
+                <div class="order-1 lg:order-2">
+                    <h2 class="font-display section-title font-black mb-6 sm:mb-8 md:mb-10 text-slate-900">WHO WE ARE</h2>
+                    <p class="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mb-6 sm:mb-8 md:mb-12 leading-relaxed">
+                        Exevo Designers is more than just a creative agency; we are a vibrant ecosystem where creativity meets strategy. We serve as a community hub for designers and a high-performance marketplace for clients seeking excellence across Africa and beyond.
+                    </p>
+                    <div class="grid sm:grid-cols-2 gap-6 sm:gap-8 md:gap-12">
+                        <div class="border-l-4 border-purple-600 pl-4 sm:pl-6">
+                            <h4 class="font-bold text-slate-900 uppercase tracking-widest text-[10px] sm:text-xs mb-2 sm:mb-3">Our Mission</h4>
+                            <p class="text-gray-500 text-xs sm:text-sm md:text-base leading-relaxed">To bridge the gap between creative potential and business growth through innovative digital craftsmanship.</p>
+                        </div>
+                        <div class="border-l-4 border-black pl-4 sm:pl-6">
+                            <h4 class="font-bold text-slate-900 uppercase tracking-widest text-[10px] sm:text-xs mb-2 sm:mb-3">Our Vision</h4>
+                            <p class="text-gray-500 text-xs sm:text-sm md:text-base leading-relaxed">To be the primary catalyst for the African digital frontier, setting new benchmarks in design excellence.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Grid -->
+    <section id="services" class="py-16 sm:py-20 md:py-40 px-4 sm:px-6 lg:px-12">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 md:mb-24 gap-4 sm:gap-6">
+                <div class="max-w-2xl">
+                    <h2 class="font-display section-title font-black mb-4 sm:mb-6 text-slate-900">OUR SERVICES</h2>
+                    <p class="text-base sm:text-lg text-gray-500">We offer specialized solutions tailored to modern brands looking for a competitive edge in the digital space.</p>
+                </div>
+                <div class="hidden md:block w-32 h-px bg-gray-200"></div>
+            </div>
+            
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
+                <div class="glass-card p-6 sm:p-8 md:p-12 rounded-2xl sm:rounded-3xl md:rounded-[2rem] group hover:bg-black hover:text-white">
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-purple-100 rounded-xl sm:rounded-2xl flex items-center justify-center mb-6 sm:mb-8 group-hover:bg-purple-600 group-hover:text-white transition-colors duration-300">
+                        <i data-lucide="palette" class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-purple-600 group-hover:text-white"></i>
+                    </div>
+                    <h3 class="font-display text-base sm:text-lg font-bold mb-3 sm:mb-4">GRAPHIC DESIGN</h3>
+                    <p class="text-xs sm:text-sm text-gray-500 group-hover:text-gray-400 leading-relaxed">Visual storytelling, branding identity systems, and high-impact layouts that command market attention.</p>
+                </div>
+
+                <div class="glass-card p-6 sm:p-8 md:p-12 rounded-2xl sm:rounded-3xl md:rounded-[2rem] group hover:bg-black hover:text-white">
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-blue-100 rounded-xl sm:rounded-2xl flex items-center justify-center mb-6 sm:mb-8 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+                        <i data-lucide="layout" class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-blue-600 group-hover:text-white"></i>
+                    </div>
+                    <h3 class="font-display text-base sm:text-lg font-bold mb-3 sm:mb-4">WEB DESIGN</h3>
+                    <p class="text-xs sm:text-sm text-gray-500 group-hover:text-gray-400 leading-relaxed">Modern, responsive, and blazing-fast digital experiences built for usability and conversion.</p>
+                </div>
+
+                <div class="glass-card p-6 sm:p-8 md:p-12 rounded-2xl sm:rounded-3xl md:rounded-[2rem] group hover:bg-black hover:text-white">
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-pink-100 rounded-xl sm:rounded-2xl flex items-center justify-center mb-6 sm:mb-8 group-hover:bg-pink-600 group-hover:text-white transition-colors duration-300">
+                        <i data-lucide="camera" class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-pink-600 group-hover:text-white"></i>
+                    </div>
+                    <h3 class="font-display text-base sm:text-lg font-bold mb-3 sm:mb-4">CONTENT MAKING</h3>
+                    <p class="text-xs sm:text-sm text-gray-500 group-hover:text-gray-400 leading-relaxed">Professional video production, photography, and creative copy for a consistent brand voice.</p>
+                </div>
+
+                <div class="glass-card p-6 sm:p-8 md:p-12 rounded-2xl sm:rounded-3xl md:rounded-[2rem] group hover:bg-black hover:text-white">
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-emerald-100 rounded-xl sm:rounded-2xl flex items-center justify-center mb-6 sm:mb-8 group-hover:bg-emerald-600 group-hover:text-white transition-colors duration-300">
+                        <i data-lucide="trending-up" class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-emerald-600 group-hover:text-white"></i>
+                    </div>
+                    <h3 class="font-display text-base sm:text-lg font-bold mb-3 sm:mb-4">DIGITAL MARKETING</h3>
+                    <p class="text-xs sm:text-sm text-gray-500 group-hover:text-gray-400 leading-relaxed">Data-driven SEO, PPC, and social media management focused on ROI and growth.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-16 sm:py-20 md:py-32 bg-black text-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 mb-12 sm:mb-16">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 sm:gap-8">
+                <div>
+                    <h2 class="font-display section-title font-black mb-3 sm:mb-4">PORTFOLIO</h2>
+                    <p class="text-gray-400 text-base sm:text-lg">A glimpse into the digital legacies we've built.</p>
+                    
+                    <a href="portfolio.html" class="inline-flex items-center gap-2 mt-6 sm:mt-8 text-white font-bold tracking-[0.2em] text-[10px] sm:text-xs uppercase hover:gap-4 transition-all duration-300 group">
+                        View All Projects 
+                        <i data-lucide="arrow-right" class="w-4 h-4 sm:w-5 sm:h-5 group-hover:text-gray-400"></i>
+                    </a>
+                </div>
+
+                <div class="flex space-x-3 sm:space-x-4">
+                    <button id="slide-prev" class="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full border border-gray-800 flex items-center justify-center hover:bg-white hover:text-black transition-all">
+                        <i data-lucide="chevron-left" class="w-5 h-5 sm:w-6 sm:h-6"></i>
+                    </button>
+                    <button id="slide-next" class="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full border border-gray-800 flex items-center justify-center hover:bg-white hover:text-black transition-all">
+                        <i data-lucide="chevron-right" class="w-5 h-5 sm:w-6 sm:h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+<div id="portfolio-slider" class="slider-container flex space-x-4 sm:space-x-6 md:space-x-10 px-4 sm:px-[5%] md:px-[10%] no-scrollbar overflow-x-auto pb-8 sm:pb-12">
+    
+    <div class="min-w-[260px] sm:min-w-[320px] md:min-w-[400px] lg:min-w-[500px] aspect-[4/5] md:aspect-[3/4] bg-zinc-900 rounded-2xl sm:rounded-3xl md:rounded-[2.5rem] overflow-hidden group relative flex-shrink-0">
+        <img src="images/HorizonProject.jfif" alt="Horizon Project" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+        
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80 z-10"></div>
+        
+        <div class="absolute bottom-6 sm:bottom-8 md:bottom-10 left-6 sm:left-8 md:left-10 z-20 transition-transform group-hover:-translate-y-2">
+            <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.3em] text-purple-500 font-black mb-2 sm:mb-3 block">Corporate Branding</span>
+            <h3 class="text-xl sm:text-2xl md:text-3xl font-display font-bold text-white">The Horizon Project</h3>
+        </div>
+    </div>
+    
+    <div class="min-w-[260px] sm:min-w-[320px] md:min-w-[400px] lg:min-w-[500px] aspect-[4/5] md:aspect-[3/4] bg-zinc-800 rounded-2xl sm:rounded-3xl md:rounded-[2.5rem] overflow-hidden group relative flex-shrink-0">
+        <img src="images/FlowtechPlatform.png" alt="FlowTech Platform" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+        
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80 z-10"></div>
+        
+        <div class="absolute bottom-6 sm:bottom-8 md:bottom-10 left-6 sm:left-8 md:left-10 z-20 transition-transform group-hover:-translate-y-2">
+            <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.3em] text-blue-400 font-black mb-2 sm:mb-3 block">UX/UI Design</span>
+            <h3 class="text-xl sm:text-2xl md:text-3xl font-display font-bold text-white">FlowTech Platform</h3>
+        </div>
+    </div>
+    
+    <div class="min-w-[260px] sm:min-w-[320px] md:min-w-[400px] lg:min-w-[500px] aspect-[4/5] md:aspect-[3/4] bg-zinc-900 rounded-2xl sm:rounded-3xl md:rounded-[2.5rem] overflow-hidden group relative flex-shrink-0">
+        <img src="images/AuraRetailApp.png" alt="Aura Retail App" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+        
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80 z-10"></div>
+        
+        <div class="absolute bottom-6 sm:bottom-8 md:bottom-10 left-6 sm:left-8 md:left-10 z-20 transition-transform group-hover:-translate-y-2">
+            <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.3em] text-pink-500 font-black mb-2 sm:mb-3 block">E-Commerce</span>
+            <h3 class="text-xl sm:text-2xl md:text-3xl font-display font-bold text-white">Aura Retail App</h3>
+        </div>
+    </div>
+</div>
+
+    <!-- Contact Section -->
+<link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&display=swap" rel="stylesheet">
+
+<section id="contact" class="py-24 sm:py-32 bg-white">
+    <div class="max-w-5xl mx-auto px-6 text-center">
+        
+        <h2 class="text-4xl sm:text-6xl md:text-7xl font-bold text-gray-900 mb-8 tracking-tighter" style="font-family: 'Syncopate', sans-serif;">
+            LET'S <span class="text-purple-600">CONNECT</span>
+        </h2>
+        
+        <p class="text-gray-500 text-lg mb-12 max-w-xl mx-auto leading-relaxed">
+            Ready to start your next project? Reach out directly through the channels below.
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+            
+            <a href="mailto:exevodesigners@gmail.com" 
+               class="w-full sm:w-auto flex items-center justify-center gap-3 bg-gray-900 text-white px-8 py-4 rounded-2xl hover:bg-purple-600 transition-all duration-300 group shadow-lg shadow-gray-200 hover:shadow-purple-200">
+                <i data-lucide="mail" class="w-5 h-5 text-purple-400 group-hover:text-white transition-colors"></i>
+                <span class="font-bold tracking-tight">exevodesigners@gmail.com</span>
+            </a>
+
+            <a href="https://wa.me/254700552884" 
+               class="w-full sm:w-auto flex items-center justify-center gap-3 bg-gray-100 text-gray-900 px-8 py-4 rounded-2xl hover:bg-green-50 transition-all duration-300 border border-transparent hover:border-green-200 group">
+                <i data-lucide="phone" class="w-5 h-5 text-green-600"></i>
+                <span class="font-bold tracking-tight">+254 700 552 884</span>
+            </a>
+
+        </div>
+
+        <div class="mt-16 flex items-center justify-center gap-2">
+            <span class="relative flex h-3 w-3">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+            </span>
+            <p class="text-[10px] uppercase tracking-[0.3em] text-gray-400 font-black">
+                Currently taking on new projects
+            </p>
+        </div>
+        
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-white border-t border-gray-100 py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-12">
+    <div class="max-w-7xl mx-auto">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 sm:gap-12 lg:gap-8 mb-16 sm:mb-20">
+            <div class="sm:col-span-2 lg:col-span-2 flex flex-col items-center sm:items-start text-center sm:text-left">
+                <a href="#" class="group flex items-center space-x-2 sm:space-x-3 mb-6 sm:mb-8">
+                    <img src="ExevoLogo/exevo-wordmark.png" alt="Exevo Logo" class="h-7 sm:h-8 md:h-10 w-auto" onerror="this.style.display='none'">
+                </a>
+                <p class="max-w-sm text-gray-500 mb-6 sm:mb-8 italic text-sm sm:text-base">Setting new benchmarks for digital creativity across the continent. Built on excellence, driven by results.</p>
+                
+                <!-- Official Social Media Icons -->
+                <div class="flex flex-wrap justify-center sm:justify-start gap-3 sm:gap-4">
+                    <a href="https://www.instagram.com/exevodesigners" class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-50 text-gray-400 rounded-full flex items-center justify-center hover:bg-purple-600 hover:text-white transition-all duration-300 group">
+                        <i data-lucide="instagram" class="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.5px]"></i>
+                    </a>
+                    <a href="https://www.facebook.com/share/17oXAWNWcZ/" class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-50 text-gray-400 rounded-full flex items-center justify-center hover:bg-purple-600 hover:text-white transition-all duration-300 group">
+                        <i data-lucide="facebook" class="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.5px]"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/exevo-designers-40122435a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-50 text-gray-400 rounded-full flex items-center justify-center hover:bg-purple-600 hover:text-white transition-all duration-300 group">
+                        <i data-lucide="linkedin" class="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.5px]"></i>
+                    </a>
+                    <a href="https://www.tiktok.com/@exevodesigners?_r=1&_t=ZS-93UpjDAoSQe " class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-50 text-gray-400 rounded-full flex items-center justify-center hover:bg-purple-600 hover:text-white transition-all duration-300 group">
+                        <!-- Standard TikTok representation -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 sm:w-5 sm:h-5"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
+                    </a>
+                    <a href="https://whatsapp.com/channel/0029Vb7kTDq3QxS1ffkZhe0J " class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-50 text-gray-400 rounded-full flex items-center justify-center hover:bg-green-600 hover:text-white transition-all duration-300 group">
+                        <i data-lucide="message-circle" class="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.5px]"></i>
+                    </a>
+                    <a href="mailto:exevodesigners@gmail.com" class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-50 text-gray-400 rounded-full flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all duration-300 group">
+                        <i data-lucide="mail" class="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.5px]"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="text-center sm:text-left">
+                <h4 class="font-black mb-6 sm:mb-8 uppercase tracking-widest text-[10px] text-gray-400">Navigation</h4>
+                <ul class="space-y-3 sm:space-y-4 text-gray-900 font-semibold text-sm">
+                    <li><a href="#home" class="hover:text-purple-600 transition-colors">Home</a></li>
+                    <li><a href="#about" class="hover:text-purple-600 transition-colors">About Us</a></li>
+                    <li><a href="#services" class="hover:text-purple-600 transition-colors">Services</a></li>
+                    <li><a href="#portfolio" class="hover:text-purple-600 transition-colors">Portfolio</a></li>
+                    <li><a href="sign-up.html" class="hover:text-purple-600 transition-colors">Join Community</a></li>
+                </ul>
+            </div>
+            
+            <div class="text-center sm:text-left">
+                <h4 class="font-black mb-6 sm:mb-8 uppercase tracking-widest text-[10px] text-gray-400">Legal</h4>
+                <ul class="space-y-3 sm:space-y-4 text-gray-500 font-medium text-sm">
+                    <li><a href="#" class="hover:text-purple-600 transition-colors">Privacy Policy</a></li>
+                    <li><a href="#" class="hover:text-purple-600 transition-colors">Terms of Service</a></li>
+                    <li><a href="digital-contract.html" class="hover:text-purple-600 transition-colors">Cookie Policy</a></li>
+                    <li><a href="bm-secure-portal.html" class="hover:text-purple-600 transition-colors">BM</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="pt-8 sm:pt-12 border-t border-gray-100 flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-6 text-[10px] sm:text-xs text-gray-400 uppercase tracking-[0.2em] font-bold text-center">
+            <p>© 2026 EXEVO DESIGNERS NETWORK. ALL RIGHTS RESERVED.</p>
+            <p class="flex items-center justify-center">DESIGNED WITH <i data-lucide="heart" class="w-3 h-3 text-red-500 mx-2"></i> IN AFRICA</p>
+        </div>
+    </div>
+</footer>
+    <!-- Chat Button -->
+    <div class="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 md:bottom-10 md:right-10 z-[100]">
+        <button id="open-bot" class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-purple-600 text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all group">
+            <i data-lucide="message-square" class="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 group-hover:rotate-12 transition-transform"></i>
+        </button>
+    </div>
+
+    <!-- WhatsApp Bot Modal -->
+    <div id="whatsapp-bot-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[200] hidden items-center justify-center p-4">
+        <div class="bg-white rounded-2xl sm:rounded-3xl md:rounded-[2.5rem] w-full max-w-sm overflow-hidden shadow-2xl transition-all duration-300 transform scale-95 opacity-0" id="bot-content">
+            <div class="bg-purple-600 p-4 sm:p-6 text-white flex justify-between items-center">
+                <div class="flex items-center space-x-2 sm:space-x-3">
+                    <div class="w-8 h-8 sm:w-10 sm:h-10 bg-white/20 rounded-lg sm:rounded-xl flex items-center justify-center font-black text-xs sm:text-sm">EX</div>
+                    <div>
+                        <h3 class="font-bold text-xs sm:text-sm">Exevo Assistant</h3>
+                        <div class="flex items-center text-[9px] sm:text-[10px] opacity-80">
+                            <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-400 rounded-full mr-1.5 sm:mr-2 animate-pulse"></span>
+                            Online Now
+                        </div>
+                    </div>
+                </div>
+                <button id="close-bot" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors">
+                    <i data-lucide="x" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
+                </button>
+            </div>
+            <div id="bot-messages" class="h-56 sm:h-64 p-4 sm:p-6 overflow-y-auto space-y-3 sm:space-y-4 bg-gray-50">
+                <div class="bg-white p-3 sm:p-4 rounded-xl sm:rounded-2xl rounded-tl-none shadow-sm text-[11px] sm:text-xs border border-gray-100 max-w-[85%] leading-relaxed">
+                    Hello! Welcome to Exevo Designers. How can we help you create your digital legacy today?
+                </div>
+            </div>
+            <div class="p-3 sm:p-4 grid grid-cols-1 gap-2 bg-white">
+                <button class="bot-option text-left text-[11px] sm:text-xs bg-gray-100 p-3 sm:p-4 rounded-xl sm:rounded-2xl hover:bg-purple-600 hover:text-white transition-all font-bold" data-msg="I'd like to hire a designer">Hire a Designer</button>
+                <button class="bot-option text-left text-[11px] sm:text-xs bg-gray-100 p-3 sm:p-4 rounded-xl sm:rounded-2xl hover:bg-purple-600 hover:text-white transition-all font-bold" data-msg="Tell me about your services">View Services</button>
+                <button class="bot-option text-left text-[11px] sm:text-xs bg-gray-100 p-3 sm:p-4 rounded-xl sm:rounded-2xl hover:bg-purple-600 hover:text-white transition-all font-bold" data-msg="Request a project quote">Request Quote</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        const menuToggle = document.getElementById('menu-toggle');
+        const closeMenu = document.getElementById('close-menu');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+        const openMobileMenu = () => {
+            mobileMenu.classList.remove('translate-x-full');
+            document.body.style.overflow = 'hidden';
+        };
+
+        const closeMobileMenu = () => {
+            mobileMenu.classList.add('translate-x-full');
+            document.body.style.overflow = '';
+        };
+
+        menuToggle.onclick = openMobileMenu;
+        closeMenu.onclick = closeMobileMenu;
+        mobileLinks.forEach(link => link.onclick = closeMobileMenu);
+
+        const sliderBox = document.getElementById('portfolio-slider');
+        const nextBtn = document.getElementById('slide-next');
+        const prevBtn = document.getElementById('slide-prev');
+
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        sliderBox.addEventListener('mousedown', (e) => {
+            isDown = true;
+            startX = e.pageX - sliderBox.offsetLeft;
+            scrollLeft = sliderBox.scrollLeft;
+        });
+
+        sliderBox.addEventListener('mouseleave', () => { isDown = false; });
+        sliderBox.addEventListener('mouseup', () => { isDown = false; });
+
+        sliderBox.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - sliderBox.offsetLeft;
+            const walk = (x - startX) * 2;
+            sliderBox.scrollLeft = scrollLeft - walk;
+        });
+
+        nextBtn.onclick = () => sliderBox.scrollBy({ left: 300, behavior: 'smooth' });
+        prevBtn.onclick = () => sliderBox.scrollBy({ left: -300, behavior: 'smooth' });
+
+        function handleExpand(element) {
+            const currentActive = document.querySelector('.expand-card.active');
+            if (currentActive && currentActive !== element) {
+                currentActive.classList.remove('active');
+            }
+            element.classList.add('active');
+        }
+
+        const botTrigger = document.getElementById('open-bot');
+        const botModal = document.getElementById('whatsapp-bot-modal');
+        const botContent = document.getElementById('bot-content');
+        const botClose = document.getElementById('close-bot');
+        const botOptions = document.querySelectorAll('.bot-option');
+        const messageArea = document.getElementById('bot-messages');
+
+        const showBot = () => {
+            botModal.classList.replace('hidden', 'flex');
+            setTimeout(() => {
+                botContent.classList.remove('scale-95', 'opacity-0');
+            }, 10);
+        };
+
+        const hideBot = () => {
+            botContent.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                botModal.classList.replace('flex', 'hidden');
+            }, 300);
+        };
+
+        botTrigger.onclick = showBot;
+        botClose.onclick = hideBot;
+
+        botOptions.forEach(opt => {
+            opt.onclick = () => {
+                const text = opt.dataset.msg;
+                const userDiv = document.createElement('div');
+                userDiv.className = 'bg-purple-600 text-white p-3 sm:p-4 rounded-xl sm:rounded-2xl rounded-tr-none shadow-sm text-[11px] sm:text-xs ml-auto max-w-[85%]';
+                userDiv.innerText = text;
+                messageArea.appendChild(userDiv);
+                
+                setTimeout(() => {
+                    const botDiv = document.createElement('div');
+                    botDiv.className = 'bg-white p-3 sm:p-4 rounded-xl sm:rounded-2xl rounded-tl-none shadow-sm text-[11px] sm:text-xs border border-gray-100 max-w-[85%] leading-relaxed';
+                    botDiv.innerText = "Excellent choice! Redirecting you to our lead specialist on WhatsApp for a personalized session...";
+                    messageArea.appendChild(botDiv);
+                    messageArea.scrollTop = messageArea.scrollHeight;
+                    
+                    setTimeout(() => {
+                        window.open(`https://wa.me/254700552884?text=${encodeURIComponent('Hi Exevo, ' + text)}`, '_blank');
+                    }, 1500);
+                }, 800);
+                
+                messageArea.scrollTop = messageArea.scrollHeight;
+            };
+        });
+
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-sm');
+            } else {
+                nav.classList.remove('shadow-sm');
+            }
+        });
+
+        document.getElementById('contact-form').onsubmit = (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            const originalText = btn.innerText;
+            btn.innerText = "SENDING...";
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                btn.innerText = "MESSAGE SENT!";
+                btn.classList.replace('bg-purple-600', 'bg-green-600');
+                e.target.reset();
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.classList.replace('bg-green-600', 'bg-purple-600');
+                    btn.disabled = false;
+                }, 3000);
+            }, 1500);
+        };
+    </script>
+</body>
+</html>
