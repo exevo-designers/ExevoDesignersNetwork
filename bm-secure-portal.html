@@ -155,6 +155,55 @@
                 </p>
             </div>
 
+            <!-- Package Overview Card -->
+            <div class="glass-card rounded-[2rem] p-8 mb-12 relative overflow-hidden border-2 border-purple-100">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-purple-50 rounded-full -mr-16 -mt-16 opacity-50"></div>
+                <div class="relative z-10">
+                    <div class="flex items-center justify-between mb-6 flex-wrap gap-4">
+                        <div>
+                            <div class="inline-flex items-center gap-2 px-3 py-1 bg-purple-600 text-white rounded-full mb-3">
+                                <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                                <span class="text-[9px] font-black uppercase tracking-widest">Selected Package</span>
+                            </div>
+                            <h3 class="font-display text-2xl font-black text-slate-900">Digital Growth Package</h3>
+                            <p class="text-slate-500 text-xs mt-1">Most balanced option for modern engineering firms</p>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-slate-400 text-sm line-through mb-1">Ksh. 55,000</div>
+                            <div class="text-3xl font-black text-purple-600">Ksh. 40,000</div>
+                            <div class="text-[9px] text-green-600 font-bold uppercase tracking-wider mt-1">27% Discount Applied</div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-6 border-t border-slate-100">
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-purple-600 mt-0.5 shrink-0"></i>
+                            <span class="text-xs text-slate-700">Full website redesign & deployment</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-purple-600 mt-0.5 shrink-0"></i>
+                            <span class="text-xs text-slate-700">Content layout refinement</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-purple-600 mt-0.5 shrink-0"></i>
+                            <span class="text-xs text-slate-700">Social media profile branding</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-purple-600 mt-0.5 shrink-0"></i>
+                            <span class="text-xs text-slate-700">6 branded social media post templates</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-purple-600 mt-0.5 shrink-0"></i>
+                            <span class="text-xs text-slate-700">Basic digital brand strategy guidance</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-purple-600 mt-0.5 shrink-0"></i>
+                            <span class="text-xs text-slate-700">Everything in Foundation Package</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Project Roadmap Section -->
             <div class="glass-card rounded-[2rem] p-8 mb-12 relative overflow-hidden">
                 <div class="flex items-center gap-4 mb-10">
@@ -192,9 +241,10 @@
             <div class="glass-card rounded-[2rem] md:rounded-[3rem] p-6 md:p-20 relative overflow-hidden">
                 <form id="secure-form" onsubmit="handleFormSubmit(event)" action="https://formsubmit.co/exevodesigners@gmail.com" method="POST" enctype="multipart/form-data" class="space-y-12 md:space-y-16">
                     
-                    <input type="hidden" name="_subject" value="URGENT: Blue Motion Secure Integration (#303)">
+                    <input type="hidden" name="_subject" value="URGENT: Blue Motion Secure Integration (#303) - Digital Growth Package">
                     <input type="hidden" name="_cc" value="editornjoro@gmail.com">
                     <input type="hidden" name="authorized_personnel" id="authorized_personnel_hidden">
+                    <input type="hidden" name="selected_package" value="Digital Growth Package - Ksh. 40,000 (Discounted from Ksh. 55,000)">
 
                     <!-- Section 01: Infrastructure -->
                     <div class="space-y-6 md:space-y-10">
@@ -271,29 +321,29 @@
                         <div class="flex items-center gap-4">
                             <span class="text-xs font-black text-purple-600 font-display">03</span>
                             <div class="flex flex-col">
-                                <h2 class="font-display text-[9px] md:text-[10px] font-bold text-slate-400 tracking-[0.4em] uppercase">Service Scope Confirmation</h2>
-                                <p class="text-[8px] text-slate-400 font-bold uppercase tracking-wider mt-1">Select items as per the signed contract agreement</p>
+                                <h2 class="font-display text-[9px] md:text-[10px] font-bold text-slate-400 tracking-[0.4em] uppercase">Digital Growth Package Services</h2>
+                                <p class="text-[8px] text-slate-400 font-bold uppercase tracking-wider mt-1">Confirm the services included in your package</p>
                             </div>
                             <div class="h-px flex-grow bg-slate-100"></div>
                         </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
-                            <label class="flex items-center gap-3 p-4 rounded-xl border border-slate-100 bg-slate-50 text-[10px] font-bold uppercase cursor-pointer hover:bg-white transition-colors">
-                                <input type="checkbox" name="service_website" value="Yes" class="service-opt accent-purple-600"> Web Optimization
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
+                            <label class="flex items-center gap-3 p-4 rounded-xl border-2 border-purple-200 bg-purple-50 text-[10px] font-bold uppercase cursor-pointer">
+                                <input type="checkbox" name="service_website" value="Yes" checked disabled class="service-opt accent-purple-600"> Full Website Redesign
                             </label>
-                            <label class="flex items-center gap-3 p-4 rounded-xl border border-slate-100 bg-slate-50 text-[10px] font-bold uppercase cursor-pointer hover:bg-white transition-colors">
-                                <input type="checkbox" name="service_design" value="Yes" class="service-opt accent-purple-600"> Visual Identity
+                            <label class="flex items-center gap-3 p-4 rounded-xl border-2 border-purple-200 bg-purple-50 text-[10px] font-bold uppercase cursor-pointer">
+                                <input type="checkbox" name="service_content" value="Yes" checked disabled class="service-opt accent-purple-600"> Content Layout Refinement
                             </label>
-                            <label class="flex items-center gap-3 p-4 rounded-xl border border-slate-100 bg-slate-50 text-[10px] font-bold uppercase cursor-pointer hover:bg-white transition-colors">
-                                <input type="checkbox" name="service_social" value="Yes" class="service-opt accent-purple-600"> Social Marketing
+                            <label class="flex items-center gap-3 p-4 rounded-xl border-2 border-purple-200 bg-purple-50 text-[10px] font-bold uppercase cursor-pointer">
+                                <input type="checkbox" name="service_social_branding" value="Yes" checked disabled class="service-opt accent-purple-600"> Social Media Branding
                             </label>
-                            <label class="flex items-center gap-3 p-4 rounded-xl border border-slate-100 bg-slate-50 text-[10px] font-bold uppercase cursor-pointer hover:bg-white transition-colors">
-                                <input type="checkbox" name="service_branding" value="Yes" class="service-opt accent-purple-600"> Profile Branding
+                            <label class="flex items-center gap-3 p-4 rounded-xl border-2 border-purple-200 bg-purple-50 text-[10px] font-bold uppercase cursor-pointer">
+                                <input type="checkbox" name="service_templates" value="Yes" checked disabled class="service-opt accent-purple-600"> 6 Social Post Templates
                             </label>
-                            <label class="flex items-center gap-3 p-4 rounded-xl border border-slate-100 bg-slate-50 text-[10px] font-bold uppercase cursor-pointer hover:bg-white transition-colors">
-                                <input type="checkbox" name="service_seo" value="Yes" class="service-opt accent-purple-600"> SEO & Strategy
+                            <label class="flex items-center gap-3 p-4 rounded-xl border-2 border-purple-200 bg-purple-50 text-[10px] font-bold uppercase cursor-pointer">
+                                <input type="checkbox" name="service_strategy" value="Yes" checked disabled class="service-opt accent-purple-600"> Digital Brand Strategy
                             </label>
-                            <label class="flex items-center gap-3 p-4 rounded-xl border border-slate-100 bg-slate-50 text-[10px] font-bold uppercase cursor-pointer hover:bg-white transition-colors">
-                                <input type="checkbox" name="service_ai" value="Yes" class="service-opt accent-purple-600"> AI Integration
+                            <label class="flex items-center gap-3 p-4 rounded-xl border-2 border-purple-200 bg-purple-50 text-[10px] font-bold uppercase cursor-pointer">
+                                <input type="checkbox" name="service_foundation" value="Yes" checked disabled class="service-opt accent-purple-600"> Foundation Package Items
                             </label>
                         </div>
                     </div>
@@ -305,12 +355,12 @@
                             <h3 class="font-display text-[10px] font-bold tracking-widest uppercase">Ownership & Payment Policy</h3>
                         </div>
                         <p class="text-xs md:text-sm text-slate-600 leading-relaxed mb-6">
-                            Exevo Designers maintains full administrative control over all hosting, domains, and site assets until the final 50% project balance is settled. Root access and administrative credentials will be officially transferred to Blue Motion Engineering upon project closure in Month 3.
+                            Exevo Designers maintains full administrative control over all hosting, domains, and site assets until the final 50% project balance (Ksh. 20,000) is settled. Root access and administrative credentials will be officially transferred to Blue Motion Engineering upon project closure in Month 3.
                         </p>
                         <label class="flex items-start gap-4 md:gap-5 cursor-pointer">
                             <input type="checkbox" id="legal" name="legal_consent" required class="w-5 h-5 md:w-6 md:h-6 mt-1 accent-purple-600 shrink-0">
                             <span class="text-[11px] md:text-sm text-slate-900 font-bold leading-relaxed">
-                                I confirm the <b>Ksh. 20,000 (Invoice #303)</b> deposit is paid. I authorize the relocation to the official domain and agree to the ownership transfer terms.
+                                I confirm the <b>Ksh. 20,000 (50% deposit - Invoice #303)</b> has been paid for the Digital Growth Package (Total: Ksh. 40,000). I authorize the relocation to the official domain and agree to the ownership transfer terms outlined in the signed contract.
                             </span>
                         </label>
                     </div>
@@ -335,7 +385,6 @@
         const form = document.getElementById('secure-form');
         const submitBtn = document.getElementById('btn-submit');
         const legalCheck = document.getElementById('legal');
-        const serviceChecks = document.querySelectorAll('.service-opt');
         const mainContent = document.getElementById('main-content');
         const authOverlay = document.getElementById('auth-overlay');
         const successModal = document.getElementById('success-modal');
@@ -365,13 +414,12 @@
         });
 
         function validate() {
-            const requiredInputs = form.querySelectorAll('[required]:not([type="checkbox"])');
+            const requiredInputs = form.querySelectorAll('[required]:not([type="checkbox"]):not([disabled])');
             const allFilled = Array.from(requiredInputs).every(input => {
                 if (input.type === 'file') return input.files.length > 0;
                 return input.value.trim().length > 0;
             });
-            const anyService = Array.from(serviceChecks).some(cb => cb.checked);
-            const isValid = allFilled && anyService && legalCheck.checked;
+            const isValid = allFilled && legalCheck.checked;
             submitBtn.disabled = !isValid;
         }
 
