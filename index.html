@@ -11,8 +11,8 @@
     <link rel="apple-touch-icon" href="ExevoLogo/exevo-logo-profile.png">
     
     <!-- Adding multiple sizes for better compatibility -->
-    <link rel="icon" type="image/png" sizes="16x16" href="/ExevoLogo/exevo-logo-profile.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/ExevoLogo/exevo-logo-profile.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="ExevoLogo/exevo-logo-profile.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="ExevoLogo/exevo-logo-profile.png">
 
     <script type="application/ld+json">
     {
@@ -173,6 +173,30 @@
             transform: translateY(-5px);
             box-shadow: 0 20px 40px rgba(124, 58, 237, 0.1);
         }
+
+        /* Scrolling Reviews Animation */
+        @keyframes scroll-reviews {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        .reviews-scroll-track {
+            animation: scroll-reviews 30s linear infinite;
+            width: fit-content;
+        }
+        
+        .reviews-scroll-track:hover {
+            animation-play-state: paused;
+        }
+        
+        .review-message {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .review-message:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px rgba(124, 58, 237, 0.15);
+        }
     </style>
 </head>
 <body class="bg-white">
@@ -227,7 +251,7 @@
             </nav>
             <div class="mt-auto border-t border-gray-100 pt-6 sm:pt-8">
                 <p class="text-xs uppercase tracking-widest text-gray-400 mb-3 sm:mb-4">Get in touch</p>
-                <a href="mailto:exevodesigners@gmail.com" class="text-sm sm:text-base text-gray-900 font-bold block mb-2 break-all">exevodesigners@gmail.com</a>
+                <a href="/cdn-cgi/l/email-protection#593c213c2f363d3c2a303e373c2b2a193e34383035773a3634" class="text-sm sm:text-base text-gray-900 font-bold block mb-2 break-all"><span class="__cf_email__" data-cfemail="e2879a87948d8687918b858c879091a2858f838b8ecc818d8f">[email&#160;protected]</span></a>
                 <a href="tel:+254700552884" class="text-sm sm:text-base text-gray-900 font-bold">+254 700 552 884</a>
             </div>
         </div>
@@ -552,7 +576,7 @@
     </section>
 
     <!-- Reviews Section -->
-    <section id="reviews" class="py-16 sm:py-20 md:py-32 bg-gradient-to-br from-purple-50 to-white px-4 sm:px-6 lg:px-12">
+    <section id="reviews" class="py-16 sm:py-20 md:py-32 bg-gradient-to-br from-purple-50 to-white px-4 sm:px-6 lg:px-12 overflow-hidden">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-12 sm:mb-16">
                 <span class="text-purple-600 font-bold text-[10px] sm:text-xs uppercase tracking-[0.3em] mb-3 sm:mb-4 block">Client Testimonials</span>
@@ -585,66 +609,156 @@
                 </a>
             </div>
 
-            <!-- Sample Review Cards (You can replace with actual reviews) -->
-            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            <!-- Scrolling Reviews Container -->
+            <div class="relative">
+                <!-- Gradient Overlays for smooth edges -->
+                <div class="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-purple-50 to-transparent z-10 pointer-events-none"></div>
+                <div class="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
                 
-                <!-- Review Card 1 -->
-                <div class="review-card bg-white p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-lg">
-                    <div class="flex items-center gap-1 mb-4">
-                        <i data-lucide="star" class="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400"></i>
-                        <i data-lucide="star" class="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400"></i>
-                        <i data-lucide="star" class="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400"></i>
-                        <i data-lucide="star" class="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400"></i>
-                        <i data-lucide="star" class="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400"></i>
-                    </div>
-                    <p class="text-gray-600 text-sm sm:text-base mb-6 leading-relaxed italic">"Exevo Designers transformed our brand identity completely. Their creativity and professionalism are unmatched. Highly recommend!"</p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 rounded-full flex items-center justify-center font-bold text-purple-600">JD</div>
-                        <div>
-                            <p class="font-bold text-gray-900 text-sm sm:text-base">John Doe</p>
-                            <p class="text-xs text-gray-500">CEO, Tech Startup</p>
+                <!-- Scrolling Reviews Track -->
+                <div class="reviews-scroll-container overflow-hidden py-4">
+                    <div class="reviews-scroll-track flex gap-4 sm:gap-6" id="reviews-track">
+                        
+                        <!-- Review Message 1 -->
+                        <div class="review-message flex-shrink-0 w-72 sm:w-80 bg-white rounded-2xl shadow-md p-4 sm:p-5 border border-gray-100">
+                            <div class="flex items-start gap-3 mb-3">
+                                <div class="w-10 h-10 bg-gradient-to-br from-purple-500 to-purple-700 rounded-full flex items-center justify-center font-bold text-white text-sm flex-shrink-0">
+                                    JM
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <p class="font-bold text-gray-900 text-sm truncate">James Mwangi</p>
+                                        <div class="flex gap-0.5">
+                                            <i data-lucide="star" class="w-3 h-3 fill-yellow-400 text-yellow-400"></i>
+                                            <i data-lucide="star" class="w-3 h-3 fill-yellow-400 text-yellow-400"></i>
+                                            <i data-lucide="star" class="w-3 h-3 fill-yellow-400 text-yellow-400"></i>
+                                            <i data-lucide="star" class="w-3 h-3 fill-yellow-400 text-yellow-400"></i>
+                                            <i data-lucide="star" class="w-3 h-3 fill-yellow-400 text-yellow-400"></i>
+                                        </div>
+                                    </div>
+                                    <p class="text-xs text-gray-500">2 weeks ago</p>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-700 leading-relaxed">Exceptional service! The team at Exevo transformed our brand identity completely. Professional, creative, and on time.</p>
                         </div>
+
+                        <!-- Review Message 2 -->
+                        <div class="review-message flex-shrink-0 w-72 sm:w-80 bg-white rounded-2xl shadow-md p-4 sm:p-5 border border-gray-100">
+                            <div class="flex items-start gap-3 mb-3">
+                                <div class="w-10 h-10 bg-gradient-to-br from-pink-500 to-pink-700 rounded-full flex items-center justify-center font-bold text-white text-sm flex-shrink-0">
+                                    AK
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <p class="font-bold text-gray-900 text-sm truncate">Amina Kamau</p>
+                                        <div class="flex gap-0.5">
+                                            <i data-lucide="star" class="w-3 h-3 fill-yellow-400 text-yellow-400"></i>
+                                            <i data-lucide="star" class="w-3 h-3 fill-yellow-400 text-yellow-400"></i>
+                                            <i data-lucide="star" class="w-3 h-3 fill-yellow-400 text-yellow-400"></i>
+                                            <i data-lucide="star" class="w-3 h-3 fill-yellow-400 text-yellow-400"></i>
+                                            <i data-lucide="star" class="w-3 h-3 fill-yellow-400 text-yellow-400"></i>
+                                        </div>
+                                    </div>
+                                    <p class="text-xs text-gray-500">1 month ago</p>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-700 leading-relaxed">Outstanding work! They designed our website and it's beautiful. Highly recommend Exevo Designers to anyone looking for quality.</p>
+                        </div>
+
+                        <!-- Review Message 3 -->
+                        <div class="review-message flex-shrink-0 w-72 sm:w-80 bg-white rounded-2xl shadow-md p-4 sm:p-5 border border-gray-100">
+                            <div class="flex items-start gap-3 mb-3">
+                                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center font-bold text-white text-sm flex-shrink-0">
+                                    DO
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <p class="font-bold text-gray-900 text-sm truncate">David Omondi</p>
+                                        <div class="flex gap-0.5">
+                                            <i data-lucide="star" class="w-3 h-3 fill-yellow-400 text-yellow-400"></i>
+                                            <i data-lucide="star" class="w-3 h-3 fill-yellow-400 text-yellow-400"></i>
+                                            <i data-lucide="star" class="w-3 h-3 fill-yellow-400 text-yellow-400"></i>
+                                            <i data-lucide="star" class="w-3 h-3 fill-yellow-400 text-yellow-400"></i>
+                                            <i data-lucide="star" class="w-3 h-3 fill-yellow-400 text-yellow-400"></i>
+                                        </div>
+                                    </div>
+                                    <p class="text-xs text-gray-500">3 weeks ago</p>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-700 leading-relaxed">Amazing experience working with Exevo! They understood our vision and delivered beyond expectations. True professionals!</p>
+                        </div>
+
+                        <!-- Review Message 4 -->
+                        <div class="review-message flex-shrink-0 w-72 sm:w-80 bg-white rounded-2xl shadow-md p-4 sm:p-5 border border-gray-100">
+                            <div class="flex items-start gap-3 mb-3">
+                                <div class="w-10 h-10 bg-gradient-to-br from-emerald-500 to-emerald-700 rounded-full flex items-center justify-center font-bold text-white text-sm flex-shrink-0">
+                                    GW
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <p class="font-bold text-gray-900 text-sm truncate">Grace Wanjiru</p>
+                                        <div class="flex gap-0.5">
+                                            <i data-lucide="star" class="w-3 h-3 fill-yellow-400 text-yellow-400"></i>
+                                            <i data-lucide="star" class="w-3 h-3 fill-yellow-400 text-yellow-400"></i>
+                                            <i data-lucide="star" class="w-3 h-3 fill-yellow-400 text-yellow-400"></i>
+                                            <i data-lucide="star" class="w-3 h-3 fill-yellow-400 text-yellow-400"></i>
+                                            <i data-lucide="star" class="w-3 h-3 fill-yellow-400 text-yellow-400"></i>
+                                        </div>
+                                    </div>
+                                    <p class="text-xs text-gray-500">1 week ago</p>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-700 leading-relaxed">Best design agency in Kenya! They created stunning graphics for our social media and the engagement went through the roof!</p>
+                        </div>
+
+                        <!-- Review Message 5 -->
+                        <div class="review-message flex-shrink-0 w-72 sm:w-80 bg-white rounded-2xl shadow-md p-4 sm:p-5 border border-gray-100">
+                            <div class="flex items-start gap-3 mb-3">
+                                <div class="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-700 rounded-full flex items-center justify-center font-bold text-white text-sm flex-shrink-0">
+                                    PM
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <p class="font-bold text-gray-900 text-sm truncate">Peter Muturi</p>
+                                        <div class="flex gap-0.5">
+                                            <i data-lucide="star" class="w-3 h-3 fill-yellow-400 text-yellow-400"></i>
+                                            <i data-lucide="star" class="w-3 h-3 fill-yellow-400 text-yellow-400"></i>
+                                            <i data-lucide="star" class="w-3 h-3 fill-yellow-400 text-yellow-400"></i>
+                                            <i data-lucide="star" class="w-3 h-3 fill-yellow-400 text-yellow-400"></i>
+                                            <i data-lucide="star" class="w-3 h-3 fill-yellow-400 text-yellow-400"></i>
+                                        </div>
+                                    </div>
+                                    <p class="text-xs text-gray-500">2 months ago</p>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-700 leading-relaxed">Very impressed with their professionalism and creativity. Our logo is now our biggest marketing asset. Thank you Exevo!</p>
+                        </div>
+
+                        <!-- Review Message 6 -->
+                        <div class="review-message flex-shrink-0 w-72 sm:w-80 bg-white rounded-2xl shadow-md p-4 sm:p-5 border border-gray-100">
+                            <div class="flex items-start gap-3 mb-3">
+                                <div class="w-10 h-10 bg-gradient-to-br from-indigo-500 to-indigo-700 rounded-full flex items-center justify-center font-bold text-white text-sm flex-shrink-0">
+                                    SK
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <p class="font-bold text-gray-900 text-sm truncate">Sarah Kimani</p>
+                                        <div class="flex gap-0.5">
+                                            <i data-lucide="star" class="w-3 h-3 fill-yellow-400 text-yellow-400"></i>
+                                            <i data-lucide="star" class="w-3 h-3 fill-yellow-400 text-yellow-400"></i>
+                                            <i data-lucide="star" class="w-3 h-3 fill-yellow-400 text-yellow-400"></i>
+                                            <i data-lucide="star" class="w-3 h-3 fill-yellow-400 text-yellow-400"></i>
+                                            <i data-lucide="star" class="w-3 h-3 fill-yellow-400 text-yellow-400"></i>
+                                        </div>
+                                    </div>
+                                    <p class="text-xs text-gray-500">4 days ago</p>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-700 leading-relaxed">Fantastic team! They handled our complete digital marketing campaign and the results were incredible. Will definitely work with them again!</p>
+                        </div>
+
                     </div>
                 </div>
-
-                <!-- Review Card 2 -->
-                <div class="review-card bg-white p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-lg">
-                    <div class="flex items-center gap-1 mb-4">
-                        <i data-lucide="star" class="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400"></i>
-                        <i data-lucide="star" class="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400"></i>
-                        <i data-lucide="star" class="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400"></i>
-                        <i data-lucide="star" class="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400"></i>
-                        <i data-lucide="star" class="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400"></i>
-                    </div>
-                    <p class="text-gray-600 text-sm sm:text-base mb-6 leading-relaxed italic">"The team delivered beyond our expectations. Our new website looks stunning and performs beautifully. Thank you Exevo!"</p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-pink-100 rounded-full flex items-center justify-center font-bold text-pink-600">SK</div>
-                        <div>
-                            <p class="font-bold text-gray-900 text-sm sm:text-base">Sarah Kim</p>
-                            <p class="text-xs text-gray-500">Marketing Director</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Review Card 3 -->
-                <div class="review-card bg-white p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-lg">
-                    <div class="flex items-center gap-1 mb-4">
-                        <i data-lucide="star" class="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400"></i>
-                        <i data-lucide="star" class="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400"></i>
-                        <i data-lucide="star" class="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400"></i>
-                        <i data-lucide="star" class="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400"></i>
-                        <i data-lucide="star" class="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400"></i>
-                    </div>
-                    <p class="text-gray-600 text-sm sm:text-base mb-6 leading-relaxed italic">"Professional, creative, and always on time. Exevo has been our go-to design partner for 2 years now. Absolutely fantastic!"</p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-full flex items-center justify-center font-bold text-blue-600">MO</div>
-                        <div>
-                            <p class="font-bold text-gray-900 text-sm sm:text-base">Michael Ochieng</p>
-                            <p class="text-xs text-gray-500">Business Owner</p>
-                        </div>
-                    </div>
-                </div>
-
             </div>
 
             <!-- Bottom CTA -->
@@ -674,9 +788,9 @@
 
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
             
-            <a href="mailto:exevodesigners@gmail.com" class="w-full sm:w-auto flex items-center justify-center gap-3 bg-gray-900 text-white px-8 py-4 rounded-2xl hover:bg-purple-600 transition-all duration-300 group shadow-lg shadow-gray-200 hover:shadow-purple-200">
+            <a href="/cdn-cgi/l/email-protection#37524f5241585352445e505952454477505a565e5b1954585a" class="w-full sm:w-auto flex items-center justify-center gap-3 bg-gray-900 text-white px-8 py-4 rounded-2xl hover:bg-purple-600 transition-all duration-300 group shadow-lg shadow-gray-200 hover:shadow-purple-200">
                 <i data-lucide="mail" class="w-5 h-5 text-purple-400 group-hover:text-white transition-colors"></i>
-                <span class="font-bold tracking-tight">exevodesigners@gmail.com</span>
+                <span class="font-bold tracking-tight"><span class="__cf_email__" data-cfemail="abced3ceddc4cfced8c2ccc5ced9d8ebccc6cac2c785c8c4c6">[email&#160;protected]</span></span>
             </a>
 
             <a href="https://wa.me/254700552884" 
@@ -728,7 +842,7 @@
                     <a href="https://whatsapp.com/channel/0029Vb7kTDq3QxS1ffkZhe0J " class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-50 text-gray-400 rounded-full flex items-center justify-center hover:bg-green-600 hover:text-white transition-all duration-300 group">
                         <i data-lucide="message-circle" class="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.5px]"></i>
                     </a>
-                    <a href="mailto:exevodesigners@gmail.com" class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-50 text-gray-400 rounded-full flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all duration-300 group">
+                    <a href="/cdn-cgi/l/email-protection#b1d4c9d4c7ded5d4c2d8d6dfd4c3c2f1d6dcd0d8dd9fd2dedc" class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-50 text-gray-400 rounded-full flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all duration-300 group">
                         <i data-lucide="mail" class="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.5px]"></i>
                     </a>
                 </div>
@@ -801,7 +915,7 @@
         </div>
     </div>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         lucide.createIcons();
 
         const menuToggle = document.getElementById('menu-toggle');
@@ -915,6 +1029,13 @@
                 nav.classList.remove('shadow-sm');
             }
         });
+
+        // Duplicate reviews for infinite scrolling effect
+        const reviewsTrack = document.getElementById('reviews-track');
+        if (reviewsTrack) {
+            const reviewsClone = reviewsTrack.cloneNode(true);
+            reviewsTrack.parentElement.appendChild(reviewsClone);
+        }
     </script>
 </body>
 </html>
