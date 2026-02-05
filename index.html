@@ -7,8 +7,8 @@
     <meta name="description" content="Exevo Designers Network provides expert graphic design, digital marketing, and creative solutions. Connect with our professional design agency.">
 
     <!-- FIXED FAVICON - Using absolute path and correct attribute order -->
-    <link rel="icon" type="image/png" href="/ExevoLogo/exevo-logo-profile.png" />
-    <link rel="apple-touch-icon" href="/ExevoLogo/exevo-logo-profile.png">
+    <link rel="icon" type="image/png" href="ExevoLogo/exevo-logo-profile.png" />
+    <link rel="apple-touch-icon" href="ExevoLogo/exevo-logo-profile.png">
     
     <!-- Adding multiple sizes for better compatibility -->
     <link rel="icon" type="image/png" sizes="16x16" href="/ExevoLogo/exevo-logo-profile.png">
@@ -164,6 +164,15 @@
         .perspective-1000 {
             perspective: 1000px;
         }
+
+        /* Review Card Styles */
+        .review-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(124, 58, 237, 0.1);
+        }
     </style>
 </head>
 <body class="bg-white">
@@ -186,6 +195,7 @@
                 <a href="#about" class="nav-link">About</a>
                 <a href="#services" class="nav-link">Services</a>
                 <a href="#portfolio" class="nav-link">Portfolio</a>
+                <a href="#reviews" class="nav-link">Reviews</a>
                 <a href="#contact" class="px-5 lg:px-6 py-2.5 lg:py-3 bg-black text-white rounded-full hover:bg-purple-600 transition-all duration-300 shadow-lg shadow-black/5">Contact</a>
             </div>
 
@@ -212,11 +222,12 @@
                 <a href="#about" class="mobile-nav-link">About</a>
                 <a href="#services" class="mobile-nav-link">Services</a>
                 <a href="#portfolio" class="mobile-nav-link">Portfolio</a>
+                <a href="#reviews" class="mobile-nav-link">Reviews</a>
                 <a href="#contact" class="mobile-nav-link">Contact</a>
             </nav>
             <div class="mt-auto border-t border-gray-100 pt-6 sm:pt-8">
                 <p class="text-xs uppercase tracking-widest text-gray-400 mb-3 sm:mb-4">Get in touch</p>
-                <a href="/cdn-cgi/l/email-protection#e3869b86958c8786908a848d869190a3848e828a8fcd808c8e" class="text-sm sm:text-base text-gray-900 font-bold block mb-2 break-all"><span class="__cf_email__" data-cfemail="492c312c3f262d2c3a202e272c3b3a092e24282025672a2624">[email&#160;protected]</span></a>
+                <a href="mailto:exevodesigners@gmail.com" class="text-sm sm:text-base text-gray-900 font-bold block mb-2 break-all">exevodesigners@gmail.com</a>
                 <a href="tel:+254700552884" class="text-sm sm:text-base text-gray-900 font-bold">+254 700 552 884</a>
             </div>
         </div>
@@ -295,7 +306,7 @@
                         <span class="text-purple-600 font-bold text-[10px] sm:text-xs uppercase tracking-[0.3em] mb-3 sm:mb-4 block text-center md:text-left">Live Deployments</span>
                         <h2 class="font-display text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 text-center md:text-left">WEB <span class="gradient-text">SHOWCASE</span></h2>
                     </div>
-                    <a href="case-studies.html" class="inline-flex items-center gap-2 text-purple-600 font-bold tracking-[0.2em] text-[10px] sm:text-xs uppercase hover:gap-4 transition-all duration-300 group mx-auto md:mx-0 mb-4 md:mb-0">
+                    <a href="case-studies.html" class="inline-flex items-center gap-2 text-purple-600 font-bold tracking-[0.2em] text-[10px] sm:text-xs uppercase hover:gap-4 transition-all duration-300 group mx-auto md:mx-0">
                         View All Case Studies 
                         <i data-lucide="arrow-right" class="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform"></i>
                     </a>
@@ -397,10 +408,12 @@
             <div class="grid lg:grid-cols-2 gap-10 sm:gap-12 md:gap-20 lg:gap-32 items-center">
                 <div class="relative order-2 lg:order-1">
                     <div class="aspect-square bg-purple-600 rounded-2xl sm:rounded-3xl md:rounded-[3rem] overflow-hidden shadow-2xl relative z-10">
-                         <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-purple-500 to-indigo-700 text-white p-6 sm:p-8 md:p-12 text-center">
-                            <div>
-                                <h3 class="font-display text-xl sm:text-2xl md:text-4xl mb-3 sm:mb-4">EXEVO</h3>
-                                <p class="text-purple-100 italic text-xs sm:text-sm md:text-base">"Design that inspires, technology that empowers."</p>
+                         <!-- Image with overlay -->
+                         <img src="ExevoLogo/exevo-logo-profile.png" alt="Exevo Designers" class="w-full h-full object-cover">
+                         <div class="absolute inset-0 bg-gradient-to-br from-purple-600/80 to-indigo-700/80 flex items-center justify-center">
+                            <div class="text-white p-6 sm:p-8 md:p-12 text-center">
+                                <h3 class="font-display text-xl sm:text-2xl md:text-4xl mb-3 sm:mb-4 drop-shadow-lg">EXEVO</h3>
+                                <p class="text-white italic text-xs sm:text-sm md:text-base drop-shadow-md">"Design that inspires, technology that empowers."</p>
                             </div>
                          </div>
                     </div>
@@ -538,6 +551,113 @@
 </div>
     </section>
 
+    <!-- Reviews Section -->
+    <section id="reviews" class="py-16 sm:py-20 md:py-32 bg-gradient-to-br from-purple-50 to-white px-4 sm:px-6 lg:px-12">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12 sm:mb-16">
+                <span class="text-purple-600 font-bold text-[10px] sm:text-xs uppercase tracking-[0.3em] mb-3 sm:mb-4 block">Client Testimonials</span>
+                <h2 class="font-display section-title font-black mb-4 sm:mb-6 text-slate-900">WHAT OUR <span class="gradient-text">CLIENTS SAY</span></h2>
+                <p class="text-gray-500 text-base sm:text-lg max-w-2xl mx-auto">Don't just take our word for it. Here's what our satisfied clients have to say about working with Exevo Designers.</p>
+            </div>
+
+            <!-- Google Reviews CTA -->
+            <div class="text-center mb-12 sm:mb-16">
+                <a href="https://g.page/r/CamR1aWs78kgEBM/review" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 bg-white px-6 sm:px-8 py-4 sm:py-5 rounded-2xl sm:rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-purple-100 hover:border-purple-300 group">
+                    <div class="flex items-center gap-2">
+                        <svg class="w-6 h-6 sm:w-8 sm:h-8" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                            <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/>
+                            <path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/>
+                            <path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/>
+                            <path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"/>
+                        </svg>
+                        <div class="text-left">
+                            <div class="flex items-center gap-1 mb-1">
+                                <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                            </div>
+                            <p class="text-xs sm:text-sm font-bold text-gray-900">Rate us on Google</p>
+                        </div>
+                    </div>
+                    <i data-lucide="external-link" class="w-4 h-4 sm:w-5 sm:h-5 text-purple-600 group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+
+            <!-- Sample Review Cards (You can replace with actual reviews) -->
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                
+                <!-- Review Card 1 -->
+                <div class="review-card bg-white p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-lg">
+                    <div class="flex items-center gap-1 mb-4">
+                        <i data-lucide="star" class="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-600 text-sm sm:text-base mb-6 leading-relaxed italic">"Exevo Designers transformed our brand identity completely. Their creativity and professionalism are unmatched. Highly recommend!"</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 rounded-full flex items-center justify-center font-bold text-purple-600">JD</div>
+                        <div>
+                            <p class="font-bold text-gray-900 text-sm sm:text-base">John Doe</p>
+                            <p class="text-xs text-gray-500">CEO, Tech Startup</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review Card 2 -->
+                <div class="review-card bg-white p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-lg">
+                    <div class="flex items-center gap-1 mb-4">
+                        <i data-lucide="star" class="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-600 text-sm sm:text-base mb-6 leading-relaxed italic">"The team delivered beyond our expectations. Our new website looks stunning and performs beautifully. Thank you Exevo!"</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-pink-100 rounded-full flex items-center justify-center font-bold text-pink-600">SK</div>
+                        <div>
+                            <p class="font-bold text-gray-900 text-sm sm:text-base">Sarah Kim</p>
+                            <p class="text-xs text-gray-500">Marketing Director</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review Card 3 -->
+                <div class="review-card bg-white p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-lg">
+                    <div class="flex items-center gap-1 mb-4">
+                        <i data-lucide="star" class="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-600 text-sm sm:text-base mb-6 leading-relaxed italic">"Professional, creative, and always on time. Exevo has been our go-to design partner for 2 years now. Absolutely fantastic!"</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-full flex items-center justify-center font-bold text-blue-600">MO</div>
+                        <div>
+                            <p class="font-bold text-gray-900 text-sm sm:text-base">Michael Ochieng</p>
+                            <p class="text-xs text-gray-500">Business Owner</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Bottom CTA -->
+            <div class="text-center mt-12 sm:mt-16">
+                <p class="text-gray-500 text-sm sm:text-base mb-4">Had a great experience? Share your review!</p>
+                <a href="https://g.page/r/CamR1aWs78kgEBM/review" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-purple-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold hover:bg-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl text-sm sm:text-base">
+                    Leave a Review
+                    <i data-lucide="arrow-right" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
 <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&display=swap" rel="stylesheet">
 
@@ -554,9 +674,9 @@
 
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
             
-            <a href="/cdn-cgi/l/email-protection#bcd9c4d9cad3d8d9cfd5dbd2d9cecffcdbd1ddd5d092dfd3d1" class="w-full sm:w-auto flex items-center justify-center gap-3 bg-gray-900 text-white px-8 py-4 rounded-2xl hover:bg-purple-600 transition-all duration-300 group shadow-lg shadow-gray-200 hover:shadow-purple-200">
+            <a href="mailto:exevodesigners@gmail.com" class="w-full sm:w-auto flex items-center justify-center gap-3 bg-gray-900 text-white px-8 py-4 rounded-2xl hover:bg-purple-600 transition-all duration-300 group shadow-lg shadow-gray-200 hover:shadow-purple-200">
                 <i data-lucide="mail" class="w-5 h-5 text-purple-400 group-hover:text-white transition-colors"></i>
-                <span class="font-bold tracking-tight"><span class="__cf_email__" data-cfemail="a0c5d8c5d6cfc4c5d3c9c7cec5d2d3e0c7cdc1c9cc8ec3cfcd">[email&#160;protected]</span></span>
+                <span class="font-bold tracking-tight">exevodesigners@gmail.com</span>
             </a>
 
             <a href="https://wa.me/254700552884" 
@@ -608,7 +728,7 @@
                     <a href="https://whatsapp.com/channel/0029Vb7kTDq3QxS1ffkZhe0J " class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-50 text-gray-400 rounded-full flex items-center justify-center hover:bg-green-600 hover:text-white transition-all duration-300 group">
                         <i data-lucide="message-circle" class="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.5px]"></i>
                     </a>
-                    <a href="/cdn-cgi/l/email-protection#16736e7360797273657f717873646556717b777f7a3875797b" class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-50 text-gray-400 rounded-full flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all duration-300 group">
+                    <a href="mailto:exevodesigners@gmail.com" class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-50 text-gray-400 rounded-full flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all duration-300 group">
                         <i data-lucide="mail" class="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.5px]"></i>
                     </a>
                 </div>
@@ -621,6 +741,7 @@
                     <li><a href="#about" class="hover:text-purple-600 transition-colors">About Us</a></li>
                     <li><a href="#services" class="hover:text-purple-600 transition-colors">Services</a></li>
                     <li><a href="#portfolio" class="hover:text-purple-600 transition-colors">Portfolio</a></li>
+                    <li><a href="#reviews" class="hover:text-purple-600 transition-colors">Reviews</a></li>
                     <li><a href="sign-up.html" class="hover:text-purple-600 transition-colors">Join Community</a></li>
                 </ul>
             </div>
@@ -680,7 +801,7 @@
         </div>
     </div>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         lucide.createIcons();
 
         const menuToggle = document.getElementById('menu-toggle');
