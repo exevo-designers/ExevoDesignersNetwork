@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Social Media Design Calendar | SJC & SJH</title>
+    <meta name="description" content="Exevo Designers Network provides expert graphic design, digital marketing, and creative solutions. Connect with our professional design agency.">
+
+    <!-- FIXED FAVICON - Using absolute path and correct attribute order -->
+    <link rel="icon" type="image/png" href="ExevoLogo/exevo-logo-profile.png" />
+    <link rel="apple-touch-icon" href="ExevoLogo/exevo-logo-profile.png">
+    
+    <!-- Adding multiple sizes for better compatibility -->
+    <link rel="icon" type="image/png" sizes="16x16" href="ExevoLogo/exevo-logo-profile.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="ExevoLogo/exevo-logo-profile.png">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Exevo Designers Network",
+      "url": "https://exevodesigners.online/",
+      "logo": "https://exevodesigners.online/ExevoLogo/exevo-logo-profile.png",
+      "image": "https://exevodesigners.online/ExevoLogo/exevo-logo-profile.png",
+      "sameAs": [
+        "https://www.linkedin.com/in/exevo-designers-40122435a",
+        "https://www.instagram.com/exevodesigners",
+        "https://www.facebook.com/share/17oXAWNWcZ/",
+        "https://www.tiktok.com/@exevodesigners",
+        "https://whatsapp.com/channel/0029Vb7kTDq3QxS1ffkZhe0J"
+      ]
+    }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --brand-purple: #7c3aed;
+            --text-dark: #0f172a;
+            --bg-light: #ffffff;
+            --muted-bg: #f8fafc;
+            --border-color: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            background-color: #fcfcfd;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            width: 100%;
+            padding-top: 5rem; /* Space for fixed nav */
+        }
+
+        .font-display {
+            font-family: 'Syncopate', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: -0.04em;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .calendar-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+
+        @media (min-width: 1280px) {
+            .calendar-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        }
+
+        .month-card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 1.25rem;
+            transition: all 0.3s ease;
+        }
+
+        .month-card:hover {
+            border-color: var(--brand-purple);
+            box-shadow: 0 10px 30px -15px rgba(124, 58, 237, 0.15);
+        }
+
+        .purple-accent { color: var(--brand-purple); }
+        .bg-purple { background-color: var(--brand-purple); }
+        
+        .day-cell {
+            aspect-ratio: 1/1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #94a3b8;
+            position: relative;
+            touch-action: manipulation;
+        }
+
+        .day-cell.has-event::after {
+            content: '';
+            position: absolute;
+            bottom: 3px;
+            width: 3px;
+            height: 3px;
+            background: var(--brand-purple);
+            border-radius: 50%;
+        }
+
+        .day-cell.has-event {
+            color: var(--brand-purple);
+            font-weight: 700;
+            background: rgba(124, 58, 237, 0.05);
+        }
+
+        .day-cell.active-select {
+            background: var(--brand-purple) !important;
+            color: white !important;
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+            z-index: 10;
+        }
+
+        .sidebar-card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+        }
+
+        @media (max-width: 1023px) {
+            .sidebar-card {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                z-index: 100;
+                border-radius: 24px 24px 0 0;
+                max-height: 85vh;
+                box-shadow: 0 -10px 40px rgba(0,0,0,0.1);
+                transform: translateY(100%);
+                transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+            .sidebar-card.open {
+                transform: translateY(0);
+            }
+            .main-content-wrapper { padding-bottom: 2rem; }
+            .overlay {
+                position: fixed;
+                inset: 0;
+                background: rgba(0,0,0,0.4);
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.3s ease;
+                z-index: 90;
+            }
+            .overlay.active {
+                opacity: 1;
+                pointer-events: auto;
+            }
+        }
+
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-slide-up { animation: slideUp 0.4s ease-out forwards; }
+    </style>
+</head>
+<body class="main-content-wrapper">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 md:h-20 flex items-center justify-between">
+            <a href="#" class="group flex items-center space-x-2 md:space-x-3">
+                <img src="ExevoLogo/exevo-logo-png.png" alt="Exevo Logo" 
+                     class="h-7 md:h-9 lg:h-10 w-auto object-contain transition-transform group-hover:scale-105" 
+                     onerror="this.style.display='none'">
+                <div class="font-display font-bold text-sm sm:text-lg md:text-xl tracking-tighter flex items-center">
+                    EXEVO <span class="text-purple-600 ml-1 hidden xs:inline">DESIGNERS</span>
+                </div>
+            </a>
+            <div class="hidden md:flex items-center space-x-6">
+                <span class="text-[10px] font-black text-slate-400 tracking-widest uppercase">2026 Strategy Matrix</span>
+                <div class="h-4 w-px bg-slate-200"></div>
+                <img src="ExevoLogo/exevo-logo-profile.png" alt="Profile" class="h-8 w-8 rounded-full border border-purple-100">
+            </div>
+        </div>
+    </nav>
+
+    <div id="overlay" class="overlay"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+        <header class="mb-8 lg:mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-slate-100 pb-8">
+            <div class="flex-1">
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="bg-purple text-white text-[9px] font-black px-3 py-1 rounded-full tracking-widest uppercase">STRATEGY PLAN</span>
+                    <span class="text-[9px] text-slate-400 font-bold tracking-widest uppercase">St. Joseph's Hospital  and Rehema College</span>
+                </div>
+                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-tight">
+                    POST <span class="purple-accent">MATRIX</span>
+                </h1>
+                <p class="text-sm text-slate-500 font-medium max-w-md mt-2">Single-post campaign architecture for monthly health awareness.</p>
+            </div>
+            
+            <div class="flex items-center gap-4 self-start bg-slate-50 p-3 rounded-2xl border border-slate-100">
+                <div class="text-right">
+                    <p class="text-[9px] font-black text-slate-900 tracking-tighter uppercase">Exevo Client Portal</p>
+                    <p class="text-[10px] text-purple-600 font-bold uppercase">Active Campaign</p>
+                </div>
+                <div class="h-8 w-px bg-slate-200"></div>
+                <i data-lucide="shield-check" class="w-5 h-5 purple-accent"></i>
+            </div>
+        </header>
+
+        <main class="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-10">
+            
+            <div class="lg:col-span-3">
+                <div id="calendar-container" class="calendar-grid">
+                    <!-- Months injected here -->
+                </div>
+            </div>
+
+            <!-- Sidebar / Bottom Sheet -->
+            <div class="lg:col-span-1">
+                <div id="sidebar" class="sidebar-card p-6 sm:p-8 h-full lg:h-[calc(100vh-14rem)] lg:sticky lg:top-24 flex flex-col">
+                    <!-- Handle for mobile -->
+                    <button id="close-btn" class="w-12 h-1.5 bg-slate-200 rounded-full mx-auto mb-6 lg:hidden cursor-pointer hover:bg-slate-300 focus:outline-none"></button>
+                    
+                    <h2 class="text-[9px] font-display font-bold mb-6 flex items-center gap-2 tracking-[0.2em] text-slate-900 uppercase">
+                        <i data-lucide="layout" class="w-4 h-4 purple-accent"></i>
+                        Creative Brief
+                    </h2>
+                    
+                    <div id="event-details" class="overflow-y-auto flex-grow custom-scrollbar space-y-6 pr-1">
+                        <div class="text-slate-400 italic text-xs text-center py-12 px-4 border-2 border-dashed border-slate-100 rounded-3xl">
+                            Tap a date with a <span class="purple-accent font-bold">•</span> to reveal the campaign strategy.
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 pt-6 border-t border-slate-50 hidden lg:block">
+                        <div class="p-4 bg-purple/5 rounded-2xl border border-purple/10">
+                            <p class="text-[8px] text-purple-600 font-black uppercase tracking-widest mb-1">STRATEGY TIP</p>
+                            <p class="text-[11px] text-purple-900 leading-relaxed font-medium">Prioritize local photography over stock images to build community trust in Molo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const rawData = [
+            { date: "2026-01-01", event: "New Year's Day", type: "Holiday", hook: "Your health is our 2026 mission.", visual: "St. Joseph's logo over a sunrise at Molo Hospital.", cta: "Book a checkup", notes: "Use high-contrast white text on a soft morning photo." },
+            { date: "2026-01-04", event: "World Braille Day", type: "Accessibility", hook: "Care that sees everyone.", visual: "Braille texture graphic with purple overlays.", cta: "Our Accessibility Policy", notes: "Focus on inclusive care standards." },
+            { date: "2026-01-25", event: "World Leprosy Day", type: "Health", hook: "Zero Leprosy is possible.", visual: "Clean, compassionate clinical photography.", cta: "Free Screenings Info", notes: "Educational and supportive tone." },
+            { date: "2026-01-30", event: "World NTD Day", type: "Health", hook: "Fighting Neglected Tropical Diseases.", visual: "Map graphic of Molo health outreach points.", cta: "Learn more", notes: "Community health focus." },
+            { date: "2026-02-04", event: "World Cancer Day", type: "Awareness", hook: "3 Things you didn't know about screening.", visual: "Clean minimalist iconography on purple.", cta: "Comment 'INFO'", notes: "Use bold, high-legibility typography." },
+            { date: "2026-02-09", event: "Int. Epilepsy Day", type: "Support", hook: "Ending the stigma, one step at a time.", visual: "Supportive hands imagery with purple ribbon.", cta: "Care Guide", notes: "Empathetic medical advice." },
+            { date: "2026-02-20", event: "Social Justice Day", type: "Advocacy", hook: "Quality healthcare is a human right.", visual: "Community portrait at Rehema Campus.", cta: "Agree? Share this", notes: "Human-centric photography." },
+            { date: "2026-03-08", event: "Women's Day", type: "Tribute", hook: "The hands that heal Molo.", visual: "Portrait of Senior Nursing Staff.", cta: "Congratulate them", notes: "High-quality, respectful portrait." },
+            { date: "2026-03-20", event: "Idd-ul-Fitr", type: "Holiday", hook: "Eid Mubarak to our Molo Community.", visual: "Crescent moon with hospital branding.", cta: "Holiday Hours", notes: "Gold and purple color scheme." },
+            { date: "2026-03-24", event: "World TB Day", type: "Clinical", hook: "TB is curable. Check today.", visual: "Medical illustration of lung health.", cta: "Get Screened", notes: "Clear, urgent medical messaging." },
+            { date: "2026-04-02", event: "World Autism Day", type: "Support", hook: "Celebrating neurodiversity.", visual: "Lightbulb/Puzzle motif in brand colors.", cta: "Support Resources", notes: "Use standard blue-awareness palette." },
+            { date: "2026-04-03", event: "Good Friday", type: "Holiday", hook: "A time for reflection and care.", visual: "Serene hospital gardens photo.", cta: "Emergency Lines", notes: "Quiet, respectful aesthetic." },
+            { date: "2026-04-05", event: "Easter Sunday", type: "Holiday", hook: "Wishing you health and renewal.", visual: "Bright floral imagery with logo.", cta: "Happy Easter", notes: "Optimistic and bright." },
+            { date: "2026-04-06", event: "Easter Monday", type: "Utility", hook: "Ready for your week of wellness.", visual: "Clean hospital reception area photo.", cta: "Book Monday", notes: "Focus on operational readiness." },
+            { date: "2026-04-07", event: "World Health Day", type: "Hero", hook: "Our Health, Our Future.", visual: "Hero photo of hospital faculty.", cta: "Join our Mission", notes: "The biggest post of the month." },
+            { date: "2026-04-25", event: "World Malaria Day", type: "Prevention", hook: "Protect your family tonight.", visual: "Anti-malaria net graphic.", cta: "Prevention Tips", notes: "Practical, action-oriented content." },
+            { date: "2026-04-28", event: "Safety at Work", type: "Internal", hook: "Safety first for our medical team.", visual: "Staff in full safety gear.", cta: "Our Standards", notes: "Builds patient trust." },
+            { date: "2026-05-01", event: "Labour Day", type: "Tribute", hook: "To the hands that build Kenya.", visual: "Workers from the local Molo area.", cta: "Salute them", notes: "Inclusive community focus." },
+            { date: "2026-05-08", event: "Red Cross Day", type: "Awareness", hook: "Humanity in every heartbeat.", visual: "Emergency response team photo.", cta: "First Aid Tips", notes: "Bold, urgent branding." },
+            { date: "2026-05-12", event: "Int. Nurses Day", type: "Tribute", hook: "The backbone of St. Joseph's.", visual: "Nurses smiling on the job.", cta: "Say Thank You", notes: "Personal and emotional appeal." },
+            { date: "2026-05-17", event: "Hypertension Day", type: "Health", hook: "Know your numbers.", visual: "BP monitor showing safe reading.", cta: "Free BP Checks", notes: "Direct health benefit." },
+            { date: "2026-05-31", event: "No Tobacco Day", type: "Wellness", hook: "Breathe easier today.", visual: "Fresh nature vs smoke graphic.", cta: "Quit Support", notes: "Inspirational aesthetic." },
+            { date: "2026-06-01", event: "Madaraka Day", type: "Holiday", hook: "Celebrating our Independence.", visual: "Kenya Flag integrated with Rehema branding.", cta: "Happy Madaraka", notes: "Patriotic and bold." },
+            { date: "2026-06-05", event: "Environment Day", type: "Green", hook: "A healthy planet, a healthy Molo.", visual: "Tree planting at the hospital.", cta: "Eco Tips", notes: "Green/Earthy color palette." },
+            { date: "2026-06-14", event: "World Blood Donor Day", type: "Urgent", hook: "Give blood, save a neighbor.", visual: "Impactful 'Donate' graphic.", cta: "Blood Bank Hours", notes: "High-contrast red design." },
+            { date: "2026-07-11", event: "World Population Day", type: "Policy", hook: "Planning for the next generation.", visual: "Infographic on maternal care.", cta: "Family Planning", notes: "Educational and clinical." },
+            { date: "2026-07-28", event: "World Hepatitis Day", type: "Health", hook: "Hepatitis can't wait.", visual: "Liver health diagram (modern style).", cta: "Get Vaccinated", notes: "Urgent health call." },
+            { date: "2026-08-01", event: "Breastfeeding Week", type: "Support", hook: "Support for Molo mothers.", visual: "Mother and child photography.", cta: "Nursing Support", notes: "Warm, soft lighting." },
+            { date: "2026-08-19", event: "Humanitarian Day", type: "Impact", hook: "Care without borders.", visual: "Outreach mission documentary photo.", cta: "Donate/Volunteer", notes: "Real, unfiltered photography." },
+            { date: "2026-09-05", event: "Day of Charity", type: "Social", hook: "Small acts, big impact.", visual: "Staff charity donation event.", cta: "How to Help", notes: "Community-driven content." },
+            { date: "2026-09-10", event: "Suicide Prevention", type: "Mental Health", hook: "It's okay to not be okay.", visual: "Calm, minimalist typography.", cta: "Talk to us", notes: "Soft, non-triggering colors." },
+            { date: "2026-09-17", event: "Patient Safety Day", type: "Trust", hook: "Your safety is our priority.", visual: "Sterilization process photo.", cta: "Our Promise", notes: "Technical but reassuring." },
+            { date: "2026-09-28", event: "World Rabies Day", type: "Health", hook: "Protect your pets and family.", visual: "Dog/Pet health graphic.", cta: "Vaccine Info", notes: "Clear and informational." },
+            { date: "2026-09-29", event: "World Heart Day", type: "Wellness", hook: "Love your heart.", visual: "Healthy lifestyle photography.", cta: "Heart Screenings", notes: "Vibrant and energetic." },
+            { date: "2026-10-01", event: "Older Persons Day", type: "Support", hook: "Honoring our seniors.", visual: "Elderly patient with care provider.", cta: "Senior Care", notes: "Respectful and gentle." },
+            { date: "2026-10-10", event: "Mazingira Day", type: "Green", hook: "Protecting our local environment.", visual: "Landscape of Molo area.", cta: "Join the cleanup", notes: "Local pride focus." },
+            { date: "2026-10-20", event: "Mashujaa Day", type: "Holiday", hook: "Celebrating our health heroes.", visual: "Frontline staff group photo.", cta: "Tag your hero", notes: "Patriotic and celebratory." },
+            { date: "2026-11-12", event: "World Pneumonia Day", type: "Health", hook: "Every breath is precious.", visual: "Pediatric care photo.", cta: "Free Vaccines", notes: "Emotional medical appeal." },
+            { date: "2026-11-14", event: "World Diabetes Day", type: "Screening", hook: "Know your sugar levels.", visual: "Fruit vs Sugar infographic.", cta: "Free Testing", notes: "Bright and educational." },
+            { date: "2026-12-01", event: "World AIDS Day", type: "Advocacy", hook: "End the silence. End the stigma.", visual: "Red Ribbon branding.", cta: "Testing available", notes: "Bold, supportive design." },
+            { date: "2026-12-03", event: "Disabilities Day", type: "Support", hook: "Inclusion is care.", visual: "Ramp/Access feature photo.", cta: "Our Story", notes: "Practical facility feature." },
+            { date: "2026-12-12", event: "Jamhuri Day", type: "Holiday", hook: "Kenya at 63.", visual: "National pride graphic.", cta: "Happy Jamhuri Day", notes: "Professional national colors." },
+            { date: "2026-12-25", event: "Christmas Day", type: "Holiday", hook: "Season of Joy and Health.", visual: "Decorated hospital lobby.", cta: "Merry Christmas", notes: "Festive and warm." },
+            { date: "2026-12-26", event: "Boxing Day", type: "Holiday", hook: "The gift of health continues.", visual: "Pharmacy/Service feature.", cta: "Service Hours", notes: "Clean and practical." }
+        ];
+
+        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const closeBtn = document.getElementById('close-btn');
+
+        function toggleSidebar(open) {
+            if (window.innerWidth < 1024) {
+                sidebar.classList.toggle('open', open);
+                overlay.classList.toggle('active', open);
+                document.body.style.overflow = open ? 'hidden' : '';
+            }
+        }
+
+        overlay.onclick = () => toggleSidebar(false);
+        closeBtn.onclick = () => toggleSidebar(false);
+
+        function renderCalendar() {
+            const container = document.getElementById('calendar-container');
+            container.innerHTML = '';
+            
+            months.forEach((month, index) => {
+                const monthCard = document.createElement('div');
+                monthCard.className = 'month-card';
+                
+                monthCard.innerHTML = `
+                    <div class="flex justify-between items-center mb-5">
+                        <h3 class="text-[9px] font-display font-bold purple-accent tracking-widest uppercase">${month}</h3>
+                        <div class="h-px flex-grow mx-4 bg-slate-50"></div>
+                        <span class="text-[7px] font-black text-slate-200">2026</span>
+                    </div>
+                    <div class="grid grid-cols-7 gap-1 text-center" id="month-${index}"></div>
+                `;
+
+                const grid = monthCard.querySelector(`#month-${index}`);
+                ['S','M','T','W','T','F','S'].forEach(d => {
+                    const h = document.createElement('div');
+                    h.className = 'text-[7px] text-slate-300 font-black mb-2 uppercase tracking-tighter';
+                    h.textContent = d;
+                    grid.appendChild(h);
+                });
+
+                const date = new Date(2026, index, 1);
+                const firstDay = date.getDay();
+                const daysInMonth = new Date(2026, index + 1, 0).getDate();
+
+                for (let i = 0; i < firstDay; i++) {
+                    const empty = document.createElement('div');
+                    empty.className = 'day-cell';
+                    grid.appendChild(empty);
+                }
+
+                for (let d = 1; d <= daysInMonth; d++) {
+                    const dayStr = `2026-${String(index + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+                    const eventsOnDay = rawData.filter(e => e.date === dayStr);
+                    
+                    const cell = document.createElement('div');
+                    cell.className = `day-cell ${eventsOnDay.length > 0 ? 'has-event' : ''}`;
+                    cell.textContent = d;
+                    
+                    cell.onclick = () => {
+                        document.querySelectorAll('.active-select').forEach(el => el.classList.remove('active-select'));
+                        if (eventsOnDay.length > 0) {
+                            cell.classList.add('active-select');
+                            showEvent(eventsOnDay);
+                            toggleSidebar(true);
+                        }
+                    };
+                    grid.appendChild(cell);
+                }
+                container.appendChild(monthCard);
+            });
+            lucide.createIcons();
+        }
+
+        function showEvent(events) {
+            const detailsDiv = document.getElementById('event-details');
+            detailsDiv.innerHTML = events.map(e => `
+                <div class="animate-slide-up">
+                    <div class="flex items-center justify-between mb-3">
+                         <span class="text-[8px] font-black text-slate-400 uppercase tracking-widest">${e.date}</span>
+                         <span class="text-[7px] px-2 py-0.5 bg-purple/10 rounded text-purple-600 font-bold uppercase">${e.type}</span>
+                    </div>
+                    
+                    <h4 class="text-slate-900 font-bold leading-tight mb-2 text-xl sm:text-2xl">${e.event}</h4>
+                    
+                    <div class="mb-5">
+                        <p class="text-[9px] text-purple-500 font-black uppercase mb-1">Headline Hook</p>
+                        <p class="text-sm font-semibold italic text-slate-800 leading-relaxed">"${e.hook}"</p>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <div class="mb-3">
+                                <p class="text-[8px] text-slate-400 uppercase font-black mb-0.5">Visual Direction</p>
+                                <p class="text-xs text-slate-600 leading-relaxed">${e.visual}</p>
+                            </div>
+                            <div>
+                                <p class="text-[8px] text-slate-400 uppercase font-black mb-0.5">Call to Action</p>
+                                <p class="text-xs font-bold text-slate-900 flex items-center gap-1">
+                                    <i data-lucide="arrow-right" class="w-3 h-3 text-purple-600"></i>
+                                    ${e.cta}
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="p-3 rounded-xl border border-slate-100 border-dashed bg-white">
+                             <p class="text-[8px] text-slate-400 uppercase font-black mb-0.5">Designer Notes</p>
+                             <p class="text-[11px] text-slate-500 leading-relaxed italic">${e.notes}</p>
+                        </div>
+                    </div>
+
+                    <button onclick="copyToClipboard('${e.hook} - ${e.cta}')" class="w-full mt-6 py-4 bg-slate-900 text-white text-[9px] font-bold rounded-xl uppercase tracking-widest hover:bg-purple transition-all active:scale-[0.98] shadow-lg shadow-black/5">
+                        Copy Details
+                    </button>
+                </div>
+            `).join('');
+            lucide.createIcons();
+        }
+
+        function copyToClipboard(text) {
+            const el = document.createElement('textarea');
+            el.value = text;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+        }
+
+        window.onload = renderCalendar;
+        
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 1024) {
+                toggleSidebar(false);
+                document.body.style.overflow = '';
+            }
+        });
+    </script>
+</body>
+</html>
