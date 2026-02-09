@@ -6,11 +6,9 @@
     <title>Social Media Design Calendar | SJC & SJH</title>
     <meta name="description" content="Exevo Designers Network provides expert graphic design, digital marketing, and creative solutions. Connect with our professional design agency.">
 
-    <!-- FIXED FAVICON - Using absolute path and correct attribute order -->
     <link rel="icon" type="image/png" href="ExevoLogo/exevo-logo-profile.png" />
     <link rel="apple-touch-icon" href="ExevoLogo/exevo-logo-profile.png">
     
-    <!-- Adding multiple sizes for better compatibility -->
     <link rel="icon" type="image/png" sizes="16x16" href="ExevoLogo/exevo-logo-profile.png">
     <link rel="icon" type="image/png" sizes="32x32" href="ExevoLogo/exevo-logo-profile.png">
 
@@ -53,7 +51,7 @@
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
             width: 100%;
-            padding-top: 5rem; /* Space for fixed nav */
+            padding-top: 5rem;
         }
 
         .font-display {
@@ -179,7 +177,6 @@
 </head>
 <body class="main-content-wrapper">
 
-    <!-- Navigation -->
     <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 md:h-20 flex items-center justify-between">
             <a href="#" class="group flex items-center space-x-2 md:space-x-3">
@@ -205,7 +202,7 @@
             <div class="flex-1">
                 <div class="flex items-center gap-2 mb-3">
                     <span class="bg-purple text-white text-[9px] font-black px-3 py-1 rounded-full tracking-widest uppercase">STRATEGY PLAN</span>
-                    <span class="text-[9px] text-slate-400 font-bold tracking-widest uppercase">St. Joseph's Hospital  and Rehema College</span>
+                    <span class="text-[9px] text-slate-400 font-bold tracking-widest uppercase">St. Joseph's Hospital and Rehema College</span>
                 </div>
                 <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-tight">
                     POST <span class="purple-accent">MATRIX</span>
@@ -224,17 +221,14 @@
         </header>
 
         <main class="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-10">
-            
             <div class="lg:col-span-3">
                 <div id="calendar-container" class="calendar-grid">
                     <!-- Months injected here -->
                 </div>
             </div>
 
-            <!-- Sidebar / Bottom Sheet -->
             <div class="lg:col-span-1">
                 <div id="sidebar" class="sidebar-card p-6 sm:p-8 h-full lg:h-[calc(100vh-14rem)] lg:sticky lg:top-24 flex flex-col">
-                    <!-- Handle for mobile -->
                     <button id="close-btn" class="w-12 h-1.5 bg-slate-200 rounded-full mx-auto mb-6 lg:hidden cursor-pointer hover:bg-slate-300 focus:outline-none"></button>
                     
                     <h2 class="text-[9px] font-display font-bold mb-6 flex items-center gap-2 tracking-[0.2em] text-slate-900 uppercase">
@@ -251,7 +245,7 @@
                     <div class="mt-6 pt-6 border-t border-slate-50 hidden lg:block">
                         <div class="p-4 bg-purple/5 rounded-2xl border border-purple/10">
                             <p class="text-[8px] text-purple-600 font-black uppercase tracking-widest mb-1">STRATEGY TIP</p>
-                            <p class="text-[11px] text-purple-900 leading-relaxed font-medium">Prioritize local photography over stock images to build community trust in Molo.</p>
+                            <p class="text-[11px] text-purple-900 leading-relaxed font-medium">Valentine's Day content should lean into "Love for Community" rather than just romantic themes.</p>
                         </div>
                     </div>
                 </div>
@@ -267,6 +261,7 @@
             { date: "2026-01-30", event: "World NTD Day", type: "Health", hook: "Fighting Neglected Tropical Diseases.", visual: "Map graphic of Molo health outreach points.", cta: "Learn more", notes: "Community health focus." },
             { date: "2026-02-04", event: "World Cancer Day", type: "Awareness", hook: "3 Things you didn't know about screening.", visual: "Clean minimalist iconography on purple.", cta: "Comment 'INFO'", notes: "Use bold, high-legibility typography." },
             { date: "2026-02-09", event: "Int. Epilepsy Day", type: "Support", hook: "Ending the stigma, one step at a time.", visual: "Supportive hands imagery with purple ribbon.", cta: "Care Guide", notes: "Empathetic medical advice." },
+            { date: "2026-02-14", event: "Valentine's Day", type: "Campaign", hook: "Caring Is Our Love Language.", visual: "Heart shape formed by medical stethoscope on purple background.", cta: "Show Love, Share Health", notes: "Warm, aesthetic lighting with brand purple gradients." },
             { date: "2026-02-20", event: "Social Justice Day", type: "Advocacy", hook: "Quality healthcare is a human right.", visual: "Community portrait at Rehema Campus.", cta: "Agree? Share this", notes: "Human-centric photography." },
             { date: "2026-03-08", event: "Women's Day", type: "Tribute", hook: "The hands that heal Molo.", visual: "Portrait of Senior Nursing Staff.", cta: "Congratulate them", notes: "High-quality, respectful portrait." },
             { date: "2026-03-20", event: "Idd-ul-Fitr", type: "Holiday", hook: "Eid Mubarak to our Molo Community.", visual: "Crescent moon with hospital branding.", cta: "Holiday Hours", notes: "Gold and purple color scheme." },
@@ -308,7 +303,6 @@
         ];
 
         const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        
         const sidebar = document.getElementById('sidebar');
         const overlay = document.getElementById('overlay');
         const closeBtn = document.getElementById('close-btn');
