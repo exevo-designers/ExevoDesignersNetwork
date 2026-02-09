@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>365 Daily Design Challenge | Brand & Social</title>
+    <meta name="description" content="Exevo Designers Network provides expert graphic design, digital marketing, and creative solutions. Connect with our professional design agency.">
+
+    <!-- SEO & Favicons -->
+    <link rel="icon" type="image/png" href="ExevoLogo/exevo-logo-profile.png" />
+    <link rel="apple-touch-icon" href="ExevoLogo/exevo-logo-profile.png">
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Exevo Designers Network",
+      "url": "https://exevodesigners.online/",
+      "logo": "https://exevodesigners.online/ExevoLogo/exevo-logo-profile.png",
+      "image": "https://exevodesigners.online/ExevoLogo/exevo-logo-profile.png"
+    }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --brand-purple: #7c3aed;
+            --text-dark: #0f172a;
+            --bg-light: #ffffff;
+            --border-color: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            background-color: #fcfcfd;
+            padding-top: 5rem;
+        }
+
+        .font-display {
+            font-family: 'Syncopate', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: -0.04em;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .calendar-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+
+        @media (min-width: 1280px) {
+            .calendar-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        }
+
+        .month-card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .day-cell {
+            aspect-ratio: 1/1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #64748b;
+            border: 1px solid transparent;
+        }
+
+        .day-cell:hover {
+            background: #f1f5f9;
+            color: var(--brand-purple);
+        }
+
+        .day-cell.active-select {
+            background: var(--brand-purple) !important;
+            color: white !important;
+            box-shadow: 0 10px 15px -3px rgba(124, 58, 237, 0.3);
+        }
+
+        .day-cell.holiday-day { 
+            background: #fff7ed;
+            border: 1px solid #fed7aa;
+            color: #ea580c;
+        }
+
+        .sidebar-card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+        }
+
+        @media (max-width: 1023px) {
+            .sidebar-card {
+                position: fixed;
+                bottom: 0; left: 0; right: 0;
+                z-index: 100;
+                border-radius: 24px 24px 0 0;
+                max-height: 85vh;
+                transform: translateY(100%);
+                transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                box-shadow: 0 -20px 25px -5px rgba(0, 0, 0, 0.1);
+            }
+            .sidebar-card.open { transform: translateY(0); }
+        }
+
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+
+        .palette-swatch {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 h-20">
+        <div class="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
+            <a href="#" class="group flex items-center space-x-3">
+                <img src="ExevoLogo/exevo-logo-png.png" alt="Exevo Logo" class="h-10 w-auto object-contain transition-transform group-hover:scale-105" onerror="this.style.display='none'">
+                <div class="font-display font-bold text-lg tracking-tighter">
+                    EXEVO <span class="text-purple-600">ACADEMY</span>
+                </div>
+            </a>
+            <div class="hidden md:flex items-center space-x-4">
+                <span class="text-[10px] font-black text-slate-400 tracking-widest uppercase bg-slate-100 px-3 py-1 rounded-full">Exevo Designers Network</span>
+            </div>
+        </div>
+    </nav>
+
+    <div id="overlay" class="fixed inset-0 bg-black/40 opacity-0 pointer-events-none transition-opacity z-[90]"></div>
+
+    <div class="max-w-7xl mx-auto px-6 py-12">
+        <header class="mb-12">
+            <div class="inline-flex items-center px-3 py-1 rounded-full bg-purple-50 text-purple-600 text-[10px] font-bold tracking-widest uppercase mb-4">
+                365 Day Curriculum: Branding & Client Ops
+            </div>
+            <h1 class="text-4xl md:text-6xl font-display font-bold mb-4 leading-tight">THE <span class="text-purple-600">DESIGNER'S</span><br>DAILY GUIDE</h1>
+            <p class="text-slate-500 max-w-2xl text-lg font-medium">Build your technical portfolio on weekdays and your business infrastructure every Sunday.</p>
+        </header>
+
+        <main class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <div class="lg:col-span-3">
+                <div id="calendar-container" class="calendar-grid"></div>
+            </div>
+
+            <div class="lg:col-span-1">
+                <div id="sidebar" class="sidebar-card p-8 h-full lg:h-[calc(100vh-14rem)] lg:sticky lg:top-24 flex flex-col">
+                    <div id="close-btn" class="w-12 h-1.5 bg-slate-200 rounded-full mx-auto mb-8 lg:hidden cursor-pointer"></div>
+                    <div id="brief-content" class="flex-grow overflow-y-auto custom-scrollbar">
+                        <div class="text-center py-20 px-6 border-2 border-dashed border-slate-100 rounded-3xl">
+                            <i data-lucide="calendar-check" class="w-10 h-10 text-slate-200 mx-auto mb-4"></i>
+                            <p class="text-slate-400 text-sm italic font-medium">Select a date to unlock today's branding or business brief.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        
+        const holidays = {
+            "01-01": "New Year's Day", "02-14": "Valentine's Day", "03-08": "International Women's Day",
+            "04-03": "Good Friday (Easter)", "04-06": "Easter Monday", "05-01": "Labour Day (Kenya)",
+            "06-01": "Madaraka Day (Kenya)", "06-05": "World Environment Day", "10-10": "Huduma Day (Kenya)",
+            "10-20": "Mashujaa Day (Kenya)", "12-12": "Jamhuri Day (Kenya)", "12-25": "Christmas Day", "12-26": "Boxing Day / Utamaduni Day"
+        };
+
+        const industries = [
+            { name: "Luxury Hospitality", palette: ["#1C1917", "#D4D4D8", "#A27B5C"], fonts: "Playfair Display + Inter", brand: "Aura Retreats" },
+            { name: "Tech Startup", palette: ["#0F172A", "#38BDF8", "#F8FAFC"], fonts: "Satoshi + JetBrains Mono", brand: "SyncNode" },
+            { name: "Organic Skincare", palette: ["#3F6212", "#ECFCCB", "#F7FEE7"], fonts: "Cormorant Garamond + Lato", brand: "Bloom Botanics" },
+            { name: "Urban Fitness", palette: ["#000000", "#FFD700", "#FFFFFF"], fonts: "Impact + Archivo", brand: "Iron Peak" }
+        ];
+
+        const businessTasks = [
+            { task: "Personal Brand Portfolio", body: "Layout a Behance case study for your best work.", footer: "Focus on: Context, Role, Results, and 'Call to Action'." },
+            { task: "Client Service Agreement", body: "Draft a visual contract including scope, payment, and rights.", footer: "Tip: Keep typography clear and professional." },
+            { task: "Onboarding Questionnaire", body: "Form design to capture client brand values and goals.", footer: "Include: Budget range, target audience, and deadlines." },
+            { task: "Professional Invoice UI", body: "Branded invoice template with clear hierarchy for totals.", footer: "Must include: Payment methods (MPESA/Bank) and Terms." },
+            { task: "Digital Business Card", body: "Mobile-first layout with clickable links and QR code.", footer: "Include: WhatsApp link, Website, and Portfolio." }
+        ];
+
+        const platforms = ["Instagram Square (1:1)", "Stories/Reels (9:16)", "Facebook Cover (820x312)"];
+
+        const getDailyBrief = (date) => {
+            const d = new Date(date);
+            const dayOfWeek = d.getDay();
+            const monthDay = `${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+            const ind = industries[d.getDate() % industries.length];
+
+            let brief = {
+                palette: ind.palette,
+                fontGuide: ind.fonts,
+                industry: ind.name
+            };
+
+            // Holiday logic
+            if (holidays[monthDay]) {
+                brief.type = "Holiday Special";
+                brief.color = "orange";
+                brief.task = `${holidays[monthDay]} Campaign`;
+                brief.bodyDetails = `Design a festive visual for ${holidays[monthDay]}. Focus on local or global relevance.`;
+                brief.deliverable = "High-Res Social Media Asset";
+                return brief;
+            }
+
+            // Sunday: Business Admin / Portfolio
+            if (dayOfWeek === 0) {
+                const bTask = businessTasks[d.getDate() % businessTasks.length];
+                brief.type = "Professional Practice";
+                brief.color = "purple";
+                brief.task = bTask.task;
+                brief.industry = "Personal Branding / Business Admin";
+                brief.palette = ["#7c3aed", "#0f172a", "#f8fafc"];
+                brief.fontGuide = "Inter (UI) + Space Mono";
+                brief.bodyDetails = bTask.body;
+                brief.footerDetails = bTask.footer;
+                brief.deliverable = "PDF / Interactive Document";
+                return brief;
+            }
+
+            // Weekdays: Design & Social
+            if ([1, 3, 6].includes(dayOfWeek)) {
+                brief.type = "Brand Identity";
+                brief.color = "red";
+                brief.task = `${ind.brand} Logo Suite`;
+                brief.bodyDetails = "Create a primary logo, secondary mark, and a specific icon set for the brand.";
+                brief.deliverable = "Vector Brand Guide Sheet";
+            } else {
+                brief.type = "Social Media Content";
+                brief.color = "blue";
+                brief.task = `${platforms[d.getDate() % platforms.length]} Post`;
+                brief.bodyDetails = `Design a high-engagement post for ${ind.brand} using provided fonts/colors.`;
+                brief.deliverable = "Static / Animated Post Asset";
+            }
+
+            return brief;
+        };
+
+        function renderCalendar() {
+            const container = document.getElementById('calendar-container');
+            container.innerHTML = '';
+            
+            months.forEach((month, index) => {
+                const card = document.createElement('div');
+                card.className = 'month-card';
+                card.innerHTML = `
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="font-display font-bold text-sm tracking-widest text-purple-600 uppercase">${month}</h3>
+                        <span class="text-[10px] font-black text-slate-200">2026</span>
+                    </div>
+                    <div class="grid grid-cols-7 gap-2" id="m-${index}"></div>
+                `;
+
+                const grid = card.querySelector(`#m-${index}`);
+                ['S','M','T','W','T','F','S'].forEach(d => {
+                    const h = document.createElement('div');
+                    h.className = 'text-[9px] text-slate-300 font-bold text-center mb-2 uppercase';
+                    h.textContent = d;
+                    grid.appendChild(h);
+                });
+
+                const firstDay = new Date(2026, index, 1).getDay();
+                const daysInMonth = new Date(2026, index + 1, 0).getDate();
+
+                for (let i = 0; i < firstDay; i++) grid.appendChild(document.createElement('div'));
+
+                for (let d = 1; d <= daysInMonth; d++) {
+                    const dateStr = `2026-${String(index+1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+                    const brief = getDailyBrief(dateStr);
+                    const colorClasses = { 
+                        'Brand Identity': 'bg-red-50 text-red-600', 
+                        'Social Media Content': 'bg-blue-50 text-blue-600', 
+                        'Holiday Special': 'holiday-day', 
+                        'Professional Practice': 'bg-purple-50 text-purple-600 font-bold border border-purple-100' 
+                    };
+                    
+                    const cell = document.createElement('div');
+                    cell.className = `day-cell ${colorClasses[brief.type]}`;
+                    cell.textContent = d;
+                    
+                    cell.onclick = () => {
+                        document.querySelectorAll('.day-cell').forEach(c => c.classList.remove('active-select'));
+                        cell.classList.add('active-select');
+                        showBrief(dateStr, brief, month);
+                        toggleSidebar(true);
+                    };
+                    grid.appendChild(cell);
+                }
+                container.appendChild(card);
+            });
+            lucide.createIcons();
+        }
+
+        function showBrief(date, brief, monthName) {
+            const content = document.getElementById('brief-content');
+            const day = new Date(date).getDate();
+            
+            content.innerHTML = `
+                <div class="animate-in fade-in slide-in-from-bottom-4 duration-300">
+                    <div class="flex items-center justify-between mb-6">
+                        <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest">${monthName} ${day}</span>
+                        <span class="px-2 py-1 bg-${brief.color}-50 text-${brief.color}-600 rounded text-[9px] font-bold uppercase tracking-tight">${brief.type}</span>
+                    </div>
+
+                    <h2 class="text-3xl font-black text-slate-900 leading-tight mb-2">${brief.task}</h2>
+                    <p class="text-xs font-bold text-purple-600 uppercase tracking-widest mb-8">Niche: ${brief.industry}</p>
+
+                    <div class="space-y-6">
+                        <div class="bg-slate-50 p-6 rounded-3xl border border-slate-100">
+                            <h3 class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">Aesthetics</h3>
+                            <div class="flex gap-4 mb-4">
+                                ${brief.palette.map(c => `<div class="palette-swatch" style="background-color: ${c}"></div>`).join('')}
+                            </div>
+                            <p class="text-sm font-semibold text-slate-700">${brief.fontGuide}</p>
+                        </div>
+
+                        <div>
+                            <h3 class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Instructions</h3>
+                            <p class="text-sm text-slate-600 leading-relaxed">${brief.bodyDetails}</p>
+                            ${brief.footerDetails ? `<p class="mt-4 text-[11px] italic text-slate-500">${brief.footerDetails}</p>` : ''}
+                        </div>
+
+                        <div class="pt-4 border-t border-slate-100">
+                            <h3 class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Deliverable</h3>
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-slate-900 text-white text-xs font-bold">
+                                <i data-lucide="check-circle" class="w-3 h-3"></i> ${brief.deliverable}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            lucide.createIcons();
+        }
+
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const closeBtn = document.getElementById('close-btn');
+
+        function toggleSidebar(open) {
+            if (window.innerWidth < 1024) {
+                sidebar.classList.toggle('open', open);
+                overlay.style.opacity = open ? '1' : '0';
+                overlay.style.pointerEvents = open ? 'auto' : 'none';
+                document.body.style.overflow = open ? 'hidden' : '';
+            }
+        }
+
+        overlay.onclick = () => toggleSidebar(false);
+        closeBtn.onclick = () => toggleSidebar(false);
+        window.onload = renderCalendar;
+    </script>
+</body>
+</html>
