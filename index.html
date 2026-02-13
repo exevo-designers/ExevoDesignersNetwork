@@ -340,6 +340,22 @@
 
             <div class="flex flex-col md:flex-row min-h-[500px] md:h-[650px] w-full gap-3 sm:gap-4 px-4 sm:px-6 md:px-12">
                 
+                                <div class="expand-card active group relative flex-1 overflow-hidden rounded-2xl sm:rounded-3xl md:rounded-[2.5rem] cursor-pointer shadow-xl" 
+                     onclick="handleExpand(this)">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent z-10 opacity-80"></div>
+                    <div class="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-110" style="background-image: url('images/malel-logo.jpeg')"></div>
+                    
+                    <div class="absolute bottom-6 sm:bottom-8 md:bottom-12 left-6 sm:left-8 md:left-10 z-20 opacity-0 group-[.active]:opacity-100 transition-all duration-500 delay-300 translate-y-4 group-[.active]:translate-y-0">
+                        <span class="text-purple-400 text-[9px] sm:text-[10px] uppercase font-black tracking-[0.3em] mb-2 block">Creative Portfolio</span>
+                        <h3 class="text-white text-xl sm:text-2xl md:text-3xl font-display font-bold mb-4 sm:mb-6">Malel Creative</h3>
+                        <div class="flex gap-2 sm:gap-3">
+                            <a href="https://exevo-designers.github.io/Malel-Creative-Works/" target="_blank" class="inline-flex items-center bg-purple-600 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-full font-bold text-[10px] sm:text-xs uppercase tracking-widest hover:bg-white hover:text-black transition-all">
+                                Launch Site <i data-lucide="external-link" class="ml-1.5 sm:ml-2 w-3 h-3 sm:w-4 sm:h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="expand-card active group relative flex-1 overflow-hidden rounded-2xl sm:rounded-3xl md:rounded-[2.5rem] cursor-pointer shadow-xl" 
                      onclick="handleExpand(this)">
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent z-10 opacity-80"></div>
