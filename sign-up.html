@@ -93,7 +93,6 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Mobile Menu */
         .mobile-menu {
             display: none;
             position: fixed;
@@ -122,7 +121,7 @@
     <!-- Navigation -->
     <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 md:h-20 flex items-center justify-between">
-            <a href="index.html" class="group flex items-center space-x-2 md:space-x-3">
+            <a href="/" class="group flex items-center space-x-2 md:space-x-3">
                 <img src="ExevoLogo/exevo-logo-png.png" alt="Exevo Logo" 
                      class="h-7 md:h-9 lg:h-10 w-auto object-contain transition-transform group-hover:scale-105" 
                      onerror="this.style.display='none'">
@@ -132,7 +131,7 @@
             </a>
             <div class="hidden md:flex items-center space-x-6 text-[11px] font-semibold uppercase tracking-[0.2em] text-gray-500">
                 <button onclick="openGuidelines()" class="hover:text-black transition">Guidelines</button>
-                <a href="login-page.html" class="px-5 py-2.5 bg-black text-white rounded-full hover:bg-purple-600 transition-all shadow-lg shadow-black/5">Member Login</a>
+                <a href="/login" class="px-5 py-2.5 bg-black text-white rounded-full hover:bg-purple-600 transition-all shadow-lg shadow-black/5">Member Login</a>
             </div>
             <button onclick="toggleMobileMenu()" class="md:hidden p-2">
                 <i data-lucide="menu" class="w-6 h-6"></i>
@@ -140,7 +139,7 @@
         </div>
         <div id="mobileMenu" class="mobile-menu">
             <button onclick="openGuidelines()" class="block w-full text-left py-2 text-sm font-semibold text-gray-700">Guidelines</button>
-            <a href="login-page.html" class="block w-full text-left py-2 text-sm font-semibold text-gray-700">Member Login</a>
+            <a href="/login" class="block w-full text-left py-2 text-sm font-semibold text-gray-700">Member Login</a>
         </div>
     </nav>
 
@@ -347,7 +346,6 @@
                             <h3 class="font-black text-[11px] uppercase tracking-widest text-purple-600 mb-3">Professionalism First</h3>
                             <p class="text-gray-500 text-xs leading-relaxed">All designers must communicate and operate with respect, integrity, and accountability. Any form of harassment, discrimination, or unprofessional conduct is not tolerated.</p>
                         </section>
-
                         <section>
                             <h3 class="font-black text-[11px] uppercase tracking-widest text-purple-600 mb-3">Creative Integrity</h3>
                             <ul class="text-gray-500 text-xs leading-relaxed list-disc ml-4 space-y-1">
@@ -356,19 +354,16 @@
                                 <li>Proper credit must be given to collaborators and sources where applicable.</li>
                             </ul>
                         </section>
-
                         <section>
                             <h3 class="font-black text-[11px] uppercase tracking-widest text-purple-600 mb-3">Quality Standards</h3>
                             <p class="text-gray-500 text-xs leading-relaxed">Designers are expected to deliver work that meets professional design standards and follows the project brief precisely.</p>
                         </section>
-
                         <section>
                             <h3 class="font-black text-[11px] uppercase tracking-widest text-purple-600 mb-3">Payment & Revenue Model</h3>
                             <p class="text-gray-500 text-xs leading-relaxed mb-2">Designers earn <span class="font-bold text-slate-900">80%</span> of the total project fee. Exevo retains <span class="font-bold text-slate-900">20%</span> as agency share.</p>
                             <p class="text-[10px] text-gray-400 font-bold uppercase italic">Payments released after client payment and work approval.</p>
                         </section>
                     </div>
-
                     <div class="space-y-8 md:space-y-10">
                         <section>
                             <h3 class="font-black text-[11px] uppercase tracking-widest text-purple-600 mb-3">Client Ownership & Protection</h3>
@@ -377,17 +372,14 @@
                                 Bypassing Exevo results in immediate removal.
                             </div>
                         </section>
-
                         <section>
                             <h3 class="font-black text-[11px] uppercase tracking-widest text-purple-600 mb-3">Accountability & Confidentiality</h3>
                             <p class="text-gray-500 text-xs leading-relaxed">Designers must respect deadlines. All client information and project materials are strictly confidential.</p>
                         </section>
-
                         <section>
                             <h3 class="font-black text-[11px] uppercase tracking-widest text-purple-600 mb-3">Community Culture</h3>
                             <p class="text-gray-500 text-xs leading-relaxed">Exevo is a creative hub. Designers are encouraged to support one another and share knowledge.</p>
                         </section>
-
                         <section class="bg-slate-900 text-white p-4 md:p-5 rounded-2xl">
                             <h3 class="font-black text-[10px] uppercase tracking-[0.2em] text-purple-400 mb-2">Zero Tolerance Policy</h3>
                             <p class="text-[10px] leading-relaxed opacity-80">Immediate suspension for: Client Poaching, Plagiarism, Fraud/Dishonesty, or Breach of Confidentiality.</p>
@@ -420,71 +412,71 @@
                     <li class="flex items-center"><i data-lucide="message-square" class="w-3 h-3 mr-2 flex-shrink-0"></i> Onboarding interview invitation</li>
                 </ul>
             </div>
-            <a href="index.html" class="block w-full py-3 md:py-4 bg-black text-white text-xs font-black uppercase tracking-widest rounded-full hover:bg-purple-600 transition-all">Back to Home</a>
+            <a href="/" class="block w-full py-3 md:py-4 bg-black text-white text-xs font-black uppercase tracking-widest rounded-full hover:bg-purple-600 transition-all">Back to Home</a>
         </div>
     </div>
-<!-- Footer -->
-<footer class="bg-white border-t border-gray-100 py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-12">
-    <div class="max-w-7xl mx-auto">
-        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 sm:gap-12 lg:gap-8 mb-16 sm:mb-20">
-            <div class="sm:col-span-2 lg:col-span-2 flex flex-col items-center sm:items-start text-center sm:text-left">
-                <a href="#" class="group flex items-center space-x-2 sm:space-x-3 mb-6 sm:mb-8">
-                    <img src="ExevoLogo/exevo-wordmark.png" alt="Exevo Logo" class="h-7 sm:h-8 md:h-10 w-auto" onerror="this.style.display='none'">
-                </a>
-                <p class="max-w-sm text-gray-500 mb-6 sm:mb-8 italic text-sm sm:text-base">Setting new benchmarks for digital creativity across the continent. Built on excellence, driven by results.</p>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-100 py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-12">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 sm:gap-12 lg:gap-8 mb-16 sm:mb-20">
+                <div class="sm:col-span-2 lg:col-span-2 flex flex-col items-center sm:items-start text-center sm:text-left">
+                    <a href="/" class="group flex items-center space-x-2 sm:space-x-3 mb-6 sm:mb-8">
+                        <img src="ExevoLogo/exevo-wordmark.png" alt="Exevo Logo" class="h-7 sm:h-8 md:h-10 w-auto" onerror="this.style.display='none'">
+                    </a>
+                    <p class="max-w-sm text-gray-500 mb-6 sm:mb-8 italic text-sm sm:text-base">Setting new benchmarks for digital creativity across the continent. Built on excellence, driven by results.</p>
+                    
+                    <div class="flex flex-wrap justify-center sm:justify-start gap-3 sm:gap-4">
+                        <a href="https://www.instagram.com/exevodesigners" class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-50 text-gray-400 rounded-full flex items-center justify-center hover:bg-purple-600 hover:text-white transition-all duration-300 group">
+                            <i data-lucide="instagram" class="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.5px]"></i>
+                        </a>
+                        <a href="https://www.facebook.com/share/17oXAWNWcZ/" class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-50 text-gray-400 rounded-full flex items-center justify-center hover:bg-purple-600 hover:text-white transition-all duration-300 group">
+                            <i data-lucide="facebook" class="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.5px]"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/exevo-designers-40122435a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-50 text-gray-400 rounded-full flex items-center justify-center hover:bg-purple-600 hover:text-white transition-all duration-300 group">
+                            <i data-lucide="linkedin" class="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.5px]"></i>
+                        </a>
+                        <a href="https://www.tiktok.com/@exevodesigners?_r=1&_t=ZS-93UpjDAoSQe" class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-50 text-gray-400 rounded-full flex items-center justify-center hover:bg-purple-600 hover:text-white transition-all duration-300 group">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 sm:w-5 sm:h-5"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
+                        </a>
+                        <a href="https://whatsapp.com/channel/0029Vb7kTDq3QxS1ffkZhe0J" class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-50 text-gray-400 rounded-full flex items-center justify-center hover:bg-green-600 hover:text-white transition-all duration-300 group">
+                            <i data-lucide="message-circle" class="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.5px]"></i>
+                        </a>
+                        <a href="mailto:exevodesigners@gmail.com" class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-50 text-gray-400 rounded-full flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all duration-300 group">
+                            <i data-lucide="mail" class="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.5px]"></i>
+                        </a>
+                    </div>
+                </div>
                 
-                <!-- Official Social Media Icons -->
-                <div class="flex flex-wrap justify-center sm:justify-start gap-3 sm:gap-4">
-                    <a href="https://www.instagram.com/exevodesigners" class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-50 text-gray-400 rounded-full flex items-center justify-center hover:bg-purple-600 hover:text-white transition-all duration-300 group">
-                        <i data-lucide="instagram" class="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.5px]"></i>
-                    </a>
-                    <a href="https://www.facebook.com/share/17oXAWNWcZ/" class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-50 text-gray-400 rounded-full flex items-center justify-center hover:bg-purple-600 hover:text-white transition-all duration-300 group">
-                        <i data-lucide="facebook" class="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.5px]"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/in/exevo-designers-40122435a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-50 text-gray-400 rounded-full flex items-center justify-center hover:bg-purple-600 hover:text-white transition-all duration-300 group">
-                        <i data-lucide="linkedin" class="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.5px]"></i>
-                    </a>
-                    <a href="https://www.tiktok.com/@exevodesigners?_r=1&_t=ZS-93UpjDAoSQe " class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-50 text-gray-400 rounded-full flex items-center justify-center hover:bg-purple-600 hover:text-white transition-all duration-300 group">
-                        <!-- Standard TikTok representation -->
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 sm:w-5 sm:h-5"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
-                    </a>
-                    <a href="https://whatsapp.com/channel/0029Vb7kTDq3QxS1ffkZhe0J " class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-50 text-gray-400 rounded-full flex items-center justify-center hover:bg-green-600 hover:text-white transition-all duration-300 group">
-                        <i data-lucide="message-circle" class="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.5px]"></i>
-                    </a>
-                    <a href="mailto:exevodesigners@gmail.com" class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-50 text-gray-400 rounded-full flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all duration-300 group">
-                        <i data-lucide="mail" class="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.5px]"></i>
-                    </a>
+                <div class="text-center sm:text-left">
+                    <h4 class="font-black mb-6 sm:mb-8 uppercase tracking-widest text-[10px] text-gray-400">Navigation</h4>
+                    <ul class="space-y-3 sm:space-y-4 text-gray-900 font-semibold text-sm">
+                        <li><a href="/" class="hover:text-purple-600 transition-colors">Home</a></li>
+                        <li><a href="/#about" class="hover:text-purple-600 transition-colors">About Us</a></li>
+                        <li><a href="/#services" class="hover:text-purple-600 transition-colors">Services</a></li>
+                        <li><a href="/#portfolio" class="hover:text-purple-600 transition-colors">Portfolio</a></li>
+                        <li><a href="/sign-up" class="hover:text-purple-600 transition-colors">Join Community</a></li>
+                    </ul>
+                </div>
+                
+                <div class="text-center sm:text-left">
+                    <h4 class="font-black mb-6 sm:mb-8 uppercase tracking-widest text-[10px] text-gray-400">Legal</h4>
+                    <ul class="space-y-3 sm:space-y-4 text-gray-500 font-medium text-sm">
+                        <li><a href="#" class="hover:text-purple-600 transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-purple-600 transition-colors">Terms of Service</a></li>
+                        <li><a href="/digital-contract" class="hover:text-purple-600 transition-colors">Cookie Policy</a></li>
+                        <li><a href="/bm-secure-portal" class="hover:text-purple-600 transition-colors">BM</a></li>
+                    </ul>
                 </div>
             </div>
             
-            <div class="text-center sm:text-left">
-                <h4 class="font-black mb-6 sm:mb-8 uppercase tracking-widest text-[10px] text-gray-400">Navigation</h4>
-                <ul class="space-y-3 sm:space-y-4 text-gray-900 font-semibold text-sm">
-                    <li><a href="#home" class="hover:text-purple-600 transition-colors">Home</a></li>
-                    <li><a href="#about" class="hover:text-purple-600 transition-colors">About Us</a></li>
-                    <li><a href="#services" class="hover:text-purple-600 transition-colors">Services</a></li>
-                    <li><a href="#portfolio" class="hover:text-purple-600 transition-colors">Portfolio</a></li>
-                    <li><a href="sign-up.html" class="hover:text-purple-600 transition-colors">Join Community</a></li>
-                </ul>
-            </div>
-            
-            <div class="text-center sm:text-left">
-                <h4 class="font-black mb-6 sm:mb-8 uppercase tracking-widest text-[10px] text-gray-400">Legal</h4>
-                <ul class="space-y-3 sm:space-y-4 text-gray-500 font-medium text-sm">
-                    <li><a href="#" class="hover:text-purple-600 transition-colors">Privacy Policy</a></li>
-                    <li><a href="#" class="hover:text-purple-600 transition-colors">Terms of Service</a></li>
-                    <li><a href="digital-contract.html" class="hover:text-purple-600 transition-colors">Cookie Policy</a></li>
-                    <li><a href="bm-secure-portal.html" class="hover:text-purple-600 transition-colors">BM</a></li>
-                </ul>
+            <div class="pt-8 sm:pt-12 border-t border-gray-100 flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-6 text-[10px] sm:text-xs text-gray-400 uppercase tracking-[0.2em] font-bold text-center">
+                <p>© 2026 EXEVO DESIGNERS NETWORK. ALL RIGHTS RESERVED.</p>
+                <p class="flex items-center justify-center">DESIGNED WITH <i data-lucide="heart" class="w-3 h-3 text-red-500 mx-2"></i> IN AFRICA</p>
             </div>
         </div>
-        
-        <div class="pt-8 sm:pt-12 border-t border-gray-100 flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-6 text-[10px] sm:text-xs text-gray-400 uppercase tracking-[0.2em] font-bold text-center">
-            <p>© 2026 EXEVO DESIGNERS NETWORK. ALL RIGHTS RESERVED.</p>
-            <p class="flex items-center justify-center">DESIGNED WITH <i data-lucide="heart" class="w-3 h-3 text-red-500 mx-2"></i> IN AFRICA</p>
-        </div>
-    </div>
-</footer>
+    </footer>
+
     <script>
         let uploadLinkOpened = false;
         let iti;
@@ -516,7 +508,6 @@
         document.addEventListener('DOMContentLoaded', function() {
             lucide.createIcons();
             
-            // Populate country dropdown
             const countrySelect = document.getElementById('countrySelect');
             countries.forEach(country => {
                 const option = document.createElement('option');
@@ -525,7 +516,6 @@
                 countrySelect.appendChild(option);
             });
 
-            // Initialize phone input
             const phoneInput = document.querySelector("#phone");
             const countryCodeInput = document.getElementById('countryCode');
             
@@ -536,7 +526,6 @@
                         .then(res => res.json())
                         .then(data => {
                             callback(data.country_code);
-                            // Update country code display after initial load
                             setTimeout(() => {
                                 const countryData = iti.getSelectedCountryData();
                                 countryCodeInput.value = '+' + countryData.dialCode;
@@ -554,16 +543,13 @@
                 separateDialCode: true
             });
 
-            // Sync country dropdown with phone country code
             phoneInput.addEventListener('countrychange', function() {
                 const countryData = iti.getSelectedCountryData();
                 const countryName = countryData.name;
                 const countrySelect = document.getElementById('countrySelect');
                 
-                // Update country code display
                 countryCodeInput.value = '+' + countryData.dialCode;
                 
-                // Find and select matching country in dropdown
                 for (let i = 0; i < countrySelect.options.length; i++) {
                     if (countrySelect.options[i].value === countryName) {
                         countrySelect.selectedIndex = i;
@@ -574,10 +560,8 @@
                 document.getElementById('phone_country').value = countryName;
             });
 
-            // Update phone country when country dropdown changes
             countrySelect.addEventListener('change', function() {
                 const selectedCountry = this.value;
-                // Try to set the phone input to match
                 const countryData = window.intlTelInputGlobals.getCountryData();
                 const matchingCountry = countryData.find(c => c.name === selectedCountry);
                 if (matchingCountry) {
@@ -585,7 +569,6 @@
                     countryCodeInput.value = '+' + matchingCountry.dialCode;
                 }
                 
-                // Add visual feedback that country was selected
                 countrySelect.classList.add('border-green-500');
                 setTimeout(() => {
                     countrySelect.classList.remove('border-green-500');
