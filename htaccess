@@ -1,6 +1,10 @@
 RewriteEngine On
 
-# Redirect .html URLs to clean URLs (301 permanent redirect)
+# Redirect /index.html to clean root /
+RewriteCond %{THE_REQUEST} /index\.html [NC]
+RewriteRule ^ / [NC,L,R=301]
+
+# Redirect .html URLs to clean URLs
 RewriteCond %{THE_REQUEST} /([^.]+)\.html [NC]
 RewriteRule ^ /%1 [NC,L,R=301]
 
