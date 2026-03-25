@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>Marketplace — Exevo Designers</title>
+<meta name="description" content="Browse digital products, AI music, design templates, website kits, and more from Exevo Designers Network.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" type="image/png" href="ExevoLogo/exevo-logo-profile.png"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --brand-purple:   #7c3aed;
+  --brand-purple-2: #6d28d9;
+  --brand-purple-3: #5b21b6;
+  --purple-light:   #ede9fe;
+  --purple-mid:     rgba(124,58,237,0.10);
+  --text-dark:  #0f172a;
+  --text-body:  #334155;
+  --text-muted: #64748b;
+  --text-dim:   #94a3b8;
+  --bg:       #ffffff;
+  --bg-soft:  #f8f7ff;
+  --border:      rgba(15,23,42,0.08);
+  --border-mid:  rgba(15,23,42,0.12);
+  --border-dark: rgba(15,23,42,0.2);
+  --accent-pink:  #d946ef;
+  --accent-green: #10b981;
+  --radius:    14px;
+  --radius-lg: 22px;
+  --radius-xl: 32px;
+  --nav-h:     72px;
+  --shadow-sm:     0 2px 8px  rgba(15,23,42,0.06);
+  --shadow-md:     0 8px 24px rgba(15,23,42,0.08);
+  --shadow-lg:     0 20px 48px rgba(15,23,42,0.10);
+  --shadow-purple: 0 8px 32px rgba(124,58,237,0.20);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}
+a{text-decoration:none;color:inherit}
+
+.label{font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--brand-purple)}
+
+/* ── BUTTONS ── */
+.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:12px 26px;background:var(--brand-purple);color:#fff;border-radius:100px;font-family:'Inter',sans-serif;font-size:14px;font-weight:700;cursor:pointer;border:none;transition:all .25s;white-space:nowrap}
+.btn-primary:hover{background:var(--brand-purple-2);transform:translateY(-2px);box-shadow:var(--shadow-purple)}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;padding:12px 26px;background:transparent;color:var(--text-dark);border:2px solid var(--border-dark);border-radius:100px;font-family:'Inter',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .25s;white-space:nowrap}
+.btn-ghost:hover{border-color:var(--brand-purple);color:var(--brand-purple);background:var(--purple-mid)}
+.btn-outline-white{display:inline-flex;align-items:center;gap:8px;padding:12px 26px;background:transparent;color:#fff;border:2px solid rgba(255,255,255,0.4);border-radius:100px;font-family:'Inter',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .25s;white-space:nowrap}
+.btn-outline-white:hover{background:rgba(255,255,255,0.15);border-color:rgba(255,255,255,0.7)}
+
+.icon{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.icon svg{stroke:currentColor;fill:none;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── NAVBAR ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--nav-h);display:flex;align-items:center;padding:0 40px;border-bottom:1px solid var(--border);background:rgba(255,255,255,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);transition:box-shadow .3s}
+.nav-logo{display:flex;align-items:center;gap:0;cursor:pointer}
+.nav-logo-img{height:36px;width:auto;object-fit:contain;display:block;transition:opacity .2s}
+.nav-logo-img:hover{opacity:.85}
+.nav-logo-fallback{font-family:'Syncopate',sans-serif;font-weight:700;font-size:16px;letter-spacing:.04em;text-transform:uppercase;color:var(--text-dark);display:none}
+.nav-logo-fallback span{color:var(--brand-purple)}
+.nav-links{display:flex;align-items:center;gap:28px;margin-left:48px;list-style:none}
+.nav-links a{font-size:13px;font-weight:600;color:var(--text-muted);transition:color .2s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--brand-purple);transition:width .25s}
+.nav-links a:hover{color:var(--text-dark)}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.nav-links a.active{color:var(--text-dark)}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:14px}
+.cart-btn{position:relative;width:40px;height:40px;border:1.5px solid var(--border-mid);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--text-muted);cursor:pointer;transition:all .2s;background:transparent}
+.cart-btn:hover{border-color:var(--brand-purple);color:var(--brand-purple)}
+.cart-count{position:absolute;top:-5px;right:-5px;width:17px;height:17px;background:var(--brand-purple);color:#fff;border-radius:50%;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid #fff}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;margin-left:auto;background:none;border:none}
+.hamburger span{display:block;width:22px;height:2px;background:var(--text-dark);border-radius:2px;transition:all .3s}
+
+/* ── MOBILE MENU ── */
+.mobile-menu{display:none;position:fixed;inset:0;z-index:99;background:#fff;padding:100px 32px 40px;flex-direction:column;gap:4px;transform:translateX(100%);transition:transform .4s cubic-bezier(.4,0,.2,1)}
+.mobile-menu.open{transform:translateX(0)}
+.mobile-menu a{font-family:'Syncopate',sans-serif;font-size:26px;font-weight:700;color:var(--text-dim);letter-spacing:.02em;text-transform:uppercase;padding:12px 0;border-bottom:1px solid var(--border);transition:color .2s}
+.mobile-menu a:hover{color:var(--brand-purple)}
+.mobile-menu-footer{margin-top:auto;display:flex;gap:12px;flex-wrap:wrap}
+
+/* ── PAGE HERO ── */
+.page-hero{padding:calc(var(--nav-h) + 60px) 40px 60px;background:var(--bg-soft);border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(124,58,237,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(124,58,237,.04) 1px,transparent 1px);background-size:56px 56px;pointer-events:none}
+.page-hero-glow{position:absolute;top:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(124,58,237,.08) 0%,transparent 70%);border-radius:50%;pointer-events:none}
+.page-hero-inner{position:relative;z-index:2;max-width:1280px;margin:0 auto}
+.page-hero-tag{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;background:var(--purple-light);border:1px solid rgba(124,58,237,.2);border-radius:100px;margin-bottom:20px}
+.page-hero-tag span{font-size:11px;font-weight:700;color:var(--brand-purple);letter-spacing:.12em;text-transform:uppercase}
+.page-hero-title{font-family:'Syncopate',sans-serif;font-weight:700;font-size:clamp(36px,5vw,72px);line-height:.95;letter-spacing:-0.03em;text-transform:uppercase;color:var(--text-dark);margin-bottom:18px}
+.page-hero-title em{font-style:normal;color:var(--brand-purple)}
+.page-hero-sub{font-size:16px;color:var(--text-body);max-width:540px;line-height:1.7;margin-bottom:32px}
+.page-hero-stats{display:flex;gap:32px;flex-wrap:wrap}
+.page-hero-stat{display:flex;align-items:center;gap:10px}
+.page-hero-stat-num{font-family:'Syncopate',sans-serif;font-size:20px;font-weight:700;color:var(--brand-purple)}
+.page-hero-stat-label{font-size:12px;color:var(--text-muted);font-weight:500}
+
+/* ── FILTER BAR ── */
+.filter-bar{background:#fff;border-bottom:1px solid var(--border);padding:0 40px;position:sticky;top:var(--nav-h);z-index:50}
+.filter-bar-inner{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:0;overflow-x:auto;scrollbar-width:none}
+.filter-bar-inner::-webkit-scrollbar{display:none}
+.filter-tab{padding:18px 20px;font-size:13px;font-weight:700;color:var(--text-muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;font-family:'Inter',sans-serif}
+.filter-tab:hover{color:var(--text-dark)}
+.filter-tab.active{color:var(--brand-purple);border-bottom-color:var(--brand-purple)}
+.filter-bar-right{margin-left:auto;display:flex;align-items:center;gap:12px;padding:12px 0;flex-shrink:0}
+.sort-select{padding:8px 14px;border:1.5px solid var(--border-mid);border-radius:8px;font-size:12px;font-weight:600;color:var(--text-body);background:#fff;cursor:pointer;font-family:'Inter',sans-serif;outline:none;transition:border-color .2s}
+.sort-select:focus{border-color:var(--brand-purple)}
+.search-box{display:flex;align-items:center;gap:8px;padding:8px 14px;border:1.5px solid var(--border-mid);border-radius:8px;background:#fff;transition:border-color .2s}
+.search-box:focus-within{border-color:var(--brand-purple)}
+.search-box input{border:none;outline:none;font-size:12px;font-family:'Inter',sans-serif;color:var(--text-dark);width:160px;background:transparent}
+.search-box input::placeholder{color:var(--text-dim)}
+.search-box svg{stroke:var(--text-muted);fill:none;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+
+/* ── MAIN LAYOUT ── */
+.marketplace-main{max-width:1280px;margin:0 auto;padding:40px 40px 100px}
+.marketplace-layout{display:grid;grid-template-columns:240px 1fr;gap:32px;align-items:start}
+
+/* ── SIDEBAR ── */
+.sidebar{position:sticky;top:calc(var(--nav-h) + 57px + 20px);background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;box-shadow:var(--shadow-sm)}
+.sidebar-section{margin-bottom:28px}
+.sidebar-section:last-child{margin-bottom:0}
+.sidebar-title{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--text-dim);margin-bottom:14px}
+.sidebar-cat{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-radius:8px;cursor:pointer;transition:all .2s;font-size:13px;font-weight:600;color:var(--text-muted)}
+.sidebar-cat:hover,.sidebar-cat.active{background:var(--purple-mid);color:var(--brand-purple)}
+.sidebar-cat-count{font-size:11px;font-weight:700;color:var(--text-dim);background:var(--bg-soft);padding:2px 8px;border-radius:100px}
+.sidebar-cat.active .sidebar-cat-count{background:var(--purple-light);color:var(--brand-purple)}
+.price-range{margin-top:4px}
+.price-inputs{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.price-input{flex:1;padding:7px 10px;border:1.5px solid var(--border-mid);border-radius:8px;font-size:12px;font-family:'Inter',sans-serif;color:var(--text-dark);outline:none;transition:border-color .2s}
+.price-input:focus{border-color:var(--brand-purple)}
+.price-sep{font-size:12px;color:var(--text-muted);font-weight:600;flex-shrink:0}
+.filter-check{display:flex;align-items:center;gap:10px;padding:6px 0;cursor:pointer}
+.filter-check input[type=checkbox]{width:15px;height:15px;accent-color:var(--brand-purple);cursor:pointer}
+.filter-check span{font-size:13px;color:var(--text-body);font-weight:500}
+.sidebar-apply{width:100%;padding:10px;background:var(--brand-purple);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;margin-top:16px;transition:all .2s}
+.sidebar-apply:hover{background:var(--brand-purple-2)}
+.sidebar-clear{width:100%;padding:8px;background:transparent;color:var(--text-muted);border:1.5px solid var(--border-mid);border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;margin-top:8px;transition:all .2s}
+.sidebar-clear:hover{border-color:var(--brand-purple);color:var(--brand-purple)}
+
+/* ── PRODUCTS AREA ── */
+.products-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px}
+.products-count{font-size:13px;color:var(--text-muted);font-weight:600}
+.products-count strong{color:var(--text-dark)}
+.view-toggle{display:flex;gap:4px}
+.view-btn{width:34px;height:34px;border:1.5px solid var(--border-mid);border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;background:transparent;color:var(--text-muted)}
+.view-btn.active,.view-btn:hover{border-color:var(--brand-purple);color:var(--brand-purple);background:var(--purple-light)}
+.view-btn svg{stroke:currentColor;fill:none;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── FEATURED BANNER ── */
+.featured-banner{background:linear-gradient(135deg,var(--brand-purple) 0%,var(--brand-purple-3) 100%);border-radius:var(--radius-lg);padding:28px 32px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;gap:20px;position:relative;overflow:hidden}
+.featured-banner::before{content:'';position:absolute;top:-40px;right:-40px;width:200px;height:200px;background:rgba(255,255,255,.06);border-radius:50%}
+.featured-banner::after{content:'';position:absolute;bottom:-60px;right:60px;width:140px;height:140px;background:rgba(255,255,255,.04);border-radius:50%}
+.featured-banner-text{position:relative;z-index:1}
+.featured-banner-tag{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:8px}
+.featured-banner-title{font-family:'Syncopate',sans-serif;font-size:22px;font-weight:700;color:#fff;letter-spacing:.02em;text-transform:uppercase;margin-bottom:6px}
+.featured-banner-sub{font-size:13px;color:rgba(255,255,255,.7);margin-bottom:16px}
+.featured-banner-cta{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:100px;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif}
+.featured-banner-cta:hover{background:rgba(255,255,255,.25)}
+.featured-banner-visual{position:relative;z-index:1;display:flex;gap:8px;flex-shrink:0}
+.featured-mini-card{padding:12px 16px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:10px;color:#fff;text-align:center;min-width:80px}
+.featured-mini-card .num{font-family:'Syncopate',sans-serif;font-size:18px;font-weight:700;margin-bottom:2px}
+.featured-mini-card .lbl{font-size:10px;color:rgba(255,255,255,.65);font-weight:600}
+
+/* ── PRODUCTS GRID ── */
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.products-grid.list-view{grid-template-columns:1fr}
+
+/* ── PRODUCT CARD ── */
+.product-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;cursor:pointer;transition:all .3s cubic-bezier(.4,0,.2,1);position:relative}
+.product-card:hover{border-color:rgba(124,58,237,.25);transform:translateY(-5px);box-shadow:var(--shadow-lg)}
+.product-thumb{aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.product-thumb-overlay{position:absolute;inset:0;background:rgba(15,23,42,.0);transition:background .3s;display:flex;align-items:center;justify-content:center;gap:8px;opacity:0;transition:all .3s}
+.product-card:hover .product-thumb-overlay{opacity:1;background:rgba(15,23,42,.35)}
+.thumb-action{padding:8px 16px;background:rgba(255,255,255,.95);border-radius:100px;font-size:12px;font-weight:700;color:var(--brand-purple);border:none;cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif}
+.thumb-action:hover{background:#fff;transform:scale(1.05)}
+.thumb-action.buy{background:var(--brand-purple);color:#fff}
+.thumb-action.buy:hover{background:var(--brand-purple-2)}
+.product-body{padding:18px 20px 20px}
+.product-cat{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px;color:var(--brand-purple)}
+.product-name{font-size:15px;font-weight:700;color:var(--text-dark);margin-bottom:8px;line-height:1.3}
+.product-desc{font-size:12px;color:var(--text-muted);line-height:1.6;margin-bottom:14px}
+.product-meta{display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.product-tag{padding:3px 10px;border-radius:100px;font-size:10px;font-weight:600;background:var(--bg-soft);color:var(--text-muted);border:1px solid var(--border)}
+.product-footer{display:flex;align-items:center;justify-content:space-between}
+.product-price{font-size:15px;font-weight:800;color:var(--brand-purple)}
+.product-price.free{color:var(--accent-green)}
+.product-actions{display:flex;gap:6px}
+.product-btn{padding:7px 16px;border:none;border-radius:100px;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif}
+.product-btn-cart{background:var(--purple-light);color:var(--brand-purple)}
+.product-btn-cart:hover{background:var(--brand-purple);color:#fff}
+.product-btn-buy{background:var(--brand-purple);color:#fff}
+.product-btn-buy:hover{background:var(--brand-purple-2)}
+.product-btn-free{background:#d1fae5;color:#065f46}
+.product-btn-free:hover{background:#059669;color:#fff}
+
+.product-badge{position:absolute;top:12px;left:12px;z-index:2;padding:4px 10px;border-radius:100px;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.badge-hot{background:#fee2e2;color:#dc2626}
+.badge-new{background:var(--purple-light);color:var(--brand-purple)}
+.badge-free{background:#d1fae5;color:#065f46}
+.badge-sale{background:#fef3c7;color:#d97706}
+.badge-best{background:var(--text-dark);color:#fff}
+
+.product-wishlist{position:absolute;top:12px;right:12px;z-index:2;width:30px;height:30px;background:rgba(255,255,255,.9);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;border:1px solid var(--border);transition:all .2s;opacity:0}
+.product-card:hover .product-wishlist{opacity:1}
+.product-wishlist:hover{background:#fff;border-color:var(--accent-pink);color:var(--accent-pink)}
+.product-wishlist svg{stroke:currentColor;fill:none;stroke-linecap:round;stroke-linejoin:round;width:14px;height:14px}
+
+/* list view card */
+.products-grid.list-view .product-card{display:grid;grid-template-columns:200px 1fr}
+.products-grid.list-view .product-thumb{aspect-ratio:auto;min-height:160px}
+.products-grid.list-view .product-body{display:flex;flex-direction:column;justify-content:space-between}
+
+/* ── AUDIO PREVIEW ── */
+.audio-preview{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--bg-soft);border-radius:8px;margin-bottom:14px;border:1px solid var(--border)}
+.play-btn{width:30px;height:30px;background:var(--brand-purple);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;border:none;transition:all .2s;flex-shrink:0}
+.play-btn:hover{background:var(--brand-purple-2);transform:scale(1.1)}
+.play-btn svg{stroke:#fff;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.audio-waveform{flex:1;height:28px;display:flex;align-items:center;gap:2px}
+.wave-bar{width:3px;border-radius:2px;background:var(--brand-purple);opacity:.4;transition:height .1s}
+.audio-duration{font-size:11px;color:var(--text-muted);font-weight:600;flex-shrink:0}
+
+/* ── PAGINATION ── */
+.pagination{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:48px}
+.page-btn{width:38px;height:38px;border:1.5px solid var(--border-mid);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;background:#fff;color:var(--text-muted);font-family:'Inter',sans-serif}
+.page-btn:hover,.page-btn.active{border-color:var(--brand-purple);color:var(--brand-purple);background:var(--purple-light)}
+.page-btn.active{background:var(--brand-purple);color:#fff;border-color:var(--brand-purple)}
+.page-btn.arrow svg{stroke:currentColor;fill:none;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── CHAT FAB ── */
+.chat-fab{position:fixed;bottom:28px;right:28px;z-index:200;width:56px;height:56px;background:var(--brand-purple);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 8px 28px rgba(124,58,237,.35);transition:all .25s;border:none}
+.chat-fab:hover{background:var(--brand-purple-2);transform:scale(1.1)}
+.chat-fab svg{stroke:#fff;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.chat-modal{position:fixed;bottom:96px;right:28px;z-index:199;width:320px;background:#fff;border:1px solid var(--border-mid);border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-lg);display:none;flex-direction:column}
+.chat-modal.open{display:flex}
+.chat-head{padding:16px 20px;background:linear-gradient(135deg,var(--brand-purple) 0%,var(--brand-purple-3) 100%);display:flex;align-items:center;gap:12px}
+.chat-head-avatar{width:38px;height:38px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syncopate',sans-serif;font-size:12px;font-weight:700;color:#fff}
+.chat-head-name{font-weight:700;font-size:14px;color:#fff}
+.chat-head-status{font-size:11px;color:rgba(255,255,255,.7);display:flex;align-items:center;gap:5px}
+.chat-head-status::before{content:'';width:6px;height:6px;background:#4ade80;border-radius:50%}
+.chat-close{margin-left:auto;cursor:pointer;font-size:18px;color:rgba(255,255,255,.7);border:none;background:none}
+.chat-messages{padding:16px;min-height:100px;display:flex;flex-direction:column;gap:10px;background:var(--bg-soft)}
+.chat-bubble{padding:10px 14px;background:#fff;border:1px solid var(--border);border-radius:14px 14px 14px 2px;font-size:13px;color:var(--text-body);max-width:90%;line-height:1.5;box-shadow:var(--shadow-sm)}
+.chat-bubble.user{background:var(--brand-purple);color:#fff;font-weight:600;border-color:transparent;border-radius:14px 14px 2px 14px;align-self:flex-end;box-shadow:none}
+.chat-options{padding:12px;background:#fff;display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--border)}
+.chat-option{padding:10px 14px;border:1.5px solid var(--border-mid);border-radius:10px;font-size:12px;font-weight:700;color:var(--text-muted);cursor:pointer;transition:all .2s;text-align:left;background:transparent;display:flex;align-items:center;justify-content:space-between}
+.chat-option:hover{border-color:var(--brand-purple);color:var(--brand-purple);background:var(--purple-light)}
+.chat-option svg{stroke:currentColor;fill:none;flex-shrink:0}
+
+/* ── FOOTER ── */
+footer{background:#fff;border-top:1px solid var(--border);padding:80px 40px 40px}
+.footer-inner{max-width:1280px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:56px;margin-bottom:56px}
+.footer-logo{display:flex;align-items:center;gap:0;margin-bottom:0}
+.footer-logo-img{height:32px;width:auto;object-fit:contain;display:block;opacity:.85;transition:opacity .2s}
+.footer-logo-img:hover{opacity:1}
+.footer-logo-fallback{font-family:'Syncopate',sans-serif;font-weight:700;font-size:15px;letter-spacing:.04em;text-transform:uppercase;color:var(--text-dark);display:none}
+.footer-logo-fallback span{color:var(--brand-purple)}
+.footer-tagline{font-size:14px;color:var(--text-muted);line-height:1.7;margin:16px 0 24px;max-width:280px}
+.footer-socials{display:flex;gap:10px;flex-wrap:wrap}
+.social-btn{width:38px;height:38px;border:1.5px solid var(--border-mid);border-radius:9px;display:flex;align-items:center;justify-content:center;color:var(--text-muted);cursor:pointer;transition:all .2s}
+.social-btn:hover{border-color:var(--brand-purple);color:var(--brand-purple);background:var(--purple-light)}
+.social-btn svg{stroke:currentColor;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.footer-col-title{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--text-dim);margin-bottom:18px}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:12px}
+.footer-links a{font-size:14px;color:var(--text-muted);font-weight:500;transition:color .2s}
+.footer-links a:hover{color:var(--brand-purple)}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:28px;border-top:1px solid var(--border);flex-wrap:wrap;gap:12px}
+.footer-copy{font-size:12px;color:var(--text-dim);font-weight:600;letter-spacing:.04em}
+.footer-love{font-size:12px;color:var(--text-dim);font-weight:600;display:flex;align-items:center;gap:5px}
+.footer-love span{color:#f43f5e}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .55s ease,transform .55s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1100px){
+  .marketplace-layout{grid-template-columns:1fr}
+  .sidebar{position:static;display:none}
+  .sidebar.mobile-open{display:block}
+  .products-grid{grid-template-columns:repeat(2,1fr)}
+  .footer-top{grid-template-columns:1fr 1fr;gap:40px}
+}
+@media(max-width:900px){
+  nav{padding:0 20px}
+  .nav-links,.nav-right .btn-primary{display:none}
+  .hamburger{display:flex}
+  .mobile-menu{display:flex}
+  .filter-bar{padding:0 20px}
+  .marketplace-main{padding:32px 20px 80px}
+  footer{padding:60px 20px 32px}
+  .page-hero{padding:calc(var(--nav-h) + 40px) 20px 40px}
+}
+@media(max-width:640px){
+  .products-grid{grid-template-columns:1fr}
+  .products-grid.list-view .product-card{grid-template-columns:1fr}
+  .products-grid.list-view .product-thumb{min-height:200px}
+  .footer-top{grid-template-columns:1fr}
+  .featured-banner{flex-direction:column}
+  .featured-banner-visual{width:100%;justify-content:flex-start}
+  .chat-modal{width:calc(100vw - 32px);right:16px;bottom:88px}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAVBAR ══════════════════════════════════════════════════════ -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <img class="nav-logo-img" src="ExevoLogo/exevo-logo-png.png" alt="Exevo Designers"
+      onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <span class="nav-logo-fallback">EXEVO <span>DESIGNERS</span></span>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="marketplace.html" class="active">Marketplace</a></li>
+    <li><a href="/#services">Services</a></li>
+    <li><a href="portfolio">Portfolio</a></li>
+    <li><a href="sign-up">Community</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <button class="cart-btn" onclick="window.location='cart'" aria-label="Cart">
+      <svg width="18" height="18" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <path d="M16 10a4 4 0 01-8 0"/>
+      </svg>
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
+    <a href="custom-order" class="btn-primary">Start Project</a>
+  </div>
+
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ══ MOBILE MENU ══════════════════════════════════════════════════ -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/"           onclick="closeMenu()">Home</a>
+  <a href="marketplace" onclick="closeMenu()">Marketplace</a>
+  <a href="/#services"  onclick="closeMenu()">Services</a>
+  <a href="portfolio"   onclick="closeMenu()">Portfolio</a>
+  <a href="sign-up"     onclick="closeMenu()">Community</a>
+  <a href="about.html"  onclick="closeMenu()">About</a>
+  <a href="custom-order" onclick="closeMenu()">Start Project</a>
+  <div class="mobile-menu-footer" style="margin-top:40px">
+    <a href="mailto:exevodesigners@gmail.com" class="btn-primary">Email Us</a>
+    <a href="https://wa.me/254700552884" class="btn-ghost">WhatsApp</a>
+  </div>
+</div>
+
+<!-- ══ PAGE HERO ══════════════════════════════════════════════════════ -->
+<div class="page-hero">
+  <div class="page-hero-glow"></div>
+  <div class="page-hero-inner">
+    <div class="page-hero-tag"><span>Digital Creative Hub</span></div>
+    <h1 class="page-hero-title">THE <em>MARKETPLACE</em></h1>
+    <p class="page-hero-sub">Discover premium digital assets — AI-generated music, design templates, website kits, and more. Instant download after purchase.</p>
+    <div class="page-hero-stats">
+      <div class="page-hero-stat">
+        <div class="page-hero-stat-num">40+</div>
+        <div class="page-hero-stat-label">Products</div>
+      </div>
+      <div style="width:1px;height:32px;background:var(--border)"></div>
+      <div class="page-hero-stat">
+        <div class="page-hero-stat-num">4</div>
+        <div class="page-hero-stat-label">Categories</div>
+      </div>
+      <div style="width:1px;height:32px;background:var(--border)"></div>
+      <div class="page-hero-stat">
+        <div class="page-hero-stat-num">KES 0</div>
+        <div class="page-hero-stat-label">Free Products</div>
+      </div>
+      <div style="width:1px;height:32px;background:var(--border)"></div>
+      <div class="page-hero-stat">
+        <div class="page-hero-stat-num">100%</div>
+        <div class="page-hero-stat-label">Instant Download</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FILTER BAR ══════════════════════════════════════════════════ -->
+<div class="filter-bar">
+  <div class="filter-bar-inner">
+    <button class="filter-tab active" onclick="filterCategory(this,'all')">All Products</button>
+    <button class="filter-tab" onclick="filterCategory(this,'audio')">AI Audio</button>
+    <button class="filter-tab" onclick="filterCategory(this,'design')">Design Assets</button>
+    <button class="filter-tab" onclick="filterCategory(this,'website')">Website Kits</button>
+    <button class="filter-tab" onclick="filterCategory(this,'free')">Free</button>
+    <div class="filter-bar-right">
+      <div class="search-box">
+        <svg width="14" height="14" viewBox="0 0 24 24" stroke-width="2" stroke="var(--text-muted)" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" placeholder="Search products…" id="searchInput" oninput="handleSearch()">
+      </div>
+      <select class="sort-select" onchange="handleSort(this.value)">
+        <option value="featured">Featured</option>
+        <option value="newest">Newest First</option>
+        <option value="price-asc">Price: Low to High</option>
+        <option value="price-desc">Price: High to Low</option>
+        <option value="free">Free First</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MAIN CONTENT ══════════════════════════════════════════════════ -->
+<div class="marketplace-main">
+  <div class="marketplace-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-title">Category</div>
+        <div class="sidebar-cat active" onclick="sidebarFilter(this,'all')">
+          All Products <span class="sidebar-cat-count">14</span>
+        </div>
+        <div class="sidebar-cat" onclick="sidebarFilter(this,'audio')">
+          AI Audio <span class="sidebar-cat-count">5</span>
+        </div>
+        <div class="sidebar-cat" onclick="sidebarFilter(this,'design')">
+          Design Assets <span class="sidebar-cat-count">4</span>
+        </div>
+        <div class="sidebar-cat" onclick="sidebarFilter(this,'website')">
+          Website Kits <span class="sidebar-cat-count">3</span>
+        </div>
+        <div class="sidebar-cat" onclick="sidebarFilter(this,'free')">
+          Free Resources <span class="sidebar-cat-count">2</span>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">Price Range</div>
+        <div class="price-range">
+          <div class="price-inputs">
+            <input class="price-input" type="number" placeholder="Min" id="priceMin">
+            <span class="price-sep">—</span>
+            <input class="price-input" type="number" placeholder="Max" id="priceMax">
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">Availability</div>
+        <label class="filter-check"><input type="checkbox" checked> <span>Instant Download</span></label>
+        <label class="filter-check"><input type="checkbox" checked> <span>Commercial Use</span></label>
+        <label class="filter-check"><input type="checkbox"> <span>Free Only</span></label>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">File Format</div>
+        <label class="filter-check"><input type="checkbox" checked> <span>MP3 / WAV</span></label>
+        <label class="filter-check"><input type="checkbox" checked> <span>PSD / AI</span></label>
+        <label class="filter-check"><input type="checkbox" checked> <span>HTML / CSS</span></label>
+        <label class="filter-check"><input type="checkbox"> <span>Canva Template</span></label>
+      </div>
+
+      <button class="sidebar-apply" onclick="applyFilters()">Apply Filters</button>
+      <button class="sidebar-clear" onclick="clearFilters()">Clear All</button>
+    </aside>
+
+    <!-- PRODUCTS AREA -->
+    <div>
+      <!-- Featured Banner -->
+      <div class="featured-banner reveal">
+        <div class="featured-banner-text">
+          <div class="featured-banner-tag">✦ New Drop</div>
+          <div class="featured-banner-title">AfroBeats AI Pack Vol.3</div>
+          <div class="featured-banner-sub">32 premium AI-generated tracks — ready for your next project</div>
+          <button class="featured-banner-cta" onclick="window.location='custom-order'">
+            Get Instant Access
+            <svg width="14" height="14" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+        <div class="featured-banner-visual">
+          <div class="featured-mini-card"><div class="num">32</div><div class="lbl">Tracks</div></div>
+          <div class="featured-mini-card"><div class="num">HQ</div><div class="lbl">Audio</div></div>
+          <div class="featured-mini-card"><div class="num">✓</div><div class="lbl">Commercial</div></div>
+        </div>
+      </div>
+
+      <!-- Products Header -->
+      <div class="products-header">
+        <div class="products-count"><strong id="productCountDisplay">14</strong> products found</div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div class="view-toggle">
+            <button class="view-btn active" onclick="setView('grid',this)" title="Grid view">
+              <svg width="14" height="14" viewBox="0 0 24 24" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+            </button>
+            <button class="view-btn" onclick="setView('list',this)" title="List view">
+              <svg width="14" height="14" viewBox="0 0 24 24" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="products-grid" id="productsGrid">
+
+        <!-- PRODUCT 1 — AfroBeats AI Pack Vol.2 -->
+        <div class="product-card reveal" data-cat="audio" data-price="1200" data-name="AfroBeats AI Pack Vol.2">
+          <div class="product-badge badge-hot">HOT</div>
+          <button class="product-wishlist" onclick="wishlist(event,this)">
+            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </button>
+          <div class="product-thumb" style="background:linear-gradient(135deg,#f3e8ff,#ede9fe)">
+            <div class="icon">
+              <svg width="52" height="52" viewBox="0 0 24 24" stroke-width="1.3" stroke="var(--brand-purple)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+              </svg>
+            </div>
+            <div class="product-thumb-overlay">
+              <button class="thumb-action">Preview</button>
+              <button class="thumb-action buy" onclick="addCart(event,'AfroBeats AI Pack Vol.2',1200)">Buy</button>
+            </div>
+          </div>
+          <div class="product-body">
+            <div class="product-cat">AI Audio</div>
+            <div class="product-name">AfroBeats AI Pack Vol.2</div>
+            <div class="audio-preview">
+              <button class="play-btn" onclick="togglePlay(this)">
+                <svg width="10" height="10" viewBox="0 0 24 24" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3" fill="white" stroke="none"/></svg>
+              </button>
+              <div class="audio-waveform" id="wave1"></div>
+              <span class="audio-duration">2:34</span>
+            </div>
+            <div class="product-meta">
+              <span class="product-tag">32 Tracks</span>
+              <span class="product-tag">320kbps</span>
+              <span class="product-tag">Commercial</span>
+            </div>
+            <div class="product-footer">
+              <div class="product-price">KES 1,200</div>
+              <div class="product-actions">
+                <button class="product-btn product-btn-cart" onclick="addCart(event,'AfroBeats AI Pack Vol.2',1200)">+ Cart</button>
+                <button class="product-btn product-btn-buy">Buy Now</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRODUCT 2 — Brand Identity Toolkit -->
+        <div class="product-card reveal" data-cat="design" data-price="800" data-name="Brand Identity Toolkit">
+          <div class="product-badge badge-new">NEW</div>
+          <button class="product-wishlist" onclick="wishlist(event,this)">
+            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </button>
+          <div class="product-thumb" style="background:linear-gradient(135deg,#f0fdf4,#dcfce7)">
+            <div class="icon">
+              <svg width="52" height="52" viewBox="0 0 24 24" stroke-width="1.3" stroke="#059669" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                <path d="M3 9h18M9 21V9"/>
+              </svg>
+            </div>
+            <div class="product-thumb-overlay">
+              <button class="thumb-action">Preview</button>
+              <button class="thumb-action buy" onclick="addCart(event,'Brand Identity Toolkit',800)">Buy</button>
+            </div>
+          </div>
+          <div class="product-body">
+            <div class="product-cat">Design Assets</div>
+            <div class="product-name">Brand Identity Toolkit</div>
+            <div class="product-desc">Complete branding kit with logo templates, color palettes, and typography guidelines.</div>
+            <div class="product-meta">
+              <span class="product-tag">PSD + AI</span>
+              <span class="product-tag">12 Files</span>
+              <span class="product-tag">Editable</span>
+            </div>
+            <div class="product-footer">
+              <div class="product-price">KES 800</div>
+              <div class="product-actions">
+                <button class="product-btn product-btn-cart" onclick="addCart(event,'Brand Identity Toolkit',800)">+ Cart</button>
+                <button class="product-btn product-btn-buy">Buy Now</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRODUCT 3 — Portfolio Website Template -->
+        <div class="product-card reveal" data-cat="website" data-price="2500" data-name="Portfolio Website Template">
+          <button class="product-wishlist" onclick="wishlist(event,this)">
+            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </button>
+          <div class="product-thumb" style="background:linear-gradient(135deg,#eff6ff,#dbeafe)">
+            <div class="icon">
+              <svg width="52" height="52" viewBox="0 0 24 24" stroke-width="1.3" stroke="#3b82f6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2"/>
+                <line x1="8" y1="21" x2="16" y2="21"/>
+                <line x1="12" y1="17" x2="12" y2="21"/>
+              </svg>
+            </div>
+            <div class="product-thumb-overlay">
+              <button class="thumb-action">Preview</button>
+              <button class="thumb-action buy" onclick="addCart(event,'Portfolio Website Template',2500)">Buy</button>
+            </div>
+          </div>
+          <div class="product-body">
+            <div class="product-cat">Website Kit</div>
+            <div class="product-name">Portfolio Website Template</div>
+            <div class="product-desc">Fully responsive HTML/CSS portfolio template ready to deploy.</div>
+            <div class="product-meta">
+              <span class="product-tag">HTML/CSS/JS</span>
+              <span class="product-tag">Responsive</span>
+              <span class="product-tag">SEO Ready</span>
+            </div>
+            <div class="product-footer">
+              <div class="product-price">KES 2,500</div>
+              <div class="product-actions">
+                <button class="product-btn product-btn-cart" onclick="addCart(event,'Portfolio Website Template',2500)">+ Cart</button>
+                <button class="product-btn product-btn-buy">Buy Now</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRODUCT 4 — Cinematic Transitions Pack (FREE) -->
+        <div class="product-card reveal" data-cat="free" data-price="0" data-name="Cinematic Transitions Pack">
+          <div class="product-badge badge-free">FREE</div>
+          <button class="product-wishlist" onclick="wishlist(event,this)">
+            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </button>
+          <div class="product-thumb" style="background:linear-gradient(135deg,#fdf2f8,#fce7f3)">
+            <div class="icon">
+              <svg width="52" height="52" viewBox="0 0 24 24" stroke-width="1.3" stroke="#db2777" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                <path d="M15.54 8.46a5 5 0 010 7.07"/>
+                <path d="M19.07 4.93a10 10 0 010 14.14"/>
+              </svg>
+            </div>
+            <div class="product-thumb-overlay">
+              <button class="thumb-action">Preview</button>
+              <button class="thumb-action buy" style="background:#059669" onclick="addCart(event,'Cinematic Transitions Pack',0)">Download</button>
+            </div>
+          </div>
+          <div class="product-body">
+            <div class="product-cat">Sound Effect</div>
+            <div class="product-name">Cinematic Transitions Pack</div>
+            <div class="product-desc">20 high-quality cinematic whoosh and transition sounds for video editors.</div>
+            <div class="product-meta">
+              <span class="product-tag">20 SFX</span>
+              <span class="product-tag">WAV</span>
+              <span class="product-tag">Free Use</span>
+            </div>
+            <div class="product-footer">
+              <div class="product-price free">Free</div>
+              <div class="product-actions">
+                <button class="product-btn product-btn-free" onclick="addCart(event,'Cinematic Transitions Pack',0)">Download</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRODUCT 5 — Nairobi Vibes Beat Pack -->
+        <div class="product-card reveal" data-cat="audio" data-price="1500" data-name="Nairobi Vibes Beat Pack">
+          <div class="product-badge badge-best">BEST SELLER</div>
+          <button class="product-wishlist" onclick="wishlist(event,this)">
+            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </button>
+          <div class="product-thumb" style="background:linear-gradient(135deg,#1e1b4b,#312e81)">
+            <div class="icon">
+              <svg width="52" height="52" viewBox="0 0 24 24" stroke-width="1.3" stroke="rgba(167,139,250,.8)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 10s3-3 3-8"/><path d="M22 10s-3-3-3-8"/>
+                <path d="M10 2c0 4.4-3.6 8-8 8"/>
+                <path d="M14 2c0 4.4 3.6 8 8 8"/>
+                <path d="M2 10s0 14 10 14 10-14 10-14"/>
+              </svg>
+            </div>
+            <div class="product-thumb-overlay">
+              <button class="thumb-action">Preview</button>
+              <button class="thumb-action buy" onclick="addCart(event,'Nairobi Vibes Beat Pack',1500)">Buy</button>
+            </div>
+          </div>
+          <div class="product-body">
+            <div class="product-cat">AI Audio</div>
+            <div class="product-name">Nairobi Vibes Beat Pack</div>
+            <div class="audio-preview">
+              <button class="play-btn" onclick="togglePlay(this)">
+                <svg width="10" height="10" viewBox="0 0 24 24" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3" fill="white" stroke="none"/></svg>
+              </button>
+              <div class="audio-waveform" id="wave2"></div>
+              <span class="audio-duration">1:58</span>
+            </div>
+            <div class="product-meta">
+              <span class="product-tag">18 Beats</span>
+              <span class="product-tag">BPM Tagged</span>
+            </div>
+            <div class="product-footer">
+              <div class="product-price">KES 1,500</div>
+              <div class="product-actions">
+                <button class="product-btn product-btn-cart" onclick="addCart(event,'Nairobi Vibes Beat Pack',1500)">+ Cart</button>
+                <button class="product-btn product-btn-buy">Buy Now</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRODUCT 6 — Social Media Mega Pack -->
+        <div class="product-card reveal" data-cat="design" data-price="600" data-name="Social Media Mega Pack">
+          <div class="product-badge badge-sale">SALE</div>
+          <button class="product-wishlist" onclick="wishlist(event,this)">
+            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </button>
+          <div class="product-thumb" style="background:linear-gradient(135deg,#fff7ed,#ffedd5)">
+            <div class="icon">
+              <svg width="52" height="52" viewBox="0 0 24 24" stroke-width="1.3" stroke="#ea580c" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5"/>
+                <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+              </svg>
+            </div>
+            <div class="product-thumb-overlay">
+              <button class="thumb-action">Preview</button>
+              <button class="thumb-action buy" onclick="addCart(event,'Social Media Mega Pack',600)">Buy</button>
+            </div>
+          </div>
+          <div class="product-body">
+            <div class="product-cat">Design Assets</div>
+            <div class="product-name">Social Media Mega Pack</div>
+            <div class="product-desc">100+ customizable social media templates for Instagram, Facebook, and TikTok.</div>
+            <div class="product-meta">
+              <span class="product-tag">100+ Files</span>
+              <span class="product-tag">Canva</span>
+              <span class="product-tag">All Sizes</span>
+            </div>
+            <div class="product-footer">
+              <div class="product-price">KES 600</div>
+              <div class="product-actions">
+                <button class="product-btn product-btn-cart" onclick="addCart(event,'Social Media Mega Pack',600)">+ Cart</button>
+                <button class="product-btn product-btn-buy">Buy Now</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRODUCT 7 — E-Commerce Store Kit -->
+        <div class="product-card reveal" data-cat="website" data-price="4500" data-name="E-Commerce Store Kit">
+          <div class="product-badge badge-new">NEW</div>
+          <button class="product-wishlist" onclick="wishlist(event,this)">
+            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </button>
+          <div class="product-thumb" style="background:linear-gradient(135deg,#ecfdf5,#d1fae5)">
+            <div class="icon">
+              <svg width="52" height="52" viewBox="0 0 24 24" stroke-width="1.3" stroke="#059669" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                <path d="M1 1h4l2.68 13.39a2 2 0 001.99 1.61h9.72a2 2 0 001.99-1.61L23 6H6"/>
+              </svg>
+            </div>
+            <div class="product-thumb-overlay">
+              <button class="thumb-action">Preview</button>
+              <button class="thumb-action buy" onclick="addCart(event,'E-Commerce Store Kit',4500)">Buy</button>
+            </div>
+          </div>
+          <div class="product-body">
+            <div class="product-cat">Website Kit</div>
+            <div class="product-name">E-Commerce Store Kit</div>
+            <div class="product-desc">Full e-commerce website kit with cart, product pages, and payment integration ready.</div>
+            <div class="product-meta">
+              <span class="product-tag">Full Build</span>
+              <span class="product-tag">M-Pesa Ready</span>
+            </div>
+            <div class="product-footer">
+              <div class="product-price">KES 4,500</div>
+              <div class="product-actions">
+                <button class="product-btn product-btn-cart" onclick="addCart(event,'E-Commerce Store Kit',4500)">+ Cart</button>
+                <button class="product-btn product-btn-buy">Buy Now</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRODUCT 8 — Gospel AI Choir Pack -->
+        <div class="product-card reveal" data-cat="audio" data-price="900" data-name="Gospel AI Choir Pack">
+          <button class="product-wishlist" onclick="wishlist(event,this)">
+            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </button>
+          <div class="product-thumb" style="background:linear-gradient(135deg,#fefce8,#fef9c3)">
+            <div class="icon">
+              <svg width="52" height="52" viewBox="0 0 24 24" stroke-width="1.3" stroke="#ca8a04" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+              </svg>
+            </div>
+            <div class="product-thumb-overlay">
+              <button class="thumb-action">Preview</button>
+              <button class="thumb-action buy" onclick="addCart(event,'Gospel AI Choir Pack',900)">Buy</button>
+            </div>
+          </div>
+          <div class="product-body">
+            <div class="product-cat">AI Audio</div>
+            <div class="product-name">Gospel AI Choir Pack</div>
+            <div class="audio-preview">
+              <button class="play-btn" onclick="togglePlay(this)">
+                <svg width="10" height="10" viewBox="0 0 24 24" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3" fill="white" stroke="none"/></svg>
+              </button>
+              <div class="audio-waveform" id="wave3"></div>
+              <span class="audio-duration">3:12</span>
+            </div>
+            <div class="product-meta">
+              <span class="product-tag">15 Tracks</span>
+              <span class="product-tag">Choir Vocals</span>
+            </div>
+            <div class="product-footer">
+              <div class="product-price">KES 900</div>
+              <div class="product-actions">
+                <button class="product-btn product-btn-cart" onclick="addCart(event,'Gospel AI Choir Pack',900)">+ Cart</button>
+                <button class="product-btn product-btn-buy">Buy Now</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRODUCT 9 — Free Logo Templates -->
+        <div class="product-card reveal" data-cat="free" data-price="0" data-name="Free Logo Templates">
+          <div class="product-badge badge-free">FREE</div>
+          <button class="product-wishlist" onclick="wishlist(event,this)">
+            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </button>
+          <div class="product-thumb" style="background:linear-gradient(135deg,#f0fdf4,#bbf7d0)">
+            <div class="icon">
+              <svg width="52" height="52" viewBox="0 0 24 24" stroke-width="1.3" stroke="#16a34a" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/>
+                <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/>
+                <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/>
+                <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/>
+                <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 011.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>
+              </svg>
+            </div>
+            <div class="product-thumb-overlay">
+              <button class="thumb-action">Preview</button>
+              <button class="thumb-action buy" style="background:#059669" onclick="addCart(event,'Free Logo Templates',0)">Download</button>
+            </div>
+          </div>
+          <div class="product-body">
+            <div class="product-cat">Design Assets</div>
+            <div class="product-name">Free Logo Templates</div>
+            <div class="product-desc">5 professional logo templates you can customize in Canva for free.</div>
+            <div class="product-meta">
+              <span class="product-tag">5 Logos</span>
+              <span class="product-tag">Canva</span>
+              <span class="product-tag">Editable</span>
+            </div>
+            <div class="product-footer">
+              <div class="product-price free">Free</div>
+              <div class="product-actions">
+                <button class="product-btn product-btn-free" onclick="addCart(event,'Free Logo Templates',0)">Download</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRODUCT 10 — Motion Graphics Starter Kit -->
+        <div class="product-card reveal" data-cat="design" data-price="1800" data-name="Motion Graphics Starter Kit">
+          <div class="product-badge badge-hot">HOT</div>
+          <button class="product-wishlist" onclick="wishlist(event,this)">
+            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </button>
+          <div class="product-thumb" style="background:linear-gradient(135deg,#fdf4ff,#f5d0fe)">
+            <div class="icon">
+              <svg width="52" height="52" viewBox="0 0 24 24" stroke-width="1.3" stroke="#a21caf" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="5 3 19 12 5 21 5 3"/>
+              </svg>
+            </div>
+            <div class="product-thumb-overlay">
+              <button class="thumb-action">Preview</button>
+              <button class="thumb-action buy" onclick="addCart(event,'Motion Graphics Starter Kit',1800)">Buy</button>
+            </div>
+          </div>
+          <div class="product-body">
+            <div class="product-cat">Design Assets</div>
+            <div class="product-name">Motion Graphics Starter Kit</div>
+            <div class="product-desc">After Effects templates for intros, outros, lower thirds, and animated overlays.</div>
+            <div class="product-meta">
+              <span class="product-tag">After Effects</span>
+              <span class="product-tag">20 Presets</span>
+            </div>
+            <div class="product-footer">
+              <div class="product-price">KES 1,800</div>
+              <div class="product-actions">
+                <button class="product-btn product-btn-cart" onclick="addCart(event,'Motion Graphics Starter Kit',1800)">+ Cart</button>
+                <button class="product-btn product-btn-buy">Buy Now</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRODUCT 11 — Business Landing Page -->
+        <div class="product-card reveal" data-cat="website" data-price="3200" data-name="Business Landing Page">
+          <div class="product-badge badge-new">NEW</div>
+          <button class="product-wishlist" onclick="wishlist(event,this)">
+            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </button>
+          <div class="product-thumb" style="background:linear-gradient(135deg,#f0f9ff,#bae6fd)">
+            <div class="icon">
+              <svg width="52" height="52" viewBox="0 0 24 24" stroke-width="1.3" stroke="#0284c7" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6"/>
+                <polyline points="8 6 2 12 8 18"/>
+              </svg>
+            </div>
+            <div class="product-thumb-overlay">
+              <button class="thumb-action">Preview</button>
+              <button class="thumb-action buy" onclick="addCart(event,'Business Landing Page',3200)">Buy</button>
+            </div>
+          </div>
+          <div class="product-body">
+            <div class="product-cat">Website Kit</div>
+            <div class="product-name">Business Landing Page</div>
+            <div class="product-desc">High-converting landing page template perfect for SMEs and service businesses.</div>
+            <div class="product-meta">
+              <span class="product-tag">HTML/CSS</span>
+              <span class="product-tag">Mobile First</span>
+            </div>
+            <div class="product-footer">
+              <div class="product-price">KES 3,200</div>
+              <div class="product-actions">
+                <button class="product-btn product-btn-cart" onclick="addCart(event,'Business Landing Page',3200)">+ Cart</button>
+                <button class="product-btn product-btn-buy">Buy Now</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRODUCT 12 — Trap & Drill AI Pack -->
+        <div class="product-card reveal" data-cat="audio" data-price="1100" data-name="Trap & Drill AI Pack">
+          <button class="product-wishlist" onclick="wishlist(event,this)">
+            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </button>
+          <div class="product-thumb" style="background:linear-gradient(135deg,#1c1917,#292524)">
+            <div class="icon">
+              <svg width="52" height="52" viewBox="0 0 24 24" stroke-width="1.3" stroke="rgba(251,191,36,.7)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 10s3-3 3-8"/><path d="M22 10s-3-3-3-8"/>
+                <path d="M10 2c0 4.4-3.6 8-8 8"/>
+                <path d="M14 2c0 4.4 3.6 8 8 8"/>
+                <path d="M2 10s0 14 10 14 10-14 10-14"/>
+              </svg>
+            </div>
+            <div class="product-thumb-overlay">
+              <button class="thumb-action">Preview</button>
+              <button class="thumb-action buy" onclick="addCart(event,'Trap & Drill AI Pack',1100)">Buy</button>
+            </div>
+          </div>
+          <div class="product-body">
+            <div class="product-cat">AI Audio</div>
+            <div class="product-name">Trap & Drill AI Pack</div>
+            <div class="audio-preview">
+              <button class="play-btn" onclick="togglePlay(this)">
+                <svg width="10" height="10" viewBox="0 0 24 24" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3" fill="white" stroke="none"/></svg>
+              </button>
+              <div class="audio-waveform" id="wave4"></div>
+              <span class="audio-duration">2:47</span>
+            </div>
+            <div class="product-meta">
+              <span class="product-tag">22 Beats</span>
+              <span class="product-tag">Stem Files</span>
+            </div>
+            <div class="product-footer">
+              <div class="product-price">KES 1,100</div>
+              <div class="product-actions">
+                <button class="product-btn product-btn-cart" onclick="addCart(event,'Trap & Drill AI Pack',1100)">+ Cart</button>
+                <button class="product-btn product-btn-buy">Buy Now</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRODUCT 13 — Flyer Design Bundle -->
+        <div class="product-card reveal" data-cat="design" data-price="450" data-name="Flyer Design Bundle">
+          <div class="product-badge badge-sale">SALE</div>
+          <button class="product-wishlist" onclick="wishlist(event,this)">
+            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </button>
+          <div class="product-thumb" style="background:linear-gradient(135deg,#fff1f2,#ffe4e6)">
+            <div class="icon">
+              <svg width="52" height="52" viewBox="0 0 24 24" stroke-width="1.3" stroke="#e11d48" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
+              </svg>
+            </div>
+            <div class="product-thumb-overlay">
+              <button class="thumb-action">Preview</button>
+              <button class="thumb-action buy" onclick="addCart(event,'Flyer Design Bundle',450)">Buy</button>
+            </div>
+          </div>
+          <div class="product-body">
+            <div class="product-cat">Design Assets</div>
+            <div class="product-name">Flyer Design Bundle</div>
+            <div class="product-desc">50 editable event flyer templates for parties, church, and business promotions.</div>
+            <div class="product-meta">
+              <span class="product-tag">50 Flyers</span>
+              <span class="product-tag">PSD</span>
+            </div>
+            <div class="product-footer">
+              <div class="product-price">KES 450</div>
+              <div class="product-actions">
+                <button class="product-btn product-btn-cart" onclick="addCart(event,'Flyer Design Bundle',450)">+ Cart</button>
+                <button class="product-btn product-btn-buy">Buy Now</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRODUCT 14 — Ambient Chill AI Pack -->
+        <div class="product-card reveal" data-cat="audio" data-price="700" data-name="Ambient Chill AI Pack">
+          <div class="product-badge badge-new">NEW</div>
+          <button class="product-wishlist" onclick="wishlist(event,this)">
+            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </button>
+          <div class="product-thumb" style="background:linear-gradient(135deg,#e0f2fe,#bae6fd)">
+            <div class="icon">
+              <svg width="52" height="52" viewBox="0 0 24 24" stroke-width="1.3" stroke="#0ea5e9" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+              </svg>
+            </div>
+            <div class="product-thumb-overlay">
+              <button class="thumb-action">Preview</button>
+              <button class="thumb-action buy" onclick="addCart(event,'Ambient Chill AI Pack',700)">Buy</button>
+            </div>
+          </div>
+          <div class="product-body">
+            <div class="product-cat">AI Audio</div>
+            <div class="product-name">Ambient Chill AI Pack</div>
+            <div class="audio-preview">
+              <button class="play-btn" onclick="togglePlay(this)">
+                <svg width="10" height="10" viewBox="0 0 24 24" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3" fill="white" stroke="none"/></svg>
+              </button>
+              <div class="audio-waveform" id="wave5"></div>
+              <span class="audio-duration">4:05</span>
+            </div>
+            <div class="product-meta">
+              <span class="product-tag">10 Tracks</span>
+              <span class="product-tag">Loopable</span>
+            </div>
+            <div class="product-footer">
+              <div class="product-price">KES 700</div>
+              <div class="product-actions">
+                <button class="product-btn product-btn-cart" onclick="addCart(event,'Ambient Chill AI Pack',700)">+ Cart</button>
+                <button class="product-btn product-btn-buy">Buy Now</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /products-grid -->
+
+      <!-- Pagination -->
+      <div class="pagination">
+        <button class="page-btn arrow">
+          <svg width="14" height="14" viewBox="0 0 24 24" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="page-btn active">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">3</button>
+        <button class="page-btn arrow">
+          <svg width="14" height="14" viewBox="0 0 24 24" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+
+    </div><!-- /products area -->
+  </div><!-- /marketplace-layout -->
+</div><!-- /marketplace-main -->
+
+<!-- ══ FOOTER ══════════════════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <a href="/" class="footer-logo">
+          <img class="footer-logo-img" src="ExevoLogo/exevo-wordmark.png" alt="Exevo Designers"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <span class="footer-logo-fallback">EXEVO <span>DESIGNERS</span></span>
+        </a>
+        <p class="footer-tagline">Setting new benchmarks for digital creativity across Africa. Built on excellence, driven by results.</p>
+        <div class="footer-socials">
+          <a href="https://www.instagram.com/exevodesigners" target="_blank" class="social-btn" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="https://www.facebook.com/share/17oXAWNWcZ/" target="_blank" class="social-btn" aria-label="Facebook">
+            <svg width="16" height="16" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/exevo-designers-40122435a" target="_blank" class="social-btn" aria-label="LinkedIn">
+            <svg width="16" height="16" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a href="https://www.tiktok.com/@exevodesigners" target="_blank" class="social-btn" aria-label="TikTok">
+            <svg width="16" height="16" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 104 4V4a5 5 0 005 5"/></svg>
+          </a>
+          <a href="https://whatsapp.com/channel/0029Vb7kTDq3QxS1ffkZhe0J" target="_blank" class="social-btn" aria-label="WhatsApp">
+            <svg width="16" height="16" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+          </a>
+          <a href="mailto:exevodesigners@gmail.com" class="social-btn" aria-label="Email">
+            <svg width="16" height="16" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigation</div>
+        <ul class="footer-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="marketplace.html">Marketplace</a></li>
+          <li><a href="/#services">Services</a></li>
+          <li><a href="portfolio">Portfolio</a></li>
+          <li><a href="sign-up">Community</a></li>
+          <li><a href="case-studies">Case Studies</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Categories</div>
+        <ul class="footer-links">
+          <li><a href="#" onclick="filterCategory(null,'audio');return false">AI Audio</a></li>
+          <li><a href="#" onclick="filterCategory(null,'design');return false">Design Assets</a></li>
+          <li><a href="#" onclick="filterCategory(null,'website');return false">Website Kits</a></li>
+          <li><a href="#" onclick="filterCategory(null,'free');return false">Free Resources</a></li>
+          <li><a href="custom-order">Custom Orders</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Legal & Info</div>
+        <ul class="footer-links">
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Refund Policy</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="https://g.page/r/Cd2kJjKTJ3_cEAE/review" target="_blank">Leave a Review</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 EXEVO DESIGNERS NETWORK. ALL RIGHTS RESERVED.</p>
+      <p class="footer-love">DESIGNED WITH <span>♥</span> IN AFRICA</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ══ CHAT FAB ══════════════════════════════════════════════════════ -->
+<button class="chat-fab" id="chatFab" onclick="toggleChat()" aria-label="Chat with us">
+  <svg width="22" height="22" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+  </svg>
+</button>
+
+<div class="chat-modal" id="chatModal">
+  <div class="chat-head">
+    <div class="chat-head-avatar">EX</div>
+    <div><div class="chat-head-name">Exevo Assistant</div><div class="chat-head-status">Online Now</div></div>
+    <button class="chat-close" onclick="toggleChat()">
+      <svg width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="rgba(255,255,255,.7)" fill="none" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="chat-messages" id="chatMessages">
+    <div class="chat-bubble">Welcome to the Marketplace! 🎨 Need help finding a product?</div>
+  </div>
+  <div class="chat-options">
+    <button class="chat-option" onclick="chatSelect(this)" data-msg="I need help finding a product">
+      Find a Product
+      <svg width="12" height="12" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </button>
+    <button class="chat-option" onclick="chatSelect(this)" data-msg="I want a custom product made">
+      Custom Order
+      <svg width="12" height="12" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </button>
+    <button class="chat-option" onclick="chatSelect(this)" data-msg="I have a question about my purchase">
+      Purchase Help
+      <svg width="12" height="12" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- ══ CART TOAST ══════════════════════════════════════════════════ -->
+<div id="cartToast" style="position:fixed;bottom:100px;right:28px;z-index:300;background:var(--text-dark);color:#fff;padding:12px 20px;border-radius:12px;font-size:13px;font-weight:600;box-shadow:var(--shadow-lg);transform:translateY(20px);opacity:0;transition:all .3s;pointer-events:none;display:flex;align-items:center;gap:10px">
+  <svg width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="#4ade80" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+  <span id="cartToastText">Added to cart!</span>
+</div>
+
+<!-- ══ SCRIPTS ══════════════════════════════════════════════════════ -->
+<script>
+// ── Cart ──────────────────────────────────────────────────────────
+let cartItems = 0;
+function addCart(e,name,price){
+  e && e.stopPropagation();
+  cartItems++;
+  document.getElementById('cartCount').textContent=cartItems;
+  const toast=document.getElementById('cartToast');
+  document.getElementById('cartToastText').textContent=price===0?name+' downloaded!':name+' added to cart!';
+  toast.style.opacity='1';toast.style.transform='translateY(0)';
+  setTimeout(()=>{toast.style.opacity='0';toast.style.transform='translateY(20px)'},2500);
+}
+function wishlist(e,btn){
+  e.stopPropagation();
+  btn.style.color=btn.style.color==='rgb(217, 70, 239)'?'':'#d946ef';
+  btn.querySelector('svg').style.fill=btn.style.color?'#d946ef':'none';
+}
+
+// ── Filter ────────────────────────────────────────────────────────
+let activeCategory='all';
+function filterCategory(btn,cat){
+  activeCategory=cat;
+  // update tab buttons
+  document.querySelectorAll('.filter-tab').forEach(t=>t.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  // update sidebar
+  document.querySelectorAll('.sidebar-cat').forEach(s=>{
+    s.classList.toggle('active', s.getAttribute('onclick') && s.getAttribute('onclick').includes("'"+cat+"'"));
+  });
+  applyFilters();
+}
+function sidebarFilter(el,cat){
+  document.querySelectorAll('.sidebar-cat').forEach(s=>s.classList.remove('active'));
+  el.classList.add('active');
+  activeCategory=cat;
+  // sync tabs
+  document.querySelectorAll('.filter-tab').forEach(t=>{
+    const match = t.getAttribute('onclick') && t.getAttribute('onclick').includes("'"+cat+"'");
+    t.classList.toggle('active',match);
+  });
+  applyFilters();
+}
+function applyFilters(){
+  const q=document.getElementById('searchInput').value.toLowerCase();
+  const minP=parseFloat(document.getElementById('priceMin').value)||0;
+  const maxP=parseFloat(document.getElementById('priceMax').value)||Infinity;
+  const cards=document.querySelectorAll('.product-card');
+  let visible=0;
+  cards.forEach(c=>{
+    const cat=c.dataset.cat;
+    const price=parseFloat(c.dataset.price);
+    const name=c.dataset.name.toLowerCase();
+    const catOk=activeCategory==='all'||(activeCategory==='free'?price===0:cat===activeCategory);
+    const priceOk=price>=minP&&price<=maxP;
+    const searchOk=!q||name.includes(q);
+    const show=catOk&&priceOk&&searchOk;
+    c.style.display=show?'':'none';
+    if(show)visible++;
+  });
+  document.getElementById('productCountDisplay').textContent=visible;
+}
+function clearFilters(){
+  document.getElementById('priceMin').value='';
+  document.getElementById('priceMax').value='';
+  document.getElementById('searchInput').value='';
+  filterCategory(document.querySelector('.filter-tab'),'all');
+}
+function handleSearch(){applyFilters()}
+function handleSort(val){
+  const grid=document.getElementById('productsGrid');
+  const cards=[...grid.querySelectorAll('.product-card')];
+  cards.sort((a,b)=>{
+    if(val==='price-asc')return parseFloat(a.dataset.price)-parseFloat(b.dataset.price);
+    if(val==='price-desc')return parseFloat(b.dataset.price)-parseFloat(a.dataset.price);
+    if(val==='free')return parseFloat(a.dataset.price)-parseFloat(b.dataset.price);
+    return 0;
+  });
+  cards.forEach(c=>grid.appendChild(c));
+}
+
+// ── View Toggle ───────────────────────────────────────────────────
+function setView(mode,btn){
+  document.querySelectorAll('.view-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const grid=document.getElementById('productsGrid');
+  grid.classList.toggle('list-view',mode==='list');
+}
+
+// ── Audio Waveforms ───────────────────────────────────────────────
+function buildWave(id){
+  const el=document.getElementById(id);
+  if(!el)return;
+  for(let i=0;i<28;i++){
+    const b=document.createElement('div');
+    b.className='wave-bar';
+    const h=4+Math.random()*18;
+    b.style.height=h+'px';
+    el.appendChild(b);
+  }
+}
+['wave1','wave2','wave3','wave4','wave5'].forEach(buildWave);
+
+let activePlayBtn=null;
+let waveInterval=null;
+function togglePlay(btn){
+  if(activePlayBtn&&activePlayBtn!==btn){
+    activePlayBtn.innerHTML='<svg width="10" height="10" viewBox="0 0 24 24" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3" fill="white" stroke="none"/></svg>';
+    clearInterval(waveInterval);
+  }
+  const isPlaying=btn.dataset.playing==='1';
+  if(isPlaying){
+    btn.innerHTML='<svg width="10" height="10" viewBox="0 0 24 24" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3" fill="white" stroke="none"/></svg>';
+    btn.dataset.playing='0';
+    clearInterval(waveInterval);
+    activePlayBtn=null;
+  } else {
+    btn.innerHTML='<svg width="10" height="10" viewBox="0 0 24 24" stroke-width="2" stroke="white" fill="none" stroke-linecap="round"><line x1="6" y1="4" x2="6" y2="20"/><line x1="18" y1="4" x2="18" y2="20"/></svg>';
+    btn.dataset.playing='1';
+    activePlayBtn=btn;
+    const waveEl=btn.closest('.audio-preview').querySelector('.audio-waveform');
+    waveInterval=setInterval(()=>{
+      waveEl.querySelectorAll('.wave-bar').forEach(b=>{
+        b.style.height=(4+Math.random()*18)+'px';
+        b.style.opacity=(0.3+Math.random()*0.7).toString();
+      });
+    },120);
+  }
+}
+
+// ── Nav / Menu ────────────────────────────────────────────────────
+function toggleMenu(){
+  const m=document.getElementById('mobileMenu'),h=document.getElementById('hamburger');
+  const o=m.classList.toggle('open');
+  document.body.style.overflow=o?'hidden':'';
+  const[s1,s2,s3]=h.querySelectorAll('span');
+  if(o){s1.style.transform='rotate(45deg) translate(5px,5px)';s2.style.opacity='0';s3.style.transform='rotate(-45deg) translate(5px,-5px)'}
+  else{[s1,s2,s3].forEach(s=>{s.style.transform='';s.style.opacity=''})}
+}
+function closeMenu(){
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.body.style.overflow='';
+  document.querySelectorAll('#hamburger span').forEach(s=>{s.style.transform='';s.style.opacity=''});
+}
+function toggleChat(){document.getElementById('chatModal').classList.toggle('open')}
+function chatSelect(btn){
+  const msg=btn.dataset.msg,area=document.getElementById('chatMessages');
+  const u=document.createElement('div');u.className='chat-bubble user';u.textContent=msg;area.appendChild(u);
+  setTimeout(()=>{
+    const b=document.createElement('div');b.className='chat-bubble';
+    b.textContent='Connecting you with our team on WhatsApp…';area.appendChild(b);
+    area.scrollTop=area.scrollHeight;
+    setTimeout(()=>window.open('https://wa.me/254700552884?text='+encodeURIComponent('Hi Exevo, '+msg),'_blank'),1200);
+  },700);
+  area.scrollTop=area.scrollHeight;
+}
+
+// ── Scroll reveal ─────────────────────────────────────────────────
+const obs=new IntersectionObserver(entries=>entries.forEach((e,i)=>{
+  if(e.isIntersecting)setTimeout(()=>e.target.classList.add('visible'),i*80);
+}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// ── Navbar shadow ─────────────────────────────────────────────────
+window.addEventListener('scroll',()=>{
+  document.getElementById('navbar').style.boxShadow=window.scrollY>40?'0 2px 16px rgba(15,23,42,0.08)':'none';
+});
+</script>
+</body>
+</html>

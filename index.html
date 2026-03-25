@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>Exevo Designers — Design. Sound. Digital Power.</title>
+<meta name="description" content="Exevo Designers Network — Africa's premier creative ecosystem for graphic design, digital sound, web development, and marketing.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" type="image/png" href="ExevoLogo/exevo-logo-profile.png"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --brand-purple:   #7c3aed;
+  --brand-purple-2: #6d28d9;
+  --brand-purple-3: #5b21b6;
+  --purple-light:   #ede9fe;
+  --purple-mid:     rgba(124,58,237,0.10);
+  --text-dark:  #0f172a;
+  --text-body:  #334155;
+  --text-muted: #64748b;
+  --text-dim:   #94a3b8;
+  --bg:       #ffffff;
+  --bg-soft:  #f8f7ff;
+  --border:      rgba(15,23,42,0.08);
+  --border-mid:  rgba(15,23,42,0.12);
+  --border-dark: rgba(15,23,42,0.2);
+  --accent-pink:  #d946ef;
+  --accent-green: #10b981;
+  --radius:    14px;
+  --radius-lg: 22px;
+  --radius-xl: 32px;
+  --nav-h:     72px;
+  --shadow-sm:     0 2px 8px  rgba(15,23,42,0.06);
+  --shadow-md:     0 8px 24px rgba(15,23,42,0.08);
+  --shadow-lg:     0 20px 48px rgba(15,23,42,0.10);
+  --shadow-purple: 0 8px 32px rgba(124,58,237,0.20);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}
+a{text-decoration:none;color:inherit}
+
+.label{font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--brand-purple)}
+
+/* ── BUTTONS ── */
+.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:12px 26px;background:var(--brand-purple);color:#fff;border-radius:100px;font-family:'Inter',sans-serif;font-size:14px;font-weight:700;cursor:pointer;border:none;transition:all .25s;white-space:nowrap}
+.btn-primary:hover{background:var(--brand-purple-2);transform:translateY(-2px);box-shadow:var(--shadow-purple)}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;padding:12px 26px;background:transparent;color:var(--text-dark);border:2px solid var(--border-dark);border-radius:100px;font-family:'Inter',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .25s;white-space:nowrap}
+.btn-ghost:hover{border-color:var(--brand-purple);color:var(--brand-purple);background:var(--purple-mid)}
+.btn-outline-white{display:inline-flex;align-items:center;gap:8px;padding:12px 26px;background:transparent;color:#fff;border:2px solid rgba(255,255,255,0.4);border-radius:100px;font-family:'Inter',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .25s;white-space:nowrap}
+.btn-outline-white:hover{background:rgba(255,255,255,0.15);border-color:rgba(255,255,255,0.7)}
+
+/* ── ICON UTILITY ── all icons use stroke, no fill */
+.icon{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.icon svg{stroke:currentColor;fill:none;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── NAVBAR ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--nav-h);display:flex;align-items:center;padding:0 40px;border-bottom:1px solid var(--border);background:rgba(255,255,255,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);transition:box-shadow .3s}
+
+/* ─ LOGO SLOT ─
+   Replace the src value with your logo file path.
+   The image renders at 36px tall; width scales automatically.
+   A text fallback shows if the image fails to load.          */
+.nav-logo{display:flex;align-items:center;gap:0;cursor:pointer}
+.nav-logo-img{
+  height:36px;
+  width:auto;
+  object-fit:contain;
+  display:block;
+  transition:opacity .2s;
+}
+.nav-logo-img:hover{opacity:.85}
+/* Text fallback (hidden when image loads) */
+.nav-logo-fallback{
+  font-family:'Syncopate',sans-serif;font-weight:700;font-size:16px;
+  letter-spacing:.04em;text-transform:uppercase;color:var(--text-dark);
+  display:none; /* shown via JS if img fails */
+}
+.nav-logo-fallback span{color:var(--brand-purple)}
+
+.nav-links{display:flex;align-items:center;gap:28px;margin-left:48px;list-style:none}
+.nav-links a{font-size:13px;font-weight:600;color:var(--text-muted);transition:color .2s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--brand-purple);transition:width .25s}
+.nav-links a:hover{color:var(--text-dark)}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.nav-links a.active{color:var(--text-dark)}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:14px}
+
+.cart-btn{position:relative;width:40px;height:40px;border:1.5px solid var(--border-mid);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--text-muted);cursor:pointer;transition:all .2s;background:transparent}
+.cart-btn:hover{border-color:var(--brand-purple);color:var(--brand-purple)}
+.cart-count{position:absolute;top:-5px;right:-5px;width:17px;height:17px;background:var(--brand-purple);color:#fff;border-radius:50%;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid #fff}
+
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;margin-left:auto;background:none;border:none}
+.hamburger span{display:block;width:22px;height:2px;background:var(--text-dark);border-radius:2px;transition:all .3s}
+
+/* ── MOBILE MENU ── */
+.mobile-menu{display:none;position:fixed;inset:0;z-index:99;background:#fff;padding:100px 32px 40px;flex-direction:column;gap:4px;transform:translateX(100%);transition:transform .4s cubic-bezier(.4,0,.2,1)}
+.mobile-menu.open{transform:translateX(0)}
+.mobile-menu a{font-family:'Syncopate',sans-serif;font-size:26px;font-weight:700;color:var(--text-dim);letter-spacing:.02em;text-transform:uppercase;padding:12px 0;border-bottom:1px solid var(--border);transition:color .2s}
+.mobile-menu a:hover{color:var(--brand-purple)}
+.mobile-menu-footer{margin-top:auto;display:flex;gap:12px;flex-wrap:wrap}
+
+/* ── HERO ── */
+.hero{min-height:100vh;padding:calc(var(--nav-h) + 72px) 40px 80px;display:flex;align-items:center;position:relative;overflow:hidden;background:var(--bg)}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(124,58,237,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(124,58,237,.04) 1px,transparent 1px);background-size:56px 56px;pointer-events:none}
+.hero-glow-1{position:absolute;top:-180px;left:-180px;width:660px;height:660px;background:radial-gradient(circle,rgba(124,58,237,.10) 0%,transparent 70%);border-radius:50%;pointer-events:none}
+.hero-glow-2{position:absolute;bottom:-80px;right:-80px;width:480px;height:480px;background:radial-gradient(circle,rgba(217,70,239,.07) 0%,transparent 70%);border-radius:50%;pointer-events:none}
+.hero-inner{position:relative;z-index:2;max-width:1280px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;background:var(--purple-light);border:1px solid rgba(124,58,237,.2);border-radius:100px;margin-bottom:28px}
+.hero-tag span{font-size:11px;font-weight:700;color:var(--brand-purple);letter-spacing:.12em;text-transform:uppercase}
+.hero-title{font-family:'Syncopate',sans-serif;font-weight:700;font-size:clamp(40px,5.5vw,80px);line-height:.95;letter-spacing:-0.03em;text-transform:uppercase;color:var(--text-dark);margin-bottom:28px}
+.hero-title .line-purple{color:var(--brand-purple)}
+.hero-title .line-grad{background:linear-gradient(135deg,var(--brand-purple) 0%,var(--accent-pink) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:17px;color:var(--text-body);max-width:460px;line-height:1.75;margin-bottom:40px}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
+.hero-stats{display:flex;gap:36px;margin-top:56px;padding-top:32px;border-top:1px solid var(--border);flex-wrap:wrap}
+.hero-stat-num{font-family:'Syncopate',sans-serif;font-size:28px;font-weight:700;color:var(--brand-purple);line-height:1;margin-bottom:4px}
+.hero-stat-label{font-size:12px;color:var(--text-muted);font-weight:500}
+
+.hero-visual{position:relative;height:520px}
+.h-card{position:absolute;background:#fff;border:1px solid var(--border-mid);border-radius:var(--radius-lg);box-shadow:var(--shadow-md);padding:18px 22px}
+.h-card-main{width:260px;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-4deg);padding:36px 28px;text-align:center;background:linear-gradient(160deg,var(--brand-purple) 0%,var(--brand-purple-3) 100%);border-color:transparent;color:#fff;animation:floatMain 6s ease-in-out infinite}
+.h-card-sm{width:176px}
+.h-card-tl{top:0;left:0;animation:floatA 5s ease-in-out .5s infinite}
+.h-card-tr{top:28px;right:0;animation:floatB 7s ease-in-out 1s infinite}
+.h-card-bl{bottom:40px;left:8px;animation:floatC 6s ease-in-out .2s infinite}
+.h-card-br{bottom:8px;right:0;animation:floatD 5.5s ease-in-out 1.5s infinite}
+.h-card-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--brand-purple);margin-bottom:10px;background:var(--purple-light)}
+.h-card-name{font-size:13px;font-weight:700;color:var(--text-dark);margin-bottom:2px}
+.h-card-sub{font-size:11px;color:var(--text-muted)}
+.h-card-main-logo{width:72px;height:72px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-family:'Syncopate',sans-serif;font-size:20px;font-weight:700;color:#fff;border:2px solid rgba(255,255,255,.4)}
+.h-card-main-title{font-family:'Syncopate',sans-serif;font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#fff;margin-bottom:6px}
+.h-card-main-sub{font-size:11px;color:rgba(255,255,255,.65);margin-bottom:18px}
+.h-card-tags{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.h-card-tag{padding:3px 10px;border-radius:100px;font-size:10px;font-weight:600;background:rgba(255,255,255,.15);color:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.2)}
+@keyframes floatMain{0%,100%{transform:translate(-50%,-50%) rotate(-4deg) translateY(0)}50%{transform:translate(-50%,-50%) rotate(-4deg) translateY(-12px)}}
+@keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes floatC{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes floatD{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+
+/* ── MARQUEE ── */
+.marquee-strip{border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden;background:var(--bg-soft);padding:20px 0}
+.marquee-track{display:flex;width:max-content;animation:marquee 32s linear infinite}
+.marquee-item{font-family:'Syncopate',sans-serif;font-size:52px;font-weight:700;text-transform:uppercase;letter-spacing:.02em;color:rgba(15,23,42,.05);padding:0 36px;white-space:nowrap}
+.marquee-item.hi{color:rgba(124,58,237,.09)}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ── SECTIONS ── */
+section{padding:100px 40px}
+.section-inner{max-width:1280px;margin:0 auto}
+.section-header{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:52px;flex-wrap:wrap}
+.section-title{font-family:'Syncopate',sans-serif;font-weight:700;font-size:clamp(28px,4vw,54px);line-height:.95;letter-spacing:-0.03em;text-transform:uppercase;color:var(--text-dark)}
+.section-title em{font-style:normal;color:var(--brand-purple)}
+.section-link{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--brand-purple);white-space:nowrap;flex-shrink:0;transition:gap .2s}
+.section-link:hover{gap:14px}
+
+/* ── MARKETPLACE ── */
+.market-section{background:var(--bg-soft)}
+.market-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.market-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;cursor:pointer;transition:all .3s cubic-bezier(.4,0,.2,1);position:relative}
+.market-card:hover{border-color:rgba(124,58,237,.25);transform:translateY(-5px);box-shadow:var(--shadow-lg)}
+.market-thumb{aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.market-thumb .icon{color:var(--brand-purple);opacity:.6}
+.market-body{padding:18px 20px 20px}
+.market-cat{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px;color:var(--brand-purple)}
+.market-name{font-size:15px;font-weight:700;color:var(--text-dark);margin-bottom:14px}
+.market-footer{display:flex;align-items:center;justify-content:space-between}
+.market-price{font-size:14px;font-weight:800;color:var(--brand-purple)}
+.market-btn{padding:7px 16px;background:var(--purple-light);border:none;border-radius:100px;font-size:12px;font-weight:700;color:var(--brand-purple);cursor:pointer;transition:all .2s}
+.market-btn:hover{background:var(--brand-purple);color:#fff}
+.market-badge{position:absolute;top:12px;left:12px;z-index:2;padding:4px 10px;border-radius:100px;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.badge-hot{background:#fee2e2;color:#dc2626}
+.badge-new{background:var(--purple-light);color:var(--brand-purple)}
+.badge-free{background:#d1fae5;color:#065f46}
+
+/* ── SERVICES ── */
+.services-section{background:var(--bg)}
+.services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.service-card{padding:34px 26px 28px;border:1px solid var(--border);border-radius:var(--radius-lg);background:#fff;cursor:pointer;transition:all .3s;position:relative;overflow:hidden}
+.service-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--brand-purple),var(--accent-pink));transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.service-card:hover{border-color:rgba(124,58,237,.2);transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.service-card:hover::after{transform:scaleX(1)}
+.service-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--brand-purple);margin-bottom:22px;border:1.5px solid rgba(124,58,237,.2);background:var(--purple-light)}
+.service-icon svg{stroke:var(--brand-purple);fill:none}
+.service-name{font-family:'Syncopate',sans-serif;font-size:14px;font-weight:700;letter-spacing:.02em;text-transform:uppercase;color:var(--text-dark);margin-bottom:10px}
+.service-desc{font-size:13px;color:var(--text-muted);line-height:1.65;margin-bottom:18px}
+.service-items{list-style:none;display:flex;flex-direction:column;gap:7px;margin-bottom:22px}
+.service-items li{font-size:12px;color:var(--text-body);display:flex;align-items:center;gap:8px}
+.service-items li::before{content:'';width:5px;height:5px;background:var(--brand-purple);border-radius:50%;flex-shrink:0}
+.service-from{font-size:11px;color:var(--text-dim);margin-bottom:2px;font-weight:500}
+.service-price{font-size:20px;font-weight:800;color:var(--brand-purple);margin-bottom:20px}
+.service-cta{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--brand-purple);transition:gap .2s}
+.service-cta:hover{gap:10px}
+
+/* ── PORTFOLIO ── */
+.portfolio-section{background:var(--text-dark);padding:100px 40px}
+.portfolio-section .section-title{color:#fff}
+.portfolio-section .section-title em{color:var(--brand-purple)}
+.portfolio-section .section-link{color:rgba(255,255,255,.55)}
+.portfolio-section .section-link:hover{color:#fff}
+.portfolio-section .label{color:rgba(167,139,250,.8)}
+.portfolio-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.portfolio-item{position:relative;border-radius:var(--radius);overflow:hidden;background:#1e293b;cursor:pointer;aspect-ratio:1}
+.portfolio-item.item-tall{grid-row:span 2;aspect-ratio:auto}
+.portfolio-item-inner{width:100%;height:100%;min-height:220px;display:flex;align-items:center;justify-content:center;font-size:40px;position:relative;transition:transform .5s cubic-bezier(.4,0,.2,1)}
+.portfolio-item:hover .portfolio-item-inner{transform:scale(1.06)}
+.portfolio-item-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(15,23,42,.9) 0%,transparent 55%);opacity:0;transition:opacity .3s;display:flex;flex-direction:column;justify-content:flex-end;padding:20px;z-index:2}
+.portfolio-item:hover .portfolio-item-overlay{opacity:1}
+.portfolio-item-cat{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(167,139,250,.9);margin-bottom:4px}
+.portfolio-item-name{font-size:15px;font-weight:700;color:#fff}
+
+/* ── COMMUNITY ── */
+.community-section{background:var(--bg-soft);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.community-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.community-desc{font-size:16px;color:var(--text-body);line-height:1.75;margin:20px 0 32px;max-width:420px}
+.community-stats{display:flex;gap:16px;margin-bottom:36px}
+.community-stat{padding:18px 20px;background:#fff;border:1px solid var(--border);border-radius:var(--radius);text-align:center;flex:1;box-shadow:var(--shadow-sm)}
+.community-stat-num{font-family:'Syncopate',sans-serif;font-size:26px;font-weight:700;color:var(--brand-purple);line-height:1;margin-bottom:4px}
+.community-stat-label{font-size:11px;color:var(--text-muted);font-weight:600}
+.creator-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.creator-card{padding:18px;background:#fff;border:1px solid var(--border);border-radius:var(--radius);display:flex;align-items:center;gap:12px;transition:all .25s;box-shadow:var(--shadow-sm)}
+.creator-card:hover{border-color:rgba(124,58,237,.25);transform:translateY(-2px);box-shadow:var(--shadow-purple)}
+.creator-avatar{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0;border:2px solid rgba(124,58,237,.15);color:#fff}
+.creator-name{font-size:13px;font-weight:700;color:var(--text-dark);margin-bottom:2px}
+.creator-role{font-size:11px;color:var(--text-muted);font-weight:500}
+.creator-check{color:var(--brand-purple);font-size:14px;margin-left:auto}
+.community-cta-box{margin-top:20px;padding:22px;background:linear-gradient(135deg,var(--brand-purple) 0%,var(--brand-purple-3) 100%);border-radius:var(--radius);color:#fff}
+.community-cta-box .label{color:rgba(255,255,255,.7);margin-bottom:10px}
+.community-cta-box p{font-size:13px;color:rgba(255,255,255,.8);line-height:1.6;margin-bottom:16px}
+
+/* ── FINAL CTA ── */
+.final-cta{background:linear-gradient(160deg,var(--text-dark) 0%,#1e0a4a 100%);text-align:center;padding:120px 40px;position:relative;overflow:hidden}
+.final-cta::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(124,58,237,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(124,58,237,.06) 1px,transparent 1px);background-size:56px 56px;pointer-events:none}
+.final-cta-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:400px;background:radial-gradient(ellipse,rgba(124,58,237,.2) 0%,transparent 70%);border-radius:50%;pointer-events:none}
+.final-cta-inner{position:relative;z-index:2;max-width:700px;margin:0 auto}
+.final-cta-title{font-family:'Syncopate',sans-serif;font-weight:700;font-size:clamp(40px,6vw,86px);line-height:.92;letter-spacing:-0.03em;text-transform:uppercase;color:#fff;margin:20px 0 24px}
+.final-cta-title .line-purple{background:linear-gradient(90deg,#a78bfa,#e879f9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.final-cta-sub{font-size:16px;color:rgba(255,255,255,.6);margin-bottom:48px;max-width:460px;margin-left:auto;margin-right:auto;line-height:1.7}
+.final-cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.final-cta-contacts{margin-top:52px;display:flex;align-items:center;justify-content:center;gap:28px;flex-wrap:wrap}
+.final-cta-contact-link{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:rgba(255,255,255,.5);transition:color .2s}
+.final-cta-contact-link:hover{color:#fff}
+.final-cta-divider{width:1px;height:20px;background:rgba(255,255,255,.15)}
+.status-pill{margin-top:36px;display:inline-flex;align-items:center;gap:8px;padding:6px 16px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:100px;font-size:11px;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:.14em;text-transform:uppercase}
+.status-dot{width:7px;height:7px;background:#22c55e;border-radius:50%;animation:statusPulse 2s ease-in-out infinite}
+@keyframes statusPulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+/* ── FOOTER ── */
+footer{background:#fff;border-top:1px solid var(--border);padding:80px 40px 40px}
+.footer-inner{max-width:1280px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:56px;margin-bottom:56px}
+
+/* ─ FOOTER LOGO SLOT ─ same rules as nav logo */
+.footer-logo{display:flex;align-items:center;gap:0;margin-bottom:0}
+.footer-logo-img{
+  height:32px;
+  width:auto;
+  object-fit:contain;
+  display:block;
+  opacity:.85;
+  transition:opacity .2s;
+}
+.footer-logo-img:hover{opacity:1}
+.footer-logo-fallback{
+  font-family:'Syncopate',sans-serif;font-weight:700;font-size:15px;
+  letter-spacing:.04em;text-transform:uppercase;color:var(--text-dark);
+  display:none;
+}
+.footer-logo-fallback span{color:var(--brand-purple)}
+
+.footer-tagline{font-size:14px;color:var(--text-muted);line-height:1.7;margin:16px 0 24px;max-width:280px}
+.footer-socials{display:flex;gap:10px;flex-wrap:wrap}
+.social-btn{width:38px;height:38px;border:1.5px solid var(--border-mid);border-radius:9px;display:flex;align-items:center;justify-content:center;color:var(--text-muted);cursor:pointer;transition:all .2s}
+.social-btn:hover{border-color:var(--brand-purple);color:var(--brand-purple);background:var(--purple-light)}
+.social-btn svg{stroke:currentColor;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.footer-col-title{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--text-dim);margin-bottom:18px}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:12px}
+.footer-links a{font-size:14px;color:var(--text-muted);font-weight:500;transition:color .2s}
+.footer-links a:hover{color:var(--brand-purple)}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:28px;border-top:1px solid var(--border);flex-wrap:wrap;gap:12px}
+.footer-copy{font-size:12px;color:var(--text-dim);font-weight:600;letter-spacing:.04em}
+.footer-love{font-size:12px;color:var(--text-dim);font-weight:600;display:flex;align-items:center;gap:5px}
+.footer-love span{color:#f43f5e}
+
+/* ── CHAT ── */
+.chat-fab{position:fixed;bottom:28px;right:28px;z-index:200;width:56px;height:56px;background:var(--brand-purple);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 8px 28px rgba(124,58,237,.35);transition:all .25s;border:none}
+.chat-fab:hover{background:var(--brand-purple-2);transform:scale(1.1)}
+.chat-fab svg{stroke:#fff;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.chat-modal{position:fixed;bottom:96px;right:28px;z-index:199;width:320px;background:#fff;border:1px solid var(--border-mid);border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-lg);display:none;flex-direction:column}
+.chat-modal.open{display:flex}
+.chat-head{padding:16px 20px;background:linear-gradient(135deg,var(--brand-purple) 0%,var(--brand-purple-3) 100%);display:flex;align-items:center;gap:12px}
+.chat-head-avatar{width:38px;height:38px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syncopate',sans-serif;font-size:12px;font-weight:700;color:#fff}
+.chat-head-name{font-weight:700;font-size:14px;color:#fff}
+.chat-head-status{font-size:11px;color:rgba(255,255,255,.7);display:flex;align-items:center;gap:5px}
+.chat-head-status::before{content:'';width:6px;height:6px;background:#4ade80;border-radius:50%}
+.chat-close{margin-left:auto;cursor:pointer;font-size:18px;color:rgba(255,255,255,.7);border:none;background:none}
+.chat-messages{padding:16px;min-height:100px;display:flex;flex-direction:column;gap:10px;background:var(--bg-soft)}
+.chat-bubble{padding:10px 14px;background:#fff;border:1px solid var(--border);border-radius:14px 14px 14px 2px;font-size:13px;color:var(--text-body);max-width:90%;line-height:1.5;box-shadow:var(--shadow-sm)}
+.chat-bubble.user{background:var(--brand-purple);color:#fff;font-weight:600;border-color:transparent;border-radius:14px 14px 2px 14px;align-self:flex-end;box-shadow:none}
+.chat-options{padding:12px;background:#fff;display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--border)}
+.chat-option{padding:10px 14px;border:1.5px solid var(--border-mid);border-radius:10px;font-size:12px;font-weight:700;color:var(--text-muted);cursor:pointer;transition:all .2s;text-align:left;background:transparent;display:flex;align-items:center;justify-content:space-between}
+.chat-option:hover{border-color:var(--brand-purple);color:var(--brand-purple);background:var(--purple-light)}
+.chat-option svg{stroke:currentColor;fill:none;flex-shrink:0}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .55s ease,transform .55s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1100px){.market-grid,.services-grid,.portfolio-grid{grid-template-columns:repeat(2,1fr)}.footer-top{grid-template-columns:1fr 1fr;gap:40px}}
+@media(max-width:900px){nav{padding:0 20px}.nav-links,.nav-right .btn-primary{display:none}.hamburger{display:flex}.mobile-menu{display:flex}.hero{padding:calc(var(--nav-h) + 40px) 20px 60px}.hero-inner{grid-template-columns:1fr}.hero-visual{display:none}section,.portfolio-section,.final-cta{padding:70px 20px}footer{padding:60px 20px 32px}.community-inner{grid-template-columns:1fr;gap:40px}.creator-cards{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.market-grid,.services-grid,.portfolio-grid,.footer-top{grid-template-columns:1fr}.portfolio-item.item-tall{grid-row:auto}.section-header{flex-direction:column;align-items:flex-start}.hero-ctas,.final-cta-btns{flex-direction:column}.hero-ctas a,.hero-ctas button,.final-cta-btns a,.final-cta-btns button{width:100%;justify-content:center}.creator-cards{grid-template-columns:1fr}.community-stats{flex-direction:column;gap:10px}.chat-modal{width:calc(100vw - 32px);right:16px;bottom:88px}.final-cta-contacts{flex-direction:column;gap:14px}.final-cta-divider{display:none}.hero-stats{gap:20px}}
+</style>
+</head>
+<body>
+
+<!-- ══ NAVBAR ══════════════════════════════════════════════════════ -->
+<nav id="navbar">
+
+  <!--
+  ┌─────────────────────────────────────────────────────────┐
+  │  LOGO — replace the src with your actual logo file path │
+  │  e.g.  src="ExevoLogo/exevo-logo-png.png"               │
+  └─────────────────────────────────────────────────────────┘
+  -->
+  <a href="/" class="nav-logo">
+    <img
+      class="nav-logo-img"
+      src="ExevoLogo/exevo-logo-png.png"
+      alt="Exevo Designers"
+      onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+    >
+    <span class="nav-logo-fallback">EXEVO <span>DESIGNERS</span></span>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="marketplace.html">Marketplace</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="portfolio">Portfolio</a></li>
+    <li><a href="sign-up">Community</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <!-- Cart icon — outline shopping bag -->
+    <button class="cart-btn" onclick="window.location='cart'" aria-label="Cart">
+      <svg width="18" height="18" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <path d="M16 10a4 4 0 01-8 0"/>
+      </svg>
+      <span class="cart-count">0</span>
+    </button>
+    <a href="custom-order" class="btn-primary">
+      Start Project
+    </a>
+  </div>
+
+  <!-- Hamburger -->
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ══ MOBILE MENU ══════════════════════════════════════════════════ -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/"           onclick="closeMenu()">Home</a>
+  <a href="marketplace.html" onclick="closeMenu()">Marketplace</a>
+  <a href="#services"   onclick="closeMenu()">Services</a>
+  <a href="portfolio"   onclick="closeMenu()">Portfolio</a>
+  <a href="sign-up"     onclick="closeMenu()">Community</a>
+  <a href="about.html"      onclick="closeMenu()">About</a>
+  <a href="custom-order" onclick="closeMenu()">Start Project</a>
+  <div class="mobile-menu-footer" style="margin-top:40px">
+    <a href="exevodesigners@gmail.com" class="btn-primary">Email Us</a>
+    <a href="https://wa.me/254700552884" class="btn-ghost">WhatsApp</a>
+  </div>
+</div>
+
+<!-- ══ HERO ══════════════════════════════════════════════════════════ -->
+<section class="hero" id="home">
+  <div class="hero-glow-1"></div>
+  <div class="hero-glow-2"></div>
+  <div class="hero-inner">
+
+    <div>
+      <div class="hero-tag"><span>Africa's Digital Creative Hub</span></div>
+      <h1 class="hero-title">
+        DESIGN.<br>
+        <span class="line-purple">SOUND.</span><br>
+        <span class="line-grad">DIGITAL<br>POWER.</span>
+      </h1>
+      <p class="hero-sub">From high-quality design assets and AI-generated music to custom websites and motion graphics — Exevo gives you everything to build and scale your brand.</p>
+
+      <div class="hero-ctas">
+        <a href="marketplace.html" class="btn-primary" style="padding:14px 30px;font-size:15px;">
+          <!-- outline shopping cart -->
+          <svg width="17" height="17" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+            <path d="M1 1h4l2.68 13.39a2 2 0 001.99 1.61h9.72a2 2 0 001.99-1.61L23 6H6"/>
+          </svg>
+          Explore Marketplace
+        </a>
+        <a href="custom-order" class="btn-ghost" style="padding:14px 30px;font-size:15px;">
+          Start a Project
+          <svg width="16" height="16" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="hero-stats">
+        <div><div class="hero-stat-num">50+</div><div class="hero-stat-label">Projects Delivered</div></div>
+        <div><div class="hero-stat-num">100%</div><div class="hero-stat-label">Client Satisfaction</div></div>
+        <div><div class="hero-stat-num">5 ★</div><div class="hero-stat-label">Average Rating</div></div>
+      </div>
+    </div>
+
+    <!-- Floating cards -->
+    <div class="hero-visual">
+      <!-- Music -->
+      <div class="h-card h-card-sm h-card-tl">
+        <div class="h-card-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+          </svg>
+        </div>
+        <div class="h-card-name">AI Music Pack</div>
+        <div class="h-card-sub">32 tracks · KES 1,200</div>
+      </div>
+
+      <!-- Main central card -->
+      <div class="h-card h-card-main">
+        <div class="h-card-main-logo">EX</div>
+        <div class="h-card-main-title">Exevo Designers</div>
+        <div class="h-card-main-sub">Design. Sound. Digital Power.</div>
+        <div class="h-card-tags">
+          <span class="h-card-tag">Graphic Design</span>
+          <span class="h-card-tag">Web Dev</span>
+          <span class="h-card-tag">Marketing</span>
+        </div>
+      </div>
+
+      <!-- Globe / web -->
+      <div class="h-card h-card-sm h-card-tr">
+        <div class="h-card-icon" style="background:#dbeafe;color:#3b82f6">
+          <svg width="18" height="18" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
+          </svg>
+        </div>
+        <div class="h-card-name">5 Live Sites</div>
+        <div class="h-card-sub">Deployed this month</div>
+      </div>
+
+      <!-- Pen tool / design -->
+      <div class="h-card h-card-sm h-card-bl">
+        <div class="h-card-icon" style="background:#dcfce7;color:#059669">
+          <svg width="18" height="18" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
+          </svg>
+        </div>
+        <div class="h-card-name">Design Assets</div>
+        <div class="h-card-sub">Templates & Kits</div>
+      </div>
+
+      <!-- Trending up / marketing -->
+      <div class="h-card h-card-sm h-card-br">
+        <div class="h-card-icon" style="background:#fce7f3;color:#db2777">
+          <svg width="18" height="18" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+            <polyline points="17 6 23 6 23 12"/>
+          </svg>
+        </div>
+        <div class="h-card-name">Growth Ready</div>
+        <div class="h-card-sub">Digital Marketing</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ MARQUEE ══════════════════════════════════════════════════════ -->
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <span class="marquee-item">GRAPHIC DESIGN</span><span class="marquee-item hi">✦</span>
+    <span class="marquee-item">DIGITAL SOUND</span><span class="marquee-item hi">✦</span>
+    <span class="marquee-item">WEB DEVELOPMENT</span><span class="marquee-item hi">✦</span>
+    <span class="marquee-item">BRANDING</span><span class="marquee-item hi">✦</span>
+    <span class="marquee-item">MOTION GRAPHICS</span><span class="marquee-item hi">✦</span>
+    <span class="marquee-item">DIGITAL MARKETING</span><span class="marquee-item hi">✦</span>
+    <span class="marquee-item">GRAPHIC DESIGN</span><span class="marquee-item hi">✦</span>
+    <span class="marquee-item">DIGITAL SOUND</span><span class="marquee-item hi">✦</span>
+    <span class="marquee-item">WEB DEVELOPMENT</span><span class="marquee-item hi">✦</span>
+    <span class="marquee-item">BRANDING</span><span class="marquee-item hi">✦</span>
+    <span class="marquee-item">MOTION GRAPHICS</span><span class="marquee-item hi">✦</span>
+    <span class="marquee-item">DIGITAL MARKETING</span><span class="marquee-item hi">✦</span>
+  </div>
+</div>
+
+<!-- ══ MARKETPLACE HIGHLIGHTS ══════════════════════════════════════ -->
+<section class="market-section" id="marketplace">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div>
+        <div class="label" style="margin-bottom:12px">Trending Products</div>
+        <h2 class="section-title">MARKETPLACE <em>HIGHLIGHTS</em></h2>
+      </div>
+      <a href="marketplace.html" class="section-link">
+        Browse All
+        <svg width="16" height="16" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <div class="market-grid">
+
+      <!-- AI Audio -->
+      <div class="market-card reveal">
+        <div class="market-badge badge-hot">HOT</div>
+        <div class="market-thumb" style="background:linear-gradient(135deg,#f3e8ff,#ede9fe)">
+          <div class="icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" stroke-width="1.4" stroke="var(--brand-purple)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+            </svg>
+          </div>
+        </div>
+        <div class="market-body">
+          <div class="market-cat">AI Audio</div>
+          <div class="market-name">AfroBeats AI Pack Vol.2</div>
+          <div class="market-footer"><div class="market-price">KES 1,200</div><button class="market-btn" onclick="window.location='marketplace'">Preview</button></div>
+        </div>
+      </div>
+
+      <!-- Design Templates -->
+      <div class="market-card reveal">
+        <div class="market-badge badge-new">NEW</div>
+        <div class="market-thumb" style="background:linear-gradient(135deg,#f0fdf4,#dcfce7)">
+          <div class="icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" stroke-width="1.4" stroke="#059669" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <path d="M3 9h18M9 21V9"/>
+            </svg>
+          </div>
+        </div>
+        <div class="market-body">
+          <div class="market-cat">Design Templates</div>
+          <div class="market-name">Brand Identity Toolkit</div>
+          <div class="market-footer"><div class="market-price">KES 800</div><button class="market-btn" onclick="window.location='marketplace'">Buy</button></div>
+        </div>
+      </div>
+
+      <!-- Website Kit -->
+      <div class="market-card reveal">
+        <div class="market-thumb" style="background:linear-gradient(135deg,#eff6ff,#dbeafe)">
+          <div class="icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" stroke-width="1.4" stroke="#3b82f6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="3" width="20" height="14" rx="2"/>
+              <line x1="8" y1="21" x2="16" y2="21"/>
+              <line x1="12" y1="17" x2="12" y2="21"/>
+            </svg>
+          </div>
+        </div>
+        <div class="market-body">
+          <div class="market-cat">Website Kit</div>
+          <div class="market-name">Portfolio Website Template</div>
+          <div class="market-footer"><div class="market-price">KES 2,500</div><button class="market-btn" onclick="window.location='marketplace'">Preview</button></div>
+        </div>
+      </div>
+
+      <!-- Free Sound Effect -->
+      <div class="market-card reveal">
+        <div class="market-badge badge-free">FREE</div>
+        <div class="market-thumb" style="background:linear-gradient(135deg,#fdf2f8,#fce7f3)">
+          <div class="icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" stroke-width="1.4" stroke="#db2777" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+              <path d="M15.54 8.46a5 5 0 010 7.07"/>
+              <path d="M19.07 4.93a10 10 0 010 14.14"/>
+            </svg>
+          </div>
+        </div>
+        <div class="market-body">
+          <div class="market-cat">Sound Effect</div>
+          <div class="market-name">Cinematic Transitions Pack</div>
+          <div class="market-footer">
+            <div class="market-price" style="color:var(--accent-green)">Free</div>
+            <button class="market-btn" style="background:#d1fae5;color:#065f46" onclick="window.location='marketplace'">Download</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ SERVICES ══════════════════════════════════════════════════════ -->
+<section class="services-section" id="services">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div>
+        <div class="label" style="margin-bottom:12px">Professional Creative Services</div>
+        <h2 class="section-title">OUR <em>SERVICES</em></h2>
+      </div>
+      <a href="services" class="section-link">
+        View All Packages
+        <svg width="16" height="16" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <div class="services-grid">
+
+      <!-- Graphic Design -->
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" stroke-width="1.6" stroke="var(--brand-purple)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/>
+            <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/>
+            <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/>
+            <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/>
+            <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 011.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>
+          </svg>
+        </div>
+        <div class="service-name">Graphic Design</div>
+        <div class="service-desc">Visual storytelling, brand identity, and high-impact layouts that command market attention.</div>
+        <ul class="service-items"><li>Logo & brand identity</li><li>Social media graphics</li><li>Posters & flyers</li></ul>
+        <div class="service-from">Starting from</div>
+        <div class="service-price">KES 1,500</div>
+        <a href="custom-order" class="service-cta">
+          Start Project
+          <svg width="14" height="14" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <!-- Motion Graphics -->
+      <div class="service-card reveal">
+        <div class="service-icon" style="background:#f3e8ff;border-color:rgba(124,58,237,.15)">
+          <svg width="22" height="22" viewBox="0 0 24 24" stroke-width="1.6" stroke="var(--brand-purple)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="5 3 19 12 5 21 5 3"/>
+          </svg>
+        </div>
+        <div class="service-name">Motion Graphics</div>
+        <div class="service-desc">High-impact animated visuals that stop the scroll and drive engagement across all platforms.</div>
+        <ul class="service-items"><li>Animated ads & reels</li><li>Intro & outro videos</li><li>Motion brand assets</li></ul>
+        <div class="service-from">Starting from</div>
+        <div class="service-price">KES 3,000</div>
+        <a href="custom-order" class="service-cta">
+          Start Project
+          <svg width="14" height="14" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <!-- Web Development -->
+      <div class="service-card reveal">
+        <div class="service-icon" style="background:#dbeafe;border-color:rgba(59,130,246,.15)">
+          <svg width="22" height="22" viewBox="0 0 24 24" stroke-width="1.6" stroke="#3b82f6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 18 22 12 16 6"/>
+            <polyline points="8 6 2 12 8 18"/>
+          </svg>
+        </div>
+        <div class="service-name">Web Development</div>
+        <div class="service-desc">Modern, responsive, blazing-fast digital experiences built for usability and conversion.</div>
+        <ul class="service-items"><li>Business websites</li><li>E-commerce stores</li><li>Portfolio sites</li></ul>
+        <div class="service-from">Starting from</div>
+        <div class="service-price">KES 8,000</div>
+        <a href="custom-order" class="service-cta">
+          Start Project
+          <svg width="14" height="14" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <!-- Digital Marketing -->
+      <div class="service-card reveal">
+        <div class="service-icon" style="background:#dcfce7;border-color:rgba(5,150,105,.15)">
+          <svg width="22" height="22" viewBox="0 0 24 24" stroke-width="1.6" stroke="#059669" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+            <polyline points="17 6 23 6 23 12"/>
+          </svg>
+        </div>
+        <div class="service-name">Digital Marketing</div>
+        <div class="service-desc">Data-driven strategy, content, and social media management focused on ROI and growth.</div>
+        <ul class="service-items"><li>SEO & PPC campaigns</li><li>Social media management</li><li>Content strategy</li></ul>
+        <div class="service-from">Starting from</div>
+        <div class="service-price">KES 5,000</div>
+        <a href="custom-order" class="service-cta">
+          Start Project
+          <svg width="14" height="14" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ PORTFOLIO PREVIEW ══════════════════════════════════════════════ -->
+<section class="portfolio-section" id="portfolio">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div>
+        <div class="label" style="margin-bottom:12px">Recent Work</div>
+        <h2 class="section-title">OUR WORK <em>SPEAKS</em></h2>
+      </div>
+      <a href="portfolio" class="section-link">
+        Full Portfolio
+        <svg width="16" height="16" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <div class="portfolio-grid">
+      <div class="portfolio-item item-tall reveal">
+        <div class="portfolio-item-inner" style="background:linear-gradient(135deg,#1e1b4b,#312e81);min-height:460px">
+          <img src="images/malel-logo.jpeg" alt="Malel Creative" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0" onerror="this.style.display='none'">
+          <span style="position:relative;z-index:1;font-size:44px;opacity:.2"></span>
+        </div>
+        <div class="portfolio-item-overlay"><div class="portfolio-item-cat">Creative Portfolio</div><div class="portfolio-item-name">Malel Creative Works</div></div>
+      </div>
+      <div class="portfolio-item reveal">
+        <div class="portfolio-item-inner" style="background:linear-gradient(135deg,#172554,#1e3a5f)">
+          <img src="images/LearnGermanwithLewisky.png" alt="German with Lewisky" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0" onerror="this.style.display='none'">
+          <span style="position:relative;z-index:1;font-size:44px;opacity:.2"></span>
+        </div>
+        <div class="portfolio-item-overlay"><div class="portfolio-item-cat">Educational Platform</div><div class="portfolio-item-name">German with Lewisky</div></div>
+      </div>
+      <div class="portfolio-item reveal">
+        <div class="portfolio-item-inner" style="background:linear-gradient(135deg,#4a1942,#6b21a8)">
+          <img src="images/JeyahHaven.jpg" alt="Jean Yarn Haven" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0" onerror="this.style.display='none'">
+          <span style="position:relative;z-index:1;font-size:44px;opacity:.2"></span>
+        </div>
+        <div class="portfolio-item-overlay"><div class="portfolio-item-cat">E-Commerce</div><div class="portfolio-item-name">Jean Yarn Haven</div></div>
+      </div>
+      <div class="portfolio-item reveal">
+        <div class="portfolio-item-inner" style="background:linear-gradient(135deg,#064e3b,#065f46)">
+          <img src="images/AshleyWambu.png" alt="Wambo Ashley" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0" onerror="this.style.display='none'">
+          <span style="position:relative;z-index:1;font-size:44px;opacity:.2"></span>
+        </div>
+        <div class="portfolio-item-overlay"><div class="portfolio-item-cat">Personal Brand</div><div class="portfolio-item-name">Wambo Ashley</div></div>
+      </div>
+      <div class="portfolio-item reveal">
+        <div class="portfolio-item-inner" style="background:linear-gradient(135deg,#431407,#7c2d12)">
+          <img src="images/TheBrandCyberLogo.jpg" alt="The Brand Cyber" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0" onerror="this.style.display='none'">
+          <span style="position:relative;z-index:1;font-size:44px;opacity:.2"></span>
+        </div>
+        <div class="portfolio-item-overlay"><div class="portfolio-item-cat">Retail & Stationeries</div><div class="portfolio-item-name">The Brand Cyber</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ COMMUNITY ══════════════════════════════════════════════════════ -->
+<section class="community-section" id="community">
+  <div class="section-inner">
+    <div class="community-inner">
+
+      <div class="reveal">
+        <div class="label" style="margin-bottom:12px">Network & Grow</div>
+        <h2 class="section-title">JOIN THE<br><em>EXEVO</em><br>NETWORK</h2>
+        <p class="community-desc">A space for creatives to collaborate, showcase their work, and build lasting careers across Africa and beyond.</p>
+        <div class="community-stats">
+          <div class="community-stat"><div class="community-stat-num">200+</div><div class="community-stat-label">Members</div></div>
+          <div class="community-stat"><div class="community-stat-num">50+</div><div class="community-stat-label">Projects</div></div>
+          <div class="community-stat"><div class="community-stat-num">5 ★</div><div class="community-stat-label">Rated</div></div>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <a href="sign-up" class="btn-primary">
+            <!-- users icon -->
+            <svg width="16" height="16" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+            </svg>
+            Join Community
+          </a>
+          <a href="about.html" class="btn-ghost">Learn More</a>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="label" style="margin-bottom:20px">Featured Creators</div>
+        <div class="creator-cards">
+          <div class="creator-card"><div class="creator-avatar" style="background:linear-gradient(135deg,var(--brand-purple),var(--accent-pink))">JM</div><div><div class="creator-name">James M.</div><div class="creator-role">Graphic Designer</div></div><span class="creator-check">✦</span></div>
+          <div class="creator-card"><div class="creator-avatar" style="background:linear-gradient(135deg,#1d4ed8,#3b82f6)">AS</div><div><div class="creator-name">Amina S.</div><div class="creator-role">Web Developer</div></div><span class="creator-check">✦</span></div>
+          <div class="creator-card"><div class="creator-avatar" style="background:linear-gradient(135deg,#dc2626,#f43f5e)">GW</div><div><div class="creator-name">Grace W.</div><div class="creator-role">Motion Designer</div></div><span class="creator-check">✦</span></div>
+          <div class="creator-card"><div class="creator-avatar" style="background:linear-gradient(135deg,#059669,#10b981)">PL</div><div><div class="creator-name">Peter L.</div><div class="creator-role">Digital Marketer</div></div><span class="creator-check">✦</span></div>
+        </div>
+        <div class="community-cta-box">
+          <div class="label">WhatsApp Channel</div>
+          <p>Join our community channel for daily design tips, job opportunities, and exclusive resources.</p>
+          <a href="https://whatsapp.com/channel/0029Vb7kTDq3QxS1ffkZhe0J" target="_blank" class="btn-outline-white" style="font-size:13px;padding:10px 22px">
+            Join Channel
+            <!-- message circle icon -->
+            <svg width="14" height="14" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ FINAL CTA ══════════════════════════════════════════════════════ -->
+<section class="final-cta" id="contact">
+  <div class="final-cta-glow"></div>
+  <div class="final-cta-inner reveal">
+    <div class="label" style="color:rgba(167,139,250,.9)">Ready to Begin?</div>
+    <h2 class="final-cta-title">BUILD<br><span class="line-purple">SOMETHING</span><br>POWERFUL.</h2>
+    <p class="final-cta-sub">Start your project today or explore our marketplace for ready-made creative assets.</p>
+    <div class="final-cta-btns">
+      <a href="custom-order" class="btn-primary" style="padding:16px 36px;font-size:15px">
+        <svg width="17" height="17" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
+        </svg>
+        Start a Project
+      </a>
+      <a href="marketplace" class="btn-outline-white" style="padding:16px 36px;font-size:15px">
+        Browse Marketplace
+        <svg width="16" height="16" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <div class="final-cta-contacts">
+      <a href="exevodesigners@gmail.com" class="final-cta-contact-link">
+        <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+        </svg>
+        exevodesigners@gmail.com
+      </a>
+      <div class="final-cta-divider"></div>
+      <a href="https://wa.me/254700552884" class="final-cta-contact-link">
+        <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 13.5a19.79 19.79 0 01-3.07-8.63A2 2 0 012 2.72h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 10.09a16 16 0 006 6l1.44-1.44a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+        </svg>
+        +254 700 552 884
+      </a>
+    </div>
+    <div class="status-pill"><span class="status-dot"></span>Currently taking new projects</div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══════════════════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+
+      <div>
+        <!--
+        ┌──────────────────────────────────────────────────────────┐
+        │  FOOTER LOGO — replace src with your logo file path     │
+        │  e.g.  src="ExevoLogo/exevo-wordmark.png"               │
+        └──────────────────────────────────────────────────────────┘
+        -->
+        <a href="/" class="footer-logo">
+          <img
+            class="footer-logo-img"
+            src="ExevoLogo/exevo-wordmark.png"
+            alt="Exevo Designers"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+          >
+          <span class="footer-logo-fallback">EXEVO <span>DESIGNERS</span></span>
+        </a>
+
+        <p class="footer-tagline">Setting new benchmarks for digital creativity across Africa. Built on excellence, driven by results.</p>
+
+        <div class="footer-socials">
+          <a href="https://www.instagram.com/exevodesigners" target="_blank" class="social-btn" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5"/>
+              <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+          </a>
+          <a href="https://www.facebook.com/share/17oXAWNWcZ/" target="_blank" class="social-btn" aria-label="Facebook">
+            <svg width="16" height="16" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+            </svg>
+          </a>
+          <a href="https://www.linkedin.com/in/exevo-designers-40122435a" target="_blank" class="social-btn" aria-label="LinkedIn">
+            <svg width="16" height="16" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/>
+              <rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+            </svg>
+          </a>
+          <a href="https://www.tiktok.com/@exevodesigners" target="_blank" class="social-btn" aria-label="TikTok">
+            <svg width="16" height="16" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 12a4 4 0 104 4V4a5 5 0 005 5"/>
+            </svg>
+          </a>
+          <a href="https://whatsapp.com/channel/0029Vb7kTDq3QxS1ffkZhe0J" target="_blank" class="social-btn" aria-label="WhatsApp">
+            <svg width="16" height="16" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/>
+            </svg>
+          </a>
+          <a href="exevodesigners@gmail.com" class="social-btn" aria-label="Email">
+            <svg width="16" height="16" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Navigation</div>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="marketplace.html">Marketplace</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="portfolio">Portfolio</a></li>
+          <li><a href="sign-up">Community</a></li>
+          <li><a href="case-studies">Case Studies</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-links">
+          <li><a href="custom-order">Graphic Design</a></li>
+          <li><a href="custom-order">Motion Graphics</a></li>
+          <li><a href="custom-order">Web Development</a></li>
+          <li><a href="custom-order">Digital Marketing</a></li>
+          <li><a href="custom-order">AI Music</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Legal & Info</div>
+        <ul class="footer-links">
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Cookie Policy</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="https://g.page/r/Cd2kJjKTJ3_cEAE/review" target="_blank">Leave a Review</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 EXEVO DESIGNERS NETWORK. ALL RIGHTS RESERVED.</p>
+      <p class="footer-love">DESIGNED WITH <span>♥</span> IN AFRICA</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ══ CHAT FAB ══════════════════════════════════════════════════════ -->
+<button class="chat-fab" id="chatFab" onclick="toggleChat()" aria-label="Chat with us">
+  <svg width="22" height="22" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+  </svg>
+</button>
+
+<div class="chat-modal" id="chatModal">
+  <div class="chat-head">
+    <div class="chat-head-avatar">EX</div>
+    <div><div class="chat-head-name">Exevo Assistant</div><div class="chat-head-status">Online Now</div></div>
+    <button class="chat-close" onclick="toggleChat()">
+      <svg width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="rgba(255,255,255,.7)" fill="none" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="chat-messages" id="chatMessages">
+    <div class="chat-bubble">Welcome to Exevo Designers! How can we help you build your digital legacy today? 🎨</div>
+  </div>
+  <div class="chat-options">
+    <button class="chat-option" onclick="chatSelect(this)" data-msg="I'd like to hire a designer">
+      Hire a Designer
+      <svg width="12" height="12" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </button>
+    <button class="chat-option" onclick="chatSelect(this)" data-msg="I want to browse the marketplace">
+      Browse Marketplace
+      <svg width="12" height="12" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </button>
+    <button class="chat-option" onclick="chatSelect(this)" data-msg="I'd like to request a project quote">
+      Get a Quote
+      <svg width="12" height="12" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- ══ SCRIPTS ══════════════════════════════════════════════════════ -->
+<script>
+function toggleMenu(){
+  const m=document.getElementById('mobileMenu'),h=document.getElementById('hamburger');
+  const o=m.classList.toggle('open');
+  document.body.style.overflow=o?'hidden':'';
+  const[s1,s2,s3]=h.querySelectorAll('span');
+  if(o){s1.style.transform='rotate(45deg) translate(5px,5px)';s2.style.opacity='0';s3.style.transform='rotate(-45deg) translate(5px,-5px)'}
+  else{[s1,s2,s3].forEach(s=>{s.style.transform='';s.style.opacity=''})}
+}
+function closeMenu(){
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.body.style.overflow='';
+  document.querySelectorAll('#hamburger span').forEach(s=>{s.style.transform='';s.style.opacity=''});
+}
+function toggleChat(){document.getElementById('chatModal').classList.toggle('open')}
+function chatSelect(btn){
+  const msg=btn.dataset.msg,area=document.getElementById('chatMessages');
+  const u=document.createElement('div');u.className='chat-bubble user';u.textContent=msg;area.appendChild(u);
+  setTimeout(()=>{
+    const b=document.createElement('div');b.className='chat-bubble';
+    b.textContent='Connecting you with our team on WhatsApp…';area.appendChild(b);
+    area.scrollTop=area.scrollHeight;
+    setTimeout(()=>window.open('https://wa.me/254700552884?text='+encodeURIComponent('Hi Exevo, '+msg),'_blank'),1200);
+  },700);
+  area.scrollTop=area.scrollHeight;
+}
+
+// Scroll reveal
+const obs=new IntersectionObserver(entries=>entries.forEach((e,i)=>{
+  if(e.isIntersecting)setTimeout(()=>e.target.classList.add('visible'),i*90)
+}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// Navbar shadow
+window.addEventListener('scroll',()=>{
+  document.getElementById('navbar').style.boxShadow=window.scrollY>40?'0 2px 16px rgba(15,23,42,0.08)':'none';
+});
+</script>
+</body>
+</html>
