@@ -712,7 +712,7 @@ textarea { resize:vertical; min-height:120px; line-height:1.6 }
           </div>
           <div class="step-text">
             <div class="step-name">Your Details</div>
-            <div class="step-desc">Name, email & contact</div>
+            <div class="step-desc">Name, email &amp; contact</div>
           </div>
         </div>
         <div class="step-item" data-step="2">
@@ -732,7 +732,7 @@ textarea { resize:vertical; min-height:120px; line-height:1.6 }
           </div>
           <div class="step-text">
             <div class="step-name">Project Brief</div>
-            <div class="step-desc">Budget, timeline & details</div>
+            <div class="step-desc">Budget, timeline &amp; details</div>
           </div>
         </div>
         <div class="step-item" data-step="4">
@@ -741,7 +741,7 @@ textarea { resize:vertical; min-height:120px; line-height:1.6 }
             <span class="step-num-text">4</span>
           </div>
           <div class="step-text">
-            <div class="step-name">Review & Send</div>
+            <div class="step-name">Review &amp; Send</div>
             <div class="step-desc">Confirm your order</div>
           </div>
         </div>
@@ -1220,23 +1220,15 @@ textarea { resize:vertical; min-height:120px; line-height:1.6 }
 <!-- ══ SCRIPTS ══════════════════════════════════════════════════════ -->
 <script>
 /* ════════════════════════════════════════════════════
-   EMAILJS SETUP
+   EMAILJS CONFIG
    ────────────────────────────────────────────────────
-   INSTRUCTIONS TO ACTIVATE:
+   These are your live credentials. The form sends
+   directly to exevodesigners@gmail.com via EmailJS.
 
-   1. Go to https://www.emailjs.com and create a free account
-   2. Add an Email Service (Gmail) and connect exevodesigners@gmail.com
-   3. Create an Email Template with these variables:
-        {{ref_number}}, {{first_name}}, {{last_name}},
-        {{email}}, {{phone}}, {{company}}, {{country}},
-        {{hear_about}}, {{services}}, {{budget}},
-        {{timeline}}, {{description}}, {{reference_url}},
-        {{contact_pref}}, {{submitted_at}}
-   4. Replace the three values below with your real IDs:
-
-        YOUR_PUBLIC_KEY   → Account → General → Public Key
-        YOUR_SERVICE_ID   → Email Services → your service ID
-        YOUR_TEMPLATE_ID  → Email Templates → your template ID
+   In your EmailJS template settings make sure:
+     To Email  → exevodesigners@gmail.com
+     Reply To  → {{email}}
+     Subject   → New Project Enquiry [{{ref_number}}] — {{first_name}} {{last_name}}
 ════════════════════════════════════════════════════ */
 const EMAILJS_PUBLIC_KEY  = '6_HJ9Fz3Oatnr-26z';
 const EMAILJS_SERVICE_ID  = 'service_3dii27v';
@@ -1244,7 +1236,7 @@ const EMAILJS_TEMPLATE_ID = 'template_fnjvbqp';
 
 (function(){
   try { emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY }); }
-  catch(e){ console.warn('EmailJS init skipped (set your keys):', e.message); }
+  catch(e){ console.warn('EmailJS init error:', e.message); }
 })();
 
 /* ── STATE ── */
@@ -1262,18 +1254,18 @@ function syncIndicators(step) {
   document.querySelectorAll('.step-item').forEach(el => {
     const s = parseInt(el.dataset.step);
     el.classList.remove('active','done');
-    const numEl  = el.querySelector('.step-num-text');
+    const numEl   = el.querySelector('.step-num-text');
     const checkEl = el.querySelector('.check-icon');
     if (s < step) {
       el.classList.add('done');
-      if (numEl)  numEl.style.display  = 'none';
+      if (numEl)   numEl.style.display   = 'none';
       if (checkEl) checkEl.style.display = 'block';
     } else if (s === step) {
       el.classList.add('active');
-      if (numEl)  numEl.style.display  = 'inline';
+      if (numEl)   numEl.style.display   = 'inline';
       if (checkEl) checkEl.style.display = 'none';
     } else {
-      if (numEl)  numEl.style.display  = 'inline';
+      if (numEl)   numEl.style.display   = 'inline';
       if (checkEl) checkEl.style.display = 'none';
     }
   });
@@ -1464,7 +1456,10 @@ function escHtml(str) {
   return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
-/* ── SUBMIT ── */
+/* ══════════════════════════════════════════════════════
+   SUBMIT — Sends via EmailJS to exevodesigners@gmail.com
+   No fallback mailto. Shows a clear error if it fails.
+══════════════════════════════════════════════════════ */
 async function submitForm() {
   if (!validateStep4()) {
     showError('Please agree to the terms before sending.');
@@ -1488,61 +1483,48 @@ async function submitForm() {
     first_name:    get('firstName'),
     last_name:     get('lastName'),
     email:         get('email'),
-    phone:         get('phone') || 'Not provided',
-    company:       get('company') || 'Not provided',
+    phone:         get('phone')       || 'Not provided',
+    company:       get('company')     || 'Not provided',
     country:       get('country'),
-    hear_about:    get('hearAbout') || 'Not specified',
+    hear_about:    get('hearAbout')   || 'Not specified',
     services:      services,
     budget:        budget,
     timeline:      timeline,
     description:   get('description'),
     reference_url: get('referenceUrl') || 'None',
-    contact_pref:  get('contactPref') || 'Any',
+    contact_pref:  get('contactPref')  || 'Any',
     submitted_at:  new Date().toLocaleString('en-KE', { timeZone:'Africa/Nairobi' }),
   };
 
-  /* ── Try EmailJS ── */
-  let sent = false;
-  if (EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY') {
-    try {
-      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params);
-      sent = true;
-    } catch(err) {
-      console.error('EmailJS error:', err);
-    }
+  /* ── Send via EmailJS ── */
+  try {
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params);
+  } catch(err) {
+    console.error('EmailJS send error:', err);
+    btn.classList.remove('loading');
+    btn.disabled = false;
+    showError('Failed to send your enquiry. Please email us directly at exevodesigners@gmail.com or try again.');
+    return;
   }
 
-  /* ── Fallback: mailto link if EmailJS not configured ── */
-  if (!sent) {
-    const body = Object.entries(params)
-      .map(([k,v]) => `${k.replace(/_/g,' ').toUpperCase()}: ${v}`)
-      .join('\n');
-    const subject = `New Exevo Project Enquiry [${ref}] — ${params.first_name} ${params.last_name}`;
-    window.open(
-      `mailto:exevodesigners@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`,
-      '_blank'
-    );
-  }
-
-  /* ── Show success ── */
+  /* ── Success ── */
   btn.classList.remove('loading');
   btn.disabled = false;
   document.getElementById('refNumber').textContent = ref;
 
-  // Hide all panels, show success
+  // Hide all panels, show success screen
   document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
   document.getElementById('progressBar').style.width = '100%';
   document.querySelector('.progress-bar-wrap').style.opacity = '0';
   document.getElementById('successScreen').classList.add('show');
 
-  // Update sidebar
-  syncIndicators(5); // all done
+  // Mark all sidebar steps as done
   document.querySelectorAll('.step-item').forEach(el => {
     el.classList.add('done');
     el.classList.remove('active');
-    const numEl  = el.querySelector('.step-num-text');
+    const numEl   = el.querySelector('.step-num-text');
     const checkEl = el.querySelector('.check-icon');
-    if (numEl)  numEl.style.display  = 'none';
+    if (numEl)   numEl.style.display   = 'none';
     if (checkEl) checkEl.style.display = 'block';
   });
 }
@@ -1557,18 +1539,18 @@ function resetForm() {
   document.querySelectorAll('input[type=checkbox], input[type=radio]').forEach(el => el.checked = false);
   document.getElementById('descCount').textContent = '0';
 
-  // Hide success
+  // Hide success screen
   document.getElementById('successScreen').classList.remove('show');
   document.querySelector('.progress-bar-wrap').style.opacity = '1';
 
-  // Remove all errors
+  // Remove all error states
   document.querySelectorAll('.field-error').forEach(e => { e.classList.remove('show'); e.style.display = ''; });
   document.querySelectorAll('input.error, select.error, textarea.error').forEach(el => el.classList.remove('error'));
 
   showStep(1);
 }
 
-/* ── NAVBAR SCROLL ── */
+/* ── NAVBAR SCROLL SHADOW ── */
 window.addEventListener('scroll', () => {
   document.getElementById('navbar').style.boxShadow =
     window.scrollY > 20 ? '0 2px 16px rgba(15,23,42,0.08)' : 'none';
@@ -1576,9 +1558,9 @@ window.addEventListener('scroll', () => {
 
 /* ── DRAG & DROP on file area (visual only) ── */
 document.querySelectorAll('.file-upload-area').forEach(area => {
-  area.addEventListener('dragover', e => { e.preventDefault(); area.classList.add('drag-over'); });
-  area.addEventListener('dragleave', () => area.classList.remove('drag-over'));
-  area.addEventListener('drop', e => { e.preventDefault(); area.classList.remove('drag-over'); });
+  area.addEventListener('dragover',  e => { e.preventDefault(); area.classList.add('drag-over'); });
+  area.addEventListener('dragleave', ()  => area.classList.remove('drag-over'));
+  area.addEventListener('drop',      e  => { e.preventDefault(); area.classList.remove('drag-over'); });
 });
 </script>
 </body>
