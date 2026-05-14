@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-<title>Exevo Designers — Design. Sound. Digital Power.</title>
-<meta name="description" content="Exevo Designers Network — Africa's premier creative ecosystem for graphic design, digital sound, web development, and marketing.">
+<title>Exevo Designers Network — Branding, Websites & Digital Growth</title>
+<meta name="description" content="Exevo Designers Network helps startups, small businesses, churches, schools, personal brands, and organizations grow through branding, websites, print design, motion graphics, and digital marketing.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -312,10 +312,49 @@ footer{background:#fff;border-top:1px solid var(--border);padding:80px 40px 40px
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .55s ease,transform .55s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
 
+
+/* ── TRUST STRIP ── */
+.trust-strip{padding:28px 40px;background:#fff;border-bottom:1px solid var(--border)}
+.trust-inner{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1.2fr repeat(4,1fr);gap:14px;align-items:center}
+.trust-copy{font-size:13px;font-weight:700;color:var(--text-body);line-height:1.6}
+.trust-pill{padding:14px 16px;background:var(--bg-soft);border:1px solid var(--border);border-radius:var(--radius);font-size:12px;font-weight:700;color:var(--text-muted);text-align:center}
+
+/* ── AUDIENCE ── */
+.audience-section{background:#fff;border-top:1px solid var(--border)}
+.audience-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+.audience-card{padding:22px 16px;background:var(--bg-soft);border:1px solid var(--border);border-radius:var(--radius);text-align:center;font-size:13px;font-weight:800;color:var(--text-body);transition:all .25s}
+.audience-card:hover{transform:translateY(-3px);border-color:rgba(124,58,237,.25);box-shadow:var(--shadow-sm);color:var(--brand-purple)}
+
+/* ── PACKAGES ── */
+.packages-section{background:var(--bg-soft);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.package-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.package-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:30px 24px;box-shadow:var(--shadow-sm);transition:all .3s;position:relative;overflow:hidden}
+.package-card.featured{border-color:rgba(124,58,237,.35);box-shadow:var(--shadow-purple)}
+.package-card.featured::before{content:'POPULAR';position:absolute;top:16px;right:-34px;transform:rotate(35deg);background:var(--brand-purple);color:#fff;font-size:9px;font-weight:800;letter-spacing:.14em;padding:5px 36px}
+.package-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
+.package-name{font-family:'Syncopate',sans-serif;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.02em;color:var(--text-dark);margin-bottom:10px;line-height:1.35}
+.package-desc{font-size:13px;color:var(--text-muted);line-height:1.65;margin-bottom:20px;min-height:64px}
+.package-list{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:24px}
+.package-list li{font-size:12px;color:var(--text-body);display:flex;gap:8px;align-items:flex-start}
+.package-list li::before{content:'✓';font-weight:900;color:var(--brand-purple);line-height:1.4}
+.package-price{font-size:22px;font-weight:900;color:var(--brand-purple);margin-bottom:18px}
+
+/* ── FOUNDER NOTE ── */
+.founder-section{background:#fff}
+.founder-box{max-width:1280px;margin:0 auto;background:linear-gradient(135deg,var(--text-dark),#24125a);border-radius:var(--radius-xl);padding:58px;display:grid;grid-template-columns:1.2fr .8fr;gap:44px;align-items:center;overflow:hidden;position:relative}
+.founder-box::before{content:'';position:absolute;right:-180px;top:-180px;width:420px;height:420px;background:radial-gradient(circle,rgba(124,58,237,.35),transparent 70%);border-radius:50%}
+.founder-title{font-family:'Syncopate',sans-serif;font-size:clamp(26px,3.5vw,48px);line-height:1;text-transform:uppercase;color:#fff;margin-bottom:22px;position:relative;z-index:1}
+.founder-text{font-size:16px;color:rgba(255,255,255,.68);line-height:1.8;position:relative;z-index:1}
+.founder-mini{position:relative;z-index:1;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:var(--radius-lg);padding:24px;color:#fff}
+.founder-mini strong{display:block;font-size:14px;margin-bottom:8px}
+.founder-mini p{font-size:13px;color:rgba(255,255,255,.62);line-height:1.65}
+
+.portfolio-item-desc{font-size:12px;color:rgba(255,255,255,.68);line-height:1.5;margin-top:6px}
+
 /* ── RESPONSIVE ── */
-@media(max-width:1100px){.market-grid,.services-grid,.portfolio-grid{grid-template-columns:repeat(2,1fr)}.footer-top{grid-template-columns:1fr 1fr;gap:40px}}
-@media(max-width:900px){nav{padding:0 20px}.nav-links,.nav-right .btn-primary{display:none}.hamburger{display:flex}.mobile-menu{display:flex}.hero{padding:calc(var(--nav-h) + 40px) 20px 60px}.hero-inner{grid-template-columns:1fr}.hero-visual{display:none}section,.portfolio-section,.final-cta{padding:70px 20px}footer{padding:60px 20px 32px}.community-inner{grid-template-columns:1fr;gap:40px}.creator-cards{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:640px){.market-grid,.services-grid,.portfolio-grid,.footer-top{grid-template-columns:1fr}.portfolio-item.item-tall{grid-row:auto}.section-header{flex-direction:column;align-items:flex-start}.hero-ctas,.final-cta-btns{flex-direction:column}.hero-ctas a,.hero-ctas button,.final-cta-btns a,.final-cta-btns button{width:100%;justify-content:center}.creator-cards{grid-template-columns:1fr}.community-stats{flex-direction:column;gap:10px}.chat-modal{width:calc(100vw - 32px);right:16px;bottom:88px}.final-cta-contacts{flex-direction:column;gap:14px}.final-cta-divider{display:none}.hero-stats{gap:20px}}
+@media(max-width:1100px){.market-grid,.services-grid,.portfolio-grid,.package-grid{grid-template-columns:repeat(2,1fr)}.audience-grid{grid-template-columns:repeat(3,1fr)}.trust-inner{grid-template-columns:repeat(2,1fr)}.footer-top{grid-template-columns:1fr 1fr;gap:40px}}
+@media(max-width:900px){nav{padding:0 20px}.nav-links,.nav-right .btn-primary{display:none}.hamburger{display:flex}.mobile-menu{display:flex}.hero{padding:calc(var(--nav-h) + 40px) 20px 60px}.hero-inner{grid-template-columns:1fr}.hero-visual{display:none}section,.portfolio-section,.final-cta{padding:70px 20px}.trust-strip{padding:22px 20px}.founder-box{grid-template-columns:1fr;padding:36px 24px}footer{padding:60px 20px 32px}.community-inner{grid-template-columns:1fr;gap:40px}.creator-cards{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.market-grid,.services-grid,.portfolio-grid,.package-grid,.audience-grid,.trust-inner,.footer-top{grid-template-columns:1fr}.portfolio-item.item-tall{grid-row:auto}.section-header{flex-direction:column;align-items:flex-start}.hero-ctas,.final-cta-btns{flex-direction:column}.hero-ctas a,.hero-ctas button,.final-cta-btns a,.final-cta-btns button{width:100%;justify-content:center}.creator-cards{grid-template-columns:1fr}.community-stats{flex-direction:column;gap:10px}.chat-modal{width:calc(100vw - 32px);right:16px;bottom:88px}.final-cta-contacts{flex-direction:column;gap:14px}.final-cta-divider{display:none}.hero-stats{gap:20px}}
 </style>
 </head>
 <body>
@@ -379,7 +418,7 @@ footer{background:#fff;border-top:1px solid var(--border);padding:80px 40px 40px
   <a href="about.html"      onclick="closeMenu()">About</a>
   <a href="enquiry.html" onclick="closeMenu()">Start Project</a>
   <div class="mobile-menu-footer" style="margin-top:40px">
-    <a href="exevodesigners@gmail.com" class="btn-primary">Email Us</a>
+    <a href="mailto:exevodesigners@gmail.com" class="btn-primary">Email Us</a>
     <a href="https://wa.me/254700552884" class="btn-ghost">WhatsApp</a>
   </div>
 </div>
@@ -391,25 +430,23 @@ footer{background:#fff;border-top:1px solid var(--border);padding:80px 40px 40px
   <div class="hero-inner">
 
     <div>
-      <div class="hero-tag"><span>Africa's Digital Creative Hub</span></div>
-      <h1 class="hero-title">
-        DESIGN.<br>
-        <span class="line-purple">SOUND.</span><br>
-        <span class="line-grad">DIGITAL<br>POWER.</span>
-      </h1>
-      <p class="hero-sub">From high-quality design assets and AI-generated music to custom websites and motion graphics — Exevo gives you everything to build and scale your brand.</p>
+      <div class="hero-tag"><span>Creative Growth Partner for Modern Brands</span></div>
+          <h1 class="hero-title">
+            BUILD.<br>
+            GROW.<br>
+            <span class="line-grad">STAND OUT.</span>
+          </h1>
+      <p class="hero-sub">Exevo Designers Network helps businesses grow through branding, websites, social media design, print design, motion graphics, and digital marketing.</p>
 
       <div class="hero-ctas">
-        <a href="marketplace.html" class="btn-primary" style="padding:14px 30px;font-size:15px;">
-          <!-- outline shopping cart -->
+        <a href="enquiry.html" class="btn-primary" style="padding:14px 30px;font-size:15px;">
           <svg width="17" height="17" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
-            <path d="M1 1h4l2.68 13.39a2 2 0 001.99 1.61h9.72a2 2 0 001.99-1.61L23 6H6"/>
+            <path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
           </svg>
-          Explore Marketplace
-        </a>
-        <a href="enquiry.html" class="btn-ghost" style="padding:14px 30px;font-size:15px;">
           Start a Project
+        </a>
+        <a href="#packages" class="btn-ghost" style="padding:14px 30px;font-size:15px;">
+          View Packages
           <svg width="16" height="16" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
             <path d="M5 12h14M12 5l7 7-7 7"/>
           </svg>
@@ -418,37 +455,33 @@ footer{background:#fff;border-top:1px solid var(--border);padding:80px 40px 40px
 
       <div class="hero-stats">
         <div><div class="hero-stat-num">50+</div><div class="hero-stat-label">Projects Delivered</div></div>
-        <div><div class="hero-stat-num">100%</div><div class="hero-stat-label">Client Satisfaction</div></div>
-        <div><div class="hero-stat-num">5 ★</div><div class="hero-stat-label">Average Rating</div></div>
+        <div><div class="hero-stat-num">Kenya</div><div class="hero-stat-label">Based, Serving Globally</div></div>
+        <div><div class="hero-stat-num">5 ★</div><div class="hero-stat-label">Client Rated</div></div>
       </div>
     </div>
 
-    <!-- Floating cards -->
     <div class="hero-visual">
-      <!-- Music -->
       <div class="h-card h-card-sm h-card-tl">
         <div class="h-card-icon">
           <svg width="18" height="18" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+            <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
           </svg>
         </div>
-        <div class="h-card-name">AI Music Pack</div>
-        <div class="h-card-sub">32 tracks · KES 1,200</div>
+        <div class="h-card-name">Brand Identity</div>
+        <div class="h-card-sub">Logos, colors & systems</div>
       </div>
 
-      <!-- Main central card -->
       <div class="h-card h-card-main">
         <div class="h-card-main-logo">EX</div>
         <div class="h-card-main-title">Exevo Designers</div>
-        <div class="h-card-main-sub">Design. Sound. Digital Power.</div>
+        <div class="h-card-main-sub">Brand. Build. Market. Grow.</div>
         <div class="h-card-tags">
-          <span class="h-card-tag">Graphic Design</span>
-          <span class="h-card-tag">Web Dev</span>
+          <span class="h-card-tag">Branding</span>
+          <span class="h-card-tag">Websites</span>
           <span class="h-card-tag">Marketing</span>
         </div>
       </div>
 
-      <!-- Globe / web -->
       <div class="h-card h-card-sm h-card-tr">
         <div class="h-card-icon" style="background:#dbeafe;color:#3b82f6">
           <svg width="18" height="18" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -457,22 +490,20 @@ footer{background:#fff;border-top:1px solid var(--border);padding:80px 40px 40px
             <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
           </svg>
         </div>
-        <div class="h-card-name">5 Live Sites</div>
-        <div class="h-card-sub">Deployed this month</div>
+        <div class="h-card-name">Business Websites</div>
+        <div class="h-card-sub">Fast, responsive & clear</div>
       </div>
 
-      <!-- Pen tool / design -->
       <div class="h-card h-card-sm h-card-bl">
         <div class="h-card-icon" style="background:#dcfce7;color:#059669">
           <svg width="18" height="18" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
+            <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
           </svg>
         </div>
-        <div class="h-card-name">Design Assets</div>
-        <div class="h-card-sub">Templates & Kits</div>
+        <div class="h-card-name">Print & Layouts</div>
+        <div class="h-card-sub">Flyers, profiles & brochures</div>
       </div>
 
-      <!-- Trending up / marketing -->
       <div class="h-card h-card-sm h-card-br">
         <div class="h-card-icon" style="background:#fce7f3;color:#db2777">
           <svg width="18" height="18" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -480,13 +511,24 @@ footer{background:#fff;border-top:1px solid var(--border);padding:80px 40px 40px
             <polyline points="17 6 23 6 23 12"/>
           </svg>
         </div>
-        <div class="h-card-name">Growth Ready</div>
-        <div class="h-card-sub">Digital Marketing</div>
+        <div class="h-card-name">Growth Content</div>
+        <div class="h-card-sub">Social media & strategy</div>
       </div>
     </div>
 
   </div>
 </section>
+
+<!-- ══ TRUST STRIP ══════════════════════════════════════════════════ -->
+<div class="trust-strip">
+  <div class="trust-inner reveal">
+    <div class="trust-copy">Based in Kenya, serving ambitious brands locally and internationally.</div>
+    <div class="trust-pill">Brand Identity</div>
+    <div class="trust-pill">Business Websites</div>
+    <div class="trust-pill">Print & Publication Design</div>
+    <div class="trust-pill">Growth & Digital Marketing</div>
+  </div>
+</div>
 
 <!-- ══ MARQUEE ══════════════════════════════════════════════════════ -->
 <div class="marquee-strip">
@@ -511,8 +553,8 @@ footer{background:#fff;border-top:1px solid var(--border);padding:80px 40px 40px
   <div class="section-inner">
     <div class="section-header reveal">
       <div>
-        <div class="label" style="margin-bottom:12px">Trending Products</div>
-        <h2 class="section-title">MARKETPLACE <em>HIGHLIGHTS</em></h2>
+        <div class="label" style="margin-bottom:12px">Ready-Made Creative Assets</div>
+        <h2 class="section-title">TOOLS FOR <em>CREATORS</em></h2>
       </div>
       <a href="marketplace.html" class="section-link">
         Browse All
@@ -617,7 +659,7 @@ footer{background:#fff;border-top:1px solid var(--border);padding:80px 40px 40px
 
     <div class="services-grid">
 
-      <!-- Graphic Design -->
+      <!-- Brand Identity & Visual Design -->
       <div class="service-card reveal">
         <div class="service-icon">
           <svg width="22" height="22" viewBox="0 0 24 24" stroke-width="1.6" stroke="var(--brand-purple)" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -628,8 +670,8 @@ footer{background:#fff;border-top:1px solid var(--border);padding:80px 40px 40px
             <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 011.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>
           </svg>
         </div>
-        <div class="service-name">Graphic Design</div>
-        <div class="service-desc">Visual storytelling, brand identity, and high-impact layouts that command market attention.</div>
+        <div class="service-name">Brand Identity & Visual Design</div>
+        <div class="service-desc">Professional visuals that make your business look trusted, consistent, and ready to sell.</div>
         <ul class="service-items"><li>Logo & brand identity</li><li>Social media graphics</li><li>Posters & flyers</li></ul>
         <div class="service-from">Starting from</div>
         <div class="service-price">KES 1,500</div>
@@ -639,15 +681,15 @@ footer{background:#fff;border-top:1px solid var(--border);padding:80px 40px 40px
         </a>
       </div>
 
-      <!-- Motion Graphics -->
+      <!-- Motion & Content Production -->
       <div class="service-card reveal">
         <div class="service-icon" style="background:#f3e8ff;border-color:rgba(124,58,237,.15)">
           <svg width="22" height="22" viewBox="0 0 24 24" stroke-width="1.6" stroke="var(--brand-purple)" fill="none" stroke-linecap="round" stroke-linejoin="round">
             <polygon points="5 3 19 12 5 21 5 3"/>
           </svg>
         </div>
-        <div class="service-name">Motion Graphics</div>
-        <div class="service-desc">High-impact animated visuals that stop the scroll and drive engagement across all platforms.</div>
+        <div class="service-name">Motion & Content Production</div>
+        <div class="service-desc">Animated content, reels, and branded video assets that help your message move faster online.</div>
         <ul class="service-items"><li>Animated ads & reels</li><li>Intro & outro videos</li><li>Motion brand assets</li></ul>
         <div class="service-from">Starting from</div>
         <div class="service-price">KES 3,000</div>
@@ -657,7 +699,7 @@ footer{background:#fff;border-top:1px solid var(--border);padding:80px 40px 40px
         </a>
       </div>
 
-      <!-- Web Development -->
+      <!-- Business Website Development -->
       <div class="service-card reveal">
         <div class="service-icon" style="background:#dbeafe;border-color:rgba(59,130,246,.15)">
           <svg width="22" height="22" viewBox="0 0 24 24" stroke-width="1.6" stroke="#3b82f6" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -665,8 +707,8 @@ footer{background:#fff;border-top:1px solid var(--border);padding:80px 40px 40px
             <polyline points="8 6 2 12 8 18"/>
           </svg>
         </div>
-        <div class="service-name">Web Development</div>
-        <div class="service-desc">Modern, responsive, blazing-fast digital experiences built for usability and conversion.</div>
+        <div class="service-name">Business Website Development</div>
+        <div class="service-desc">Responsive websites built to present your business clearly and turn visitors into enquiries.</div>
         <ul class="service-items"><li>Business websites</li><li>E-commerce stores</li><li>Portfolio sites</li></ul>
         <div class="service-from">Starting from</div>
         <div class="service-price">KES 8,000</div>
@@ -676,7 +718,7 @@ footer{background:#fff;border-top:1px solid var(--border);padding:80px 40px 40px
         </a>
       </div>
 
-      <!-- Digital Marketing -->
+      <!-- Growth & Digital Marketing -->
       <div class="service-card reveal">
         <div class="service-icon" style="background:#dcfce7;border-color:rgba(5,150,105,.15)">
           <svg width="22" height="22" viewBox="0 0 24 24" stroke-width="1.6" stroke="#059669" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -684,8 +726,8 @@ footer{background:#fff;border-top:1px solid var(--border);padding:80px 40px 40px
             <polyline points="17 6 23 6 23 12"/>
           </svg>
         </div>
-        <div class="service-name">Digital Marketing</div>
-        <div class="service-desc">Data-driven strategy, content, and social media management focused on ROI and growth.</div>
+        <div class="service-name">Growth & Digital Marketing</div>
+        <div class="service-desc">Content planning, social media support, and campaigns that help your brand stay visible.</div>
         <ul class="service-items"><li>SEO & PPC campaigns</li><li>Social media management</li><li>Content strategy</li></ul>
         <div class="service-from">Starting from</div>
         <div class="service-price">KES 5,000</div>
@@ -695,6 +737,71 @@ footer{background:#fff;border-top:1px solid var(--border);padding:80px 40px 40px
         </a>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<!-- ══ AUDIENCE ════════════════════════════════════════════════════ -->
+<section class="audience-section" id="audience">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div>
+        <div class="label" style="margin-bottom:12px">Who We Work With</div>
+        <h2 class="section-title">BUILT FOR <em>REAL BUSINESSES</em></h2>
+      </div>
+      <p style="max-width:420px;color:var(--text-muted);font-size:14px;line-height:1.7">From small local brands to online businesses, Exevo helps you look professional, communicate clearly, and sell with confidence.</p>
+    </div>
+    <div class="audience-grid reveal">
+      <div class="audience-card">Startups</div>
+      <div class="audience-card">Small Businesses</div>
+      <div class="audience-card">Churches</div>
+      <div class="audience-card">Schools</div>
+      <div class="audience-card">Personal Brands</div>
+      <div class="audience-card">Events & Organizations</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PACKAGES ══════════════════════════════════════════════════════ -->
+<section class="packages-section" id="packages">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div>
+        <div class="label" style="margin-bottom:12px">Simple Starting Points</div>
+        <h2 class="section-title">CHOOSE A <em>PACKAGE</em></h2>
+      </div>
+      <a href="enquiry.html" class="section-link">Request Custom Quote <svg width="16" height="16" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+
+    <div class="package-grid">
+      <div class="package-card reveal">
+        <div class="package-name">Starter Brand Kit</div>
+        <p class="package-desc">For new businesses that need a clean, professional identity to start confidently.</p>
+        <ul class="package-list"><li>Logo direction</li><li>Color palette</li><li>Typography suggestion</li><li>3 social media posts</li></ul>
+        <div class="package-price">From KES 5,000</div>
+        <a href="enquiry.html" class="btn-primary">Start Here</a>
+      </div>
+      <div class="package-card featured reveal">
+        <div class="package-name">Business Visibility Kit</div>
+        <p class="package-desc">For businesses that need stronger marketing materials and consistent public visibility.</p>
+        <ul class="package-list"><li>Poster or flyer design</li><li>Rate card or brochure</li><li>Social media graphics</li><li>WhatsApp-ready assets</li></ul>
+        <div class="package-price">From KES 8,000</div>
+        <a href="enquiry.html" class="btn-primary">Build Visibility</a>
+      </div>
+      <div class="package-card reveal">
+        <div class="package-name">Website Starter</div>
+        <p class="package-desc">For brands that need a simple online home that looks sharp and works on mobile.</p>
+        <ul class="package-list"><li>One-page website</li><li>Mobile responsive layout</li><li>WhatsApp CTA</li><li>Basic SEO setup</li></ul>
+        <div class="package-price">From KES 12,000</div>
+        <a href="enquiry.html" class="btn-primary">Launch Website</a>
+      </div>
+      <div class="package-card reveal">
+        <div class="package-name">Monthly Content Package</div>
+        <p class="package-desc">For brands that want to stay active online without struggling for daily design ideas.</p>
+        <ul class="package-list"><li>12 social media posts</li><li>Captions support</li><li>Content direction</li><li>Monthly design consistency</li></ul>
+        <div class="package-price">From KES 10,000</div>
+        <a href="enquiry.html" class="btn-primary">Plan Content</a>
+      </div>
     </div>
   </div>
 </section>
@@ -718,36 +825,51 @@ footer{background:#fff;border-top:1px solid var(--border);padding:80px 40px 40px
           <img src="images/malel-logo.jpeg" alt="Malel Creative" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0" onerror="this.style.display='none'">
           <span style="position:relative;z-index:1;font-size:44px;opacity:.2"></span>
         </div>
-        <div class="portfolio-item-overlay"><div class="portfolio-item-cat">Creative Portfolio</div><div class="portfolio-item-name">Malel Creative Works</div></div>
+        <div class="portfolio-item-overlay"><div class="portfolio-item-cat">Creative Portfolio</div><div class="portfolio-item-name">Malel Creative Works</div><div class="portfolio-item-desc">Visual identity direction and portfolio presentation for a creative brand.</div></div>
       </div>
       <div class="portfolio-item reveal">
         <div class="portfolio-item-inner" style="background:linear-gradient(135deg,#172554,#1e3a5f)">
           <img src="images/LearnGermanwithLewisky.png" alt="German with Lewisky" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0" onerror="this.style.display='none'">
           <span style="position:relative;z-index:1;font-size:44px;opacity:.2"></span>
         </div>
-        <div class="portfolio-item-overlay"><div class="portfolio-item-cat">Educational Platform</div><div class="portfolio-item-name">German with Lewisky</div></div>
+        <div class="portfolio-item-overlay"><div class="portfolio-item-cat">Educational Platform</div><div class="portfolio-item-name">German with Lewisky</div><div class="portfolio-item-desc">Learning-focused brand visuals for an online education project.</div></div>
       </div>
       <div class="portfolio-item reveal">
         <div class="portfolio-item-inner" style="background:linear-gradient(135deg,#4a1942,#6b21a8)">
           <img src="images/JeyahHaven.jpg" alt="Jean Yarn Haven" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0" onerror="this.style.display='none'">
           <span style="position:relative;z-index:1;font-size:44px;opacity:.2"></span>
         </div>
-        <div class="portfolio-item-overlay"><div class="portfolio-item-cat">E-Commerce</div><div class="portfolio-item-name">Jean Yarn Haven</div></div>
+        <div class="portfolio-item-overlay"><div class="portfolio-item-cat">E-Commerce</div><div class="portfolio-item-name">Jean Yarn Haven</div><div class="portfolio-item-desc">Brand identity concept for a handmade yarn and crochet business.</div></div>
       </div>
       <div class="portfolio-item reveal">
         <div class="portfolio-item-inner" style="background:linear-gradient(135deg,#064e3b,#065f46)">
           <img src="images/AshleyWambu.png" alt="Wambo Ashley" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0" onerror="this.style.display='none'">
           <span style="position:relative;z-index:1;font-size:44px;opacity:.2"></span>
         </div>
-        <div class="portfolio-item-overlay"><div class="portfolio-item-cat">Personal Brand</div><div class="portfolio-item-name">Wambo Ashley</div></div>
+        <div class="portfolio-item-overlay"><div class="portfolio-item-cat">Personal Brand</div><div class="portfolio-item-name">Wambo Ashley</div><div class="portfolio-item-desc">Personal brand visuals built for recognition and online presence.</div></div>
       </div>
       <div class="portfolio-item reveal">
         <div class="portfolio-item-inner" style="background:linear-gradient(135deg,#431407,#7c2d12)">
           <img src="images/TheBrandCyberLogo.jpg" alt="The Brand Cyber" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0" onerror="this.style.display='none'">
           <span style="position:relative;z-index:1;font-size:44px;opacity:.2"></span>
         </div>
-        <div class="portfolio-item-overlay"><div class="portfolio-item-cat">Retail & Stationeries</div><div class="portfolio-item-name">The Brand Cyber</div></div>
+        <div class="portfolio-item-overlay"><div class="portfolio-item-cat">Retail & Stationery</div><div class="portfolio-item-name">The Brand Cyber</div><div class="portfolio-item-desc">Business identity for cyber, printing, branding, and stationery services.</div></div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOUNDER NOTE ═════════════════════════════════════════════════ -->
+<section class="founder-section" id="founder-note">
+  <div class="founder-box reveal">
+    <div>
+      <div class="label" style="color:rgba(167,139,250,.9);margin-bottom:14px">Founder Direction</div>
+      <h2 class="founder-title">WHY EXEVO EXISTS</h2>
+      <p class="founder-text">Exevo was built from the belief that African creatives and businesses deserve world-class branding, design, and digital experiences without limitations. We combine design, strategy, web, content, and marketing so your brand does not just look good — it communicates, earns trust, and grows.</p>
+    </div>
+    <div class="founder-mini">
+      <strong>Our promise</strong>
+      <p>We help you move from “I have an idea” to “my brand looks ready, professional, and easy to trust.”</p>
     </div>
   </div>
 </section>
@@ -758,9 +880,9 @@ footer{background:#fff;border-top:1px solid var(--border);padding:80px 40px 40px
     <div class="community-inner">
 
       <div class="reveal">
-        <div class="label" style="margin-bottom:12px">Network & Grow</div>
-        <h2 class="section-title">JOIN THE<br><em>EXEVO</em><br>NETWORK</h2>
-        <p class="community-desc">A space for creatives to collaborate, showcase their work, and build lasting careers across Africa and beyond.</p>
+        <div class="label" style="margin-bottom:12px">Creator Network</div>
+        <h2 class="section-title">GROW WITH<br><em>EXEVO</em><br>COMMUNITY</h2>
+        <p class="community-desc">Beyond client work, Exevo is building a space for creatives, learners, and business owners to share resources, opportunities, and ideas.</p>
         <div class="community-stats">
           <div class="community-stat"><div class="community-stat-num">200+</div><div class="community-stat-label">Members</div></div>
           <div class="community-stat"><div class="community-stat-num">50+</div><div class="community-stat-label">Projects</div></div>
@@ -782,7 +904,7 @@ footer{background:#fff;border-top:1px solid var(--border);padding:80px 40px 40px
       <div class="reveal">
         <div class="label" style="margin-bottom:20px">Featured Creators</div>
         <div class="creator-cards">
-          <div class="creator-card"><div class="creator-avatar" style="background:linear-gradient(135deg,var(--brand-purple),var(--accent-pink))">JM</div><div><div class="creator-name">James M.</div><div class="creator-role">Graphic Designer</div></div><span class="creator-check">✦</span></div>
+          <div class="creator-card"><div class="creator-avatar" style="background:linear-gradient(135deg,var(--brand-purple),var(--accent-pink))">JM</div><div><div class="creator-name">James M.</div><div class="creator-role">Brand Identity & Visual Designer</div></div><span class="creator-check">✦</span></div>
           <div class="creator-card"><div class="creator-avatar" style="background:linear-gradient(135deg,#1d4ed8,#3b82f6)">AS</div><div><div class="creator-name">Amina S.</div><div class="creator-role">Web Developer</div></div><span class="creator-check">✦</span></div>
           <div class="creator-card"><div class="creator-avatar" style="background:linear-gradient(135deg,#dc2626,#f43f5e)">GW</div><div><div class="creator-name">Grace W.</div><div class="creator-role">Motion Designer</div></div><span class="creator-check">✦</span></div>
           <div class="creator-card"><div class="creator-avatar" style="background:linear-gradient(135deg,#059669,#10b981)">PL</div><div><div class="creator-name">Peter L.</div><div class="creator-role">Digital Marketer</div></div><span class="creator-check">✦</span></div>
@@ -809,8 +931,8 @@ footer{background:#fff;border-top:1px solid var(--border);padding:80px 40px 40px
   <div class="final-cta-glow"></div>
   <div class="final-cta-inner reveal">
     <div class="label" style="color:rgba(167,139,250,.9)">Ready to Begin?</div>
-    <h2 class="final-cta-title">BUILD<br><span class="line-purple">SOMETHING</span><br>POWERFUL.</h2>
-    <p class="final-cta-sub">Start your project today or explore our marketplace for ready-made creative assets.</p>
+    <h2 class="final-cta-title">READY TO<br><span class="line-purple">LOOK</span><br>PROFESSIONAL?</h2>
+    <p class="final-cta-sub">Tell us what you need and we will recommend the best design, website, branding, or marketing package for your business.</p>
     <div class="final-cta-btns">
       <a href="enquiry.html" class="btn-primary" style="padding:16px 36px;font-size:15px">
         <svg width="17" height="17" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -819,7 +941,7 @@ footer{background:#fff;border-top:1px solid var(--border);padding:80px 40px 40px
         Start a Project
       </a>
       <a href="marketplace" class="btn-outline-white" style="padding:16px 36px;font-size:15px">
-        Browse Marketplace
+        View Packages
         <svg width="16" height="16" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
     </div>
@@ -913,16 +1035,17 @@ footer{background:#fff;border-top:1px solid var(--border);padding:80px 40px 40px
           <li><a href="portfolio">Portfolio</a></li>
           <li><a href="sign-up">Community</a></li>
           <li><a href="case-studies">Case Studies</a></li>
+          <li><a href="exevo_service_agreement_renewal_with_rates.html">Case Studies</a></li>
         </ul>
       </div>
       <div>
         <div class="footer-col-title">Services</div>
         <ul class="footer-links">
-          <li><a href="custom-order">Graphic Design</a></li>
-          <li><a href="custom-order">Motion Graphics</a></li>
-          <li><a href="custom-order">Web Development</a></li>
-          <li><a href="custom-order">Digital Marketing</a></li>
-          <li><a href="custom-order">AI Music</a></li>
+          <li><a href="custom-order">Brand Identity & Visual Design</a></li>
+          <li><a href="custom-order">Motion & Content Production</a></li>
+          <li><a href="custom-order">Business Website Development</a></li>
+          <li><a href="custom-order">Growth & Digital Marketing</a></li>
+          <li><a href="custom-order">Print & Publication Design</a></li>
         </ul>
       </div>
       <div>
@@ -961,15 +1084,15 @@ footer{background:#fff;border-top:1px solid var(--border);padding:80px 40px 40px
     </button>
   </div>
   <div class="chat-messages" id="chatMessages">
-    <div class="chat-bubble">Welcome to Exevo Designers! How can we help you build your digital legacy today? 🎨</div>
+    <div class="chat-bubble">Welcome to Exevo Designers! Tell us what you need and we will recommend the best package for your brand. 🎨</div>
   </div>
   <div class="chat-options">
-    <button class="chat-option" onclick="chatSelect(this)" data-msg="I'd like to hire a designer">
-      Hire a Designer
+    <button class="chat-option" onclick="chatSelect(this)" data-msg="I'd like to start a design project">
+      Start a Design Project
       <svg width="12" height="12" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </button>
-    <button class="chat-option" onclick="chatSelect(this)" data-msg="I want to browse the marketplace">
-      Browse Marketplace
+    <button class="chat-option" onclick="chatSelect(this)" data-msg="I want to see your design packages">
+      View Packages
       <svg width="12" height="12" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </button>
     <button class="chat-option" onclick="chatSelect(this)" data-msg="I'd like to request a project quote">
