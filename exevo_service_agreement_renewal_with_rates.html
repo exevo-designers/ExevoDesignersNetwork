@@ -455,6 +455,87 @@ ol.clauses > li::before{
   color:var(--text-body);
 }
 
+
+.success-modal{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:22px;
+  background:rgba(15,23,42,.62);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+}
+.success-modal.show{
+  display:flex;
+}
+.success-card{
+  width:min(520px,100%);
+  background:#fff;
+  border:1px solid rgba(255,255,255,.25);
+  border-radius:28px;
+  overflow:hidden;
+  box-shadow:0 24px 80px rgba(15,23,42,.28);
+}
+.success-card-top{
+  height:10px;
+  background:linear-gradient(90deg,var(--brand-purple),var(--accent-pink),var(--brand-purple-3));
+}
+.success-card-body{
+  padding:30px;
+}
+.success-badge{
+  width:54px;
+  height:54px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:#dcfce7;
+  color:#16a34a;
+  font-size:28px;
+  font-weight:900;
+  margin-bottom:18px;
+}
+.success-title{
+  font-family:'Syncopate',sans-serif;
+  font-size:22px;
+  line-height:1.15;
+  text-transform:uppercase;
+  color:var(--text-dark);
+  margin-bottom:12px;
+}
+.success-text{
+  font-size:14px;
+  color:var(--text-body);
+  line-height:1.7;
+  margin-bottom:18px;
+}
+.success-ref{
+  padding:13px 14px;
+  border-radius:14px;
+  border:1px dashed rgba(124,58,237,.35);
+  background:#f8f7ff;
+  color:var(--text-body);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+  font-size:12px;
+  word-break:break-all;
+  margin-bottom:20px;
+}
+.success-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.success-actions .btn{
+  flex:1;
+  min-width:180px;
+}
+@media print{
+  .success-modal{display:none!important}
+}
+
 @media(max-width:760px){
   .inner{padding:40px 28px 38px}
   .document::after{display:none}
@@ -876,6 +957,41 @@ ol.clauses > li::before{
 </div>
 
 
+
+<div class="success-modal" id="successModal" aria-hidden="true">
+  <div class="success-card">
+    <div class="success-card-top"></div>
+
+    <div class="success-card-body">
+      <div class="success-badge">✓</div>
+
+      <h2 class="success-title">
+        Agreement<br>Successfully Executed
+      </h2>
+
+      <p class="success-text">
+        The signed contract record has been generated and emailed to Exevo.
+        You may download your signed copy before continuing to the homepage.
+      </p>
+
+      <div class="success-ref" id="successReference">
+        Execution reference will appear here.
+      </div>
+
+      <div class="success-actions">
+        <button class="btn btn-primary" onclick="downloadSignedContract()">
+          Download Signed Copy
+        </button>
+
+        <button class="btn btn-ghost" onclick="goToHomepage()">
+          Continue to Homepage
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
   emailjs.init("tX28998dA9Wbi34ti");
@@ -884,6 +1000,7 @@ ol.clauses > li::before{
 <script>
 let contractExecuted = false;
 let originalBodyHTML = document.body.innerHTML;
+let signedContractFilename = "exevo-signed-contract.html";
 
 function pad(n){
   return String(n).padStart(2,'0');
@@ -913,6 +1030,84 @@ function updateContractStatus(){
   }
 }
 
+function syncFormValuesForDownload(){
+  const fields = ['repName', 'repTitle', 'clientEmail', 'clientPhone'];
+
+  fields.forEach(function(id){
+    const field = document.getElementById(id);
+    if(field){
+      field.setAttribute('value', field.value);
+    }
+  });
+
+  const notesField = document.getElementById('notes');
+  if(notesField){
+    notesField.textContent = notesField.value;
+  }
+
+  const agreeCheck = document.getElementById('agreeCheck');
+  if(agreeCheck && agreeCheck.checked){
+    agreeCheck.setAttribute('checked', 'checked');
+  }
+}
+
+function showSuccessPopup(ref){
+  const modal = document.getElementById('successModal');
+  const successReference = document.getElementById('successReference');
+
+  if(successReference){
+    successReference.textContent = ref;
+  }
+
+  if(modal){
+    modal.classList.add('show');
+    modal.setAttribute('aria-hidden', 'false');
+  }
+}
+
+function downloadSignedContract(){
+  if(!contractExecuted){
+    alert('The agreement must be digitally executed before downloading.');
+    return;
+  }
+
+  syncFormValuesForDownload();
+
+  const htmlCopy = document.documentElement.cloneNode(true);
+
+  const modal = htmlCopy.querySelector('#successModal');
+  if(modal){
+    modal.remove();
+  }
+
+  const buttons = htmlCopy.querySelector('.actions');
+  if(buttons){
+    buttons.remove();
+  }
+
+  const printNote = htmlCopy.querySelector('.print-note');
+  if(printNote){
+    printNote.remove();
+  }
+
+  const signedHtml = '<!DOCTYPE html>\n' + htmlCopy.outerHTML;
+  const blob = new Blob([signedHtml], { type: 'text/html;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = signedContractFilename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+
+  URL.revokeObjectURL(url);
+}
+
+function goToHomepage(){
+  window.location.href = "/index.html";
+}
+
 function acceptAgreement(){
   const repName = document.getElementById('repName').value.trim();
   const repTitle = document.getElementById('repTitle').value.trim();
@@ -933,6 +1128,8 @@ function acceptAgreement(){
   const executionId = Math.random().toString(36).slice(2,10).toUpperCase();
   const ref = `EXV-STJ-2026-001-R1-${executionId}`;
   const signatureHash = btoa(repName + clientEmail + iso).slice(0,32);
+
+  signedContractFilename = `exevo-signed-contract-${ref}.html`;
 
   const summary =
 `DIGITAL CONTRACT EXECUTION
@@ -1000,12 +1197,15 @@ This agreement was digitally acknowledged and executed electronically under the 
 
   updateContractStatus();
   enableButtons();
+  syncFormValuesForDownload();
 
   document.getElementById('acceptBtn').disabled = true;
   document.getElementById('acceptBtn').style.opacity = '.7';
   document.getElementById('acceptBtn').style.cursor = 'not-allowed';
 
   originalBodyHTML = document.body.innerHTML;
+
+  showSuccessPopup(ref);
 }
 
 function copySummary(){
