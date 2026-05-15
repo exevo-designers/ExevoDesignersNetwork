@@ -851,7 +851,7 @@ ol.clauses > li::before{
           <strong style="color:var(--text-dark)">Exevo Designers Network</strong>
           <span>Email: exevodesigners@gmail.com</span>
           <span>WhatsApp: +254 700 552 884</span>
-          <span>Website: exevodesigners.online</span>
+          <span>Website: www.exevodesigners.online</span>
         </div>
         <div class="sign-line">
           <strong style="color:var(--text-dark)">Service Provider</strong>
@@ -965,6 +965,45 @@ function copySummary(){
     alert('Automatic copy failed. Please copy manually.');
   });
 }
+
+let contractExecuted = false;
+
+/* LOCK CTRL + P */
+document.addEventListener('keydown', function(e){
+  if((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'p'){
+    if(!contractExecuted){
+      e.preventDefault();
+      alert('This agreement must be completed and digitally executed before printing is allowed.');
+    }
+  }
+});
+
+/* LOCK BROWSER PRINT */
+window.onbeforeprint = function(){
+  if(!contractExecuted){
+    document.body.innerHTML = '';
+  }
+};
+
+/* MODIFY EXISTING FUNCTION */
+const originalAcceptAgreement = acceptAgreement;
+
+acceptAgreement = function(){
+  originalAcceptAgreement();
+
+  /* check if execution happened */
+  const executionBox = document.getElementById('executionBox');
+
+  if(executionBox.classList.contains('show')){
+    contractExecuted = true;
+  }
+};
+
+window.onafterprint = function(){
+  if(!contractExecuted){
+    location.reload();
+  }
+};
 </script>
 
 </body>
