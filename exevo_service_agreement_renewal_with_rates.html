@@ -952,7 +952,7 @@ ol.clauses > li::before{
   </main>
 
   <p class="print-note">
-    Tip: After acceptance, use “Print / Save as PDF” and keep the generated execution log together with the email/WhatsApp confirmation.
+    Tip: After acceptance, download the signed PDF copy and keep the generated execution log together with the email/WhatsApp confirmation.
   </p>
 </div>
 
@@ -971,7 +971,7 @@ ol.clauses > li::before{
 
       <p class="success-text">
         The signed contract record has been generated and emailed to Exevo.
-        You may download your signed copy before continuing to the homepage.
+        You may download your signed PDF copy before continuing to the homepage.
       </p>
 
       <div class="success-ref" id="successReference">
@@ -980,7 +980,7 @@ ol.clauses > li::before{
 
       <div class="success-actions">
         <button class="btn btn-primary" onclick="downloadSignedContract()">
-          Download Signed Copy
+          Download Signed PDF
         </button>
 
         <button class="btn btn-ghost" onclick="goToHomepage()">
@@ -992,6 +992,7 @@ ol.clauses > li::before{
 </div>
 
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
   emailjs.init("tX28998dA9Wbi34ti");
@@ -1000,7 +1001,7 @@ ol.clauses > li::before{
 <script>
 let contractExecuted = false;
 let originalBodyHTML = document.body.innerHTML;
-let signedContractFilename = "exevo-signed-contract.html";
+let signedContractFilename = "exevo-signed-contract.pdf";
 
 function pad(n){
   return String(n).padStart(2,'0');
@@ -1073,35 +1074,31 @@ function downloadSignedContract(){
 
   syncFormValuesForDownload();
 
-  const htmlCopy = document.documentElement.cloneNode(true);
+  const element = document.querySelector('.document');
 
-  const modal = htmlCopy.querySelector('#successModal');
-  if(modal){
-    modal.remove();
-  }
+  const opt = {
+    margin: 0.35,
+    filename: signedContractFilename,
+    image: {
+      type: 'jpeg',
+      quality: 1
+    },
+    html2canvas: {
+      scale: 2,
+      useCORS: true,
+      scrollY: 0
+    },
+    jsPDF: {
+      unit: 'in',
+      format: 'a4',
+      orientation: 'portrait'
+    },
+    pagebreak: {
+      mode: ['avoid-all', 'css', 'legacy']
+    }
+  };
 
-  const buttons = htmlCopy.querySelector('.actions');
-  if(buttons){
-    buttons.remove();
-  }
-
-  const printNote = htmlCopy.querySelector('.print-note');
-  if(printNote){
-    printNote.remove();
-  }
-
-  const signedHtml = '<!DOCTYPE html>\n' + htmlCopy.outerHTML;
-  const blob = new Blob([signedHtml], { type: 'text/html;charset=utf-8' });
-  const url = URL.createObjectURL(blob);
-
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = signedContractFilename;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-
-  URL.revokeObjectURL(url);
+  html2pdf().set(opt).from(element).save();
 }
 
 function goToHomepage(){
@@ -1129,7 +1126,7 @@ function acceptAgreement(){
   const ref = `EXV-STJ-2026-001-R1-${executionId}`;
   const signatureHash = btoa(repName + clientEmail + iso).slice(0,32);
 
-  signedContractFilename = `exevo-signed-contract-${ref}.html`;
+  signedContractFilename = `exevo-signed-contract-${ref}.pdf`;
 
   const summary =
 `DIGITAL CONTRACT EXECUTION
