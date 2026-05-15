@@ -876,6 +876,11 @@ ol.clauses > li::before{
 </div>
 
 
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  emailjs.init("tX28998dA9Wbi34ti");
+</script>
+
 <script>
 let contractExecuted = false;
 let originalBodyHTML = document.body.innerHTML;
@@ -948,6 +953,33 @@ LEGAL NOTICE:
 This agreement was digitally acknowledged and executed electronically under the Constitution of Kenya (2010) and the Kenya Information and Communications Act (Cap 411A).`;
 
   localStorage.setItem('exevo_contract_execution', summary);
+
+  const emailPayload = {
+    to_email: "exevodesigners@gmail.com",
+
+    representative_name: repName,
+    representative_capacity: repTitle,
+    client_email: clientEmail,
+    client_phone: clientPhone,
+
+    execution_reference: ref,
+    executed_at: local,
+    timezone: timezone,
+    utc_timestamp: iso,
+    digital_signature_hash: signatureHash,
+
+    notes: notes || "None",
+    signed_contract_summary: summary
+  };
+
+  emailjs.send("service_1j6xvi7", "template_s4cl3eg", emailPayload)
+    .then(function(){
+      console.log("EmailJS: signed contract email sent successfully.");
+    })
+    .catch(function(error){
+      console.error("EmailJS delivery failed:", error);
+      alert("Agreement executed, but email delivery failed. Please copy the execution summary manually.");
+    });
 
   document.getElementById('executionLog').textContent = summary;
   document.getElementById('executionBox').classList.add('show');
