@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Service Agreement Renewal</title>
+<meta name="description" content="Service Agreement Renewal — Exevo Designers Network" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" type="image/png" href="ExevoLogo/exevo-logo-profile.png"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --brand-purple:#7c3aed;
+  --brand-purple-2:#6d28d9;
+  --brand-purple-3:#4c1d95;
+  --accent-pink:#d946ef;
+  --text-dark:#0f172a;
+  --text-body:#334155;
+  --text-muted:#64748b;
+  --text-dim:#94a3b8;
+  --bg:#ffffff;
+  --bg-soft:#f8f7ff;
+  --border:rgba(15,23,42,.10);
+  --border-mid:rgba(15,23,42,.16);
+  --radius:16px;
+  --radius-lg:24px;
+  --shadow:0 18px 45px rgba(15,23,42,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:linear-gradient(135deg,#fff 0%,#f8f7ff 100%);
+  color:var(--text-dark);
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+a{text-decoration:none;color:inherit}
+button,input,textarea,select{font:inherit}
+.wrapper{
+  max-width:1080px;
+  margin:0 auto;
+  padding:34px 18px 60px;
+}
+.document{
+  position:relative;
+  overflow:hidden;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:32px;
+  box-shadow:var(--shadow);
+}
+.document::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  height:12px;
+  width:100%;
+  background:linear-gradient(90deg,var(--brand-purple),var(--accent-pink),var(--brand-purple-3));
+}
+.document::after{
+  content:"";
+  position:absolute;
+  top:0;
+  right:0;
+  width:52px;
+  height:100%;
+  background:
+    linear-gradient(135deg,transparent 18px,var(--brand-purple-3) 18px,var(--brand-purple-3) 26px,transparent 26px) 0 0/52px 52px,
+    linear-gradient(135deg,transparent 18px,var(--accent-pink) 18px,var(--accent-pink) 26px,transparent 26px) 0 26px/52px 52px;
+  opacity:.9;
+}
+.inner{
+  position:relative;
+  z-index:2;
+  padding:54px 76px 46px 64px;
+}
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:24px;
+  padding-bottom:26px;
+  border-bottom:1px solid var(--border-mid);
+}
+.logo-row{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  text-decoration:none;
+}
+
+.nav-logo-img{
+  height:44px;
+  width:auto;
+  object-fit:contain;
+  display:block;
+  flex-shrink:0;
+}
+
+.nav-logo-text{
+  font-family:'Syncopate',sans-serif;
+  font-weight:700;
+  font-size:16px;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  color:var(--text-dark);
+  display:flex;
+  align-items:center;
+  gap:4px;
+  line-height:1;
+}
+
+.nav-logo-text span{
+  color:var(--brand-purple);
+}
+.meta strong{
+  display:block;
+  color:var(--text-dark);
+  font-size:13px;
+  margin-bottom:4px;
+}
+.label{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:7px 13px;
+  border-radius:999px;
+  background:#ede9fe;
+  color:var(--brand-purple);
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  margin:34px 0 16px;
+}
+h1{
+  font-family:Syncopate,sans-serif;
+  font-size:clamp(26px,4.8vw,48px);
+  line-height:1;
+  text-transform:uppercase;
+  letter-spacing:-.04em;
+  margin-bottom:16px;
+}
+h1 span{
+  background:linear-gradient(120deg,var(--brand-purple),var(--accent-pink));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.lead{
+  max-width:780px;
+  font-size:15px;
+  color:var(--text-body);
+}
+.notice{
+  margin-top:24px;
+  padding:18px 20px;
+  border-left:4px solid var(--brand-purple);
+  background:var(--bg-soft);
+  border-radius:0 var(--radius) var(--radius) 0;
+  color:var(--text-body);
+  font-size:14px;
+}
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+  margin-top:26px;
+}
+.field-card{
+  border:1px solid var(--border);
+  background:#fff;
+  border-radius:var(--radius);
+  padding:16px 18px;
+}
+.field-card.full{grid-column:1/-1}
+.field-label{
+  font-size:10px;
+  font-weight:900;
+  color:var(--text-dim);
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  margin-bottom:5px;
+}
+.field-value{
+  font-size:14px;
+  font-weight:800;
+  color:var(--text-dark);
+}
+.section{
+  margin-top:34px;
+}
+.section-title{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-family:Syncopate,sans-serif;
+  font-weight:700;
+  font-size:16px;
+  text-transform:uppercase;
+  letter-spacing:-.02em;
+  margin-bottom:16px;
+}
+.section-title::before{
+  content:"";
+  width:28px;
+  height:4px;
+  border-radius:999px;
+  background:linear-gradient(90deg,var(--brand-purple),var(--accent-pink));
+}
+ol.clauses{
+  list-style:none;
+  counter-reset:clause;
+  display:grid;
+  gap:12px;
+}
+ol.clauses > li{
+  counter-increment:clause;
+  position:relative;
+  padding:16px 18px 16px 54px;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  background:#fff;
+}
+ol.clauses > li::before{
+  content:counter(clause);
+  position:absolute;
+  left:16px;
+  top:17px;
+  width:24px;
+  height:24px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:var(--brand-purple);
+  color:#fff;
+  font-size:11px;
+  font-weight:900;
+}
+.clause-head{
+  font-weight:900;
+  color:var(--text-dark);
+  margin-bottom:4px;
+}
+.clause-text{
+  color:var(--text-body);
+  font-size:14px;
+}
+.warning{
+  border:1px solid rgba(217,70,239,.22);
+  background:linear-gradient(135deg,#fff,#fdf4ff);
+}
+.form-box{
+  margin-top:28px;
+  padding:24px;
+  border:1px solid var(--border-mid);
+  border-radius:var(--radius-lg);
+  background:linear-gradient(135deg,#fff,#f8f7ff);
+}
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+.input-group{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.input-group.full{grid-column:1/-1}
+.input-group label{
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.12em;
+  color:var(--text-muted);
+  text-transform:uppercase;
+}
+.input-group input,.input-group textarea{
+  width:100%;
+  border:1px solid var(--border-mid);
+  border-radius:12px;
+  padding:13px 14px;
+  outline:none;
+  background:#fff;
+  color:var(--text-dark);
+}
+.input-group textarea{min-height:94px;resize:vertical}
+.input-group input:focus,.input-group textarea:focus{
+  border-color:var(--brand-purple);
+  box-shadow:0 0 0 4px rgba(124,58,237,.10);
+}
+.check{
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+  margin-top:16px;
+  font-size:13px;
+  color:var(--text-body);
+}
+.check input{margin-top:5px;accent-color:var(--brand-purple)}
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:20px;
+}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  border:none;
+  cursor:pointer;
+  border-radius:999px;
+  padding:12px 22px;
+  font-size:13px;
+  font-weight:900;
+  transition:.25s ease;
+}
+.btn-primary{
+  background:var(--brand-purple);
+  color:#fff;
+}
+.btn-primary:hover{
+  background:var(--brand-purple-2);
+  transform:translateY(-2px);
+}
+.btn-ghost{
+  background:#fff;
+  border:1.5px solid var(--border-mid);
+  color:var(--text-dark);
+}
+.btn-ghost:hover{
+  color:var(--brand-purple);
+  border-color:var(--brand-purple);
+}
+.execution{
+  margin-top:22px;
+  padding:16px 18px;
+  border-radius:var(--radius);
+  border:1px dashed rgba(124,58,237,.36);
+  background:#fff;
+  display:none;
+}
+.execution.show{display:block}
+.execution-title{
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--brand-purple);
+  margin-bottom:8px;
+}
+.execution-log{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
+  font-size:12px;
+  color:var(--text-body);
+  word-break:break-all;
+}
+.footer{
+  margin-top:42px;
+  padding-top:22px;
+  border-top:1px solid var(--border-mid);
+  display:flex;
+  justify-content:space-between;
+  gap:24px;
+  flex-wrap:wrap;
+  color:var(--text-muted);
+  font-size:12px;
+}
+.contact-list{
+  display:grid;
+  gap:4px;
+}
+.sign-line{
+  min-width:260px;
+}
+.line{
+  margin-top:34px;
+  height:1px;
+  background:var(--border-mid);
+}
+.print-note{
+  margin:16px auto 0;
+  max-width:1080px;
+  color:var(--text-muted);
+  font-size:12px;
+  text-align:center;
+}
+
+.pricing-table{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0;
+  overflow:hidden;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  background:#fff;
+  font-size:13px;
+}
+.pricing-table th{
+  background:linear-gradient(135deg,var(--brand-purple),var(--brand-purple-3));
+  color:#fff;
+  text-align:left;
+  padding:13px 14px;
+  font-size:11px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.pricing-table td{
+  padding:13px 14px;
+  border-top:1px solid var(--border);
+  color:var(--text-body);
+}
+.pricing-table td strong{color:var(--text-dark)}
+.pricing-note{
+  margin-top:14px;
+  padding:14px 16px;
+  border-radius:var(--radius);
+  background:#f8f7ff;
+  border:1px solid var(--border);
+  color:var(--text-body);
+  font-size:13px;
+}
+@media(max-width:680px){
+  .pricing-table{font-size:12px}
+  .pricing-table th,.pricing-table td{padding:10px 9px}
+}
+
+
+.signature-box{
+  margin-top:18px;
+  padding:18px;
+  border:1px solid rgba(124,58,237,.22);
+  border-radius:var(--radius);
+  background:linear-gradient(135deg,#fff,#faf5ff);
+  display:none;
+}
+.signature-box.show{display:block}
+.signature-mark{
+  font-family:'Syncopate',sans-serif;
+  font-size:22px;
+  color:var(--brand-purple);
+  margin-bottom:8px;
+}
+.signature-meta{
+  display:grid;
+  gap:4px;
+  font-size:13px;
+  color:var(--text-body);
+}
+
+
+.success-modal{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:22px;
+  background:rgba(15,23,42,.62);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+}
+.success-modal.show{
+  display:flex;
+}
+.success-card{
+  width:min(520px,100%);
+  background:#fff;
+  border:1px solid rgba(255,255,255,.25);
+  border-radius:28px;
+  overflow:hidden;
+  box-shadow:0 24px 80px rgba(15,23,42,.28);
+}
+.success-card-top{
+  height:10px;
+  background:linear-gradient(90deg,var(--brand-purple),var(--accent-pink),var(--brand-purple-3));
+}
+.success-card-body{
+  padding:30px;
+}
+.success-badge{
+  width:54px;
+  height:54px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:#dcfce7;
+  color:#16a34a;
+  font-size:28px;
+  font-weight:900;
+  margin-bottom:18px;
+}
+.success-title{
+  font-family:'Syncopate',sans-serif;
+  font-size:22px;
+  line-height:1.15;
+  text-transform:uppercase;
+  color:var(--text-dark);
+  margin-bottom:12px;
+}
+.success-text{
+  font-size:14px;
+  color:var(--text-body);
+  line-height:1.7;
+  margin-bottom:18px;
+}
+.success-ref{
+  padding:13px 14px;
+  border-radius:14px;
+  border:1px dashed rgba(124,58,237,.35);
+  background:#f8f7ff;
+  color:var(--text-body);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+  font-size:12px;
+  word-break:break-all;
+  margin-bottom:20px;
+}
+.success-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.success-actions .btn{
+  flex:1;
+  min-width:180px;
+}
+@media print{
+  .success-modal{display:none!important}
+}
+
+@media(max-width:760px){
+  .inner{padding:40px 28px 38px}
+  .document::after{display:none}
+  .header,.footer{flex-direction:column}
+  .meta{text-align:left}
+  .grid,.form-grid{grid-template-columns:1fr}
+}
+@media print{
+  body{background:#fff}
+  .wrapper{padding:0}
+  .document{box-shadow:none;border:none;border-radius:0}
+  .document::after{display:block}
+  .actions,.print-note{display:none!important}
+  .inner{padding:36px 64px 32px 54px}
+  .field-card,ol.clauses>li,.form-box{break-inside:avoid}
+}
+</style>
+</head>
+
+<body>
+<div class="wrapper">
+  <main class="document">
+    <div class="inner">
+        <header class="header">
+          <a href="/" class="logo-row">
+            <img
+              class="nav-logo-img"
+              src="ExevoLogo/exevo-logo-png.png"
+              alt="Exevo Designers"
+            >
+
+            <span class="nav-logo-text">
+              EXEVO <span>DESIGNERS</span>
+            </span>
+          </a>
+
+          <div class="meta">
+            <strong>Service Agreement Renewal</strong>
+            Ref: EXV-STJ-2026-001-R1<br>
+
+            Status:
+            <span
+              id="contractStatus"
+              style="color:#f59e0b;font-weight:700;"
+            >
+              Pending Digital Execution
+            </span>
+          </div>
+        </header>
+
+      <div class="label">Renewed Contract</div>
+      <h1>Creative Service<br><span>Agreement</span></h1>
+      <p class="lead">
+        This renewed agreement is made between Exevo Designers Network and St. Joseph Rehema College and St. Joseph Hospital
+        for future creative, design, marketing, print, website, and related institutional work. This renewal
+        replaces informal arrangements and introduces stricter payment, approval, revision, and usage-rights terms.
+      </p>
+
+      <div class="notice">
+        <strong>Important:</strong> The previous engagement under Ref. EXV-STJ-2026-001 was closed after settlement discussions.
+        This renewal applies only to new work requested after acceptance of this agreement.
+      </div>
+
+      <section class="grid">
+        <div class="field-card">
+          <div class="field-label">Service Provider</div>
+          <div class="field-value">Exevo Designers Network</div>
+        </div>
+        <div class="field-card">
+          <div class="field-label">Client / Institution</div>
+          <div class="field-value">St. Joseph Rehema College & St. Joseph Hospital — Molo Town, Nakuru</div>
+        </div>
+        <div class="field-card">
+          <div class="field-label">Representative</div>
+          <div class="field-value">Kabii Kariuki</div>
+        </div>
+        <div class="field-card">
+          <div class="field-label">Renewal Reference</div>
+          <div class="field-value">EXV-STJ-2026-001-R1</div>
+        </div>
+        <div class="field-card full">
+          <div class="field-label">Scope Category</div>
+          <div class="field-value">Institutional creative work only unless otherwise quoted and approved separately.</div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Scope & Billing</h2>
+        <ol class="clauses">
+          <li>
+            <div class="clause-head">Approved Institutional Work Only</div>
+            <div class="clause-text">
+              The agreement covers approved institutional designs, posters, flyers, notices, brochures, documents,
+              digital graphics, and agreed creative services for St. Joseph Rehema College and St. Joseph Hospital only.
+            </div>
+          </li>
+          <li>
+            <div class="clause-head">Separate Quotes for Extra Work</div>
+            <div class="clause-text">
+              Any personal, third-party, external institute, emergency, website, branding, printing, social media management,
+              motion design, or work outside the confirmed St. Joseph Rehema College / St. Joseph Hospital scope must
+              receive a separate written quote before production begins.
+            </div>
+          </li>
+          <li>
+            <div class="clause-head">No Work Starts Without Deposit</div>
+            <div class="clause-text">
+              Exevo will begin work only after receiving a minimum 50% deposit or full payment, depending on the size
+              and urgency of the task. Rush work may require full payment upfront.
+            </div>
+          </li>
+          <li>
+            <div class="clause-head">Final Files Released After Full Payment</div>
+            <div class="clause-text">
+              Editable files, high-resolution exports, print-ready files, and unwatermarked designs remain withheld
+              until the full balance is paid.
+            </div>
+          </li>
+        </ol>
+      </section>
+
+
+      <section class="section">
+        <h2 class="section-title">Approved Design Rates</h2>
+        <p class="lead">
+          The following rates apply strictly to St. Joseph Rehema College and St. Joseph Hospital, both based in
+          Molo Town, Nakuru. Any work requested by another institute, branch, department, personal client, third party,
+          or external organization shall be billed under the external work rates below unless Exevo issues a separate
+          written quote.
+        </p>
+
+        <div style="overflow-x:auto;margin-top:18px">
+          <table class="pricing-table">
+            <thead>
+              <tr>
+                <th>Service / Item</th>
+                <th>St. Joseph Rehema College & St. Joseph Hospital</th>
+                <th>External / Other Institute Work</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Social media flyers / designs</strong></td>
+                <td>Ksh. 500</td>
+                <td>Ksh. 800</td>
+              </tr>
+              <tr>
+                <td><strong>Extra revisions</strong></td>
+                <td>Ksh. 300 per revision session</td>
+                <td>Ksh. 500 per revision session</td>
+              </tr>
+              <tr>
+                <td><strong>Print banner designs</strong></td>
+                <td>Ksh. 1,000</td>
+                <td>Ksh. 1,500</td>
+              </tr>
+              <tr>
+                <td><strong>Roll-up banner designs</strong></td>
+                <td>Ksh. 2,500</td>
+                <td>Ksh. 3,500</td>
+              </tr>
+              <tr>
+                <td><strong>Logo designs</strong></td>
+                <td>Ksh. 1,500</td>
+                <td>Ksh. 2,500</td>
+              </tr>
+              <tr>
+                <td><strong>Catalogue designs</strong></td>
+                <td>Ksh. 3,500</td>
+                <td>Ksh. 4,500</td>
+              </tr>
+              <tr>
+                <td><strong>Business cards</strong></td>
+                <td>Ksh. 500</td>
+                <td>Ksh. 800</td>
+              </tr>
+              <tr>
+                <td><strong>Design edits / minor corrections</strong></td>
+                <td>Ksh. 500</td>
+                <td>Ksh. 700</td>
+              </tr>
+              <tr>
+                <td><strong>Full redesigns / major redesign changes</strong></td>
+                <td>Ksh. 1,500</td>
+                <td>Ksh. 2,000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pricing-note">
+          <strong>Strict rate boundary:</strong> These discounted institutional rates are limited to approved work for
+          St. Joseph Rehema College and St. Joseph Hospital in Molo Town, Nakuru only. They do not extend to personal
+          work, partner institutions, sister institutions outside this agreement, external clients, or any third-party
+          requests unless Exevo confirms so in writing.
+        </div>
+      </section>
+
+
+      <section class="section">
+        <h2 class="section-title">Pricing & Revisions</h2>
+        <ol class="clauses">
+          <li>
+            <div class="clause-head">Base Design Rate</div>
+            <div class="clause-text">
+              The renewed minimum rate for standard institutional flyer or poster designs shall be confirmed per order
+              before work begins. No previous discounted or adjusted rate shall automatically apply to new work.
+            </div>
+          </li>
+          <li>
+            <div class="clause-head">Revision Limit</div>
+            <div class="clause-text">
+              Each approved design includes two complimentary revision sessions only. A revision session means one
+              collected round of changes submitted together.
+            </div>
+          </li>
+          <li>
+            <div class="clause-head">Additional Revision Fee</div>
+            <div class="clause-text">
+              Additional revisions beyond the included two sessions are billed separately before implementation.
+              Revisions caused by late information, new instructions, or changes in direction are chargeable.
+            </div>
+          </li>
+          <li>
+            <div class="clause-head">Major Changes Count as New Work</div>
+            <div class="clause-text">
+                Minor flyer edits such as text corrections, date changes, contact updates,
+                logo replacements, color adjustments, or small layout adjustments shall not
+                be treated as full redesigns. However, a complete change of concept, layout,
+                visual structure, branding direction, department, campaign purpose, or target
+                use after approval shall be treated as a redesign/new order and billed
+                according to the approved pricing structure under this agreement.
+              </div>
+          </li>
+        </ol>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Strict Payment Terms</h2>
+        <ol class="clauses">
+          <li>
+            <div class="clause-head">Payment Timeline</div>
+            <div class="clause-text">
+              The outstanding balance must be cleared before final delivery. Where credit is expressly allowed in writing,
+              payment must be completed within the agreed period stated on the invoice.
+            </div>
+          </li>
+          <li>
+            <div class="clause-head">Late Payment Consequence</div>
+            <div class="clause-text">
+              Exevo may pause all active and future work, withhold files, suspend delivery, or decline new requests until
+              all pending balances are cleared.
+            </div>
+          </li>
+          <li>
+            <div class="clause-head">No Verbal Discounts</div>
+            <div class="clause-text">
+              Discounts, waivers, and settlement adjustments are valid only when issued in writing by Exevo. Good-faith
+              adjustments made in the past shall not create a future pricing obligation.
+            </div>
+          </li>
+          <li>
+            <div class="clause-head">Urgent Work</div>
+            <div class="clause-text">
+              Same-day, weekend, night, public holiday, or urgent turnaround work may attract an additional rush fee and
+              may require full payment before commencement.
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Ownership & Usage Rights</h2>
+        <ol class="clauses">
+          <li>
+            <div class="clause-head">Intellectual Property</div>
+            <div class="clause-text">
+              All concepts, drafts, editable files, templates, source files, layouts, and creative direction remain the
+              property of Exevo Designers Network until full payment is received.
+            </div>
+          </li>
+          <li>
+            <div class="clause-head">Usage Rights After Payment</div>
+            <div class="clause-text">
+              Once full payment is settled, the client receives usage rights for the approved final outputs for
+              institutional use only. Raw/editable files are not included unless quoted separately.
+            </div>
+          </li>
+          <li>
+            <div class="clause-head">Unauthorized Use</div>
+            <div class="clause-text">
+              Use, printing, publishing, forwarding, editing, or distributing unpaid drafts, screenshots, previews, or
+              watermarked files is prohibited.
+            </div>
+          </li>
+          <li>
+            <div class="clause-head">Portfolio Rights</div>
+            <div class="clause-text">
+              Exevo may display completed work in its portfolio, website, social media, or proposals unless the client
+              requests confidentiality in writing before the work begins.
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <section class="section warning">
+        <h2 class="section-title">Approval & Communication Rules</h2>
+        <ol class="clauses">
+          <li>
+            <div class="clause-head">One Authorized Representative</div>
+            <div class="clause-text">
+              The client shall appoint one main representative to approve instructions, revisions, and final work.
+              Conflicting instructions from multiple parties may delay delivery and may attract extra charges.
+            </div>
+          </li>
+          <li>
+            <div class="clause-head">Collected Feedback Required</div>
+            <div class="clause-text">
+              Feedback must be submitted clearly and preferably in one message/document per revision round. Scattered
+              corrections sent in parts may be treated as multiple revision sessions.
+            </div>
+          </li>
+          <li>
+            <div class="clause-head">Approval Is Final</div>
+            <div class="clause-text">
+              Once a design is approved and final files are issued, later corrections, typos, content changes, or
+              replacement details are billed as new revisions or new work.
+            </div>
+          </li>
+          <li>
+            <div class="clause-head">Content Accuracy</div>
+            <div class="clause-text">
+              The client is responsible for confirming names, dates, prices, contacts, spellings, course details,
+              logos, approvals, and institutional information before final output is released.
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Digital Acceptance</h2>
+        <p class="lead">
+          By completing the fields below and clicking “Accept Agreement,” the representative confirms that they have
+          read, understood, and legally accepted this renewed agreement on behalf of the client/institution.
+          This digital acknowledgment shall constitute a legally binding electronic acceptance under the Constitution
+          of Kenya (2010) and the Kenya Information and Communications Act (Cap 411A).
+        </p>
+
+        <div class="form-box">
+          <div class="form-grid">
+            <div class="input-group">
+              <label for="repName">Representative Name</label>
+              <input id="repName" type="text" placeholder="e.g. Kabii Kariuki" />
+            </div>
+            <div class="input-group">
+              <label for="repTitle">Position / Capacity</label>
+              <input id="repTitle" type="text" placeholder="e.g. Institution Representative" />
+            </div>
+            <div class="input-group">
+              <label for="clientEmail">Email Address</label>
+              <input id="clientEmail" type="email" placeholder="name@example.com" />
+            </div>
+            <div class="input-group">
+              <label for="clientPhone">Phone Number</label>
+              <input id="clientPhone" type="tel" placeholder="+254..." />
+            </div>
+            <div class="input-group full">
+              <label for="notes">Special Notes / Agreed Adjustments</label>
+              <textarea id="notes" placeholder="Write any specific package, rate, deposit, or delivery agreement here."></textarea>
+            </div>
+          </div>
+
+          <label class="check">
+            <input id="agreeCheck" type="checkbox" />
+            <span>I confirm that I am authorized to accept this agreement and that future work will follow the stricter terms above.</span>
+          </label>
+
+          <div class="actions">
+            <button class="btn btn-primary" id="acceptBtn" onclick="acceptAgreement()">Accept Agreement</button>
+            <button class="btn btn-ghost" id="printBtn" onclick="window.print()" disabled style="opacity:.45;cursor:not-allowed">
+              Print / Save as PDF
+            </button>
+            <button class="btn btn-ghost" id="copyBtn" onclick="copySummary()" disabled style="opacity:.45;cursor:not-allowed">
+              Copy Execution Summary
+            </button>
+          </div>
+
+          <div class="signature-box" id="signatureBox">
+            <div class="signature-mark">EXEVO VERIFIED EXECUTION</div>
+            <div class="signature-meta" id="signatureMeta"></div>
+          </div>
+
+          <div class="execution" id="executionBox">
+            <div class="execution-title">Execution Log</div>
+            <div class="execution-log" id="executionLog"></div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div class="contact-list">
+          <strong style="color:var(--text-dark)">Exevo Designers Network</strong>
+          <span>Email: exevodesigners@gmail.com</span>
+          <span>WhatsApp: +254 700 552 884</span>
+          <span>Website: www.exevodesigners.online</span>
+        </div>
+        <div class="sign-line">
+          <strong style="color:var(--text-dark)">Service Provider</strong>
+          <div class="line"></div>
+          <span>Stephen Njoroge — Exevo Designers Network</span>
+        </div>
+      </footer>
+    </div>
+  </main>
+
+  <p class="print-note">
+    Tip: After acceptance, download the signed PDF copy and keep the generated execution log together with the email/WhatsApp confirmation.
+  </p>
+</div>
+
+
+
+<div class="success-modal" id="successModal" aria-hidden="true">
+  <div class="success-card">
+    <div class="success-card-top"></div>
+
+    <div class="success-card-body">
+      <div class="success-badge">✓</div>
+
+      <h2 class="success-title">
+        Agreement<br>Successfully Executed
+      </h2>
+
+      <p class="success-text">
+        The signed contract record has been generated and emailed to Exevo.
+        You may download your signed PDF copy before continuing to the homepage.
+      </p>
+
+      <div class="success-ref" id="successReference">
+        Execution reference will appear here.
+      </div>
+
+      <div class="success-actions">
+        <button class="btn btn-primary" onclick="downloadSignedContract()">
+          Download Signed PDF
+        </button>
+
+        <button class="btn btn-ghost" onclick="goToHomepage()">
+          Continue to Homepage
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  emailjs.init("tX28998dA9Wbi34ti");
+</script>
+
+<script>
+let contractExecuted = false;
+let originalBodyHTML = document.body.innerHTML;
+let signedContractFilename = "exevo-signed-contract.pdf";
+
+function pad(n){
+  return String(n).padStart(2,'0');
+}
+
+function enableButtons(){
+  const printBtn = document.getElementById('printBtn');
+  const copyBtn = document.getElementById('copyBtn');
+
+  printBtn.disabled = false;
+  copyBtn.disabled = false;
+
+  printBtn.style.opacity = '1';
+  copyBtn.style.opacity = '1';
+
+  printBtn.style.cursor = 'pointer';
+  copyBtn.style.cursor = 'pointer';
+}
+
+function updateContractStatus(){
+  const statusElement = document.getElementById('contractStatus');
+
+  if(statusElement){
+    statusElement.textContent = 'Digitally Executed';
+    statusElement.style.color = '#16a34a';
+    statusElement.style.fontWeight = '700';
+  }
+}
+
+function syncFormValuesForDownload(){
+  const fields = ['repName', 'repTitle', 'clientEmail', 'clientPhone'];
+
+  fields.forEach(function(id){
+    const field = document.getElementById(id);
+    if(field){
+      field.setAttribute('value', field.value);
+    }
+  });
+
+  const notesField = document.getElementById('notes');
+  if(notesField){
+    notesField.textContent = notesField.value;
+  }
+
+  const agreeCheck = document.getElementById('agreeCheck');
+  if(agreeCheck && agreeCheck.checked){
+    agreeCheck.setAttribute('checked', 'checked');
+  }
+}
+
+function showSuccessPopup(ref){
+  const modal = document.getElementById('successModal');
+  const successReference = document.getElementById('successReference');
+
+  if(successReference){
+    successReference.textContent = ref;
+  }
+
+  if(modal){
+    modal.classList.add('show');
+    modal.setAttribute('aria-hidden', 'false');
+  }
+}
+
+function downloadSignedContract(){
+  if(!contractExecuted){
+    alert('The agreement must be digitally executed before downloading.');
+    return;
+  }
+
+  syncFormValuesForDownload();
+
+  const element = document.querySelector('.document');
+
+  const opt = {
+    margin: 0.35,
+    filename: signedContractFilename,
+    image: {
+      type: 'jpeg',
+      quality: 1
+    },
+    html2canvas: {
+      scale: 2,
+      useCORS: true,
+      scrollY: 0
+    },
+    jsPDF: {
+      unit: 'in',
+      format: 'a4',
+      orientation: 'portrait'
+    },
+    pagebreak: {
+      mode: ['avoid-all', 'css', 'legacy']
+    }
+  };
+
+  html2pdf().set(opt).from(element).save();
+}
+
+function goToHomepage(){
+  window.location.href = "/index.html";
+}
+
+function acceptAgreement(){
+  const repName = document.getElementById('repName').value.trim();
+  const repTitle = document.getElementById('repTitle').value.trim();
+  const clientEmail = document.getElementById('clientEmail').value.trim();
+  const clientPhone = document.getElementById('clientPhone').value.trim();
+  const notes = document.getElementById('notes').value.trim();
+  const checked = document.getElementById('agreeCheck').checked;
+
+  if(!repName || !repTitle || !clientEmail || !clientPhone || !checked){
+    alert('All required fields must be completed and the legal acceptance checkbox must be ticked before execution.');
+    return;
+  }
+
+  const now = new Date();
+  const iso = now.toISOString();
+  const local = `${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const executionId = Math.random().toString(36).slice(2,10).toUpperCase();
+  const ref = `EXV-STJ-2026-001-R1-${executionId}`;
+  const signatureHash = btoa(repName + clientEmail + iso).slice(0,32);
+
+  signedContractFilename = `exevo-signed-contract-${ref}.pdf`;
+
+  const summary =
+`DIGITAL CONTRACT EXECUTION
+Provider: Exevo Designers Network
+Client: St. Joseph Rehema College & St. Joseph Hospital — Molo Town, Nakuru
+Representative: ${repName}
+Capacity: ${repTitle}
+Email: ${clientEmail}
+Phone: ${clientPhone}
+Reference: ${ref}
+Executed At: ${local}
+Timezone: ${timezone}
+UTC Timestamp: ${iso}
+Digital Signature Hash: ${signatureHash}
+Notes: ${notes || 'None'}
+
+LEGAL NOTICE:
+This agreement was digitally acknowledged and executed electronically under the Constitution of Kenya (2010) and the Kenya Information and Communications Act (Cap 411A).`;
+
+  localStorage.setItem('exevo_contract_execution', summary);
+
+  const emailPayload = {
+    to_email: "exevodesigners@gmail.com",
+
+    representative_name: repName,
+    representative_capacity: repTitle,
+    client_email: clientEmail,
+    client_phone: clientPhone,
+
+    execution_reference: ref,
+    executed_at: local,
+    timezone: timezone,
+    utc_timestamp: iso,
+    digital_signature_hash: signatureHash,
+
+    notes: notes || "None",
+    signed_contract_summary: summary
+  };
+
+  emailjs.send("service_1j6xvi7", "template_s4cl3eg", emailPayload)
+    .then(function(){
+      console.log("EmailJS: signed contract email sent successfully.");
+    })
+    .catch(function(error){
+      console.error("EmailJS delivery failed:", error);
+      alert("Agreement executed, but email delivery failed. Please copy the execution summary manually.");
+    });
+
+  document.getElementById('executionLog').textContent = summary;
+  document.getElementById('executionBox').classList.add('show');
+
+  document.getElementById('signatureMeta').innerHTML = `
+    <strong>Digitally Executed By:</strong> ${repName}<br>
+    <strong>Email:</strong> ${clientEmail}<br>
+    <strong>Execution Reference:</strong> ${ref}<br>
+    <strong>Exact Local Date & Time:</strong> ${local}<br>
+    <strong>UTC Timestamp:</strong> ${iso}<br>
+    <strong>Timezone:</strong> ${timezone}<br>
+    <strong>Digital Signature Hash:</strong> ${signatureHash}
+  `;
+
+  document.getElementById('signatureBox').classList.add('show');
+
+  contractExecuted = true;
+
+  updateContractStatus();
+  enableButtons();
+  syncFormValuesForDownload();
+
+  document.getElementById('acceptBtn').disabled = true;
+  document.getElementById('acceptBtn').style.opacity = '.7';
+  document.getElementById('acceptBtn').style.cursor = 'not-allowed';
+
+  originalBodyHTML = document.body.innerHTML;
+
+  showSuccessPopup(ref);
+}
+
+function copySummary(){
+  const summary = localStorage.getItem('exevo_contract_execution') || document.getElementById('executionLog').textContent;
+
+  if(!summary){
+    alert('Accept the agreement first.');
+    return;
+  }
+
+  navigator.clipboard.writeText(summary).then(() => {
+    alert('Execution summary copied successfully.');
+  }).catch(() => {
+    alert('Automatic copy failed. Please copy manually.');
+  });
+}
+
+/* BLOCK CTRL + P BEFORE EXECUTION */
+document.addEventListener('keydown', function(e){
+  if((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'p'){
+    if(!contractExecuted){
+      e.preventDefault();
+      alert('This agreement must be completed and digitally executed before printing is allowed.');
+    }
+  }
+});
+
+/* FORCE BLANK PRINT PAGE BEFORE EXECUTION */
+window.onbeforeprint = function(){
+  if(!contractExecuted){
+    document.body.innerHTML = `
+      <div style="display:none;">
+        Printing is disabled until the agreement is digitally executed.
+      </div>
+    `;
+  }
+};
+
+/* RESTORE PAGE AFTER BLOCKED PRINT */
+window.onafterprint = function(){
+  if(!contractExecuted){
+    document.body.innerHTML = originalBodyHTML;
+    location.reload();
+  }
+};
+</script>
+
+</body>
+</html>
