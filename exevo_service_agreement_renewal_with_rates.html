@@ -494,9 +494,15 @@ ol.clauses > li::before{
           <div class="meta">
             <strong>Service Agreement Renewal</strong>
             Ref: EXV-STJ-2026-001-R1<br>
-            Status: Pending Digital Execution
+
+            Status:
+            <span
+              id="contractStatus"
+              style="color:#f59e0b;font-weight:700;"
+            >
+              Pending Digital Execution
+            </span>
           </div>
-        </header>
 
       <div class="label">Renewed Contract</div>
       <h1>Creative Service<br><span>Agreement</span></h1>
@@ -869,7 +875,12 @@ ol.clauses > li::before{
 
 
 <script>
-function pad(n){return String(n).padStart(2,'0')}
+let contractExecuted = false;
+let originalBodyHTML = document.body.innerHTML;
+
+function pad(n){
+  return String(n).padStart(2,'0');
+}
 
 function enableButtons(){
   const printBtn = document.getElementById('printBtn');
@@ -883,6 +894,16 @@ function enableButtons(){
 
   printBtn.style.cursor = 'pointer';
   copyBtn.style.cursor = 'pointer';
+}
+
+function updateContractStatus(){
+  const statusElement = document.getElementById('contractStatus');
+
+  if(statusElement){
+    statusElement.textContent = 'Digitally Executed';
+    statusElement.style.color = '#16a34a';
+    statusElement.style.fontWeight = '700';
+  }
 }
 
 function acceptAgreement(){
@@ -899,15 +920,11 @@ function acceptAgreement(){
   }
 
   const now = new Date();
-
   const iso = now.toISOString();
   const local = `${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
-
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
   const executionId = Math.random().toString(36).slice(2,10).toUpperCase();
   const ref = `EXV-STJ-2026-001-R1-${executionId}`;
-
   const signatureHash = btoa(repName + clientEmail + iso).slice(0,32);
 
   const summary =
@@ -945,10 +962,16 @@ This agreement was digitally acknowledged and executed electronically under the 
 
   document.getElementById('signatureBox').classList.add('show');
 
+  contractExecuted = true;
+
+  updateContractStatus();
   enableButtons();
 
   document.getElementById('acceptBtn').disabled = true;
   document.getElementById('acceptBtn').style.opacity = '.7';
+  document.getElementById('acceptBtn').style.cursor = 'not-allowed';
+
+  originalBodyHTML = document.body.innerHTML;
 }
 
 function copySummary(){
@@ -966,9 +989,7 @@ function copySummary(){
   });
 }
 
-let contractExecuted = false;
-
-/* LOCK CTRL + P */
+/* BLOCK CTRL + P BEFORE EXECUTION */
 document.addEventListener('keydown', function(e){
   if((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'p'){
     if(!contractExecuted){
@@ -978,29 +999,21 @@ document.addEventListener('keydown', function(e){
   }
 });
 
-/* LOCK BROWSER PRINT */
+/* FORCE BLANK PRINT PAGE BEFORE EXECUTION */
 window.onbeforeprint = function(){
   if(!contractExecuted){
-    document.body.innerHTML = '';
+    document.body.innerHTML = `
+      <div style="display:none;">
+        Printing is disabled until the agreement is digitally executed.
+      </div>
+    `;
   }
 };
 
-/* MODIFY EXISTING FUNCTION */
-const originalAcceptAgreement = acceptAgreement;
-
-acceptAgreement = function(){
-  originalAcceptAgreement();
-
-  /* check if execution happened */
-  const executionBox = document.getElementById('executionBox');
-
-  if(executionBox.classList.contains('show')){
-    contractExecuted = true;
-  }
-};
-
+/* RESTORE PAGE AFTER BLOCKED PRINT */
 window.onafterprint = function(){
   if(!contractExecuted){
+    document.body.innerHTML = originalBodyHTML;
     location.reload();
   }
 };
