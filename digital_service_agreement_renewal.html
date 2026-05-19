@@ -456,6 +456,22 @@ ol.clauses > li::before{
 }
 
 
+.expiry-box{
+  margin-top:22px;
+  padding:16px 18px;
+  border-radius:var(--radius);
+  border:1px solid rgba(245,158,11,.30);
+  background:#fffbeb;
+  color:#92400e;
+  font-size:13px;
+}
+.expiry-box strong{color:#78350f}
+.expiry-box.expired{
+  border-color:rgba(220,38,38,.30);
+  background:#fef2f2;
+  color:#991b1b;
+}
+
 .success-modal{
   position:fixed;
   inset:0;
@@ -581,7 +597,7 @@ ol.clauses > li::before{
               id="contractStatus"
               style="color:#f59e0b;font-weight:700;"
             >
-              Pending Digital Execution
+              Pending Digital Execution • Expires 22 May 2026 — 11:59 AM
             </span>
           </div>
         </header>
@@ -597,6 +613,16 @@ ol.clauses > li::before{
       <div class="notice">
         <strong>Important:</strong> The previous engagement under Ref. EXV-STJ-2026-001 was closed after settlement discussions.
         This renewal applies only to new work requested after acceptance of this agreement.
+        <br><br>
+        <strong>Execution Deadline:</strong> This agreement link was issued on
+        <strong>Friday, 15 May 2026 at 9:55 AM (EAT)</strong> and remains active for 7 days.
+        It will automatically expire on <strong>Friday, 22 May 2026 at 11:59 AM (EAT)</strong>
+        if not digitally executed and accompanied by payment confirmation.
+      </div>
+
+      <div class="expiry-box" id="expiryBox">
+        <strong>Agreement Window:</strong> Active until Friday, 22 May 2026 at 11:59 AM (EAT).
+        <span id="expiryCountdown"></span>
       </div>
 
       <section class="grid">
@@ -1000,11 +1026,96 @@ ol.clauses > li::before{
 
 <script>
 let contractExecuted = false;
+
+/* CONTRACT EXPIRY
+   Link issued: Friday, 15 May 2026 at 9:55 AM (EAT)
+   Expiry: Friday, 22 May 2026 at 11:59 AM (EAT)
+*/
+const contractIssuedAt = new Date('2026-05-15T09:55:00+03:00');
+const contractExpiry = new Date('2026-05-22T11:59:00+03:00');
+
 let originalBodyHTML = document.body.innerHTML;
 let signedContractFilename = "exevo-signed-contract.pdf";
 
 function pad(n){
   return String(n).padStart(2,'0');
+}
+
+function expireContract(){
+  if(contractExecuted) return;
+
+  const acceptBtn = document.getElementById('acceptBtn');
+  const statusElement = document.getElementById('contractStatus');
+  const executionBox = document.getElementById('executionBox');
+  const executionLog = document.getElementById('executionLog');
+  const expiryBox = document.getElementById('expiryBox');
+  const expiryCountdown = document.getElementById('expiryCountdown');
+
+  if(acceptBtn){
+    acceptBtn.disabled = true;
+    acceptBtn.style.opacity = '.55';
+    acceptBtn.style.cursor = 'not-allowed';
+    acceptBtn.textContent = 'Agreement Expired';
+  }
+
+  if(statusElement){
+    statusElement.textContent = 'Expired • Renewal Required';
+    statusElement.style.color = '#dc2626';
+    statusElement.style.fontWeight = '800';
+  }
+
+  if(expiryBox){
+    expiryBox.classList.add('expired');
+    expiryBox.innerHTML = '<strong>Agreement Expired:</strong> This renewal link closed on Friday, 22 May 2026 at 11:59 AM (EAT). Fresh onboarding, updated quotation, and new agreement approval may be required.';
+  }
+
+  if(expiryCountdown){
+    expiryCountdown.textContent = '';
+  }
+
+  if(executionBox){
+    executionBox.classList.add('show');
+  }
+
+  if(executionLog){
+    executionLog.textContent =
+`CONTRACT STATUS: EXPIRED
+
+This agreement automatically expired on:
+Friday, 22 May 2026 at 11:59 AM (EAT)
+
+Link issued on:
+Friday, 15 May 2026 at 9:55 AM (EAT)
+
+Reason:
+No digital execution, payment confirmation, or renewal communication was received within the active agreement window.
+
+Any future work requests may require:
+- fresh onboarding
+- updated quotation
+- new agreement approval`;
+  }
+}
+
+function updateExpiryCountdown(){
+  if(contractExecuted) return;
+
+  const now = new Date();
+  const expiryCountdown = document.getElementById('expiryCountdown');
+
+  if(now >= contractExpiry){
+    expireContract();
+    return;
+  }
+
+  if(!expiryCountdown) return;
+
+  const diff = contractExpiry - now;
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((diff / (1000 * 60)) % 60);
+
+  expiryCountdown.textContent = ` Time remaining: ${days}d ${hours}h ${minutes}m.`;
 }
 
 function enableButtons(){
@@ -1106,6 +1217,12 @@ function goToHomepage(){
 }
 
 function acceptAgreement(){
+  if(new Date() >= contractExpiry){
+    expireContract();
+    alert('This agreement has expired. Please request a fresh renewal agreement from Exevo Designers Network.');
+    return;
+  }
+
   const repName = document.getElementById('repName').value.trim();
   const repTitle = document.getElementById('repTitle').value.trim();
   const clientEmail = document.getElementById('clientEmail').value.trim();
@@ -1248,6 +1365,12 @@ window.onafterprint = function(){
     location.reload();
   }
 };
+
+/* AUTO EXPIRY CHECK */
+window.addEventListener('load', function(){
+  updateExpiryCountdown();
+  setInterval(updateExpiryCountdown, 60000);
+});
 </script>
 
 </body>
