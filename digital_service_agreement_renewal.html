@@ -597,7 +597,7 @@ ol.clauses > li::before{
               id="contractStatus"
               style="color:#f59e0b;font-weight:700;"
             >
-              Pending Digital Execution • Expires 22 May 2026 — 11:59 AM
+              Pending Digital Execution • Expires 22 May 2026 — 11:59 PM
             </span>
           </div>
         </header>
@@ -616,12 +616,12 @@ ol.clauses > li::before{
         <br><br>
         <strong>Execution Deadline:</strong> This agreement link was issued on
         <strong>Friday, 15 May 2026 at 9:55 AM (EAT)</strong> and remains active for 7 days.
-        It will automatically expire on <strong>Friday, 22 May 2026 at 11:59 AM (EAT)</strong>
+        It will automatically expire on <strong>Friday, 22 May 2026 at 11:59 PM (EAT)</strong>
         if not digitally executed and accompanied by payment confirmation.
       </div>
 
       <div class="expiry-box" id="expiryBox">
-        <strong>Agreement Window:</strong> Active until Friday, 22 May 2026 at 11:59 AM (EAT).
+        <strong>Agreement Window:</strong> Active until Friday, 22 May 2026 at 11:59 PM (EAT).
         <span id="expiryCountdown"></span>
       </div>
 
@@ -1160,10 +1160,10 @@ let contractExecuted = false;
 
 /* CONTRACT EXPIRY
    Link issued: Friday, 15 May 2026 at 9:55 AM (EAT)
-   Expiry: Friday, 22 May 2026 at 11:59 AM (EAT)
+   Expiry: Friday, 22 May 2026 at 11:59 PM (EAT)
 */
 const contractIssuedAt = new Date('2026-05-15T09:55:00+03:00');
-const contractExpiry = new Date('2026-05-22T11:59:00+03:00');
+const contractExpiry = new Date('2026-05-22T23:59:00+03:00');
 
 let originalBodyHTML = document.body.innerHTML;
 let signedContractFilename = "exevo-signed-contract.pdf";
@@ -1197,7 +1197,7 @@ function expireContract(){
 
   if(expiryBox){
     expiryBox.classList.add('expired');
-    expiryBox.innerHTML = '<strong>Agreement Expired:</strong> This renewal link closed on Friday, 22 May 2026 at 11:59 AM (EAT). Fresh onboarding, updated quotation, and new agreement approval may be required.';
+    expiryBox.innerHTML = '<strong>Agreement Expired:</strong> This renewal link closed on Friday, 22 May 2026 at 11:59 PM (EAT). Fresh onboarding, updated quotation, and new agreement approval may be required.';
   }
 
   if(expiryCountdown){
@@ -1213,7 +1213,7 @@ function expireContract(){
 `CONTRACT STATUS: EXPIRED
 
 This agreement automatically expired on:
-Friday, 22 May 2026 at 11:59 AM (EAT)
+Friday, 22 May 2026 at 11:59 PM (EAT)
 
 Link issued on:
 Friday, 15 May 2026 at 9:55 AM (EAT)
