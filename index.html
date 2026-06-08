@@ -1225,44 +1225,49 @@
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--border);
-      padding: 5rem 3rem 3rem;
+      padding: clamp(2.25rem, 4vw, 5rem) 2.5rem 2.5rem;
     }
     .footer__top {
-      display: flex; justify-content: space-between; align-items: flex-start;
-      margin-bottom: 6rem;
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 2rem; flex-wrap: wrap;
+      margin-bottom: clamp(2rem, 4vw, 6rem);
     }
     .footer__wordmark {
-      font-family: var(--font-display);
-      font-size: clamp(4rem, 10vw, 10rem);
-      letter-spacing: -0.05em;
-      line-height: 1;
-      color: rgba(245,245,245,0.05);
-      user-select: none;
+      display: flex; align-items: center; user-select: none;
+      flex: 0 0 auto; padding-right: 0.75rem;
+    }
+    .footer__wordmark .footer__logo {
+      height: clamp(40px, 8vw, 110px);
+      max-height: 110px;
+      width: auto; display: block; object-fit: contain;
+      filter: grayscale(1) brightness(0) invert(1);
     }
     .footer__links {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 4rem;
+      flex: 1 1 420px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: clamp(1rem, 2vw, 2.5rem);
     }
     .footer__col-title {
       font-size: 0.68rem; font-weight: 600;
       letter-spacing: 0.25em; text-transform: uppercase;
-      color: var(--muted); margin-bottom: 1.5rem;
+      color: var(--muted); margin-bottom: 1rem;
     }
     .footer__col a {
       display: block;
-      font-size: 0.88rem; line-height: 2.2;
+      font-size: 0.88rem; line-height: 1.9;
       color: var(--subtle); text-decoration: none;
       transition: color 0.3s;
     }
     .footer__col a:hover { color: var(--text); }
     .footer__bottom {
-      display: flex; justify-content: space-between; align-items: center;
-      padding-top: 2rem;
+      display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;
+      padding-top: 1.5rem;
       border-top: 1px solid var(--border);
-      font-size: 0.75rem; color: var(--muted);
+      font-size: 0.75rem; color: var(--muted); gap: 1rem;
     }
     .footer__socials {
-      display: flex; gap: 2rem;
+      display: flex; gap: 1.25rem; flex-wrap: wrap;
     }
     .footer__socials a {
       color: var(--muted); text-decoration: none;
@@ -1296,10 +1301,10 @@
       .contact__grid { grid-template-columns: 1fr; gap: 4rem; }
       #work, #about, #services, #process, #insights, #contact { padding: 6rem 2rem; }
       .process__track { grid-template-columns: repeat(2, 1fr); }
-      .footer__top { flex-direction: column; gap: 4rem; }
-      .footer__wordmark { font-size: 5rem; }
-      .footer__links { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
-      .footer__bottom { flex-direction: column; gap: 1rem; text-align: center; }
+      .footer__top { flex-direction: column; gap: 2rem; align-items: center; }
+      .footer__wordmark { padding-bottom: 0.5rem; }
+      .footer__links { grid-template-columns: 1fr 1fr; gap: 1.25rem; width: 100%; }
+      .footer__bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
       .insights__intro { flex-direction: column; align-items: flex-start; gap: 2rem; }
       .founder__card {
         grid-template-columns: 1fr;
@@ -2239,7 +2244,7 @@
               <div class="contact__channel-value">Message us directly</div>
             </div>
           </a>
-          <a href="mailto:hello@exevo.studio" class="contact__channel">
+          <a href="mailto:exevodesigners@gmail.com" class="contact__channel">
             <div class="contact__channel-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
@@ -2294,7 +2299,7 @@
   <!-- FOOTER -->
   <footer>
     <div class="footer__top">
-      <div class="footer__wordmark">EXEVO</div>
+      <div class="footer__wordmark"><img src="ExevoLogo/exevo-logo-profile(2).png" alt="Exevo wordmark" class="footer__logo" /></div>
       <div class="footer__links">
         <div class="footer__col">
           <div class="footer__col-title">Navigate</div>
