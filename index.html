@@ -824,6 +824,20 @@
       opacity: 0.7;
     }
 
+    @media (max-width: 1100px) {
+      .founder__card {
+        grid-template-columns: 220px 1fr;
+      }
+      .founder__signature {
+        grid-column: 1 / -1;
+        padding-left: 0;
+        border-left: none;
+        border-top: 1px solid var(--border);
+        padding-top: 2rem;
+        min-width: auto;
+      }
+    }
+
     /* ── SERVICES ── */
     #services {
       padding: 8rem 3rem;
@@ -1272,6 +1286,31 @@
       .footer__links { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
       .footer__bottom { flex-direction: column; gap: 1rem; text-align: center; }
       .insights__intro { flex-direction: column; align-items: flex-start; gap: 2rem; }
+      .founder__card {
+        grid-template-columns: 1fr;
+        padding: 2rem;
+        gap: 2rem;
+      }
+      .founder__left {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 1.5rem;
+      }
+      .founder__photo-wrap {
+        width: 100px; height: 100px;
+      }
+      .founder__bio {
+        max-width: 100%;
+      }
+      .founder__links { flex-direction: column; }
+      .founder__signature {
+        grid-column: 1 / -1;
+        padding-left: 0;
+        border-left: none;
+        border-top: 1px solid var(--border);
+        padding-top: 2rem;
+      }
     }
     @media (max-width: 640px) {
       nav { padding: 1.25rem 1.25rem; }
@@ -1286,6 +1325,10 @@
       .form__row { grid-template-columns: 1fr; }
       .footer__links { grid-template-columns: 1fr; }
       .testimonials__header { padding: 0 1.25rem; }
+      .founder__card { padding: 1.5rem; }
+      .founder__left { flex-direction: column; align-items: center; }
+      .founder__reach-list { justify-content: center; }
+      .founder__links { gap: 0.75rem; }
     }
   </style>
 </head>
@@ -2172,7 +2215,7 @@
         <h2 class="contact__heading">Ready to Build<br>Your <em>Digital</em><br>Legacy?</h2>
         <p class="contact__sub">Tell us about your project. We'll get back within 24 hours with a clear path forward — no fluff, no endless back-and-forth.</p>
         <div class="contact__channels">
-          <a href="https://wa.me/233000000000" class="contact__channel" target="_blank">
+          <a href="https://wa.me/254700552884" class="contact__channel" target="_blank" rel="noopener noreferrer">
             <div class="contact__channel-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             </div>
@@ -2192,28 +2235,28 @@
           </a>
         </div>
       </div>
-      <div class="contact__form">
+      <form class="contact__form" id="contactForm">
         <div class="form__row">
           <div class="form__group">
             <label class="form__label">First Name</label>
-            <input type="text" class="form__input" placeholder="John" />
+            <input type="text" name="firstName" class="form__input" placeholder="John" required autocomplete="given-name" />
           </div>
           <div class="form__group">
             <label class="form__label">Last Name</label>
-            <input type="text" class="form__input" placeholder="Doe" />
+            <input type="text" name="lastName" class="form__input" placeholder="Doe" required autocomplete="family-name" />
           </div>
         </div>
         <div class="form__group">
           <label class="form__label">Email Address</label>
-          <input type="email" class="form__input" placeholder="john@company.com" />
+          <input type="email" name="email" class="form__input" placeholder="john@company.com" required autocomplete="email" />
         </div>
         <div class="form__group">
           <label class="form__label">Company / Business</label>
-          <input type="text" class="form__input" placeholder="Your company name" />
+          <input type="text" name="company" class="form__input" placeholder="Your company name" autocomplete="organization" />
         </div>
         <div class="form__group">
           <label class="form__label">Project Type</label>
-          <select class="form__select">
+          <select name="projectType" class="form__select" required>
             <option value="" disabled selected>Select a service</option>
             <option>Brand Identity</option>
             <option>Website Design</option>
@@ -2226,10 +2269,10 @@
         </div>
         <div class="form__group">
           <label class="form__label">Tell Us About Your Project</label>
-          <textarea class="form__textarea" placeholder="Share what you're building, your goals, and any relevant context…"></textarea>
+          <textarea name="projectBrief" class="form__textarea" placeholder="Share what you're building, your goals, and any relevant context…" required></textarea>
         </div>
-        <button type="button" class="form__submit magnetic">Send Project Brief</button>
-      </div>
+        <button type="submit" class="form__submit magnetic">Send Project Brief</button>
+      </form>
     </div>
   </section>
 
@@ -2525,14 +2568,46 @@
     });
 
     // ── FORM SUBMIT ──────────────────────────────────────────────────────────
-    document.querySelector('.form__submit').addEventListener('click', function() {
-      this.textContent = 'Message Sent ✓';
-      this.style.background = '#10B981';
-      setTimeout(() => {
-        this.textContent = 'Send Project Brief';
-        this.style.background = '';
-      }, 3000);
-    });
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+      contactForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        if (!contactForm.checkValidity()) {
+          contactForm.reportValidity();
+          return;
+        }
+
+        const formData = new FormData(contactForm);
+        const firstName = formData.get('firstName') || '';
+        const lastName = formData.get('lastName') || '';
+        const email = formData.get('email') || '';
+        const company = formData.get('company') || 'Not provided';
+        const projectType = formData.get('projectType') || 'Not specified';
+        const projectBrief = formData.get('projectBrief') || '';
+        const fullName = `${firstName} ${lastName}`.trim();
+
+        const message = `Project Brief from ${fullName}\nEmail: ${email}\nCompany: ${company}\nService: ${projectType}\n\n${projectBrief}`;
+        const subject = `Project Brief: ${projectType} - ${fullName}`;
+        const emailAddress = 'hello@exevo.studio';
+        const whatsappNumber = '254700552884';
+
+        const mailtoLink = `mailto:${emailAddress}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+        const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+        window.open(whatsappLink, '_blank');
+        window.location.href = mailtoLink;
+
+        const submitButton = contactForm.querySelector('.form__submit');
+        if (submitButton) {
+          submitButton.textContent = 'Message Sent ✓';
+          submitButton.style.background = '#10B981';
+          setTimeout(() => {
+            submitButton.textContent = 'Send Project Brief';
+            submitButton.style.background = '';
+          }, 3000);
+        }
+      });
+    }
   </script>
 </body>
 </html>
