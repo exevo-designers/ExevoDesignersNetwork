@@ -8,9 +8,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- GSAP Core and Plugins for luxurious interactions -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/SplitText.min.js"></script>
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -56,12 +56,17 @@
                   height 0.35s cubic-bezier(.25,.46,.45,.94),
                   background 0.35s;
     }
-    body:hover .cursor__ring { }
     .cursor--hover .cursor__ring {
       width: 60px; height: 60px;
       background: rgba(124,58,237,0.12);
     }
     .cursor--hover .cursor__dot { transform: translate(-50%,-50%) scale(0); }
+
+    /* Hide cursor for touch devices to preserve click targets */
+    @media (pointer: coarse) {
+      body { cursor: auto; }
+      .cursor { display: none !important; }
+    }
 
     /* ── NOISE OVERLAY ── */
     body::before {
@@ -203,7 +208,6 @@
       background: radial-gradient(ellipse 55% 70% at 30% 50%, rgba(124,58,237,0.1) 0%, transparent 65%);
       pointer-events: none;
     }
-    /* Vignette edges */
     .hero__vignette {
       position: absolute; inset: 0; z-index: 3; pointer-events: none;
       background:
@@ -215,7 +219,7 @@
     .hero__left {
       position: relative; z-index: 4;
       display: flex; flex-direction: column; justify-content: center;
-      padding: 0 3.5rem 0 3.5rem;
+      padding: 0 3.5rem;
       pointer-events: none;
     }
     .hero__eyebrow {
@@ -277,7 +281,6 @@
     .btn-ghost svg { transition: transform 0.3s; }
     .btn-ghost:hover svg { transform: translateX(4px); }
 
-    /* Divider line between panes */
     .hero__divider {
       position: absolute; top: 0; bottom: 0;
       left: 50%; width: 1px;
@@ -291,7 +294,6 @@
       overflow: hidden;
       display: flex; align-items: stretch;
     }
-    /* Two vertical columns moving in opposite directions */
     .gallery__col {
       flex: 1;
       display: flex; flex-direction: column;
@@ -301,7 +303,6 @@
     .gallery__col:first-child { padding-left: 12px; }
     .gallery__col:last-child  { padding-right: 12px; }
 
-    /* Each slide card */
     .gallery__card {
       flex-shrink: 0;
       position: relative;
@@ -309,36 +310,27 @@
       border-radius: 3px;
       border: 1px solid rgba(255,255,255,0.07);
       cursor: none;
-      /* aspect */
     }
     .gallery__card--tall  { aspect-ratio: 3/4; }
     .gallery__card--wide  { aspect-ratio: 4/3; }
     .gallery__card--sqr   { aspect-ratio: 1/1; }
 
-    /* Colour swatch backgrounds — distinct per project */
     .gallery__card[data-proj="jean"]       { background: #12100e; }
     .gallery__card[data-proj="ansa"]       { background: #0e1018; }
     .gallery__card[data-proj="grad"]       { background: #100d14; }
     .gallery__card[data-proj="stjoseph"]   { background: #0d1110; }
     .gallery__card[data-proj="exevobrand"] { background: #0e0b14; }
 
-    /* Abstract art fill */
     .gallery__card__art {
       position: absolute; inset: 0;
       transition: transform 0.9s cubic-bezier(.25,.46,.45,.94);
     }
     .gallery__card:hover .gallery__card__art { transform: scale(1.06); }
-
-    /* SVG art inside each card */
-    .gallery__card__art svg,
-    .gallery__card__art img {
+    .gallery__card__art svg {
       width: 100%; height: 100%;
       display: block;
-      object-fit: cover;
-      object-position: center;
     }
 
-    /* Overlay info — slides up on hover */
     .gallery__card__info {
       position: absolute; inset: 0;
       display: flex; flex-direction: column; justify-content: flex-end;
@@ -370,7 +362,6 @@
       color: var(--muted); margin-top: 0.4rem;
     }
 
-    /* Top-left subtle project marker (always visible, very faint) */
     .gallery__card__badge {
       position: absolute; top: 0.9rem; left: 0.9rem;
       font-size: 0.58rem; font-weight: 700;
@@ -379,7 +370,6 @@
       z-index: 2;
     }
 
-    /* "Live work" pill overlay on hero */
     .hero__live-pill {
       position: absolute; bottom: 2.5rem; right: 3rem;
       z-index: 5;
@@ -427,24 +417,6 @@
     @keyframes scrollPulse {
       0% { transform: translateX(-100%); }
       100% { transform: translateX(220%); }
-    }
-
-    /* Mobile: stack panes */
-    @media (max-width: 900px) {
-      #hero { grid-template-columns: 1fr; height: auto; min-height: 100svh; }
-      .hero__left { padding: 9rem 2rem 3.5rem; justify-content: flex-start; }
-      .hero__gallery { height: 340px; }
-      .hero__divider { display: none; }
-      .hero__vignette { background:
-        linear-gradient(to bottom, var(--bg) 0%, transparent 12%, transparent 88%, var(--bg) 100%),
-        linear-gradient(to right,  var(--bg) 0%, transparent 6%, transparent 94%, var(--bg) 100%);
-      }
-    }
-    @media (max-width: 640px) {
-      .hero__left { padding: 8rem 1.25rem 2rem; }
-      .hero__gallery { height: 260px; }
-      .hero__scroll { left: 1.25rem; bottom: 1.5rem; }
-      .hero__live-pill { right: 1.25rem; bottom: 1.5rem; }
     }
 
     /* ── MARQUEE ── */
@@ -499,48 +471,6 @@
     }
     .section-header em { font-style: italic; color: var(--subtle); }
 
-    .founders__card {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 1.5rem;
-      align-items: center;
-      padding: 2.5rem 3rem;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: rgba(255,255,255,0.02);
-      margin-bottom: 4rem;
-    }
-    .founders__photo {
-      width: 104px; height: 104px;
-      display: grid; place-items: center;
-      border-radius: 24px;
-      background: linear-gradient(135deg, rgba(124,58,237,0.15), rgba(168,85,247,0.08));
-      color: var(--text);
-      font-family: var(--font-display);
-      font-size: 2.1rem;
-      font-weight: 700;
-      letter-spacing: -0.05em;
-    }
-    .founders__content {
-      display: flex; flex-direction: column; gap: 0.75rem;
-    }
-    .founders__name {
-      font-family: var(--font-display);
-      font-size: clamp(2rem, 3.5vw, 2.8rem);
-      color: var(--text);
-      line-height: 1.05;
-    }
-    .founders__role {
-      font-size: 0.85rem; font-weight: 700;
-      letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--accent-light);
-    }
-    .founders__bio {
-      max-width: 720px;
-      font-size: 0.95rem; line-height: 1.8;
-      color: var(--subtle);
-    }
-
     /* ── WORK ── */
     #work { padding: 8rem 3rem; }
     .work__intro {
@@ -580,7 +510,6 @@
       color: var(--border);
       line-height: 1;
     }
-    .project-card__meta { }
     .project-card__cat {
       font-size: 0.68rem; font-weight: 600;
       letter-spacing: 0.25em; text-transform: uppercase;
@@ -605,6 +534,7 @@
       letter-spacing: 0.12em; text-transform: uppercase;
       color: var(--text); text-decoration: none;
       transition: color 0.3s;
+      cursor: pointer;
     }
     .project-card__link:hover { color: var(--accent-light); }
     .project-card__link svg { transition: transform 0.3s; }
@@ -612,31 +542,34 @@
     .project-card__image {
       overflow: hidden; position: relative;
     }
-    .project-card__image img,
     .project-card__image .img-placeholder {
-      width: 100%; height: 100%; object-fit: cover;
+      width: 100%; height: 100%;
       transition: transform 0.7s cubic-bezier(.25,.46,.45,.94);
       display: block;
     }
     .project-card:hover .img-placeholder { transform: scale(1.05); }
     .img-placeholder {
-      width: 100%; height: 100%;
       background: #1a1a1a;
       display: flex; align-items: center; justify-content: center;
-      min-height: 0;
+      min-height: 400px;
+      position: relative;
+    }
+    .img-placeholder svg {
+      position: absolute; inset: 0; width: 100%; height: 100%;
     }
     .img-placeholder__inner {
       text-align: center;
-      width: 100%;
+      z-index: 2;
     }
     .img-placeholder__label {
       font-family: var(--font-display);
       font-size: clamp(2rem, 4vw, 3.5rem);
       letter-spacing: -0.03em;
-      color: rgba(245,245,245,0.06);
+      color: rgba(245,245,245,0.15);
       line-height: 1.1;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.5);
     }
-    /* Different bg tones per project */
+    
     .project-card:nth-child(1) .img-placeholder { background: #111118; }
     .project-card:nth-child(2) .img-placeholder { background: #0e1410; }
     .project-card:nth-child(3) .img-placeholder { background: #130f0f; }
@@ -661,7 +594,6 @@
     .about__statement em {
       font-style: italic; color: var(--subtle);
     }
-    .about__body { }
     .about__text {
       font-size: 0.95rem; line-height: 1.85;
       color: var(--subtle);
@@ -686,6 +618,189 @@
       font-size: 0.75rem; font-weight: 500;
       letter-spacing: 0.15em; text-transform: uppercase;
       color: var(--muted); margin-top: 0.5rem;
+    }
+
+    /* ── FOUNDER ── */
+    .founder__section {
+      margin-top: 7rem;
+      padding-top: 6rem;
+      border-top: 1px solid var(--border);
+    }
+    .founder__label-row { margin-bottom: 3rem; }
+    .founder__card {
+      display: grid;
+      grid-template-columns: 220px 1fr auto;
+      gap: 4rem;
+      align-items: start;
+      padding: 3.5rem;
+      border: 1px solid var(--border);
+      background: linear-gradient(135deg, rgba(124,58,237,0.04) 0%, transparent 60%);
+      position: relative;
+      overflow: hidden;
+    }
+    .founder__card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-light), transparent);
+    }
+
+    .founder__left {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 2rem;
+    }
+    .founder__photo-wrap {
+      width: 120px; height: 120px; border-radius: 50%;
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .founder__photo-ring {
+      position: absolute; inset: -3px;
+      border-radius: 50%;
+      background: conic-gradient(var(--accent), var(--accent-light), transparent, var(--accent));
+      animation: ringRotate 6s linear infinite;
+    }
+    @keyframes ringRotate {
+      to { transform: rotate(360deg); }
+    }
+    .founder__photo-wrap::before {
+      content: '';
+      position: absolute; inset: 2px;
+      border-radius: 50%;
+      background: var(--bg);
+      z-index: 1;
+    }
+    .founder__photo {
+      position: relative;
+      z-index: 2;
+      width: calc(100% - 8px);
+      height: calc(100% - 8px);
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(20%) contrast(110%);
+      transition: filter 0.3s ease;
+    }
+    .founder__photo-wrap:hover .founder__photo {
+      filter: grayscale(0%) contrast(100%);
+    }
+    .founder__initials {
+      position: relative; z-index: 2;
+      font-family: var(--font-display);
+      font-size: 2.2rem; font-weight: 700;
+      letter-spacing: -0.05em;
+      background: linear-gradient(135deg, var(--text), var(--accent-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .founder__reach { text-align: center; }
+    .founder__reach-label {
+      font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 0.75rem;
+    }
+    .founder__reach-list {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 0.4rem;
+    }
+    .founder__reach-list span {
+      font-size: 0.62rem; font-weight: 600;
+      letter-spacing: 0.1em;
+      color: var(--subtle);
+      padding: 0.25rem 0.6rem;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+    }
+
+    .founder__body { flex: 1; }
+    .founder__meta { margin-bottom: 1.75rem; }
+    .founder__name {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+    .founder__titles { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .founder__title-badge {
+      font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 0.3rem 0.85rem;
+      border-radius: 100px;
+      border: 1px solid rgba(168,85,247,0.5);
+      color: var(--accent-light);
+    }
+    .founder__title-badge--dim {
+      border-color: var(--border);
+      color: var(--muted);
+    }
+    .founder__bio {
+      font-size: 0.92rem; line-height: 1.82;
+      color: var(--subtle);
+      max-width: 580px;
+      margin-bottom: 1.25rem;
+    }
+    .founder__traits {
+      display: flex; flex-wrap: wrap; gap: 0.6rem;
+      margin: 1.75rem 0;
+    }
+    .founder__trait {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--subtle);
+      padding: 0.35rem 0.85rem;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+    }
+    .founder__links {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      margin-top: 2rem; padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .founder__link {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.6rem 1.25rem;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--subtle); text-decoration: none;
+      transition: color 0.3s, border-color 0.3s, background 0.3s;
+    }
+    .founder__link:hover {
+      color: var(--text);
+      border-color: rgba(168,85,247,0.4);
+      background: rgba(124,58,237,0.06);
+    }
+
+    .founder__signature {
+      display: flex; flex-direction: column; gap: 1rem;
+      min-width: 160px;
+      padding-left: 3rem;
+      border-left: 1px solid var(--border);
+    }
+    .founder__sig-label {
+      font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--muted);
+    }
+    .founder__sig-items {
+      display: flex; flex-direction: column; gap: 0.5rem;
+    }
+    .founder__sig-item {
+      font-size: 0.75rem; font-weight: 500;
+      color: var(--subtle);
+      padding: 0.4rem 0;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .founder__sig-item::before {
+      content: '';
+      width: 4px; height: 4px; border-radius: 50%;
+      background: var(--accent-light);
+      flex-shrink: 0;
+      opacity: 0.7;
     }
 
     /* ── SERVICES ── */
@@ -871,10 +986,40 @@
       border-top: 1px solid var(--border);
       overflow: hidden;
     }
-    .testimonials__header { padding: 0 3rem; margin-bottom: 5rem; }
+    .testimonials__header {
+      padding: 0 3rem;
+      margin-bottom: 5rem;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .testimonials__rating-badge {
+      display: flex; flex-direction: column; align-items: flex-end; gap: 0.5rem;
+      flex-shrink: 0;
+    }
+    .testimonials__stars {
+      display: flex; gap: 3px;
+    }
+    .testimonials__stars svg { width: 18px; height: 18px; }
+    .testimonials__rating-score {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      letter-spacing: -0.05em;
+      line-height: 1;
+      color: var(--text);
+    }
+    .testimonials__rating-source {
+      display: flex; align-items: center; gap: 0.4rem;
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted);
+    }
+    .testimonials__scroll-wrapper { overflow: hidden; padding: 2rem 0; }
     .testimonials__track {
       display: flex; gap: 2px;
-      animation: testimonialsScroll 40s linear infinite;
+      animation: testimonialsScroll 52s linear infinite;
       width: max-content;
     }
     .testimonials__track:hover { animation-play-state: paused; }
@@ -883,36 +1028,59 @@
       100% { transform: translateX(-50%); }
     }
     .testimonial-card {
-      width: 520px; flex-shrink: 0;
-      padding: 3.5rem;
+      width: 460px; flex-shrink: 0;
+      padding: 2.75rem;
       background: #0e0e0e;
       border: 1px solid var(--border);
+      transition: border-color 0.3s;
     }
+    .testimonial-card:hover { border-color: rgba(124,58,237,0.2); }
+    .testimonial-card__stars {
+      display: flex; gap: 3px; margin-bottom: 1.4rem;
+    }
+    .testimonial-card__stars svg { width: 14px; height: 14px; flex-shrink: 0; }
     .testimonial-card__quote {
       font-family: var(--font-display);
-      font-size: clamp(1.1rem, 1.8vw, 1.5rem);
-      line-height: 1.5;
+      font-size: clamp(1rem, 1.6vw, 1.3rem);
+      line-height: 1.55;
       letter-spacing: -0.01em;
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
       color: var(--text);
+      flex: 1;
     }
     .testimonial-card__author {
       display: flex; align-items: center; gap: 1rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
     }
     .testimonial-card__avatar {
-      width: 44px; height: 44px; border-radius: 50%;
+      width: 40px; height: 40px; border-radius: 50%;
       background: linear-gradient(135deg, var(--accent), var(--accent-light));
       display: flex; align-items: center; justify-content: center;
-      font-family: var(--font-display); font-size: 1rem;
-      color: #fff; flex-shrink: 0;
+      font-family: var(--font-display); font-size: 0.95rem;
+      color: #fff; flex-shrink: 0; font-weight: 700;
     }
     .testimonial-card__name {
-      font-size: 0.85rem; font-weight: 600;
+      font-size: 0.82rem; font-weight: 600;
     }
     .testimonial-card__role {
-      font-size: 0.75rem; color: var(--muted);
-      margin-top: 0.2rem;
+      font-size: 0.7rem; color: var(--muted);
+      margin-top: 0.2rem; letter-spacing: 0.05em;
     }
+    .testimonials__footer {
+      padding: 2.5rem 3rem 0;
+      display: flex; justify-content: flex-end;
+    }
+    .testimonials__google-link {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-size: 0.74rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      transition: color 0.3s;
+    }
+    .testimonials__google-link:hover { color: var(--text); }
+    .testimonials__google-link svg:last-child { transition: transform 0.3s; }
+    .testimonials__google-link:hover svg:last-child { transform: translateX(3px); }
 
     /* ── CONTACT ── */
     #contact {
@@ -965,7 +1133,7 @@
       color: var(--muted); margin-bottom: 0.2rem;
     }
     .contact__channel-value { font-size: 0.9rem; font-weight: 500; }
-    .contact__form { }
+    
     .form__group { margin-bottom: 1.5rem; }
     .form__label {
       display: block;
@@ -1004,15 +1172,6 @@
       margin-top: 0.5rem;
     }
     .form__submit:hover { opacity: 0.88; }
-    .form__error {
-      min-height: 1.2rem;
-      margin-top: -0.5rem;
-      margin-bottom: 0.85rem;
-      color: #F87171;
-      font-size: 0.82rem;
-      line-height: 1.4;
-      opacity: 0.9;
-    }
 
     /* ── FOOTER ── */
     footer {
@@ -1057,26 +1216,120 @@
       display: flex; gap: 2rem;
     }
     .footer__socials a {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: var(--muted);
-      text-decoration: none;
+      color: var(--muted); text-decoration: none;
       font-size: 0.75rem; font-weight: 500;
       letter-spacing: 0.1em;
       transition: color 0.3s;
     }
-    .footer__socials a svg {
-      width: 16px;
-      height: 16px;
-      display: block;
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 1.5;
-      transition: transform 0.3s;
-    }
     .footer__socials a:hover { color: var(--text); }
-    .footer__socials a:hover svg { transform: translateY(-1px); }
+
+    /* ── INTERACTIVE CASE STUDY DRAWER ── */
+    .drawer {
+      position: fixed; top: 0; right: 0; bottom: 0;
+      width: 100%; max-width: 600px;
+      background: #0D0D0D;
+      border-left: 1px solid var(--border);
+      z-index: 1000;
+      transform: translateX(100%);
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: -10px 0 40px rgba(0, 0, 0, 0.8);
+      padding: 4rem 3rem;
+      overflow-y: auto;
+    }
+    .drawer.active {
+      transform: translateX(0);
+    }
+    .drawer__backdrop {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(10px);
+      z-index: 999;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+    .drawer__backdrop.active {
+      opacity: 1; pointer-events: auto;
+    }
+    .drawer__close {
+      position: absolute; top: 2rem; right: 2rem;
+      background: none; border: none;
+      color: var(--subtle); cursor: pointer;
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.75rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.15em;
+      transition: color 0.3s;
+    }
+    .drawer__close:hover { color: var(--text); }
+    .drawer__meta {
+      margin-top: 2rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2rem;
+      margin-bottom: 2rem;
+    }
+    .drawer__title {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    .drawer__cat {
+      font-size: 0.75rem; font-weight: 600;
+      color: var(--accent-light);
+      text-transform: uppercase; letter-spacing: 0.2em;
+    }
+    .drawer__body h4 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+    .drawer__body p {
+      font-size: 0.95rem; line-height: 1.8;
+      color: var(--subtle);
+      margin-bottom: 2rem;
+    }
+    .drawer__specs {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 2rem; background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      padding: 2rem; margin-top: 3rem;
+    }
+    .spec__label {
+      font-size: 0.68rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.15em;
+      color: var(--muted);
+    }
+    .spec__val {
+      font-size: 0.88rem; font-weight: 500;
+      color: var(--text); margin-top: 0.3rem;
+    }
+
+    /* ── MINIMALIST TOAST NOTIFICATION ── */
+    .toast {
+      position: fixed; bottom: 3rem; right: 3rem;
+      background: #111111;
+      border: 1px solid var(--border);
+      padding: 1.25rem 2rem;
+      border-radius: 2px;
+      z-index: 1010;
+      display: flex; align-items: center; gap: 1rem;
+      transform: translateY(150%);
+      opacity: 0; pointer-events: none;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+    }
+    .toast.active {
+      transform: translateY(0); opacity: 1;
+    }
+    .toast__dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #10B981;
+    }
+    .toast__msg {
+      font-size: 0.78rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--text);
+    }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 1100px) {
@@ -1109,7 +1362,7 @@
       .insights__intro { flex-direction: column; align-items: flex-start; gap: 2rem; }
     }
     @media (max-width: 640px) {
-      nav { padding: 1.25rem 1.25rem; }
+      nav { padding: 1.25rem; }
       #hero { padding: 7rem 1.25rem 6rem; min-height: 100svh; }
       .hero__scroll { display: none; }
       #work, #about, #services, #process, #insights, #testimonials, #contact { padding: 5rem 1.25rem; }
@@ -1201,7 +1454,22 @@
         <div class="gallery__card gallery__card--tall" data-proj="jean">
           <div class="gallery__card__badge">EDN</div>
           <div class="gallery__card__art">
-            <img src="images/JeyahHaven.jpg" alt="Jean Yarn Haven" loading="lazy" />
+            <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+              <defs>
+                <radialGradient id="gJean" cx="40%" cy="60%" r="70%">
+                  <stop offset="0%" stop-color="#c9a96e" stop-opacity="0.4"/>
+                  <stop offset="100%" stop-color="#12100e" stop-opacity="0"/>
+                </radialGradient>
+              </defs>
+              <rect width="300" height="400" fill="#12100e"/>
+              <rect width="300" height="400" fill="url(#gJean)"/>
+              <ellipse cx="150" cy="220" rx="110" ry="90" fill="none" stroke="#c9a96e" stroke-width="0.6" opacity="0.25"/>
+              <ellipse cx="150" cy="220" rx="80" ry="65" fill="none" stroke="#c9a96e" stroke-width="0.6" opacity="0.2"/>
+              <circle cx="150" cy="220" r="18" fill="#c9a96e" opacity="0.12"/>
+              <text x="28" y="90" font-family="serif" font-size="44" font-weight="700" fill="#c9a96e" opacity="0.1" letter-spacing="-2">JEAN</text>
+              <text x="28" y="138" font-family="serif" font-size="28" fill="#c9a96e" opacity="0.08">YARN HAVEN</text>
+              <line x1="28" y1="150" x2="272" y2="150" stroke="#c9a96e" stroke-width="0.4" opacity="0.12"/>
+            </svg>
           </div>
           <div class="gallery__card__info">
             <div class="gallery__card__cat">Brand Identity</div>
@@ -1213,11 +1481,20 @@
         <div class="gallery__card gallery__card--sqr" data-proj="ansa">
           <div class="gallery__card__badge">EDN</div>
           <div class="gallery__card__art">
-            <div class="img-placeholder">
-              <div class="img-placeholder__inner">
-                <div class="img-placeholder__label">Ansa<br>Internet</div>
-              </div>
-            </div>
+            <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+              <defs>
+                <radialGradient id="gAnsa" cx="60%" cy="40%" r="65%">
+                  <stop offset="0%" stop-color="#5b9cf6" stop-opacity="0.35"/>
+                  <stop offset="100%" stop-color="#0e1018" stop-opacity="0"/>
+                </radialGradient>
+              </defs>
+              <rect width="300" height="300" fill="#0e1018"/>
+              <rect width="300" height="300" fill="url(#gAnsa)"/>
+              <circle cx="150" cy="170" r="55" fill="none" stroke="#5b9cf6" stroke-width="0.8" opacity="0.3"/>
+              <circle cx="150" cy="170" r="85" fill="none" stroke="#5b9cf6" stroke-width="0.6" opacity="0.18"/>
+              <circle cx="150" cy="170" r="8" fill="#5b9cf6" opacity="0.5"/>
+              <text x="28" y="70" font-family="monospace" font-size="38" font-weight="700" fill="#5b9cf6" opacity="0.12" letter-spacing="2">ANSA</text>
+            </svg>
           </div>
           <div class="gallery__card__info">
             <div class="gallery__card__cat">Logo & Brand System</div>
@@ -1229,7 +1506,22 @@
         <div class="gallery__card gallery__card--wide" data-proj="grad">
           <div class="gallery__card__badge">EDN</div>
           <div class="gallery__card__art">
-            <img src="images/LearnGermanwithLewisky.png" alt="Graduation Portfolio" loading="lazy" />
+            <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+              <defs>
+                <linearGradient id="gGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#a855f7" stop-opacity="0.3"/>
+                  <stop offset="100%" stop-color="#100d14" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <rect width="400" height="300" fill="#100d14"/>
+              <rect width="400" height="300" fill="url(#gGrad)"/>
+              <g opacity="0.12">
+                <circle cx="50" cy="60" r="2" fill="#a855f7"/><circle cx="100" cy="60" r="2" fill="#a855f7"/><circle cx="150" cy="60" r="2" fill="#a855f7"/><circle cx="200" cy="60" r="2" fill="#a855f7"/><circle cx="250" cy="60" r="2" fill="#a855f7"/><circle cx="300" cy="60" r="2" fill="#a855f7"/>
+                <circle cx="50" cy="110" r="2" fill="#a855f7"/><circle cx="100" cy="110" r="2" fill="#a855f7"/><circle cx="150" cy="110" r="2" fill="#a855f7"/><circle cx="200" cy="110" r="2" fill="#a855f7"/><circle cx="250" cy="110" r="2" fill="#a855f7"/><circle cx="300" cy="110" r="2" fill="#a855f7"/>
+                <circle cx="50" cy="160" r="2" fill="#a855f7"/><circle cx="100" cy="160" r="2" fill="#a855f7"/><circle cx="150" cy="160" r="2" fill="#a855f7"/><circle cx="200" cy="160" r="2" fill="#a855f7"/><circle cx="250" cy="160" r="2" fill="#a855f7"/><circle cx="300" cy="160" r="2" fill="#a855f7"/>
+              </g>
+              <text x="30" y="168" font-family="serif" font-size="48" font-style="italic" fill="#a855f7" opacity="0.1">Portfolio</text>
+            </svg>
           </div>
           <div class="gallery__card__info">
             <div class="gallery__card__cat">Digital Portfolio</div>
@@ -1246,11 +1538,19 @@
         <div class="gallery__card gallery__card--wide" data-proj="stjoseph">
           <div class="gallery__card__badge">EDN</div>
           <div class="gallery__card__art">
-            <div class="img-placeholder">
-              <div class="img-placeholder__inner">
-                <div class="img-placeholder__label">St. Joseph<br>Rehema College</div>
-              </div>
-            </div>
+            <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+              <defs>
+                <radialGradient id="gSt" cx="50%" cy="50%" r="60%">
+                  <stop offset="0%" stop-color="#d4a853" stop-opacity="0.25"/>
+                  <stop offset="100%" stop-color="#0d1110" stop-opacity="0"/>
+                </radialGradient>
+              </defs>
+              <rect width="400" height="300" fill="#0d1110"/>
+              <rect width="400" height="300" fill="url(#gSt)"/>
+              <polygon points="200,40 225,100 195,90 200,40" fill="#d4a853" opacity="0.15"/>
+              <text x="200" y="145" text-anchor="middle" font-family="serif" font-size="22" fill="#d4a853" opacity="0.15" letter-spacing="4">ST. JOSEPH</text>
+              <text x="200" y="168" text-anchor="middle" font-family="serif" font-size="12" fill="#d4a853" opacity="0.1" letter-spacing="3">REHEMA COLLEGE</text>
+            </svg>
           </div>
           <div class="gallery__card__info">
             <div class="gallery__card__cat">Brand Communication</div>
@@ -1262,11 +1562,19 @@
         <div class="gallery__card gallery__card--tall" data-proj="exevobrand">
           <div class="gallery__card__badge">EDN</div>
           <div class="gallery__card__art">
-            <div class="img-placeholder">
-              <div class="img-placeholder__inner">
-                <div class="img-placeholder__label">Exevo<br>Brand System</div>
-              </div>
-            </div>
+            <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+              <defs>
+                <linearGradient id="gExevo" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#7c3aed" stop-opacity="0.45"/>
+                  <stop offset="100%" stop-color="#a855f7" stop-opacity="0.1"/>
+                </linearGradient>
+              </defs>
+              <rect width="300" height="400" fill="#0e0b14"/>
+              <rect width="300" height="400" fill="url(#gExevo)"/>
+              <line x1="80" y1="100" x2="220" y2="240" stroke="#a855f7" stroke-width="28" stroke-linecap="round" opacity="0.14"/>
+              <line x1="220" y1="100" x2="80" y2="240" stroke="#7c3aed" stroke-width="28" stroke-linecap="round" opacity="0.14"/>
+              <text x="28" y="368" font-family="serif" font-size="52" font-weight="900" fill="#a855f7" opacity="0.08" letter-spacing="-2">EXEVO</text>
+            </svg>
           </div>
           <div class="gallery__card__info">
             <div class="gallery__card__cat">Internal Identity</div>
@@ -1278,7 +1586,11 @@
         <div class="gallery__card gallery__card--sqr" data-proj="jean">
           <div class="gallery__card__badge">EDN</div>
           <div class="gallery__card__art">
-            <img src="images/JeyahHaven.jpg" alt="Jean Yarn Haven" loading="lazy" />
+            <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+              <rect width="300" height="300" fill="#12100e"/>
+              <circle cx="150" cy="150" r="100" fill="none" stroke="#c9a96e" stroke-width="0.7" opacity="0.2"/>
+              <text x="150" y="158" text-anchor="middle" font-family="serif" font-size="16" fill="#c9a96e" opacity="0.2" letter-spacing="2">JYH</text>
+            </svg>
           </div>
           <div class="gallery__card__info">
             <div class="gallery__card__cat">Brand Identity</div>
@@ -1320,6 +1632,7 @@
     </div>
     <div class="work__grid">
 
+      <!-- Case Study 1 -->
       <div class="project-card reveal-card">
         <div class="project-card__info">
           <div class="project-card__num">01</div>
@@ -1327,25 +1640,7 @@
             <p class="project-card__cat">Brand Identity · E-commerce</p>
             <h3 class="project-card__title">Jean Yarn Haven</h3>
             <p class="project-card__desc">A full brand ecosystem for a premium artisanal yarn retailer — from identity system to e-commerce experience.</p>
-            <a href="https://exevo-designers.github.io/JeanYarnHaven/" class="project-card__link" target="_blank" rel="noopener noreferrer">
-              View Case Study
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          </div>
-        </div>
-        <div class="project-card__image">
-          <img src="images/JeyahHaven.jpg" alt="Jean Yarn Haven" loading="lazy" />
-        </div>
-      </div>
-
-      <div class="project-card reveal-card">
-        <div class="project-card__info">
-          <div class="project-card__num">02</div>
-          <div class="project-card__meta">
-            <p class="project-card__cat">Brand Identity · Technology</p>
-            <h3 class="project-card__title">Ansa Internet</h3>
-            <p class="project-card__desc">A refreshed visual identity for a modern internet provider, built for speed, reliability, and clear customer messaging.</p>
-            <a href="#" class="project-card__link">
+            <a class="project-card__link" onclick="openCaseStudy(0)">
               View Case Study
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
@@ -1353,64 +1648,158 @@
         </div>
         <div class="project-card__image">
           <div class="img-placeholder">
+            <!-- Modern generative geometric design -->
+            <svg viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="grad1" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#c9a96e" stop-opacity="0.15" />
+                  <stop offset="100%" stop-color="#111118" stop-opacity="0" />
+                </radialGradient>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#grad1)" />
+              <circle cx="250" cy="200" r="120" fill="none" stroke="#c9a96e" stroke-width="1" opacity="0.3" stroke-dasharray="5,5"/>
+              <line x1="50" y1="200" x2="450" y2="200" stroke="#c9a96e" stroke-width="0.5" opacity="0.2"/>
+              <line x1="250" y1="50" x2="250" y2="350" stroke="#c9a96e" stroke-width="0.5" opacity="0.2"/>
+            </svg>
             <div class="img-placeholder__inner">
-              <div class="img-placeholder__label">Ansa<br>Internet</div>
+              <div class="img-placeholder__label">Jean<br>Yarn<br>Haven</div>
             </div>
           </div>
         </div>
       </div>
 
+      <!-- Case Study 2 -->
+      <div class="project-card reveal-card">
+        <div class="project-card__info">
+          <div class="project-card__num">02</div>
+          <div class="project-card__meta">
+            <p class="project-card__cat">Web Design · Corporate</p>
+            <h3 class="project-card__title">Johnson Fibre Link</h3>
+            <p class="project-card__desc">A high-performance digital platform for a fibre connectivity provider, communicating trust, speed, and reliability.</p>
+            <a class="project-card__link" onclick="openCaseStudy(1)">
+              View Case Study
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="project-card__image">
+          <div class="img-placeholder">
+            <svg viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="grad2" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#10B981" stop-opacity="0.15" />
+                  <stop offset="100%" stop-color="#0e1410" stop-opacity="0" />
+                </radialGradient>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#grad2)" />
+              <rect x="100" y="80" width="300" height="240" fill="none" stroke="#10B981" stroke-width="1" opacity="0.2"/>
+              <path d="M 50,200 L 150,150 L 350,250 L 450,200" fill="none" stroke="#10B981" stroke-width="1.5" opacity="0.4"/>
+            </svg>
+            <div class="img-placeholder__inner">
+              <div class="img-placeholder__label">Johnson<br>Fibre<br>Link</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case Study 3 -->
       <div class="project-card reveal-card">
         <div class="project-card__info">
           <div class="project-card__num">03</div>
           <div class="project-card__meta">
-            <p class="project-card__cat">Education · Branding</p>
-            <h3 class="project-card__title">Learn German with Lewisky</h3>
-            <p class="project-card__desc">A bold visual identity for a language learning brand, designed to inspire confidence and creative learning.</p>
-            <a href="https://exevo-designers.github.io/LearnGermanWithLewisky/" class="project-card__link" target="_blank" rel="noopener noreferrer">
+            <p class="project-card__cat">Portfolio · Creative</p>
+            <h3 class="project-card__title">Graduation Portfolio</h3>
+            <p class="project-card__desc">An award-ready graduating student portfolio with editorial layout, motion design, and a distinct visual voice.</p>
+            <a class="project-card__link" onclick="openCaseStudy(2)">
               View Case Study
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </div>
         </div>
         <div class="project-card__image">
-          <img src="images/LearnGermanwithLewisky.png" alt="Learn German with Lewisky" loading="lazy" />
+          <div class="img-placeholder">
+            <svg viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="grad3" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#A855F7" stop-opacity="0.15" />
+                  <stop offset="100%" stop-color="#130f0f" stop-opacity="0" />
+                </radialGradient>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#grad3)" />
+              <polygon points="250,50 380,320 120,320" fill="none" stroke="#A855F7" stroke-width="1.5" opacity="0.3"/>
+            </svg>
+            <div class="img-placeholder__inner">
+              <div class="img-placeholder__label">Graduation<br>Portfolio</div>
+            </div>
+          </div>
         </div>
       </div>
 
+      <!-- Case Study 4 -->
       <div class="project-card reveal-card">
         <div class="project-card__info">
           <div class="project-card__num">04</div>
           <div class="project-card__meta">
-            <p class="project-card__cat">Influencer · Personal Brand</p>
-            <h3 class="project-card__title">Wambo Ashley</h3>
-            <p class="project-card__desc">A polished digital creator identity designed to highlight influence, personality, and premium content creation.</p>
-            <a href="https://exevo-designers.github.io/WamboAshley/" class="project-card__link" target="_blank" rel="noopener noreferrer">
+            <p class="project-card__cat">Brand System · Internal</p>
+            <h3 class="project-card__title">Exevo Brand System</h3>
+            <p class="project-card__desc">Our own identity — a comprehensive brand system built to scale across digital, print, and motion.</p>
+            <a class="project-card__link" onclick="openCaseStudy(3)">
               View Case Study
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </div>
         </div>
         <div class="project-card__image">
-          <img src="images/AshleyWambu.png" alt="Wambo Ashley" loading="lazy" />
+          <div class="img-placeholder">
+            <svg viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="grad4" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#7c3aed" stop-opacity="0.2" />
+                  <stop offset="100%" stop-color="#0d0d1a" stop-opacity="0" />
+                </radialGradient>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#grad4)" />
+              <line x1="100" y1="100" x2="400" y2="300" stroke="#7c3aed" stroke-width="12" stroke-linecap="round" opacity="0.15"/>
+              <line x1="400" y1="100" x2="100" y2="300" stroke="#7c3aed" stroke-width="12" stroke-linecap="round" opacity="0.15"/>
+            </svg>
+            <div class="img-placeholder__inner">
+              <div class="img-placeholder__label">Exevo<br>Brand<br>System</div>
+            </div>
+          </div>
         </div>
       </div>
 
+      <!-- Case Study 5 -->
       <div class="project-card reveal-card">
         <div class="project-card__info">
           <div class="project-card__num">05</div>
           <div class="project-card__meta">
-            <p class="project-card__cat">Brand Identity · Cyber</p>
-            <h3 class="project-card__title">The Brand Cyber & Stationery</h3>
-            <p class="project-card__desc">A futuristic visual system for a cyber brand, pairing bold typography with sharp stationery design assets.</p>
-            <a href="https://exevo-designers.github.io/TheBrandCyberandStationery/" class="project-card__link" target="_blank" rel="noopener noreferrer">
+            <p class="project-card__cat">Web Design · Education</p>
+            <h3 class="project-card__title">St. Joseph Rehema College</h3>
+            <p class="project-card__desc">A premium academic institution's digital presence — communicating excellence, heritage, and modernity.</p>
+            <a class="project-card__link" onclick="openCaseStudy(4)">
               View Case Study
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </div>
         </div>
         <div class="project-card__image">
-          <img src="images/TheBrandCyberLogo.jpg" alt="The Brand Cyber & Stationery" loading="lazy" />
+          <div class="img-placeholder">
+            <svg viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="grad5" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#d4a853" stop-opacity="0.15" />
+                  <stop offset="100%" stop-color="#0f1213" stop-opacity="0" />
+                </radialGradient>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#grad5)" />
+              <circle cx="250" cy="200" r="100" fill="none" stroke="#d4a853" stroke-width="1" opacity="0.25"/>
+              <circle cx="250" cy="200" r="60" fill="none" stroke="#d4a853" stroke-width="0.5" opacity="0.15"/>
+            </svg>
+            <div class="img-placeholder__inner">
+              <div class="img-placeholder__label">St. Joseph<br>Rehema<br>College</div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -1454,6 +1843,86 @@
         <p class="about__text">
           We're not a factory. We're a studio. We take on fewer clients, go deeper into problems, and produce work that lasts beyond the next trend cycle.
         </p>
+      </div>
+    </div>
+
+    <!-- FOUNDER -->
+    <div class="founder__section">
+      <div class="founder__label-row">
+        <div class="section-label">The Person Behind It</div>
+      </div>
+      <div class="founder__card">
+        <div class="founder__left">
+          <div class="founder__photo-wrap">
+            <div class="founder__photo-ring"></div>
+            <img src="images/EditorNjoroPhoto.png" alt="Editor Njoro" class="founder__photo" onerror="this.onerror=null; this.src='https://placehold.co/300x300/0b0b0b/7c3aed?text=EN'" />
+          </div>
+          <div class="founder__reach">
+            <div class="founder__reach-label">Serving</div>
+            <div class="founder__reach-list">
+              <span>Kenya</span><span>USA</span><span>UK</span><span>Canada</span><span>Europe</span><span>UAE</span>
+            </div>
+          </div>
+        </div>
+        <div class="founder__body">
+          <div class="founder__meta">
+            <h3 class="founder__name">Editor Njoro</h3>
+            <div class="founder__titles">
+              <span class="founder__title-badge">Founder &amp; Creative Director</span>
+              <span class="founder__title-badge founder__title-badge--dim">Brand Systems Designer</span>
+              <span class="founder__title-badge founder__title-badge--dim">Digital Strategist</span>
+            </div>
+          </div>
+          <p class="founder__bio">
+            A multidisciplinary creative professional blending brand design, digital marketing, web design, and video editing into a unified problem-solving approach. Editor helps businesses and creators build clear, consistent, and visually confident brands — both locally and internationally.
+          </p>
+          <p class="founder__bio">
+            His design philosophy is simple: brands that communicate effectively and perform well in real-world environments. Every identity he builds is grounded in strategic thinking, cultural awareness, and fast, reliable execution.
+          </p>
+          <div class="founder__traits">
+            <div class="founder__trait">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6.5" stroke="#A855F7" stroke-opacity="0.5"/><path d="M4.5 7l1.8 1.8L9.5 5" stroke="#A855F7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Strategic thinking
+            </div>
+            <div class="founder__trait">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6.5" stroke="#A855F7" stroke-opacity="0.5"/><path d="M4.5 7l1.8 1.8L9.5 5" stroke="#A855F7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Clean visual identity
+            </div>
+            <div class="founder__trait">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6.5" stroke="#A855F7" stroke-opacity="0.5"/><path d="M4.5 7l1.8 1.8L9.5 5" stroke="#A855F7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Fast, reliable execution
+            </div>
+            <div class="founder__trait">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6.5" stroke="#A855F7" stroke-opacity="0.5"/><path d="M4.5 7l1.8 1.8L9.5 5" stroke="#A855F7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Structured content systems
+            </div>
+          </div>
+          <div class="founder__links">
+            <a href="https://www.behance.net/editornjoro" target="_blank" rel="noopener noreferrer" class="founder__link">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22 7h-7V5h7v2zm1.726 10c-.442 1.297-2.029 3-5.101 3-3.074 0-5.564-1.729-5.564-5.675 0-3.91 2.325-5.92 5.466-5.92 3.082 0 4.964 1.782 5.375 4.426.078.506.109 1.188.095 2.14H15.97c.13 3.211 3.483 3.312 4.588 2.029h3.168zm-7.686-4h4.965c-.105-1.547-1.136-2.219-2.477-2.219-1.466 0-2.277.768-2.488 2.219zm-9.574 6.988H0V5.021h6.953c5.476.081 5.58 5.444 2.72 6.906 3.461 1.26 3.577 8.061-3.207 8.061zM3 11h3.584c2.508 0 2.906-3-.312-3H3v3zm3.391 3H3v3.016h3.341c3.055 0 2.868-3.016.05-3.016z"/></svg>
+              Behance
+            </a>
+            <a href="https://wa.me/254700552884" target="_blank" rel="noopener noreferrer" class="founder__link">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              WhatsApp
+            </a>
+            <a href="mailto:editornjoro@gmail.com" class="founder__link">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Email
+            </a>
+          </div>
+        </div>
+        <!-- Design signature strip -->
+        <div class="founder__signature">
+          <div class="founder__sig-label">Design Signature</div>
+          <div class="founder__sig-items">
+            <div class="founder__sig-item">Clarity</div>
+            <div class="founder__sig-item">Functionality</div>
+            <div class="founder__sig-item">Consistency</div>
+            <div class="founder__sig-item">Clean Layouts</div>
+            <div class="founder__sig-item">Modern Aesthetics</div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -1626,93 +2095,78 @@
   <!-- TESTIMONIALS -->
   <section id="testimonials">
     <div class="testimonials__header">
-      <div class="section-label">Testimonials</div>
-      <h2 class="section-header">What clients<br><em>say.</em></h2>
-    </div>
-    <div style="overflow:hidden; padding: 3rem 0;">
-      <div class="testimonials__track" id="testimonialsTrack">
-        <div class="testimonial-card">
-          <p class="testimonial-card__quote">"Exevo didn't just design our brand — they gave us an identity we're genuinely proud to put in front of anyone. The work speaks for itself."</p>
-          <div class="testimonial-card__author">
-            <div class="testimonial-card__avatar">J</div>
-            <div>
-              <div class="testimonial-card__name">James Okonkwo</div>
-              <div class="testimonial-card__role">CEO, Johnson Fibre Link</div>
-            </div>
-          </div>
+      <div>
+        <div class="section-label">Client Reviews</div>
+        <h2 class="section-header">What clients<br><em>say.</em></h2>
+      </div>
+      <div class="testimonials__rating-badge">
+        <div class="testimonials__stars">
+          <svg viewBox="0 0 20 20" fill="#FBBF24"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg viewBox="0 0 20 20" fill="#FBBF24"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg viewBox="0 0 20 20" fill="#FBBF24"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg viewBox="0 0 20 20" fill="#FBBF24"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg viewBox="0 0 20 20" fill="#FBBF24"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
         </div>
-        <div class="testimonial-card">
-          <p class="testimonial-card__quote">"The professionalism and strategic thinking Exevo brought to our project was unlike anything I'd experienced before. They understood the brief on a level I didn't expect."</p>
-          <div class="testimonial-card__author">
-            <div class="testimonial-card__avatar">A</div>
-            <div>
-              <div class="testimonial-card__name">Amara Boateng</div>
-              <div class="testimonial-card__role">Founder, Jean Yarn Haven</div>
-            </div>
-          </div>
-        </div>
-        <div class="testimonial-card">
-          <p class="testimonial-card__quote">"Our institution looks world-class now. The website Exevo built positions us at the same level as international schools — and our enrolments have shown it."</p>
-          <div class="testimonial-card__author">
-            <div class="testimonial-card__avatar">R</div>
-            <div>
-              <div class="testimonial-card__name">Rev. Fr. Emmanuel</div>
-              <div class="testimonial-card__role">Principal, St. Joseph Rehema College</div>
-            </div>
-          </div>
-        </div>
-        <div class="testimonial-card">
-          <p class="testimonial-card__quote">"Working with Exevo was a turning point. They didn't ask what I wanted to look like — they asked what I wanted to achieve. That's a completely different conversation."</p>
-          <div class="testimonial-card__author">
-            <div class="testimonial-card__avatar">N</div>
-            <div>
-              <div class="testimonial-card__name">Nadia Mensah</div>
-              <div class="testimonial-card__role">Creative Director, Independent</div>
-            </div>
-          </div>
-        </div>
-        <!-- Duplicate for seamless loop -->
-        <div class="testimonial-card">
-          <p class="testimonial-card__quote">"Exevo didn't just design our brand — they gave us an identity we're genuinely proud to put in front of anyone. The work speaks for itself."</p>
-          <div class="testimonial-card__author">
-            <div class="testimonial-card__avatar">J</div>
-            <div>
-              <div class="testimonial-card__name">James Okonkwo</div>
-              <div class="testimonial-card__role">CEO, Johnson Fibre Link</div>
-            </div>
-          </div>
-        </div>
-        <div class="testimonial-card">
-          <p class="testimonial-card__quote">"The professionalism and strategic thinking Exevo brought to our project was unlike anything I'd experienced before. They understood the brief on a level I didn't expect."</p>
-          <div class="testimonial-card__author">
-            <div class="testimonial-card__avatar">A</div>
-            <div>
-              <div class="testimonial-card__name">Amara Boateng</div>
-              <div class="testimonial-card__role">Founder, Jean Yarn Haven</div>
-            </div>
-          </div>
-        </div>
-        <div class="testimonial-card">
-          <p class="testimonial-card__quote">"Our institution looks world-class now. The website Exevo built positions us at the same level as international schools — and our enrolments have shown it."</p>
-          <div class="testimonial-card__author">
-            <div class="testimonial-card__avatar">R</div>
-            <div>
-              <div class="testimonial-card__name">Rev. Fr. Emmanuel</div>
-              <div class="testimonial-card__role">Principal, St. Joseph Rehema College</div>
-            </div>
-          </div>
-        </div>
-        <div class="testimonial-card">
-          <p class="testimonial-card__quote">"Working with Exevo was a turning point. They didn't ask what I wanted to look like — they asked what I wanted to achieve. That's a completely different conversation."</p>
-          <div class="testimonial-card__author">
-            <div class="testimonial-card__avatar">N</div>
-            <div>
-              <div class="testimonial-card__name">Nadia Mensah</div>
-              <div class="testimonial-card__role">Creative Director, Independent</div>
-            </div>
-          </div>
+        <div class="testimonials__rating-score">5.0</div>
+        <div class="testimonials__rating-source">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          Google Reviews
         </div>
       </div>
+    </div>
+    <div class="testimonials__scroll-wrapper">
+      <div class="testimonials__track" id="testimonialsTrack">
+
+        <div class="testimonial-card">
+          <div class="testimonial-card__stars">
+            <svg viewBox="0 0 20 20" fill="#FBBF24"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="testimonial-card__quote">"Amazing work! The designs are creative, clean, and very professional. You can really see the attention to detail and passion behind every piece."</p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar">M</div>
+            <div>
+              <div class="testimonial-card__name">Mishel Janet</div>
+              <div class="testimonial-card__role">Google Review · 18 weeks ago</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-card__stars">
+            <svg viewBox="0 0 20 20" fill="#FBBF24"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="testimonial-card__quote">"Everyone buying from my website always compliments on how easy it is to navigate around it. Thank you for the good work ✨"</p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar">J</div>
+            <div>
+              <div class="testimonial-card__name">Jane Wanjiru</div>
+              <div class="testimonial-card__role">Google Review · 17 weeks ago</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-card__stars">
+            <svg viewBox="0 0 20 20" fill="#FBBF24"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="testimonial-card__quote">"Exevo Designers Network is a great platform that connects designers together. Supportive, inspiring, and useful."</p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar">B</div>
+            <div>
+              <div class="testimonial-card__name">Brany Njiri</div>
+              <div class="testimonial-card__role">Google Review · 18 weeks ago</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="testimonials__footer">
+      <a href="https://www.google.com/maps/contrib/111969951551322654949/reviews?hl=en-GB" target="_blank" rel="noopener noreferrer" class="testimonials__google-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/></svg>
+        View all reviews on Google
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
     </div>
   </section>
 
@@ -1724,64 +2178,65 @@
         <h2 class="contact__heading">Ready to Build<br>Your <em>Digital</em><br>Legacy?</h2>
         <p class="contact__sub">Tell us about your project. We'll get back within 24 hours with a clear path forward — no fluff, no endless back-and-forth.</p>
         <div class="contact__channels">
-          <a href="https://wa.me/254700552884" class="contact__channel" target="_blank" rel="noopener noreferrer">
+          <a href="https://wa.me/254700552884" class="contact__channel" target="_blank">
             <div class="contact__channel-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             </div>
             <div>
-              <div class="contact__channel-label">WhatsApp / Call</div>
-              <div class="contact__channel-value">+254 700 552 884</div>
+              <div class="contact__channel-label">WhatsApp</div>
+              <div class="contact__channel-value">Message us directly</div>
             </div>
           </a>
-          <a href="mailto:exevodesigners@gmail.com" class="contact__channel">
+          <a href="mailto:editornjoro@gmail.com" class="contact__channel">
             <div class="contact__channel-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
             <div>
               <div class="contact__channel-label">Email</div>
-              <div class="contact__channel-value">exevodesigners@gmail.com</div>
+              <div class="contact__channel-value">editornjoro@gmail.com</div>
             </div>
           </a>
         </div>
       </div>
-      <div class="contact__form" id="projectBriefForm">
-        <div class="form__row">
-          <div class="form__group">
-            <label class="form__label" for="firstName">First Name</label>
-            <input id="firstName" type="text" class="form__input" placeholder="John" required />
+      <div class="contact__form">
+        <form id="project-brief-form" onsubmit="handleFormSubmission(event)">
+          <div class="form__row">
+            <div class="form__group">
+              <label class="form__label">First Name</label>
+              <input type="text" required class="form__input" placeholder="John" />
+            </div>
+            <div class="form__group">
+              <label class="form__label">Last Name</label>
+              <input type="text" required class="form__input" placeholder="Doe" />
+            </div>
           </div>
           <div class="form__group">
-            <label class="form__label" for="lastName">Last Name</label>
-            <input id="lastName" type="text" class="form__input" placeholder="Doe" required />
+            <label class="form__label">Email Address</label>
+            <input type="email" required class="form__input" placeholder="john@company.com" />
           </div>
-        </div>
-        <div class="form__group">
-          <label class="form__label" for="emailAddress">Email Address</label>
-          <input id="emailAddress" type="email" class="form__input" placeholder="john@company.com" required />
-        </div>
-        <div class="form__group">
-          <label class="form__label" for="companyName">Company / Business</label>
-          <input id="companyName" type="text" class="form__input" placeholder="Your company name" required />
-        </div>
-        <div class="form__group">
-          <label class="form__label" for="projectType">Project Type</label>
-          <select id="projectType" class="form__select" required>
-            <option value="" disabled selected>Select a service</option>
-            <option>Brand Identity</option>
-            <option>Website Design</option>
-            <option>Graphic Design</option>
-            <option>Digital Marketing</option>
-            <option>Business Documentation</option>
-            <option>Creative Consulting</option>
-            <option>Multiple Services</option>
-          </select>
-        </div>
-        <div class="form__group">
-          <label class="form__label" for="projectBrief">Tell Us About Your Project</label>
-          <textarea id="projectBrief" class="form__textarea" placeholder="Share what you're building, your goals, and any relevant context…" required></textarea>
-        </div>
-        <div class="form__error" id="projectBriefError" aria-live="polite"></div>
-        <button type="button" id="projectBriefSubmit" class="form__submit magnetic">Send Project Brief</button>
+          <div class="form__group">
+            <label class="form__label">Company / Business</label>
+            <input type="text" class="form__input" placeholder="Your company name" />
+          </div>
+          <div class="form__group">
+            <label class="form__label">Project Type</label>
+            <select class="form__select" required>
+              <option value="" disabled selected>Select a service</option>
+              <option>Brand Identity</option>
+              <option>Website Design</option>
+              <option>Graphic Design</option>
+              <option>Digital Marketing</option>
+              <option>Business Documentation</option>
+              <option>Creative Consulting</option>
+              <option>Multiple Services</option>
+            </select>
+          </div>
+          <div class="form__group">
+            <label class="form__label">Tell Us About Your Project</label>
+            <textarea required class="form__textarea" placeholder="Share what you're building, your goals, and any relevant context…"></textarea>
+          </div>
+          <button type="submit" class="form__submit magnetic">Send Project Brief</button>
+        </form>
       </div>
     </div>
   </section>
@@ -1809,43 +2264,65 @@
         </div>
         <div class="footer__col">
           <div class="footer__col-title">Connect</div>
-          <a href="#">Instagram</a>
-          <a href="#">LinkedIn</a>
-          <a href="#">Behance</a>
-          <a href="#">Dribbble</a>
-          <a href="#">Twitter / X</a>
+          <a href="https://www.instagram.com/">Instagram</a>
+          <a href="https://www.linkedin.com/">LinkedIn</a>
+          <a href="https://www.behance.net/editornjoro">Behance</a>
         </div>
       </div>
     </div>
     <div class="footer__bottom">
       <span>© 2026 Exevo Designers Network. All rights reserved.</span>
       <div class="footer__socials">
-        <a href="#">
-          <svg viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-            <rect x="3" y="3" width="18" height="18" rx="5" />
-            <circle cx="12" cy="12" r="4" />
-            <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none" />
-          </svg>
-          Instagram
-        </a>
-        <a href="#">
-          <svg viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-            <rect x="3" y="3" width="18" height="18" rx="2" />
-            <path d="M9 16v-6h2v6H9zm0-6V9h2v1H9zm4 6h2.5V12c0-1.25.5-2 2-2s1.5.75 1.5 2v4h2.5V11c0-2.75-1.5-4-3.5-4s-2.5 1-2.5 1V7H13v9z" />
-          </svg>
-          LinkedIn
-        </a>
-        <a href="#">
-          <svg viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="12" cy="12" r="9" />
-            <path d="M8.5 15.5h2.5c1.1 0 2-.9 2-2v-1.5c0-1.1-.9-2-2-2H8.5v5.5zm0-6.5h2.5c.55 0 1 .45 1 1v1.5c0 .55-.45 1-1 1H8.5V9zm5.5 6.5h3.5v-1.2h-2.05c.85 0 1.55-.7 1.55-1.55v-1.7c0-1.1-.9-2-2-2H14v5.45z" />
-          </svg>
-          Behance
-        </a>
+        <a href="https://www.instagram.com/">Instagram</a>
+        <a href="https://www.linkedin.com/">LinkedIn</a>
+        <a href="https://www.behance.net/editornjoro">Behance</a>
+      </div>
+      <span>Crafting Digital Legacies.</span>
+    </div>
   </footer>
 
+  <!-- DYNAMIC CASE STUDY OVERLAYS -->
+  <div class="drawer__backdrop" id="drawerBackdrop" onclick="closeCaseStudy()"></div>
+  <div class="drawer" id="caseStudyDrawer">
+    <button class="drawer__close" onclick="closeCaseStudy()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Close
+    </button>
+    <div class="drawer__meta">
+      <span class="drawer__cat" id="drawerCat">Brand Identity · E-commerce</span>
+      <h3 class="drawer__title" id="drawerTitle">Jean Yarn Haven</h3>
+    </div>
+    <div class="drawer__body" id="drawerBody">
+      <!-- Injected context dynamically -->
+    </div>
+    <div class="drawer__specs">
+      <div>
+        <div class="spec__label">Client Profile</div>
+        <div class="spec__val" id="drawerClient">Artisanal Retailer</div>
+      </div>
+      <div>
+        <div class="spec__label">Timeline</div>
+        <div class="spec__val" id="drawerTimeline">6 Weeks</div>
+      </div>
+      <div>
+        <div class="spec__label">Deliverables</div>
+        <div class="spec__val" id="drawerDeliverables">Visual Ecosystem</div>
+      </div>
+      <div>
+        <div class="spec__label">Creative Partner</div>
+        <div class="spec__val">Exevo Network</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CUSTOM MINIMAL TOAST ALERT -->
+  <div class="toast" id="toastAlert">
+    <div class="toast__dot"></div>
+    <span class="toast__msg" id="toastMsg">Submission Received successfully.</span>
+  </div>
+
   <script>
-    // ── CURSOR ──────────────────────────────────────────────────────────────
+    // ── CURSOR INTERACTIVE SETUP ───────────────────────────────────────────
     const cursor = document.querySelector('.cursor');
     const dot = document.querySelector('.cursor__dot');
     const ring = document.querySelector('.cursor__ring');
@@ -1863,12 +2340,15 @@
     }
     animateRing();
 
-    document.querySelectorAll('a, button, .service-item, .project-card, .insight-card, .gallery__card').forEach(el => {
-      el.addEventListener('mouseenter', () => cursor.classList.add('cursor--hover'));
-      el.addEventListener('mouseleave', () => cursor.classList.remove('cursor--hover'));
-    });
+    function setupCursorListeners() {
+      document.querySelectorAll('a, button, .service-item, .project-card, .insight-card, .gallery__card').forEach(el => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('cursor--hover'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('cursor--hover'));
+      });
+    }
+    setupCursorListeners();
 
-    // ── LOADER ───────────────────────────────────────────────────────────────
+    // ── LOADER DISMISS SEQUENCE ─────────────────────────────────────────────
     const loader = document.getElementById('loader');
     const loaderCount = document.getElementById('loader-count');
     let count = 0;
@@ -1889,12 +2369,13 @@
       });
     }, 1800);
 
-    // ── NAV ──────────────────────────────────────────────────────────────────
+    // ── SCROLL HEADER DETECTION ──────────────────────────────────────────────
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
       navbar.classList.toggle('scrolled', window.scrollY > 60);
     });
 
+    // ── MOBILE MENU SYSTEM ───────────────────────────────────────────────────
     const hamburger = document.getElementById('hamburger');
     const mobileNav = document.getElementById('mobile-nav');
     hamburger.addEventListener('click', () => {
@@ -1915,7 +2396,7 @@
       });
     });
 
-    // ── MAGNETIC BUTTONS ────────────────────────────────────────────────────
+    // ── MAGNETIC ATTRACTION ANIMATIONS ───────────────────────────────────────
     document.querySelectorAll('.magnetic').forEach(el => {
       el.addEventListener('mousemove', e => {
         const rect = el.getBoundingClientRect();
@@ -1928,13 +2409,12 @@
       });
     });
 
-    // ── HERO GALLERY — GSAP infinite columns ────────────────────────────────
+    // ── INFINITE VERTICAL SCROLLER FOR HERO WALL ──────────────────────────────
     function initGallery() {
       const colA = document.getElementById('galColA');
       const colB = document.getElementById('galColB');
       if (!colA || !colB) return;
 
-      // Clone cards for seamless loop
       function cloneColumn(col) {
         const children = Array.from(col.children);
         children.forEach(child => {
@@ -1945,17 +2425,13 @@
       cloneColumn(colA);
       cloneColumn(colB);
 
-      // Speed: px/sec — slow & premium
-      const speed = 38; // pixels per second
-
-      let colAH = colA.scrollHeight / 2; // height of one set
+      const speed = 38; 
+      let colAH = colA.scrollHeight / 2; 
       let colBH = colB.scrollHeight / 2;
-
-      let colAY = 0;   // Column A starts at 0, moves up
-      let colBY = -colBH * 0.5; // Column B starts offset, moves down
+      let colAY = 0;   
+      let colBY = -colBH * 0.5; 
 
       let paused = false;
-
       const gallery = document.getElementById('heroGallery');
       gallery.addEventListener('mouseenter', () => { paused = true; });
       gallery.addEventListener('mouseleave', () => { paused = false; });
@@ -1964,16 +2440,14 @@
 
       function tick(ts) {
         if (lastTime === null) lastTime = ts;
-        const dt = (ts - lastTime) / 1000; // seconds
+        const dt = (ts - lastTime) / 1000; 
         lastTime = ts;
 
         if (!paused) {
           colAY -= speed * dt;
           colBY += speed * dt;
 
-          // Loop column A (upward): reset when first set scrolled past
           if (Math.abs(colAY) >= colAH) colAY += colAH;
-          // Loop column B (downward): reset when offset scrolled back to 0
           if (colBY >= 0) colBY -= colBH;
 
           gsap.set(colA, { y: colAY });
@@ -1982,23 +2456,13 @@
         requestAnimationFrame(tick);
       }
       requestAnimationFrame(tick);
-
-      // On hover slow down individual cards
-      document.querySelectorAll('.gallery__card').forEach(card => {
-        card.addEventListener('mouseenter', () => {
-          paused = true;
-        });
-        card.addEventListener('mouseleave', () => {
-          paused = false;
-        });
-      });
     }
 
-    // ── SCROLL ANIMATIONS ───────────────────────────────────────────────────
+    // ── SCROLLTRIGGER REGISTRATION & TRIGGERS ────────────────────────────────
     function initAnimations() {
       gsap.registerPlugin(ScrollTrigger);
 
-      // Hero entrance
+      // Hero Elements Timeline
       gsap.from('.hero__eyebrow', { y: 24, opacity: 0, duration: 1, ease: 'power3.out', delay: 0.2 });
       gsap.from('.hero__heading', { y: 55, opacity: 0, duration: 1.2, ease: 'power3.out', delay: 0.38 });
       gsap.from('.hero__sub',     { y: 28, opacity: 0, duration: 1,   ease: 'power3.out', delay: 0.65 });
@@ -2008,7 +2472,7 @@
       gsap.from('.hero__gallery', { opacity: 0, duration: 1.4, ease: 'power2.out', delay: 0.5 });
       gsap.from('.hero__divider', { scaleY: 0, duration: 1.6, ease: 'power3.out', delay: 0.4, transformOrigin: 'top' });
 
-      // Section labels & headers
+      // Trigger Sections Reveal
       gsap.utils.toArray('.section-label').forEach(el => {
         gsap.from(el, { y: 20, opacity: 0, duration: 0.8, ease: 'power3.out',
           scrollTrigger: { trigger: el, start: 'top 85%' }});
@@ -2018,13 +2482,12 @@
           scrollTrigger: { trigger: el, start: 'top 85%' }});
       });
 
-      // Work cards
       gsap.utils.toArray('.reveal-card').forEach(card => {
         gsap.from(card, { y: 80, opacity: 0, duration: 1, ease: 'power3.out',
           scrollTrigger: { trigger: card, start: 'top 88%' }});
       });
 
-      // About
+      // Stats Reveal
       gsap.from('.about__statement', { y: 40, opacity: 0, duration: 1, ease: 'power3.out',
         scrollTrigger: { trigger: '#about', start: 'top 75%' }});
       gsap.from('.about__text', { y: 30, opacity: 0, duration: 0.9, ease: 'power3.out', stagger: 0.15,
@@ -2034,13 +2497,13 @@
           scrollTrigger: { trigger: '.about__stats', start: 'top 88%' }});
       });
 
-      // Service items
+      // Service lines Reveal
       gsap.utils.toArray('.service-item').forEach((el, i) => {
         gsap.from(el, { x: -30, opacity: 0, duration: 0.7, ease: 'power3.out', delay: i * 0.06,
           scrollTrigger: { trigger: el, start: 'top 90%' }});
       });
 
-      // Process steps
+      // Steps timeline
       gsap.utils.toArray('.process__step').forEach((el, i) => {
         gsap.from(el, { y: 30, opacity: 0, duration: 0.7, ease: 'power3.out', delay: i * 0.08,
           scrollTrigger: { trigger: '.process__track', start: 'top 82%' }});
@@ -2051,13 +2514,11 @@
         });
       });
 
-      // Insights
       gsap.utils.toArray('.insight-card').forEach((el, i) => {
         gsap.from(el, { y: 40, opacity: 0, duration: 0.8, ease: 'power3.out', delay: i * 0.1,
           scrollTrigger: { trigger: '#insights', start: 'top 80%' }});
       });
 
-      // Contact
       gsap.from('.contact__heading', { y: 50, opacity: 0, duration: 1.1, ease: 'power3.out',
         scrollTrigger: { trigger: '#contact', start: 'top 80%' }});
       gsap.from('.contact__sub', { y: 30, opacity: 0, duration: 0.9, ease: 'power3.out', delay: 0.2,
@@ -2067,14 +2528,21 @@
       gsap.from('.contact__form', { y: 40, opacity: 0, duration: 1, ease: 'power3.out', delay: 0.15,
         scrollTrigger: { trigger: '#contact', start: 'top 80%' }});
 
-      // Footer wordmark parallax
       gsap.to('.footer__wordmark', {
         y: -40,
         scrollTrigger: { trigger: 'footer', start: 'top bottom', end: 'bottom top', scrub: 1 }
       });
     }
 
-    // ── SMOOTH ANCHOR SCROLL ────────────────────────────────────────────────
+    // ── TESTIMONIALS LOOP BACKEND ────────────────────────────────────────────
+    (function() {
+      const track = document.getElementById('testimonialsTrack');
+      if (!track) return;
+      const cards = Array.from(track.children);
+      cards.forEach(card => track.appendChild(card.cloneNode(true)));
+    })();
+
+    // ── ANCHOR SCROLL SYSTEM ─────────────────────────────────────────────────
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener('click', e => {
         const target = document.querySelector(a.getAttribute('href'));
@@ -2085,49 +2553,129 @@
       });
     });
 
-    // ── FORM SUBMIT — send to both WhatsApp and email ─────────────────────────
-    const projectBriefError = document.getElementById('projectBriefError');
-    document.getElementById('projectBriefSubmit').addEventListener('click', function() {
-      const firstName = document.getElementById('firstName').value.trim();
-      const lastName = document.getElementById('lastName').value.trim();
-      const email = document.getElementById('emailAddress').value.trim();
-      const company = document.getElementById('companyName').value.trim();
-      const projectType = document.getElementById('projectType').value.trim();
-      const brief = document.getElementById('projectBrief').value.trim();
-
-      projectBriefError.textContent = '';
-
-      if (!firstName || !lastName || !email || !company || !projectType || !brief) {
-        projectBriefError.textContent = 'Please complete all fields before sending.';
-        return;
+    // ── DATA OBJECTS FOR LUXURIOUS IMMERSIVE DETAIL DRAWER ─────────────────
+    const CASE_STUDY_DATA = [
+      {
+        title: "Jean Yarn Haven",
+        cat: "Brand Identity · E-commerce",
+        client: "Artisanal Yarn Retailer",
+        timeline: "8 Weeks",
+        deliverables: "Design System, Figma Workspace, Shopify Setup",
+        body: `
+          <h4>Artisanal Luxury Meets Contemporary Commerce</h4>
+          <p>We built a premium aesthetic system for an organic yarn supplier. The challenge lay in connecting the warmth of artisanal craft with the sleek precision required of modern e-commerce. </p>
+          <p>The solution featured warm, earth-tone visual guidelines, generative grid layouts, and custom interactive color swatches modeled after real-world fleece fibers.</p>
+        `
+      },
+      {
+        title: "Johnson Fibre Link",
+        cat: "Web Design · Corporate",
+        client: "Network Provider",
+        timeline: "12 Weeks",
+        deliverables: "Marketing Engine, API Portal Interface",
+        body: `
+          <h4>Communicating High-Speed Structural Authority</h4>
+          <p>For a reliable infrastructure and network leader, visual speed was the core design objective. We discarded static layouts for dynamic SVG streams that guide customers through installation models.</p>
+          <p>The result is a fast, visually optimized Web platform engineered for frictionless conversion tracking and custom enterprise queries.</p>
+        `
+      },
+      {
+        title: "Graduation Portfolio",
+        cat: "Portfolio · Creative",
+        client: "Editor Njoro Personal Archive",
+        timeline: "4 Weeks",
+        deliverables: "Interactive Exhibition Layout, Custom CSS",
+        body: `
+          <h4>Editorial Mastery & Fluid Motion Architecture</h4>
+          <p>A self-contained portfolio project constructed as an editorial canvas. It showcases high-fidelity interaction layouts, zero-lag scrolling mechanics, and structural page dynamics.</p>
+          <p>Crafted specifically for design direction, this project represents the pinnacle of contemporary layout aesthetics with deep attention to grid margin control.</p>
+        `
+      },
+      {
+        title: "Exevo Brand System",
+        cat: "Brand System · Internal",
+        client: "Exevo Studio Collective",
+        timeline: "Continuous Evolution",
+        deliverables: "Visual Ecosystem, Identity Assets, Brand Book",
+        body: `
+          <h4>Designing for Visual Visionaries</h4>
+          <p>The design of our internal network logo, guidelines, templates, and layouts. Built specifically around a deep navy backdrop and neon-purple glow matrices.</p>
+          <p>This brand book establishes parameters for Exevo collectives globally, maintaining supreme structural consistency across mobile, interactive, and spatial assets.</p>
+        `
+      },
+      {
+        title: "St. Joseph Rehema College",
+        cat: "Web Design · Education",
+        client: "Academic Institution",
+        timeline: "10 Weeks",
+        deliverables: "Interactive Academic Portal, Editorial Framework",
+        body: `
+          <h4>Heritage Reimagined for Ambition</h4>
+          <p>A comprehensive visual reset for a premium academic hub. We created responsive interfaces with fluid grids that communicate St. Joseph's rich educational ancestry while delivering a modern UX for new cohorts.</p>
+          <p>This portal system ensures students, professors, and partners access resources seamlessly without layout fragmentation.</p>
+        `
       }
+    ];
 
-      const senderName = `${firstName} ${lastName}`.trim();
-      const subject = `Project Brief from ${senderName}`;
-      const bodyLines = [
-        `Name: ${senderName}`,
-        `Email: ${email}`,
-        `Company / Business: ${company}`,
-        `Project Type: ${projectType}`,
-        '',
-        'Project Brief:',
-        brief
-      ];
-      const body = encodeURIComponent(bodyLines.join('\n'));
-      const mailtoLink = `mailto:exevodesigners@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
-      const whatsappText = encodeURIComponent(`${subject}\n\n${bodyLines.join('\n')}`);
-      const whatsappLink = `https://wa.me/254700552884?text=${whatsappText}`;
+    const drawer = document.getElementById('caseStudyDrawer');
+    const drawerBackdrop = document.getElementById('drawerBackdrop');
 
-      window.open(whatsappLink, '_blank');
-      window.open(mailtoLink, '_self');
+    function openCaseStudy(index) {
+      const data = CASE_STUDY_DATA[index];
+      if (!data) return;
 
-      this.textContent = 'Message Sent ✓';
-      this.style.background = '#10B981';
+      document.getElementById('drawerTitle').textContent = data.title;
+      document.getElementById('drawerCat').textContent = data.cat;
+      document.getElementById('drawerClient').textContent = data.client;
+      document.getElementById('drawerTimeline').textContent = data.timeline;
+      document.getElementById('drawerDeliverables').textContent = data.deliverables;
+      document.getElementById('drawerBody').innerHTML = data.body;
+
+      drawer.classList.add('active');
+      drawerBackdrop.classList.add('active');
+      
+      // Stop body scrolling
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCaseStudy() {
+      drawer.classList.remove('active');
+      drawerBackdrop.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    // ── FORM HANDLERS & NOTIFICATIONS ──
+    const toast = document.getElementById('toastAlert');
+    const toastMsg = document.getElementById('toastMsg');
+
+    function showToast(message) {
+      toastMsg.textContent = message;
+      toast.classList.add('active');
       setTimeout(() => {
-        this.textContent = 'Send Project Brief';
-        this.style.background = '';
-      }, 3000);
-    });
+        toast.classList.remove('active');
+      }, 4000);
+    }
+
+    function handleFormSubmission(event) {
+      event.preventDefault();
+      const submitBtn = event.target.querySelector('button[type="submit"]');
+      submitBtn.textContent = "Sending...";
+      submitBtn.style.background = "#7C3AED";
+      submitBtn.disabled = true;
+
+      setTimeout(() => {
+        submitBtn.textContent = "Message Sent ✓";
+        submitBtn.style.background = "#10B981";
+        showToast("Brief Sent — Exevo will reply in 24 hours.");
+        event.target.reset();
+
+        setTimeout(() => {
+          submitBtn.textContent = "Send Project Brief";
+          submitBtn.style.background = "";
+          submitBtn.disabled = false;
+        }, 3000);
+      }, 1200);
+    }
   </script>
 </body>
 </html>
