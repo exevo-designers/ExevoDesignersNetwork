@@ -665,7 +665,6 @@
       background: linear-gradient(90deg, var(--accent), var(--accent-light), transparent);
     }
 
-    /* Left column */
     .founder__left {
       display: flex; flex-direction: column; align-items: center;
       gap: 2rem;
@@ -691,6 +690,20 @@
       border-radius: 50%;
       background: var(--bg);
       z-index: 1;
+    }
+    .founder__photo {
+      position: relative;
+      z-index: 2;
+      width: calc(100% - 8px);
+      height: calc(100% - 8px);
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(20%) contrast(110%);
+      transition: filter 0.3s ease;
+    }
+    .founder__photo-wrap:hover .founder__photo {
+      filter: grayscale(0%) contrast(100%);
     }
     .founder__initials {
       position: relative; z-index: 2;
@@ -720,7 +733,6 @@
       border-radius: 100px;
     }
 
-    /* Main body */
     .founder__body { flex: 1; }
     .founder__meta { margin-bottom: 1.75rem; }
     .founder__name {
@@ -783,7 +795,6 @@
       background: rgba(124,58,237,0.06);
     }
 
-    /* Signature strip */
     .founder__signature {
       display: flex; flex-direction: column; gap: 1rem;
       min-width: 160px;
@@ -811,15 +822,6 @@
       background: var(--accent-light);
       flex-shrink: 0;
       opacity: 0.7;
-    }
-
-    @media (max-width: 1100px) {
-      .founder__card { grid-template-columns: 180px 1fr; }
-      .founder__signature { display: none; }
-    }
-    @media (max-width: 768px) {
-      .founder__card { grid-template-columns: 1fr; gap: 2.5rem; padding: 2.5rem 1.75rem; }
-      .founder__left { flex-direction: row; align-items: flex-start; }
     }
 
     /* ── SERVICES ── */
@@ -886,7 +888,6 @@
       color: var(--accent-light);
       transform: rotate(-45deg);
     }
-
     /* ── PROCESS ── */
     #process {
       padding: 8rem 3rem;
