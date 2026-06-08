@@ -80,11 +80,20 @@
       flex-direction: column; gap: 2rem;
     }
     .loader__logo {
-      font-family: var(--font-display);
-      font-size: clamp(3rem, 8vw, 7rem);
-      letter-spacing: -0.04em;
-      color: var(--text);
+      width: 160px;
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       overflow: hidden;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .loader__logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
     .loader__bar {
       width: 200px; height: 1px;
@@ -119,11 +128,17 @@
       border-bottom: 1px solid var(--border);
     }
     .nav__logo {
-      font-family: var(--font-display);
-      font-size: 1.6rem;
-      letter-spacing: -0.04em;
-      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-width: 120px;
       text-decoration: none;
+    }
+    .nav__logo img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
     }
     .nav__logo span { color: var(--accent-light); }
     .nav__links {
@@ -1342,14 +1357,14 @@
 
   <!-- LOADER -->
   <div id="loader">
-    <div class="loader__logo">EXEVO</div>
+    <div class="loader__logo"><img src="ExevoLogo/exevo-logo-png.png" alt="Exevo" /></div>
     <div class="loader__bar"></div>
     <div class="loader__count" id="loader-count">0%</div>
   </div>
 
   <!-- NAV -->
   <nav id="navbar">
-    <a href="#" class="nav__logo">EXEVO<span>.</span></a>
+    <a href="#" class="nav__logo"><img src="ExevoLogo/exevo-wordmark.png" alt="Exevo" /></a>
     <ul class="nav__links">
       <li><a href="#work">Work</a></li>
       <li><a href="#services">Services</a></li>
