@@ -1,0 +1,10 @@
+RewriteEngine On
+
+# Remove .html extension from all pages
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^\.]+)$ $1.html [NC,L]
+
+# Redirect index.html to /home
+RewriteRule ^index\.html$ /home [R=301,L]
+RewriteRule ^home/?$ /index.html [L]
