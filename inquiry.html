@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Start a Project — EXEVO Designers Network</title>
+  <meta name="description" content="Tell us about your project. Exevo Designers Network — Brand Identity, Web Design, Digital Marketing & Creative Systems." />
+  <link rel="icon" type="image/png" href="ExevoLogo/exevo-logo-profile(2).png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Libre Baskerville (display) + Poppins (body/UI) -->
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #09090B;
+      --surface: #111113;
+      --text: #F5F4F0;
+      --muted: #5A5A60;
+      --subtle: #A8A8B0;
+      --accent: #7C3AED;
+      --accent-light: #A78BFA;
+      --green: #10B981;
+      --border: rgba(245,244,240,0.07);
+      --border-hover: rgba(167,139,250,0.35);
+      --font-display: 'Libre Baskerville', Georgia, serif;
+      --font-body: 'Poppins', system-ui, sans-serif;
+      --radius: 4px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.28;
+    }
+
+    /* ── LAYOUT ── */
+    .page {
+      position: relative; z-index: 1;
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      min-height: 100vh;
+    }
+
+    /* ── LEFT PANEL ── */
+    .sidebar {
+      position: sticky; top: 0; height: 100vh;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      display: flex; flex-direction: column;
+      padding: 3rem 2.75rem;
+      overflow: hidden;
+    }
+
+    /* Decorative gradient orb */
+    .sidebar::before {
+      content: '';
+      position: absolute; bottom: -120px; left: -80px;
+      width: 360px; height: 360px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(124,58,237,.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .sidebar__back {
+      display: inline-flex; align-items: center; gap: .55rem;
+      font-size: .68rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      transition: color .25s;
+      margin-bottom: 3rem;
+    }
+    .sidebar__back:hover { color: var(--text); }
+
+    .sidebar__logo {
+      display: block; max-width: 110px; margin-bottom: 3rem; text-decoration: none;
+    }
+    .sidebar__logo img { width: 100%; height: auto; filter: brightness(0) invert(1); }
+    .sidebar__logo span {
+      font-family: var(--font-display);
+      font-size: 1.6rem; letter-spacing: -.03em; color: var(--text);
+    }
+
+    .sidebar__eyebrow {
+      font-size: .62rem; font-weight: 600; letter-spacing: .28em; text-transform: uppercase;
+      color: var(--accent-light); margin-bottom: 1rem;
+      display: flex; align-items: center; gap: .6rem;
+    }
+    .sidebar__eyebrow::before { content: ''; width: 20px; height: 1px; background: var(--accent-light); flex-shrink: 0; }
+
+    .sidebar__heading {
+      font-family: var(--font-display);
+      font-size: clamp(1.9rem, 2.8vw, 2.6rem);
+      line-height: 1.2; letter-spacing: -.025em;
+      margin-bottom: 1.5rem;
+    }
+    .sidebar__heading em { font-style: italic; color: var(--subtle); }
+
+    .sidebar__desc {
+      font-size: .82rem; line-height: 1.78;
+      color: var(--subtle); margin-bottom: 2.5rem;
+    }
+
+    /* Contact quick-links */
+    .sidebar__contacts { display: flex; flex-direction: column; gap: .6rem; }
+    .sidebar__contact {
+      display: flex; align-items: center; gap: .85rem;
+      padding: .75rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      text-decoration: none; color: var(--text);
+      font-size: .78rem;
+      transition: border-color .25s, background .25s;
+    }
+    .sidebar__contact:hover { border-color: var(--border-hover); background: rgba(124,58,237,.05); }
+    .sidebar__contact-icon {
+      width: 32px; height: 32px; border-radius: var(--radius);
+      background: rgba(124,58,237,.15);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent-light); flex-shrink: 0;
+    }
+    .sidebar__contact-label { font-size: .6rem; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: .1rem; }
+    .sidebar__contact-value { font-size: .78rem; font-weight: 500; }
+
+    /* Response badge */
+    .sidebar__response {
+      display: flex; align-items: flex-start; gap: .7rem;
+      margin-top: auto; padding-top: 2rem; padding: 1rem 1.1rem;
+      border: 1px solid rgba(16,185,129,.18);
+      background: rgba(16,185,129,.04);
+      border-radius: var(--radius);
+      margin-top: auto;
+    }
+    .response-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--green); flex-shrink: 0; margin-top: 3px;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.75)} }
+    .sidebar__response p { font-size: .74rem; line-height: 1.65; color: var(--subtle); }
+    .sidebar__response strong { color: var(--text); font-weight: 600; }
+
+    /* ── RIGHT: FORM AREA ── */
+    .form-area {
+      display: flex; flex-direction: column;
+      padding: 3.5rem 4rem;
+      min-height: 100vh;
+    }
+
+    /* Step progress */
+    .progress {
+      display: flex; align-items: center;
+      gap: 0; margin-bottom: 3.5rem;
+    }
+    .progress__step {
+      display: flex; flex-direction: column; align-items: center;
+      gap: .45rem; flex: 1; position: relative; cursor: default;
+    }
+    .progress__step::after {
+      content: ''; position: absolute; top: 14px; left: 50%;
+      width: 100%; height: 1px;
+      background: var(--border); z-index: 0;
+    }
+    .progress__step:last-child::after { display: none; }
+    .progress__dot {
+      width: 28px; height: 28px; border-radius: 50%;
+      border: 1px solid var(--border); background: #131316;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .62rem; font-weight: 700; color: var(--muted);
+      position: relative; z-index: 1;
+      transition: background .35s, border-color .35s, color .35s, box-shadow .35s;
+    }
+    .progress__step--active .progress__dot {
+      background: var(--accent); border-color: var(--accent); color: #fff;
+      box-shadow: 0 0 0 4px rgba(124,58,237,.2);
+    }
+    .progress__step--done .progress__dot {
+      background: rgba(16,185,129,.15); border-color: var(--green); color: var(--green);
+    }
+    .progress__label {
+      font-size: .58rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--muted); transition: color .3s; white-space: nowrap;
+    }
+    .progress__step--active .progress__label { color: var(--text); }
+    .progress__step--done .progress__label { color: var(--green); }
+
+    /* Step panels */
+    .steps-wrap { flex: 1; display: flex; flex-direction: column; }
+    .step {
+      display: none; animation: fadeUp .38s cubic-bezier(.25,.46,.45,.94) both;
+      flex: 1; flex-direction: column;
+    }
+    .step--active { display: flex; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+
+    .step__eyebrow {
+      font-size: .62rem; font-weight: 600; letter-spacing: .28em; text-transform: uppercase;
+      color: var(--accent-light); margin-bottom: .65rem;
+    }
+    .step__question {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+      line-height: 1.25; letter-spacing: -.02em;
+      margin-bottom: .65rem;
+    }
+    .step__hint {
+      font-size: .8rem; line-height: 1.7; color: var(--subtle);
+      margin-bottom: 2.25rem; max-width: 560px;
+    }
+
+    /* Inputs */
+    .field { margin-bottom: 1.25rem; }
+    .field__label {
+      display: block; font-size: .62rem; font-weight: 600;
+      letter-spacing: .2em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: .6rem;
+    }
+    .field__input,
+    .field__select,
+    .field__textarea {
+      width: 100%;
+      background: #0f0f12; border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: .95rem 1.2rem;
+      color: var(--text); font-family: var(--font-body); font-size: .88rem;
+      outline: none; appearance: none;
+      transition: border-color .3s, box-shadow .3s;
+    }
+    .field__input::placeholder,
+    .field__textarea::placeholder { color: var(--muted); }
+    .field__input:focus,
+    .field__select:focus,
+    .field__textarea:focus {
+      border-color: rgba(124,58,237,.55);
+      box-shadow: 0 0 0 3px rgba(124,58,237,.1);
+    }
+    .field__textarea { resize: vertical; min-height: 130px; line-height: 1.72; }
+    .field__select option { background: #0f0f12; }
+    .field__row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .field__char {
+      font-size: .65rem; color: var(--muted); text-align: right;
+      margin-top: .35rem; transition: color .25s;
+    }
+    .field__char--warn { color: var(--accent-light); }
+
+    /* Error */
+    .field__error { font-size: .72rem; color: #F87171; min-height: 1rem; margin-top: .25rem; }
+
+    /* ── BUDGET WIDGET ── */
+    .budget-box {
+      background: #0f0f12; border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.75rem;
+      margin-bottom: 1.25rem;
+    }
+    .budget-box__top {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;
+    }
+    .budget-box__amount {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      letter-spacing: -.04em; line-height: 1;
+    }
+    .budget-box__currencies {
+      display: flex; flex-wrap: wrap; gap: 4px;
+    }
+    .currency-btn {
+      padding: .28rem .65rem;
+      background: transparent; border: 1px solid var(--border);
+      border-radius: 100px;
+      font-family: var(--font-body); font-size: .6rem; font-weight: 700;
+      letter-spacing: .1em; color: var(--muted); cursor: pointer;
+      transition: all .22s;
+    }
+    .currency-btn:hover,
+    .currency-btn--active {
+      background: rgba(124,58,237,.15);
+      border-color: rgba(167,139,250,.5);
+      color: var(--accent-light);
+    }
+    .budget-box__slider {
+      width: 100%; -webkit-appearance: none; appearance: none;
+      height: 3px; border-radius: 2px; outline: none; cursor: pointer;
+      background: linear-gradient(to right, var(--accent) 0%, var(--accent) var(--pct, 30%), var(--border) var(--pct, 30%));
+    }
+    .budget-box__slider::-webkit-slider-thumb {
+      -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%;
+      background: var(--accent-light); border: 2px solid var(--bg);
+      box-shadow: 0 0 8px rgba(167,139,250,.5); cursor: pointer;
+      transition: transform .2s;
+    }
+    .budget-box__slider::-webkit-slider-thumb:hover { transform: scale(1.2); }
+    .budget-box__slider::-moz-range-thumb {
+      width: 20px; height: 20px; border-radius: 50%;
+      background: var(--accent-light); border: 2px solid var(--bg); cursor: pointer;
+    }
+    .budget-box__ticks {
+      display: flex; justify-content: space-between; margin-top: .65rem;
+    }
+    .budget-box__tick { font-size: .58rem; font-weight: 600; color: var(--muted); }
+    .budget-box__conversions {
+      display: grid; grid-template-columns: repeat(5, 1fr);
+      gap: .5rem; margin-top: 1.5rem; padding-top: 1.25rem;
+      border-top: 1px solid var(--border);
+    }
+    .budget-conv {
+      text-align: center; padding: .6rem .4rem;
+      border: 1px solid var(--border); border-radius: var(--radius);
+      background: rgba(255,255,255,.02); transition: border-color .2s;
+    }
+    .budget-conv:hover { border-color: rgba(167,139,250,.2); }
+    .budget-conv__amount { font-family: var(--font-display); font-size: .9rem; letter-spacing: -.02em; line-height: 1; }
+    .budget-conv__cur { font-size: .55rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin-top: .25rem; }
+    .budget-conv__flag { font-size: .8rem; margin-top: .15rem; }
+
+    /* ── NAV BUTTONS ── */
+    .step__nav {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem; margin-top: 2.5rem;
+    }
+    .btn-back {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .85rem 1.5rem;
+      background: transparent; border: 1px solid var(--border); border-radius: var(--radius);
+      font-family: var(--font-body); font-size: .72rem; font-weight: 600;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--muted); cursor: pointer; transition: all .25s;
+    }
+    .btn-back:hover { color: var(--text); border-color: rgba(255,255,255,.18); }
+    .btn-next {
+      flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: .6rem;
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      border: none; border-radius: var(--radius);
+      font-family: var(--font-body); font-size: .78rem; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: #fff; cursor: pointer;
+      transition: opacity .25s, transform .25s;
+    }
+    .btn-next:hover { opacity: .88; transform: translateY(-1px); }
+    .btn-next:disabled { opacity: .4; cursor: not-allowed; transform: none; }
+
+    /* ── SUCCESS ── */
+    .success {
+      display: none; text-align: center;
+      padding: 5rem 2rem; flex-direction: column; align-items: center;
+      animation: fadeUp .5s ease both;
+    }
+    .success--show { display: flex; }
+    .success__icon {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: rgba(16,185,129,.1); border: 1px solid rgba(16,185,129,.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; margin-bottom: 2rem;
+    }
+    .success__title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: -.03em; margin-bottom: 1rem;
+    }
+    .success__sub {
+      font-size: .9rem; line-height: 1.8;
+      color: var(--subtle); max-width: 440px;
+      margin-bottom: 2.5rem;
+    }
+    .btn-home {
+      display: inline-flex; align-items: center; gap: .6rem;
+      padding: .95rem 2rem;
+      border: 1px solid rgba(124,58,237,.5); border-radius: var(--radius);
+      font-family: var(--font-body); font-size: .76rem; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--text); text-decoration: none; transition: all .28s;
+    }
+    .btn-home:hover { background: var(--accent); border-color: var(--accent); }
+
+    /* ── MOBILE ── */
+    @media (max-width: 900px) {
+      .page { grid-template-columns: 1fr; }
+      .sidebar {
+        position: relative; height: auto;
+        padding: 2.5rem 2rem 2rem;
+        border-right: none; border-bottom: 1px solid var(--border);
+      }
+      .sidebar::before { display: none; }
+      .sidebar__response { margin-top: 2rem; }
+      .form-area { padding: 2.5rem 2rem; }
+      .budget-box__conversions { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .form-area { padding: 2rem 1.25rem; }
+      .field__row { grid-template-columns: 1fr; }
+      .budget-box__conversions { grid-template-columns: repeat(2, 1fr); }
+      .progress__label { display: none; }
+      .step__nav { flex-direction: column-reverse; }
+      .btn-back { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ── LEFT SIDEBAR ── -->
+  <aside class="sidebar">
+    <a href="index.html" class="sidebar__back">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M13 8H3M7 4l-4 4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back to site
+    </a>
+
+    <a href="index.html" class="sidebar__logo">
+      <img src="ExevoLogo/exevo-wordmark.png" alt="Exevo" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" />
+      <span style="display:none">EXEVO</span>
+    </a>
+
+    <div class="sidebar__eyebrow">New Project Inquiry</div>
+    <h1 class="sidebar__heading">
+      Tell us what<br>you're <em>building.</em>
+    </h1>
+    <p class="sidebar__desc">
+      Five quick questions — no fluff. We'll read every word and come back within 24 hours with honest, specific next steps.
+    </p>
+
+    <div class="sidebar__contacts">
+      <a href="https://wa.me/254700552884" class="sidebar__contact" target="_blank" rel="noopener noreferrer">
+        <div class="sidebar__contact-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </div>
+        <div>
+          <span class="sidebar__contact-label">WhatsApp / Call</span>
+          <span class="sidebar__contact-value">+254 700 552 884</span>
+        </div>
+      </a>
+      <a href="mailto:exevodesigners@gmail.com" class="sidebar__contact">
+        <div class="sidebar__contact-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <span class="sidebar__contact-label">Email</span>
+          <span class="sidebar__contact-value">exevodesigners@gmail.com</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="sidebar__response">
+      <div class="response-dot"></div>
+      <p><strong>We reply within 24 hours.</strong> No bots — a real human reads your brief and responds with a clear path forward.</p>
+    </div>
+  </aside>
+
+  <!-- ── RIGHT: FORM ── -->
+  <main class="form-area">
+
+    <!-- Progress bar -->
+    <div class="progress" id="progress">
+      <div class="progress__step progress__step--active" data-step="0">
+        <div class="progress__dot">1</div>
+        <span class="progress__label">You</span>
+      </div>
+      <div class="progress__step" data-step="1">
+        <div class="progress__dot">2</div>
+        <span class="progress__label">Problem</span>
+      </div>
+      <div class="progress__step" data-step="2">
+        <div class="progress__dot">3</div>
+        <span class="progress__label">Journey</span>
+      </div>
+      <div class="progress__step" data-step="3">
+        <div class="progress__dot">4</div>
+        <span class="progress__label">Urgency</span>
+      </div>
+      <div class="progress__step" data-step="4">
+        <div class="progress__dot">5</div>
+        <span class="progress__label">Budget</span>
+      </div>
+    </div>
+
+    <!-- Steps -->
+    <div class="steps-wrap" id="stepsWrap">
+
+      <!-- STEP 0 — Who are you -->
+      <div class="step step--active" id="step0">
+        <div class="step__eyebrow">Step 1 of 5 · Introduction</div>
+        <h2 class="step__question">First, let's get to know you.</h2>
+        <p class="step__hint">We use this to address you properly and follow up on the right channels.</p>
+
+        <div class="field__row">
+          <div class="field">
+            <label class="field__label" for="cf_first">First Name</label>
+            <input id="cf_first" type="text" class="field__input" placeholder="John" autocomplete="given-name" />
+          </div>
+          <div class="field">
+            <label class="field__label" for="cf_last">Last Name</label>
+            <input id="cf_last" type="text" class="field__input" placeholder="Doe" autocomplete="family-name" />
+          </div>
+        </div>
+        <div class="field">
+          <label class="field__label" for="cf_email">Email Address</label>
+          <input id="cf_email" type="email" class="field__input" placeholder="john@company.com" autocomplete="email" />
+        </div>
+        <div class="field">
+          <label class="field__label" for="cf_phone">Phone / WhatsApp <span style="color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0;font-size:.75em">(optional)</span></label>
+          <input id="cf_phone" type="tel" class="field__input" placeholder="+254 7XX XXX XXX" autocomplete="tel" />
+        </div>
+        <div class="field">
+          <label class="field__label" for="cf_company">Company / Business <span style="color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0;font-size:.75em">(optional)</span></label>
+          <input id="cf_company" type="text" class="field__input" placeholder="Your business name" autocomplete="organization" />
+        </div>
+
+        <div class="field__error" id="err0"></div>
+        <div class="step__nav">
+          <button type="button" class="btn-next" onclick="goNext(0)">
+            Continue
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 1 — Problem -->
+      <div class="step" id="step1">
+        <div class="step__eyebrow">Step 2 of 5 · The Problem</div>
+        <h2 class="step__question">What's the biggest problem you're trying to solve?</h2>
+        <p class="step__hint">Don't filter yourself — describe it the way you'd explain it to a friend. The more honest you are, the better we can help.</p>
+
+        <div class="field">
+          <label class="field__label" for="cf_service">Type of Project</label>
+          <select id="cf_service" class="field__select">
+            <option value="" disabled selected>Select a service area</option>
+            <option>Brand Identity</option>
+            <option>Website Design</option>
+            <option>Graphic Design</option>
+            <option>Digital Marketing</option>
+            <option>Business Documentation</option>
+            <option>Creative Consulting</option>
+            <option>Multiple Services</option>
+            <option>Not Sure Yet</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="field__label" for="cf_problem">Describe the Problem</label>
+          <textarea id="cf_problem" class="field__textarea" placeholder="e.g. My brand looks inconsistent across platforms and I'm losing trust with potential clients — every touchpoint feels slightly different…"></textarea>
+          <div class="field__char" id="cnt_problem">0 / 500</div>
+        </div>
+
+        <div class="field__error" id="err1"></div>
+        <div class="step__nav">
+          <button type="button" class="btn-back" onclick="goBack(1)">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M13 8H3M7 4l-4 4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Back
+          </button>
+          <button type="button" class="btn-next" onclick="goNext(1)">
+            Continue
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 2 — What have you tried -->
+      <div class="step" id="step2">
+        <div class="step__eyebrow">Step 3 of 5 · Your Journey So Far</div>
+        <h2 class="step__question">What have you already tried?</h2>
+        <p class="step__hint">This helps us skip what hasn't worked and start from where you actually are — not from zero.</p>
+
+        <div class="field">
+          <textarea id="cf_tried" class="field__textarea" style="min-height:160px" placeholder="e.g. I worked with a freelancer before but the results felt too generic. I also tried designing myself in Canva but it looks unprofessional next to my competitors…"></textarea>
+          <div class="field__char" id="cnt_tried">0 / 500</div>
+        </div>
+
+        <div class="field__error" id="err2"></div>
+        <div class="step__nav">
+          <button type="button" class="btn-back" onclick="goBack(2)">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M13 8H3M7 4l-4 4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Back
+          </button>
+          <button type="button" class="btn-next" onclick="goNext(2)">
+            Continue
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 3 — Why now -->
+      <div class="step" id="step3">
+        <div class="step__eyebrow">Step 4 of 5 · The Urgency</div>
+        <h2 class="step__question">Why is now the right time to address this?</h2>
+        <p class="step__hint">Something made you reach out today. What changed — a deadline, a new opportunity, a competitor move?</p>
+
+        <div class="field">
+          <textarea id="cf_timing" class="field__textarea" style="min-height:160px" placeholder="e.g. We're launching a new product line in 6 weeks and need a brand that matches our new direction before we go live to our investor audience…"></textarea>
+          <div class="field__char" id="cnt_timing">0 / 500</div>
+        </div>
+
+        <div class="field__error" id="err3"></div>
+        <div class="step__nav">
+          <button type="button" class="btn-back" onclick="goBack(3)">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M13 8H3M7 4l-4 4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Back
+          </button>
+          <button type="button" class="btn-next" onclick="goNext(3)">
+            Continue
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 4 — Budget -->
+      <div class="step" id="step4">
+        <div class="step__eyebrow">Step 5 of 5 · Budget</div>
+        <h2 class="step__question">What's your approximate budget?</h2>
+        <p class="step__hint">No wrong answer — this helps us scope the right solution and be upfront about what's realistic.</p>
+
+        <div class="budget-box">
+          <div class="budget-box__top">
+            <div class="budget-box__amount" id="budgetDisplay">KES 25,000</div>
+            <div class="budget-box__currencies" id="currencyBtns">
+              <button type="button" class="currency-btn currency-btn--active" onclick="setCurrency('KES',this)">KES</button>
+              <button type="button" class="currency-btn" onclick="setCurrency('USD',this)">USD</button>
+              <button type="button" class="currency-btn" onclick="setCurrency('GBP',this)">GBP</button>
+              <button type="button" class="currency-btn" onclick="setCurrency('CAD',this)">CAD</button>
+              <button type="button" class="currency-btn" onclick="setCurrency('AED',this)">AED</button>
+              <button type="button" class="currency-btn" onclick="setCurrency('EUR',this)">EUR</button>
+            </div>
+          </div>
+          <input type="range" class="budget-box__slider" id="budgetSlider"
+            min="0" max="100" value="30" oninput="updateBudget(this)" />
+          <div class="budget-box__ticks" id="budgetTicks"></div>
+          <div class="budget-box__conversions" id="budgetConversions"></div>
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="cf_extra">Anything else to add? <span style="color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0;font-size:.75em">(optional)</span></label>
+          <input type="text" id="cf_extra" class="field__input" placeholder="Timeline, special requirements, referral source, or anything you want us to know…" />
+        </div>
+
+        <div class="field__error" id="err4"></div>
+        <div class="step__nav">
+          <button type="button" class="btn-back" onclick="goBack(4)">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M13 8H3M7 4l-4 4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Back
+          </button>
+          <button type="button" class="btn-next" onclick="submitForm()">
+            Send Project Brief
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+
+    </div><!-- /steps-wrap -->
+
+    <!-- Success -->
+    <div class="success" id="success">
+      <div class="success__icon">✓</div>
+      <h2 class="success__title">Brief received.</h2>
+      <p class="success__sub">
+        Your project brief is on its way to the team. We read every submission carefully and will respond within 24 hours with honest, specific next steps — no templates.
+      </p>
+      <a href="index.html" class="btn-home">
+        Back to Exevo
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+
+  </main>
+</div><!-- /page -->
+
+<script>
+  /* ── BUDGET ── */
+  const CURRENCIES = {
+    KES: { symbol: 'KES ', flag: '🇰🇪', rate: 1 },
+    USD: { symbol: '$',   flag: '🇺🇸', rate: 0.0077 },
+    GBP: { symbol: '£',   flag: '🇬🇧', rate: 0.0062 },
+    CAD: { symbol: 'C$',  flag: '🇨🇦', rate: 0.0105 },
+    AED: { symbol: 'AED ',flag: '🇦🇪', rate: 0.0283 },
+    EUR: { symbol: '€',   flag: '🇪🇺', rate: 0.0071 },
+  };
+
+  const STEPS_KES = [
+    5000, 8000, 12000, 15000, 20000, 25000, 30000, 40000,
+    50000, 65000, 80000, 100000, 150000, 200000, 300000, 500000
+  ];
+
+  let activeCur = 'KES';
+  let budgetIdx = 5; // default ~25k
+
+  function fmt(kes, cur) {
+    const c = CURRENCIES[cur];
+    const v = cur === 'KES' ? kes : kes * c.rate;
+    const s = v >= 1000 ? (v / 1000).toFixed(v >= 100000 ? 0 : 1) + 'k' : Math.round(v).toLocaleString();
+    return c.symbol + (cur === 'KES' ? Math.round(kes).toLocaleString() : s);
+  }
+
+  function renderBudget() {
+    const kes = STEPS_KES[budgetIdx];
+    document.getElementById('budgetDisplay').textContent = fmt(kes, activeCur);
+
+    // ticks
+    const ticks = document.getElementById('budgetTicks');
+    ticks.innerHTML = [0, 4, 8, 12, 15].map(i => {
+      const c = CURRENCIES[activeCur];
+      const v = activeCur === 'KES' ? STEPS_KES[i] : STEPS_KES[i] * c.rate;
+      const label = v >= 1000 ? Math.round(v / 1000) + 'k' : Math.round(v);
+      return `<span class="budget-box__tick">${c.symbol}${label}</span>`;
+    }).join('');
+
+    // conversions
+    const conv = document.getElementById('budgetConversions');
+    const others = Object.keys(CURRENCIES).filter(k => k !== activeCur);
+    conv.innerHTML = others.map(cur => {
+      const c = CURRENCIES[cur];
+      const v = cur === 'KES' ? kes : kes * c.rate;
+      const s = v >= 1000 ? (v / 1000).toFixed(v >= 100000 ? 0 : 1) + 'k' : Math.round(v).toLocaleString();
+      return `<div class="budget-conv">
+        <div class="budget-conv__amount">${c.symbol}${s}</div>
+        <div class="budget-conv__cur">${cur}</div>
+        <div class="budget-conv__flag">${c.flag}</div>
+      </div>`;
+    }).join('');
+
+    // slider track
+    const sl = document.getElementById('budgetSlider');
+    const pct = (budgetIdx / (STEPS_KES.length - 1)) * 100;
+    sl.style.setProperty('--pct', pct + '%');
+    sl.value = pct;
+  }
+
+  function updateBudget(sl) {
+    const pct = parseInt(sl.value);
+    sl.style.setProperty('--pct', pct + '%');
+    budgetIdx = Math.round((pct / 100) * (STEPS_KES.length - 1));
+    renderBudget();
+  }
+
+  function setCurrency(cur, btn) {
+    activeCur = cur;
+    document.querySelectorAll('.currency-btn').forEach(b => b.classList.remove('currency-btn--active'));
+    btn.classList.add('currency-btn--active');
+    renderBudget();
+  }
+
+  /* ── CHAR COUNTERS ── */
+  [['cf_problem','cnt_problem'],['cf_tried','cnt_tried'],['cf_timing','cnt_timing']].forEach(([id,cid])=>{
+    const ta = document.getElementById(id);
+    const ct = document.getElementById(cid);
+    if(!ta||!ct) return;
+    ta.addEventListener('input', () => {
+      const l = ta.value.length;
+      ct.textContent = `${l} / 500`;
+      ct.classList.toggle('field__char--warn', l > 425);
+    });
+  });
+
+  /* ── PROGRESS ── */
+  let current = 0;
+
+  function showStep(n) {
+    document.querySelectorAll('.step').forEach((s,i) => {
+      s.classList.toggle('step--active', i === n);
+    });
+    document.querySelectorAll('.progress__step').forEach((s, i) => {
+      s.classList.remove('progress__step--active','progress__step--done');
+      if (i < n) s.classList.add('progress__step--done');
+      if (i === n) s.classList.add('progress__step--active');
+    });
+    // Update dot labels
+    document.querySelectorAll('.progress__dot').forEach((d, i) => {
+      d.textContent = i < n ? '✓' : i + 1;
+    });
+    current = n;
+    if (n === 4) renderBudget();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function goNext(step) {
+    const err = document.getElementById('err' + step);
+    err.textContent = '';
+
+    if (step === 0) {
+      const first = document.getElementById('cf_first').value.trim();
+      const email = document.getElementById('cf_email').value.trim();
+      if (!first) { err.textContent = 'Please enter your first name.'; return; }
+      if (!email || !email.includes('@')) { err.textContent = 'Please enter a valid email address.'; return; }
+    }
+    if (step === 1) {
+      const svc = document.getElementById('cf_service').value;
+      const prob = document.getElementById('cf_problem').value.trim();
+      if (!svc) { err.textContent = 'Please select a project type.'; return; }
+      if (prob.length < 20) { err.textContent = 'Please describe your problem in a bit more detail.'; return; }
+    }
+    if (step === 2) {
+      const tried = document.getElementById('cf_tried').value.trim();
+      if (tried.length < 10) { err.textContent = 'Please share what you\'ve tried — even briefly.'; return; }
+    }
+    if (step === 3) {
+      const timing = document.getElementById('cf_timing').value.trim();
+      if (timing.length < 10) { err.textContent = 'Help us understand the timing — even one sentence.'; return; }
+    }
+
+    showStep(step + 1);
+  }
+
+  function goBack(step) {
+    showStep(step - 1);
+  }
+
+  /* ── SUBMIT ── */
+  function submitForm() {
+    const first   = document.getElementById('cf_first').value.trim();
+    const last    = document.getElementById('cf_last').value.trim();
+    const email   = document.getElementById('cf_email').value.trim();
+    const phone   = document.getElementById('cf_phone').value.trim() || 'Not provided';
+    const company = document.getElementById('cf_company').value.trim() || 'Not provided';
+    const service = document.getElementById('cf_service').value || 'Not specified';
+    const problem = document.getElementById('cf_problem').value.trim();
+    const tried   = document.getElementById('cf_tried').value.trim();
+    const timing  = document.getElementById('cf_timing').value.trim();
+    const extra   = document.getElementById('cf_extra').value.trim();
+    const budget  = fmt(STEPS_KES[budgetIdx], activeCur) + ` (${activeCur})`;
+
+    const body = [
+      `PROJECT BRIEF — EXEVO DESIGNERS NETWORK`,
+      `─────────────────────────────────────────`,
+      `Name:     ${first} ${last}`,
+      `Email:    ${email}`,
+      `Phone:    ${phone}`,
+      `Company:  ${company}`,
+      `Service:  ${service}`,
+      `Budget:   ${budget}`,
+      ``,
+      `1. BIGGEST PROBLEM`,
+      problem,
+      ``,
+      `2. WHAT THEY'VE TRIED`,
+      tried,
+      ``,
+      `3. WHY NOW`,
+      timing,
+      extra ? `\n4. ADDITIONAL NOTES\n${extra}` : '',
+    ].filter(x => x !== undefined).join('\n');
+
+    const subject = `Project Brief: ${service} — ${first} ${last}`;
+
+    // Open WhatsApp first, then trigger mailto
+    window.open(`https://wa.me/254700552884?text=${encodeURIComponent(body)}`, '_blank');
+    setTimeout(() => {
+      window.location.href = `mailto:exevodesigners@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    }, 800);
+
+    // Show success
+    document.getElementById('stepsWrap').style.display = 'none';
+    document.getElementById('progress').style.display = 'none';
+    document.getElementById('success').classList.add('success--show');
+  }
+
+  /* ── INIT ── */
+  renderBudget();
+</script>
+</body>
+</html>
