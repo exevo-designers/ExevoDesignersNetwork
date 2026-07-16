@@ -98,16 +98,34 @@
     @keyframes loaderFill { to { transform: scaleX(1); } }
     .loader__count { font-size: .72rem; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--muted); }
 
-    /* ── NAV ── */
+    /* ── NAV — floating glassmorphic bar, always on ── */
     nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 800;
-      padding: 1.75rem 3rem;
+      position: fixed; top: 1.25rem; left: 1.75rem; right: 1.75rem; z-index: 800;
+      padding: 1.1rem 2rem;
       display: flex; align-items: center; justify-content: space-between;
-      transition: background .4s, backdrop-filter .4s, padding .4s;
+      border-radius: 100px;
+      background:
+        linear-gradient(135deg, rgba(124,58,237,.14), rgba(167,139,250,.05)),
+        rgba(9,9,11,.55);
+      backdrop-filter: blur(22px) saturate(160%);
+      -webkit-backdrop-filter: blur(22px) saturate(160%);
+      border: 1px solid rgba(167,139,250,.16);
+      box-shadow: 0 8px 32px rgba(124,58,237,.14), inset 0 1px 0 rgba(255,255,255,.05);
+      transition: background .4s, padding .4s, box-shadow .4s, top .4s;
+      animation: navFloat 6s ease-in-out infinite;
+    }
+    @keyframes navFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
     }
     nav.scrolled {
-      background: rgba(9,9,11,.9); backdrop-filter: blur(20px);
-      padding: 1.1rem 3rem; border-bottom: 1px solid var(--border);
+      top: .85rem;
+      padding: .85rem 1.75rem;
+      background:
+        linear-gradient(135deg, rgba(124,58,237,.2), rgba(167,139,250,.08)),
+        rgba(9,9,11,.78);
+      box-shadow: 0 10px 40px rgba(124,58,237,.22), inset 0 1px 0 rgba(255,255,255,.06);
+      border-color: rgba(167,139,250,.26);
     }
     .nav__logo { display: flex; align-items: center; max-width: 110px; text-decoration: none; }
     .nav__logo img { width: 100%; height: auto; filter: brightness(0) invert(1); }
@@ -144,13 +162,13 @@
     /* Collapse the desktop nav into a hamburger menu below 900px so the
        full link list never overflows or wraps on tablets/phones. */
     @media (max-width: 900px) {
-      nav { padding: 1.25rem 1.5rem; }
-      nav.scrolled { padding: 1rem 1.5rem; }
+      nav { left: 1rem; right: 1rem; top: 1rem; padding: 1.1rem 1.5rem; }
+      nav.scrolled { padding: .8rem 1.5rem; }
       .nav__links, .nav__cta { display: none; }
       .nav__hamburger { display: flex; }
     }
     @media (max-width: 480px) {
-      nav { padding: 1rem 1.1rem; }
+      nav { left: .75rem; right: .75rem; padding: .95rem 1.1rem; }
       .nav__logo { max-width: 88px; }
     }
 
@@ -956,6 +974,43 @@
     </div>
   </section>
 
+  <!-- CLIENTS — shown immediately after the hero, before any about copy -->
+  <section id="clients">
+    <div class="clients__intro">
+      <div class="section-label">Trusted By</div>
+      <h2 class="section-header">Brands we've <em>worked with.</em></h2>
+    </div>
+    <div class="clients__grid">
+      <!-- Real brand logos via Clearbit/Brandfetch CDN -->
+      <div class="client-tile">
+        <img src="https://logo.clearbit.com/safaricom.co.ke" alt="Safaricom" onerror="this.parentNode.classList.add('client-tile--text');this.parentNode.textContent='Safaricom'" />
+      </div>
+      <div class="client-tile">
+        <img src="https://logo.clearbit.com/canva.com" alt="Canva" onerror="this.parentNode.classList.add('client-tile--text');this.parentNode.textContent='Canva'" />
+      </div>
+      <div class="client-tile">
+        <img src="https://logo.clearbit.com/shopify.com" alt="Shopify" onerror="this.parentNode.classList.add('client-tile--text');this.parentNode.textContent='Shopify'" />
+      </div>
+      <div class="client-tile">
+        <img src="https://logo.clearbit.com/squarespace.com" alt="Squarespace" onerror="this.parentNode.classList.add('client-tile--text');this.parentNode.textContent='Squarespace'" />
+      </div>
+      <div class="client-tile">
+        <img src="https://logo.clearbit.com/fiverr.com" alt="Fiverr" onerror="this.parentNode.classList.add('client-tile--text');this.parentNode.textContent='Fiverr'" />
+      </div>
+      <div class="client-tile">
+        <img src="https://logo.clearbit.com/mailchimp.com" alt="Mailchimp" onerror="this.parentNode.classList.add('client-tile--text');this.parentNode.textContent='Mailchimp'" />
+      </div>
+      <!-- In-house clients -->
+      <div class="client-tile client-tile--text">Jean Yarn Haven</div>
+      <div class="client-tile client-tile--text">Ansa Internet</div>
+      <div class="client-tile client-tile--text">St. Joseph Rehema</div>
+      <div class="client-tile client-tile--text">Wambo Ashley</div>
+      <div class="client-tile client-tile--text">Lewisky Academy</div>
+      <div class="client-tile client-tile--text">The Brand Cyber</div>
+    </div>
+    <p class="clients__note">40+ businesses across Kenya, East Africa, Europe &amp; North America.</p>
+  </section>
+
   <!-- MARQUEE -->
   <div class="marquee-section">
     <div class="marquee__track" id="marquee">
@@ -1035,42 +1090,6 @@
   </section>
 
   <!-- CLIENT LOGOS -->
-  <section id="clients">
-    <div class="clients__intro">
-      <div class="section-label">Trusted By</div>
-      <h2 class="section-header">Brands we've <em>worked with.</em></h2>
-    </div>
-    <div class="clients__grid">
-      <!-- Real brand logos via Clearbit/Brandfetch CDN -->
-      <div class="client-tile">
-        <img src="https://logo.clearbit.com/safaricom.co.ke" alt="Safaricom" onerror="this.parentNode.classList.add('client-tile--text');this.parentNode.textContent='Safaricom'" />
-      </div>
-      <div class="client-tile">
-        <img src="https://logo.clearbit.com/canva.com" alt="Canva" onerror="this.parentNode.classList.add('client-tile--text');this.parentNode.textContent='Canva'" />
-      </div>
-      <div class="client-tile">
-        <img src="https://logo.clearbit.com/shopify.com" alt="Shopify" onerror="this.parentNode.classList.add('client-tile--text');this.parentNode.textContent='Shopify'" />
-      </div>
-      <div class="client-tile">
-        <img src="https://logo.clearbit.com/squarespace.com" alt="Squarespace" onerror="this.parentNode.classList.add('client-tile--text');this.parentNode.textContent='Squarespace'" />
-      </div>
-      <div class="client-tile">
-        <img src="https://logo.clearbit.com/fiverr.com" alt="Fiverr" onerror="this.parentNode.classList.add('client-tile--text');this.parentNode.textContent='Fiverr'" />
-      </div>
-      <div class="client-tile">
-        <img src="https://logo.clearbit.com/mailchimp.com" alt="Mailchimp" onerror="this.parentNode.classList.add('client-tile--text');this.parentNode.textContent='Mailchimp'" />
-      </div>
-      <!-- In-house clients -->
-      <div class="client-tile client-tile--text">Jean Yarn Haven</div>
-      <div class="client-tile client-tile--text">Ansa Internet</div>
-      <div class="client-tile client-tile--text">St. Joseph Rehema</div>
-      <div class="client-tile client-tile--text">Wambo Ashley</div>
-      <div class="client-tile client-tile--text">Lewisky Academy</div>
-      <div class="client-tile client-tile--text">The Brand Cyber</div>
-    </div>
-    <p class="clients__note">40+ businesses across Kenya, East Africa, Europe &amp; North America.</p>
-  </section>
-
   <!-- ABOUT -->
   <section id="about">
     <div class="about__grid">
