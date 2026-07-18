@@ -242,20 +242,23 @@
     .btn-ghost svg { transition: transform .3s; }
     .btn-ghost:hover svg { transform: translateX(4px); }
 
-    /* Fanned project-card stack */
+    /* Arc of project cards — tallest at the edges, shortest at center, no rotation */
     .hero__fan {
       position: relative; z-index: 1;
-      width: 100%; max-width: 1000px;
-      height: 340px;
+      width: 100vw;
+      max-width: none;
+      margin-left: calc(-50vw + 50%);
       display: flex; align-items: center; justify-content: center;
+      gap: .5rem;
+      padding: 0 1rem;
     }
     .hero__fan-card {
-      position: absolute;
-      width: 200px; height: 300px;
-      border-radius: 14px;
+      flex-shrink: 0;
+      width: 168px;
+      border-radius: 20px;
       overflow: hidden;
       border: 1px solid rgba(255,255,255,.08);
-      box-shadow: 0 25px 60px -15px rgba(0,0,0,.6);
+      box-shadow: 0 25px 50px -15px rgba(0,0,0,.55);
       background: #111;
       transition: transform .4s cubic-bezier(.25,.46,.45,.94), box-shadow .4s;
       cursor: none;
@@ -265,68 +268,49 @@
     }
     .hero__fan-card::after {
       content: ''; position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,.35) 0%, transparent 45%);
+      background: linear-gradient(to top, rgba(0,0,0,.3) 0%, transparent 45%);
     }
     .hero__fan-card:hover {
-      transform: translateY(-18px) rotate(0deg) scale(1.04) !important;
+      transform: translateY(-14px) scale(1.03);
       box-shadow: 0 35px 70px -12px rgba(124,58,237,.35);
-      z-index: 10 !important;
+      z-index: 10;
     }
-    /* Fan positions — 5 cards, center highest z-index */
-    .hero__fan-card:nth-child(1) { transform: translateX(-340px) rotate(-14deg) translateY(28px); z-index: 1; }
-    .hero__fan-card:nth-child(2) { transform: translateX(-175px) rotate(-7deg) translateY(8px); z-index: 2; }
-    .hero__fan-card:nth-child(3) { transform: translateX(0) rotate(0deg) translateY(-6px); z-index: 5; }
-    .hero__fan-card:nth-child(4) { transform: translateX(175px) rotate(7deg) translateY(8px); z-index: 3; }
-    .hero__fan-card:nth-child(5) { transform: translateX(340px) rotate(14deg) translateY(28px); z-index: 2; }
-
-    /* Floating tag bubbles on a couple of cards */
-    .hero__fan-tag {
-      position: absolute; z-index: 20;
-      display: inline-flex; align-items: center; gap: .4rem;
-      font-size: .68rem; font-weight: 600; letter-spacing: .02em;
-      color: #fff; padding: .4rem .8rem;
-      border-radius: 100px 100px 100px 4px;
-      white-space: nowrap;
-      box-shadow: 0 8px 20px rgba(0,0,0,.35);
-    }
-    .hero__fan-tag--purple { background: linear-gradient(135deg, var(--accent), var(--accent-light)); }
-    .hero__fan-tag--green { background: linear-gradient(135deg, #0F9D6E, #2ECC94); }
-    .hero__fan-tag-1 { top: -18px; left: calc(50% - 490px); }
-    .hero__fan-tag-2 { top: -8px; right: calc(50% - 500px); }
+    /* Arc heights — edges tallest, center shortest */
+    .hero__fan-card:nth-child(1) { height: 400px; }
+    .hero__fan-card:nth-child(2) { height: 340px; }
+    .hero__fan-card:nth-child(3) { height: 300px; }
+    .hero__fan-card:nth-child(4) { height: 340px; }
+    .hero__fan-card:nth-child(5) { height: 400px; }
 
     @media (max-width: 1100px) {
-      .hero__fan { max-width: 900px; height: 300px; }
-      .hero__fan-card { width: 170px; height: 260px; }
-      .hero__fan-card:nth-child(1) { transform: translateX(-270px) rotate(-14deg) translateY(24px); }
-      .hero__fan-card:nth-child(2) { transform: translateX(-140px) rotate(-7deg) translateY(6px); }
-      .hero__fan-card:nth-child(4) { transform: translateX(140px) rotate(7deg) translateY(6px); }
-      .hero__fan-card:nth-child(5) { transform: translateX(270px) rotate(14deg) translateY(24px); }
-      .hero__fan-tag-1 { left: calc(50% - 400px); }
-      .hero__fan-tag-2 { right: calc(50% - 410px); }
+      .hero__fan { gap: .4rem; }
+      .hero__fan-card { width: 140px; }
+      .hero__fan-card:nth-child(1) { height: 340px; }
+      .hero__fan-card:nth-child(2) { height: 290px; }
+      .hero__fan-card:nth-child(3) { height: 260px; }
+      .hero__fan-card:nth-child(4) { height: 290px; }
+      .hero__fan-card:nth-child(5) { height: 340px; }
     }
     @media (max-width: 900px) {
       #hero { padding: 8.5rem 1.5rem 4rem; }
-      .hero__fan { height: 260px; }
-      .hero__fan-card { width: 130px; height: 200px; border-radius: 10px; }
-      .hero__fan-card:nth-child(1) { transform: translateX(-195px) rotate(-14deg) translateY(18px); }
-      .hero__fan-card:nth-child(2) { transform: translateX(-100px) rotate(-7deg) translateY(4px); }
-      .hero__fan-card:nth-child(3) { transform: translateX(0) rotate(0deg) translateY(-6px); }
-      .hero__fan-card:nth-child(4) { transform: translateX(100px) rotate(7deg) translateY(4px); }
-      .hero__fan-card:nth-child(5) { transform: translateX(195px) rotate(14deg) translateY(18px); }
-      .hero__fan-tag { font-size: .6rem; padding: .32rem .65rem; }
-      .hero__fan-tag-1 { top: -14px; left: calc(50% - 280px); }
-      .hero__fan-tag-2 { top: -6px; right: calc(50% - 285px); }
+      .hero__fan { gap: .3rem; }
+      .hero__fan-card { width: 108px; border-radius: 14px; }
+      .hero__fan-card:nth-child(1) { height: 270px; }
+      .hero__fan-card:nth-child(2) { height: 230px; }
+      .hero__fan-card:nth-child(3) { height: 205px; }
+      .hero__fan-card:nth-child(4) { height: 230px; }
+      .hero__fan-card:nth-child(5) { height: 270px; }
     }
     @media (max-width: 640px) {
       #hero { padding: 7.5rem 1.25rem 3.5rem; }
       .hero__actions { flex-direction: column; gap: 1.1rem; margin-bottom: 3.5rem; }
-      .hero__fan { height: 210px; }
-      .hero__fan-card { width: 100px; height: 155px; border-radius: 8px; }
-      .hero__fan-card:nth-child(1) { transform: translateX(-140px) rotate(-13deg) translateY(14px); }
-      .hero__fan-card:nth-child(2) { transform: translateX(-72px) rotate(-6deg) translateY(3px); }
-      .hero__fan-card:nth-child(4) { transform: translateX(72px) rotate(6deg) translateY(3px); }
-      .hero__fan-card:nth-child(5) { transform: translateX(140px) rotate(13deg) translateY(14px); }
-      .hero__fan-tag-1, .hero__fan-tag-2 { display: none; }
+      .hero__fan { gap: .2rem; padding: 0 .5rem; }
+      .hero__fan-card { width: 76px; border-radius: 10px; }
+      .hero__fan-card:nth-child(1) { height: 200px; }
+      .hero__fan-card:nth-child(2) { height: 170px; }
+      .hero__fan-card:nth-child(3) { height: 150px; }
+      .hero__fan-card:nth-child(4) { height: 170px; }
+      .hero__fan-card:nth-child(5) { height: 200px; }
     }
 
     /* ── MARQUEE ── */
@@ -799,8 +783,6 @@
     </div>
 
     <div class="hero__fan">
-      <span class="hero__fan-tag hero__fan-tag--purple hero__fan-tag-1">@jeanyarnhaven</span>
-      <span class="hero__fan-tag hero__fan-tag--green hero__fan-tag-2">@lewiskyacademy</span>
       <div class="hero__fan-card"><img src="images/AshleyWambu.png" alt="Wambo Ashley" /></div>
       <div class="hero__fan-card"><img src="images/JeyahHaven.jpg" alt="Jean Yarn Haven" /></div>
       <div class="hero__fan-card"><img src="images/LearnGermanwithLewisky.png" alt="Learn German with Lewisky" /></div>
