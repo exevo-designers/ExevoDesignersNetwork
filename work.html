@@ -8,7 +8,7 @@
   <link rel="icon" type="image/png" href="ExevoLogo/exevo-logo-profile(2).png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
@@ -25,6 +25,9 @@
       --border: rgba(245,244,240,0.07);
       --font-display: 'Inter', system-ui, sans-serif;
       --font-body: 'Poppins', system-ui, sans-serif;
+      --card-w: 280px;
+      --card-w-tablet: 230px;
+      --card-w-mobile: 168px;
     }
 
     html { scroll-behavior: smooth; }
@@ -43,6 +46,7 @@
     .cursor__ring { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(167,139,250,.5); position: absolute; transform: translate(-50%,-50%); transition: width .35s cubic-bezier(.25,.46,.45,.94), height .35s, background .35s; }
     .cursor--hover .cursor__ring { width: 60px; height: 60px; background: rgba(124,58,237,.1); }
     .cursor--hover .cursor__dot { opacity: 0; }
+    @media (hover: none) { .cursor { display: none; } body { cursor: auto; } }
 
     /* ── NAV ── */
     nav {
@@ -102,133 +106,164 @@
     .ph-stat__num { font-family: var(--font-display); font-size: 2.8rem; letter-spacing: -.04em; line-height: 1; }
     .ph-stat__label { font-size: .65rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); margin-top: .35rem; }
 
-    /* ── FILTERS ── */
-    .work-filters {
+    /* ── GENRE JUMP BAR (was filters) ── */
+    .genre-bar {
       padding: 1.5rem 3rem;
       border-bottom: 1px solid var(--border);
       display: flex; align-items: center; gap: .75rem;
       flex-wrap: wrap;
-      position: sticky; top: 62px; z-index: 100;
+      position: sticky; top: 0; z-index: 500;
       background: rgba(9,9,11,.94); backdrop-filter: blur(18px);
+      margin-top: 62px;
     }
-    .filter-label { font-size: .6rem; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; color: var(--muted); margin-right: .25rem; flex-shrink: 0; }
-    .filter-btn {
+    .genre-label { font-size: .6rem; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; color: var(--muted); margin-right: .25rem; flex-shrink: 0; }
+    .genre-btn {
       padding: .38rem .95rem; border-radius: 100px;
       border: 1px solid var(--border); background: transparent;
       font-family: var(--font-body); font-size: .62rem; font-weight: 600;
       letter-spacing: .1em; text-transform: uppercase;
       color: var(--muted); cursor: pointer; transition: all .22s;
     }
-    .filter-btn:hover { border-color: rgba(167,139,250,.4); color: var(--text); }
-    .filter-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .genre-btn:hover { border-color: rgba(167,139,250,.4); color: var(--text); }
+    .genre-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
 
-    /* ── PROJECTS GRID ── */
-    .work-grid {
-      padding: 4rem 3rem 8rem;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 3px;
+    /* ── NETFLIX-STYLE ROWS ── */
+    .nx-rows { padding: 4rem 0 8rem; }
+
+    .nx-row { margin-bottom: 3.75rem; scroll-margin-top: 130px; }
+    .nx-row__head {
+      display: flex; align-items: baseline; justify-content: space-between;
+      padding: 0 3rem; margin-bottom: 1.1rem;
+    }
+    .nx-row__title { font-family: var(--font-display); font-size: clamp(1.3rem,2.2vw,1.9rem); letter-spacing: -.02em; }
+    .nx-row__title em { font-style: italic; color: var(--subtle); }
+    .nx-row__count { font-size: .64rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+
+    .nx-row__viewport { position: relative; }
+
+    /* edge fades hinting scrollability */
+    .nx-row__viewport::before, .nx-row__viewport::after {
+      content: ''; position: absolute; top: 0; bottom: 0; width: 3rem; z-index: 5; pointer-events: none;
+      transition: opacity .3s;
+    }
+    .nx-row__viewport::before { left: 0; background: linear-gradient(to right, var(--bg), transparent); }
+    .nx-row__viewport::after  { right: 0; background: linear-gradient(to left, var(--bg), transparent); }
+
+    .nx-row__track {
+      display: flex;
+      gap: .6rem;
+      overflow-x: auto;
+      overflow-y: visible;
+      scroll-snap-type: x proximity;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding: 2.75rem 3rem;
+      margin: -2.75rem 0;
+    }
+    .nx-row__track::-webkit-scrollbar { display: none; }
+
+    .nx-row__arrow {
+      position: absolute; top: 0; bottom: 0; z-index: 10;
+      width: 3.25rem;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(9,9,11,.55);
+      border: none; color: var(--text); cursor: none;
+      opacity: 0; transition: opacity .25s, background .25s;
+    }
+    .nx-row__arrow--prev { left: 0; }
+    .nx-row__arrow--next { right: 0; }
+    .nx-row__viewport:hover .nx-row__arrow { opacity: 1; }
+    .nx-row__arrow:hover { background: rgba(124,58,237,.35); }
+    .nx-row__arrow svg { width: 22px; height: 22px; }
+
+    /* card */
+    .nx-card {
+      position: relative;
+      flex: 0 0 var(--card-w);
+      scroll-snap-align: start;
+      z-index: 1;
+      transform-origin: center center;
+      transition: transform .35s cubic-bezier(.4,0,.2,1), z-index 0s .35s;
+      cursor: none;
+    }
+    .nx-card:first-child { transform-origin: left center; }
+    .nx-card:last-child  { transform-origin: right center; }
+
+    .nx-card__box {
+      border-radius: 6px;
+      overflow: hidden;
+      background: #131316;
+      box-shadow: 0 2px 14px rgba(0,0,0,.4);
+      transition: box-shadow .35s ease;
     }
 
-    /* Category divider row */
-    .cat-divider {
-      grid-column: 1 / -1;
-      padding: 3.5rem 0 1.25rem;
-      border-top: 1px solid var(--border);
+    .nx-card__thumb { position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; }
+    .nx-card__thumb img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      filter: brightness(.78) saturate(.85);
+      transition: filter .35s ease;
+    }
+    .nx-card__num {
+      position: absolute; bottom: .5rem; right: .65rem;
+      font-family: var(--font-display); font-style: italic; font-size: .82rem;
+      color: rgba(255,255,255,.35);
+    }
+
+    .nx-card__info {
+      max-height: 0; opacity: 0;
+      overflow: hidden;
+      transition: max-height .38s ease, opacity .3s ease, padding .38s ease;
+      background: #131316;
+      padding: 0 .95rem;
+    }
+    .nx-card__info-top {
       display: flex; align-items: center; justify-content: space-between;
+      padding-top: .85rem;
     }
-    .cat-divider:first-child { border-top: none; padding-top: 0; }
-    .cat-divider__title { font-family: var(--font-display); font-size: clamp(1.5rem,3vw,2.5rem); letter-spacing: -.025em; }
-    .cat-divider__title em { font-style: italic; color: var(--subtle); }
-    .cat-divider__count { font-size: .65rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
-
-    /* Project card */
-    .proj {
-      position: relative; overflow: hidden;
-      min-height: 420px; cursor: none;
-      transition: opacity .35s;
+    .nx-card__play {
+      display: flex; align-items: center; justify-content: center;
+      width: 30px; height: 30px; border-radius: 50%;
+      background: var(--text); color: #09090B;
+      text-decoration: none; flex-shrink: 0;
+      transition: background .25s;
     }
-    .proj.hidden { display: none; }
-    .proj--wide  { grid-column: span 2; }
-    .proj--tall  { grid-row: span 2; }
-
-    /* Colour fills — each project gets its own dark tint */
-    .proj--jean     { background: #12100e; }
-    .proj--ansa     { background: #0e1018; }
-    .proj--lewisky  { background: #100d14; }
-    .proj--wambo    { background: #0e1010; }
-    .proj--cyber    { background: #0d0d12; }
-    .proj--miraja   { background: #0c1012; }
-    .proj--blossom  { background: #120e10; }
-    .proj--jordan   { background: #0d1208; }
-    .proj--dolla    { background: #0e0e14; }
-    .proj--lokiboss { background: #0e1212; }
-    .proj--grace    { background: #12100d; }
-
-    /* Image (swap in real screenshots when ready) */
-    .proj__img {
-      position: absolute; inset: 0; width: 100%; height: 100%;
-      object-fit: cover;
-      transition: transform .85s cubic-bezier(.25,.46,.45,.94), filter .5s;
-      filter: brightness(.75) saturate(.8);
+    .nx-card__play:hover { background: var(--accent-light); }
+    .nx-card__play svg { width: 12px; height: 12px; }
+    .nx-card__badge {
+      font-size: .56rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--accent-light); border: 1px solid rgba(167,139,250,.35);
+      padding: .22rem .55rem; border-radius: 100px;
     }
-    .proj:hover .proj__img { transform: scale(1.05); filter: brightness(.9) saturate(1); }
-
-    /* Ghost text fallback (no image) */
-    .proj__ghost { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
-    .proj__ghost-text {
-      font-family: var(--font-display);
-      font-size: clamp(2.5rem, 6vw, 5rem);
-      letter-spacing: -.04em; line-height: 1.05;
-      text-align: center; color: rgba(245,244,240,.05);
-      user-select: none; padding: 1rem;
+    .nx-card__soon {
+      font-size: .58rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--muted);
+    }
+    .nx-card__title {
+      font-family: var(--font-display); font-size: .92rem; letter-spacing: -.01em;
+      margin-top: .7rem; line-height: 1.2;
+    }
+    .nx-card__meta {
+      font-size: .66rem; color: var(--muted); margin-top: .3rem; letter-spacing: .02em;
+    }
+    .nx-card__desc {
+      font-size: .72rem; line-height: 1.55; color: var(--subtle);
+      margin-top: .55rem; padding-bottom: .95rem;
     }
 
-    /* Always-visible bottom strip */
-    .proj__strip {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      padding: 1.1rem 1.5rem;
-      background: linear-gradient(to top, rgba(0,0,0,.72) 0%, transparent 100%);
-      display: flex; align-items: flex-end; justify-content: space-between;
-      z-index: 2;
-    }
-    .proj__num { font-family: var(--font-display); font-size: 1rem; font-style: italic; color: rgba(255,255,255,.22); }
-    .proj__tag-pill {
-      font-size: .55rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
-      color: var(--accent-light); border: 1px solid rgba(167,139,250,.3);
-      padding: .2rem .55rem; border-radius: 100px;
+    /* hover-capable devices: classic netflix pop */
+    @media (hover: hover) and (pointer: fine) {
+      .nx-card:hover { transform: scale(1.42); z-index: 30; transition: transform .35s cubic-bezier(.4,0,.2,1), z-index 0s; }
+      .nx-card:hover .nx-card__box { box-shadow: 0 22px 45px rgba(0,0,0,.6); }
+      .nx-card:hover .nx-card__thumb img { filter: brightness(.95) saturate(1.05); }
+      .nx-card:hover .nx-card__info { max-height: 220px; opacity: 1; padding: 0 .95rem .3rem; }
     }
 
-    /* Hover overlay */
-    .proj__overlay {
-      position: absolute; inset: 0; z-index: 3;
-      background: linear-gradient(to top, rgba(0,0,0,.92) 0%, rgba(0,0,0,.22) 45%, transparent 72%);
-      display: flex; flex-direction: column; justify-content: flex-end;
-      padding: 2rem 1.75rem;
-      opacity: 0; transform: translateY(6px);
-      transition: opacity .38s ease, transform .38s ease;
+    /* touch devices: tap to expand */
+    @media (hover: none), (pointer: coarse) {
+      .nx-card.is-open { transform: scale(1.12); z-index: 30; }
+      .nx-card.is-open .nx-card__box { box-shadow: 0 16px 34px rgba(0,0,0,.55); }
+      .nx-card.is-open .nx-card__info { max-height: 220px; opacity: 1; padding: 0 .95rem .3rem; }
     }
-    .proj:hover .proj__overlay { opacity: 1; transform: translateY(0); }
-    .proj--wide .proj__overlay { padding: 2.5rem 2.25rem; }
-
-    .proj__cat { font-size: .58rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--accent-light); margin-bottom: .45rem; }
-    .proj__title {
-      font-family: var(--font-display);
-      font-size: clamp(1rem, 1.8vw, 1.55rem);
-      letter-spacing: -.02em; line-height: 1.15; margin-bottom: .85rem;
-    }
-    .proj--wide .proj__title { font-size: clamp(1.3rem, 2.5vw, 2.1rem); }
-    .proj__desc { font-size: .78rem; line-height: 1.68; color: rgba(245,244,240,.72); margin-bottom: 1.1rem; max-width: 520px; }
-    .proj__links { display: flex; gap: .85rem; align-items: center; }
-    .proj__link {
-      display: inline-flex; align-items: center; gap: .42rem;
-      font-size: .66rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
-      color: var(--text); text-decoration: none; transition: color .28s;
-    }
-    .proj__link:hover { color: var(--accent-light); }
-    .proj__link svg { transition: transform .28s; }
-    .proj__link:hover svg { transform: translateX(3px); }
-    .proj__link--ghost { color: var(--muted); font-weight: 500; font-size: .64rem; }
 
     /* ── FOOTER CTA ── */
     .work-cta {
@@ -246,7 +281,7 @@
     .work-cta__actions { display: flex; align-items: center; justify-content: center; gap: 2rem; flex-wrap: wrap; }
     .btn-primary { display: inline-flex; align-items: center; gap: .7rem; padding: .95rem 2.1rem; background: linear-gradient(135deg, var(--accent), var(--accent-light)); color: #fff; font-size: .76rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; border-radius: 4px; transition: opacity .3s, transform .3s; }
     .btn-primary:hover { opacity: .86; transform: translateY(-2px); }
-    .btn-ghost { display: inline-flex; align-items: center; gap: .5rem; font-size: .76rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--subtle); text-decoration: none; transition: color .3s; }
+    .btn-ghost { display: inline-flex; align-items: center; gap: .5rem; font-size: .76rem; font-weight: 700; letter-spacing: .12em; color: var(--subtle); text-decoration: none; transition: color .3s; }
     .btn-ghost:hover { color: var(--text); }
     .btn-ghost svg { transition: transform .3s; }
     .btn-ghost:hover svg { transform: translateX(4px); }
@@ -273,8 +308,7 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 1100px) {
-      .work-grid { grid-template-columns: repeat(2,1fr); }
-      .proj--wide { grid-column: span 2; }
+      :root { --card-w: var(--card-w-tablet); }
     }
     @media (max-width: 900px) {
       nav { padding: 1.5rem 2rem; }
@@ -282,17 +316,21 @@
       .nav__links, .nav__cta { display: none; }
       .nav__hamburger { display: flex; }
       .page-header { padding: 12rem 2rem 5rem; }
-      .work-filters { padding: 1.25rem 2rem; top: 58px; }
-      .work-grid { padding: 3rem 2rem 6rem; }
+      .genre-bar { padding: 1.25rem 2rem; }
+      .nx-row__head { padding: 0 2rem; }
+      .nx-row__track { padding: 2.75rem 2rem; }
+      .nx-row__viewport::before, .nx-row__viewport::after { width: 2rem; }
     }
     @media (max-width: 640px) {
+      :root { --card-w: var(--card-w-mobile); }
       nav { padding: 1.25rem 1.25rem; }
       .page-header { padding: 9rem 1.25rem 4rem; }
-      .work-filters { padding: 1rem 1.25rem; }
-      .work-grid { grid-template-columns: 1fr; padding: 2rem 1.25rem 5rem; }
-      .proj--wide, .proj--tall { grid-column: span 1; grid-row: span 1; }
-      .proj { min-height: 300px; }
-      .proj__overlay { opacity: 1; transform: none; }
+      .genre-bar { padding: 1rem 1.25rem; }
+      .nx-row__head { padding: 0 1.25rem; }
+      .nx-row__track { padding: 1.6rem 1.25rem; margin: -1.6rem 0; gap: .45rem; }
+      .nx-row__arrow { display: none; }
+      .nx-card__title { font-size: .82rem; }
+      .nx-card__desc { font-size: .68rem; -webkit-line-clamp: 3; }
       .work-cta { padding: 5rem 1.25rem; }
       footer { padding: 2.5rem 1.25rem; }
       .footer__bottom { flex-direction: column; text-align: center; }
@@ -362,236 +400,282 @@
     </div>
   </header>
 
-  <!-- FILTERS -->
-  <div class="work-filters">
-    <span class="filter-label">Filter</span>
-    <button class="filter-btn active" data-filter="all">All Work</button>
-    <button class="filter-btn" data-filter="brand">Brand Identity</button>
-    <button class="filter-btn" data-filter="web">Web Design</button>
-    <button class="filter-btn" data-filter="graphic">Graphic Design</button>
+  <!-- GENRE JUMP BAR -->
+  <div class="genre-bar">
+    <span class="genre-label">Jump to</span>
+    <button class="genre-btn active" data-jump="top">All Work</button>
+    <button class="genre-btn" data-jump="row-brand">Brand Identity</button>
+    <button class="genre-btn" data-jump="row-web">Web Design</button>
+    <button class="genre-btn" data-jump="row-graphic">Graphic Design</button>
   </div>
 
-  <!-- PROJECTS GRID -->
-  <div class="work-grid" id="workGrid">
+  <!-- NETFLIX-STYLE ROWS -->
+  <div class="nx-rows" id="nxRows">
 
     <!-- ════════ BRAND IDENTITY ════════ -->
-    <div class="cat-divider" data-cat="brand">
-      <h2 class="cat-divider__title">Brand <em>Identity</em></h2>
-      <span class="cat-divider__count">06 Projects</span>
-    </div>
+    <section class="nx-row" id="row-brand">
+      <div class="nx-row__head">
+        <h2 class="nx-row__title">Brand <em>Identity</em></h2>
+        <span class="nx-row__count">06 Projects</span>
+      </div>
+      <div class="nx-row__viewport">
+        <button class="nx-row__arrow nx-row__arrow--prev" data-dir="-1" aria-label="Scroll left">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="nx-row__track">
 
-    <!-- 01 · Jean Yarn Haven — WIDE -->
-    <div class="proj proj--wide proj--jean" id="jean" data-category="brand">
-      <img class="proj__img" src="https://images.unsplash.com/photo-1617791160536-598cf32026fb?w=1200&q=85&auto=format&fit=crop" alt="Jean Yarn Haven — Brand Identity" />
-      <div class="proj__strip">
-        <span class="proj__num">01</span>
-        <span class="proj__tag-pill">Brand Identity</span>
-      </div>
-      <div class="proj__overlay">
-        <div class="proj__cat">Brand Identity · E-commerce · 2025</div>
-        <div class="proj__title">Jean Yarn Haven</div>
-        <div class="proj__desc">A complete brand ecosystem for a premium artisanal yarn retailer — logomark, colour palette, packaging, and an e-commerce experience built to convert craft enthusiasts into loyal buyers.</div>
-        <div class="proj__links">
-          <a href="https://exevo-designers.github.io/JeanYarnHaven/" target="_blank" rel="noopener noreferrer" class="proj__link">
-            View Live
-            <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-        </div>
-      </div>
-    </div>
+          <article class="nx-card">
+            <div class="nx-card__box">
+              <div class="nx-card__thumb">
+                <img src="https://images.unsplash.com/photo-1617791160536-598cf32026fb?w=800&q=85&auto=format&fit=crop" alt="Jean Yarn Haven — Brand Identity" loading="lazy" />
+                <span class="nx-card__num">01</span>
+              </div>
+              <div class="nx-card__info">
+                <div class="nx-card__info-top">
+                  <a href="https://exevo-designers.github.io/JeanYarnHaven/" target="_blank" rel="noopener noreferrer" class="nx-card__play" aria-label="View live site">
+                    <svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 2l10 6-10 6V2z"/></svg>
+                  </a>
+                  <span class="nx-card__badge">Brand Identity</span>
+                </div>
+                <div class="nx-card__title">Jean Yarn Haven</div>
+                <div class="nx-card__meta">E-commerce · 2025</div>
+                <p class="nx-card__desc">A complete brand ecosystem for a premium artisanal yarn retailer — logomark, packaging, and a converting e-commerce experience.</p>
+              </div>
+            </div>
+          </article>
 
-    <!-- 02 · Ansa Internet -->
-    <div class="proj proj--ansa" id="ansa" data-category="brand">
-      <img class="proj__img" src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=800&q=85&auto=format&fit=crop" alt="Ansa Internet — Logo & Brand System" />
-      <div class="proj__strip">
-        <span class="proj__num">02</span>
-        <span class="proj__tag-pill">Logo & Brand</span>
-      </div>
-      <div class="proj__overlay">
-        <div class="proj__cat">Logo & Brand System · ISP · 2024</div>
-        <div class="proj__title">Ansa Internet</div>
-        <div class="proj__desc">A strong, modern identity for a new internet service provider — angular geometry, dynamic blue palette, and a complete brand guideline built for speed, trust, and scale.</div>
-        <div class="proj__links">
-          <span class="proj__link proj__link--ghost">Case Study Coming</span>
-        </div>
-      </div>
-    </div>
+          <article class="nx-card">
+            <div class="nx-card__box">
+              <div class="nx-card__thumb">
+                <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=800&q=85&auto=format&fit=crop" alt="Ansa Internet — Logo & Brand System" loading="lazy" />
+                <span class="nx-card__num">02</span>
+              </div>
+              <div class="nx-card__info">
+                <div class="nx-card__info-top">
+                  <span class="nx-card__soon">Case Study Coming</span>
+                  <span class="nx-card__badge">Logo & Brand</span>
+                </div>
+                <div class="nx-card__title">Ansa Internet</div>
+                <div class="nx-card__meta">ISP · 2024</div>
+                <p class="nx-card__desc">A modern identity for a new internet provider — angular geometry, dynamic blue palette, and a full brand guideline.</p>
+              </div>
+            </div>
+          </article>
 
-    <!-- 03 · Blossom Groove Vetcare -->
-    <div class="proj proj--blossom" data-category="brand">
-      <img class="proj__img" src="https://images.unsplash.com/photo-1548767797-d8c844163c4a?w=800&q=85&auto=format&fit=crop" alt="Blossom Groove VetCare — Brand Identity" />
-      <div class="proj__strip">
-        <span class="proj__num">03</span>
-        <span class="proj__tag-pill">Brand Identity</span>
-      </div>
-      <div class="proj__overlay">
-        <div class="proj__cat">Brand Identity · Animal Care · 2025</div>
-        <div class="proj__title">Blossom Groove VetCare</div>
-        <div class="proj__desc">A warm, trustworthy identity for a holistic veterinary clinic — friendly enough for pets and families, professional enough for medical services.</div>
-        <div class="proj__links">
-          <span class="proj__link proj__link--ghost">Case Study Coming</span>
-        </div>
-      </div>
-    </div>
+          <article class="nx-card">
+            <div class="nx-card__box">
+              <div class="nx-card__thumb">
+                <img src="https://images.unsplash.com/photo-1548767797-d8c844163c4a?w=800&q=85&auto=format&fit=crop" alt="Blossom Groove VetCare — Brand Identity" loading="lazy" />
+                <span class="nx-card__num">03</span>
+              </div>
+              <div class="nx-card__info">
+                <div class="nx-card__info-top">
+                  <span class="nx-card__soon">Case Study Coming</span>
+                  <span class="nx-card__badge">Brand Identity</span>
+                </div>
+                <div class="nx-card__title">Blossom Groove VetCare</div>
+                <div class="nx-card__meta">Animal Care · 2025</div>
+                <p class="nx-card__desc">A warm identity for a holistic veterinary clinic — friendly enough for pets, professional enough for medical services.</p>
+              </div>
+            </div>
+          </article>
 
-    <!-- 04 · Miraja Works — WIDE -->
-    <div class="proj proj--wide proj--miraja" data-category="brand">
-      <img class="proj__img" src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&q=85&auto=format&fit=crop" alt="Miraja Works & Supplies International — Brand System" />
-      <div class="proj__strip">
-        <span class="proj__num">04</span>
-        <span class="proj__tag-pill">Brand System</span>
-      </div>
-      <div class="proj__overlay">
-        <div class="proj__cat">Brand Identity · Construction · 2025</div>
-        <div class="proj__title">Miraja Works & Supplies International</div>
-        <div class="proj__desc">A structured, credible identity for a global construction and supplies company — bold geometric logomark, teal + dark palette, and a full stationery and corporate kit built for international markets.</div>
-        <div class="proj__links">
-          <span class="proj__link proj__link--ghost">Case Study Coming</span>
-        </div>
-      </div>
-    </div>
+          <article class="nx-card">
+            <div class="nx-card__box">
+              <div class="nx-card__thumb">
+                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=85&auto=format&fit=crop" alt="Miraja Works & Supplies International — Brand System" loading="lazy" />
+                <span class="nx-card__num">04</span>
+              </div>
+              <div class="nx-card__info">
+                <div class="nx-card__info-top">
+                  <span class="nx-card__soon">Case Study Coming</span>
+                  <span class="nx-card__badge">Brand System</span>
+                </div>
+                <div class="nx-card__title">Miraja Works & Supplies</div>
+                <div class="nx-card__meta">Construction · 2025</div>
+                <p class="nx-card__desc">A structured, credible identity for a global construction supplier — geometric logomark and full corporate kit.</p>
+              </div>
+            </div>
+          </article>
 
-    <!-- 05 · Jordan Medical Clinic -->
-    <div class="proj proj--jordan" data-category="brand">
-      <img class="proj__img" src="https://images.unsplash.com/photo-1631815588090-d1bcbe9a8539?w=800&q=85&auto=format&fit=crop" alt="Jordan Medical Clinic — Brand Identity" />
-      <div class="proj__strip">
-        <span class="proj__num">05</span>
-        <span class="proj__tag-pill">Brand Identity</span>
-      </div>
-      <div class="proj__overlay">
-        <div class="proj__cat">Brand Identity · Healthcare · 2024</div>
-        <div class="proj__title">Jordan Medical Clinic</div>
-        <div class="proj__desc">A clean, approachable medical brand communicating trust and care — green-led palette, modern logo, and print collateral built for a community healthcare provider in Klambogo, Nakuru.</div>
-        <div class="proj__links">
-          <span class="proj__link proj__link--ghost">Case Study Coming</span>
-        </div>
-      </div>
-    </div>
+          <article class="nx-card">
+            <div class="nx-card__box">
+              <div class="nx-card__thumb">
+                <img src="https://images.unsplash.com/photo-1631815588090-d1bcbe9a8539?w=800&q=85&auto=format&fit=crop" alt="Jordan Medical Clinic — Brand Identity" loading="lazy" />
+                <span class="nx-card__num">05</span>
+              </div>
+              <div class="nx-card__info">
+                <div class="nx-card__info-top">
+                  <span class="nx-card__soon">Case Study Coming</span>
+                  <span class="nx-card__badge">Brand Identity</span>
+                </div>
+                <div class="nx-card__title">Jordan Medical Clinic</div>
+                <div class="nx-card__meta">Healthcare · 2024</div>
+                <p class="nx-card__desc">A clean, approachable medical brand — green-led palette, modern logo, and print collateral for a community clinic.</p>
+              </div>
+            </div>
+          </article>
 
-    <!-- 06 · DollaMoja Hub -->
-    <div class="proj proj--dolla" data-category="brand">
-      <img class="proj__img" src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=85&auto=format&fit=crop" alt="DollaMoja Hub Limited — Logo Design" />
-      <div class="proj__strip">
-        <span class="proj__num">06</span>
-        <span class="proj__tag-pill">Logo Design</span>
-      </div>
-      <div class="proj__overlay">
-        <div class="proj__cat">Logo Design · Fintech · 2024</div>
-        <div class="proj__title">DollaMoja Hub Limited</div>
-        <div class="proj__desc">A sharp, modern fintech logo for a digital financial platform — the 'D' letterform communicates momentum and reliability, paired with bold green signalling growth and trust.</div>
-        <div class="proj__links">
-          <span class="proj__link proj__link--ghost">Case Study Coming</span>
+          <article class="nx-card">
+            <div class="nx-card__box">
+              <div class="nx-card__thumb">
+                <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=85&auto=format&fit=crop" alt="DollaMoja Hub Limited — Logo Design" loading="lazy" />
+                <span class="nx-card__num">06</span>
+              </div>
+              <div class="nx-card__info">
+                <div class="nx-card__info-top">
+                  <span class="nx-card__soon">Case Study Coming</span>
+                  <span class="nx-card__badge">Logo Design</span>
+                </div>
+                <div class="nx-card__title">DollaMoja Hub Limited</div>
+                <div class="nx-card__meta">Fintech · 2024</div>
+                <p class="nx-card__desc">A sharp fintech logo — the 'D' letterform signals momentum, paired with bold green for growth and trust.</p>
+              </div>
+            </div>
+          </article>
+
         </div>
+        <button class="nx-row__arrow nx-row__arrow--next" data-dir="1" aria-label="Scroll right">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
-    </div>
+    </section>
 
     <!-- ════════ WEB DESIGN ════════ -->
-    <div class="cat-divider" data-cat="web">
-      <h2 class="cat-divider__title">Web <em>Design</em></h2>
-      <span class="cat-divider__count">03 Projects</span>
-    </div>
+    <section class="nx-row" id="row-web">
+      <div class="nx-row__head">
+        <h2 class="nx-row__title">Web <em>Design</em></h2>
+        <span class="nx-row__count">03 Projects</span>
+      </div>
+      <div class="nx-row__viewport">
+        <button class="nx-row__arrow nx-row__arrow--prev" data-dir="-1" aria-label="Scroll left">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="nx-row__track">
 
-    <!-- 07 · Learn German with Lewisky — WIDE -->
-    <div class="proj proj--wide proj--lewisky" id="lewisky" data-category="web">
-      <img class="proj__img" src="https://images.unsplash.com/photo-1434030216411-0b793f4b6f71?w=1200&q=85&auto=format&fit=crop" alt="Learn German with Lewisky — Web Design" />
-      <div class="proj__strip">
-        <span class="proj__num">07</span>
-        <span class="proj__tag-pill">Web Design</span>
-      </div>
-      <div class="proj__overlay">
-        <div class="proj__cat">Web Design · Education · 2025</div>
-        <div class="proj__title">Learn German with Lewisky</div>
-        <div class="proj__desc">A bold, energetic digital identity for a language learning brand — designed to inspire confidence, reduce the intimidation of learning German, and convert curious visitors into enrolled students.</div>
-        <div class="proj__links">
-          <a href="https://exevo-designers.github.io/LearnGermanWithLewisky/" target="_blank" rel="noopener noreferrer" class="proj__link">
-            View Live
-            <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-        </div>
-      </div>
-    </div>
+          <article class="nx-card">
+            <div class="nx-card__box">
+              <div class="nx-card__thumb">
+                <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b6f71?w=800&q=85&auto=format&fit=crop" alt="Learn German with Lewisky — Web Design" loading="lazy" />
+                <span class="nx-card__num">07</span>
+              </div>
+              <div class="nx-card__info">
+                <div class="nx-card__info-top">
+                  <a href="https://exevo-designers.github.io/LearnGermanWithLewisky/" target="_blank" rel="noopener noreferrer" class="nx-card__play" aria-label="View live site">
+                    <svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 2l10 6-10 6V2z"/></svg>
+                  </a>
+                  <span class="nx-card__badge">Web Design</span>
+                </div>
+                <div class="nx-card__title">Learn German with Lewisky</div>
+                <div class="nx-card__meta">Education · 2025</div>
+                <p class="nx-card__desc">A bold, energetic digital identity for a language brand — built to reduce intimidation and convert visitors into students.</p>
+              </div>
+            </div>
+          </article>
 
-    <!-- 08 · Wambo Ashley — TALL -->
-    <div class="proj proj--tall proj--wambo" id="wambo" data-category="web">
-      <img class="proj__img" src="https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=800&q=85&auto=format&fit=crop&crop=top" alt="Wambo Ashley — Personal Brand" />
-      <div class="proj__strip">
-        <span class="proj__num">08</span>
-        <span class="proj__tag-pill">Personal Brand</span>
-      </div>
-      <div class="proj__overlay">
-        <div class="proj__cat">Influencer · Personal Brand · 2025</div>
-        <div class="proj__title">Wambo Ashley</div>
-        <div class="proj__desc">A polished digital creator identity designed to highlight influence, personality, and premium content creation. Built to command attention and monetise an audience.</div>
-        <div class="proj__links">
-          <a href="https://exevo-designers.github.io/WamboAshley/" target="_blank" rel="noopener noreferrer" class="proj__link">
-            View Live
-            <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-        </div>
-      </div>
-    </div>
+          <article class="nx-card">
+            <div class="nx-card__box">
+              <div class="nx-card__thumb">
+                <img src="https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=800&q=85&auto=format&fit=crop&crop=top" alt="Wambo Ashley — Personal Brand" loading="lazy" />
+                <span class="nx-card__num">08</span>
+              </div>
+              <div class="nx-card__info">
+                <div class="nx-card__info-top">
+                  <a href="https://exevo-designers.github.io/WamboAshley/" target="_blank" rel="noopener noreferrer" class="nx-card__play" aria-label="View live site">
+                    <svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 2l10 6-10 6V2z"/></svg>
+                  </a>
+                  <span class="nx-card__badge">Personal Brand</span>
+                </div>
+                <div class="nx-card__title">Wambo Ashley</div>
+                <div class="nx-card__meta">Influencer · 2025</div>
+                <p class="nx-card__desc">A polished creator identity built to command attention, highlight personality, and monetise an audience.</p>
+              </div>
+            </div>
+          </article>
 
-    <!-- 09 · The Brand Cyber -->
-    <div class="proj proj--cyber" id="cyber" data-category="web">
-      <img class="proj__img" src="https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=800&q=85&auto=format&fit=crop" alt="The Brand Cyber & Stationery — Brand Identity" />
-      <div class="proj__strip">
-        <span class="proj__num">09</span>
-        <span class="proj__tag-pill">Brand & Print</span>
-      </div>
-      <div class="proj__overlay">
-        <div class="proj__cat">Brand Identity · Stationery · 2025</div>
-        <div class="proj__title">The Brand Cyber & Stationery</div>
-        <div class="proj__desc">A futuristic visual system pairing bold typography with sharp stationery design assets — business cards, letterheads, and a full print suite.</div>
-        <div class="proj__links">
-          <a href="https://exevo-designers.github.io/TheBrandCyberandStationery/" target="_blank" rel="noopener noreferrer" class="proj__link">
-            View Live
-            <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
+          <article class="nx-card">
+            <div class="nx-card__box">
+              <div class="nx-card__thumb">
+                <img src="https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=800&q=85&auto=format&fit=crop" alt="The Brand Cyber & Stationery — Brand Identity" loading="lazy" />
+                <span class="nx-card__num">09</span>
+              </div>
+              <div class="nx-card__info">
+                <div class="nx-card__info-top">
+                  <a href="https://exevo-designers.github.io/TheBrandCyberandStationery/" target="_blank" rel="noopener noreferrer" class="nx-card__play" aria-label="View live site">
+                    <svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 2l10 6-10 6V2z"/></svg>
+                  </a>
+                  <span class="nx-card__badge">Brand & Print</span>
+                </div>
+                <div class="nx-card__title">The Brand Cyber & Stationery</div>
+                <div class="nx-card__meta">Stationery · 2025</div>
+                <p class="nx-card__desc">A futuristic visual system pairing bold typography with sharp stationery — cards, letterheads, and a full print suite.</p>
+              </div>
+            </div>
+          </article>
+
         </div>
+        <button class="nx-row__arrow nx-row__arrow--next" data-dir="1" aria-label="Scroll right">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
-    </div>
+    </section>
 
     <!-- ════════ GRAPHIC DESIGN ════════ -->
-    <div class="cat-divider" data-cat="graphic">
-      <h2 class="cat-divider__title">Graphic <em>Design</em></h2>
-      <span class="cat-divider__count">02 Projects</span>
-    </div>
-
-    <!-- 10 · Lokiboss Cleaners — WIDE -->
-    <div class="proj proj--wide proj--lokiboss" data-category="graphic">
-      <img class="proj__img" src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=1200&q=85&auto=format&fit=crop" alt="Lokiboss Cleaners — Social Branding" />
-      <div class="proj__strip">
-        <span class="proj__num">10</span>
-        <span class="proj__tag-pill">Social Branding</span>
+    <section class="nx-row" id="row-graphic">
+      <div class="nx-row__head">
+        <h2 class="nx-row__title">Graphic <em>Design</em></h2>
+        <span class="nx-row__count">02 Projects</span>
       </div>
-      <div class="proj__overlay">
-        <div class="proj__cat">Social Media · Home Care · 2025</div>
-        <div class="proj__title">Lokiboss Cleaners</div>
-        <div class="proj__desc">A vibrant social media brand for a home cleaning service — ownable visual language, campaign flyers, and a promotional kit that communicates professionalism and care.</div>
-        <div class="proj__links">
-          <span class="proj__link proj__link--ghost">Case Study Coming</span>
+      <div class="nx-row__viewport">
+        <button class="nx-row__arrow nx-row__arrow--prev" data-dir="-1" aria-label="Scroll left">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="nx-row__track">
+
+          <article class="nx-card">
+            <div class="nx-card__box">
+              <div class="nx-card__thumb">
+                <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&q=85&auto=format&fit=crop" alt="Lokiboss Cleaners — Social Branding" loading="lazy" />
+                <span class="nx-card__num">10</span>
+              </div>
+              <div class="nx-card__info">
+                <div class="nx-card__info-top">
+                  <span class="nx-card__soon">Case Study Coming</span>
+                  <span class="nx-card__badge">Social Branding</span>
+                </div>
+                <div class="nx-card__title">Lokiboss Cleaners</div>
+                <div class="nx-card__meta">Home Care · 2025</div>
+                <p class="nx-card__desc">A vibrant social brand for a home cleaning service — flyers and a promotional kit that read professional and caring.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="nx-card">
+            <div class="nx-card__box">
+              <div class="nx-card__thumb">
+                <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800&q=85&auto=format&fit=crop" alt="Grace Esther Beauty Shop — Print Design" loading="lazy" />
+                <span class="nx-card__num">11</span>
+              </div>
+              <div class="nx-card__info">
+                <div class="nx-card__info-top">
+                  <span class="nx-card__soon">Case Study Coming</span>
+                  <span class="nx-card__badge">Print Design</span>
+                </div>
+                <div class="nx-card__title">Grace Esther Beauty Shop</div>
+                <div class="nx-card__meta">Beauty · 2025</div>
+                <p class="nx-card__desc">Promotional flyers and price-list design for a beauty salon — striking photography and a layout that pulls in walk-ins.</p>
+              </div>
+            </div>
+          </article>
+
         </div>
+        <button class="nx-row__arrow nx-row__arrow--next" data-dir="1" aria-label="Scroll right">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
-    </div>
+    </section>
 
-    <!-- 11 · Grace Esther Beauty -->
-    <div class="proj proj--grace" data-category="graphic">
-      <img class="proj__img" src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800&q=85&auto=format&fit=crop" alt="Grace Esther Beauty Shop — Print Design" />
-      <div class="proj__strip">
-        <span class="proj__num">11</span>
-        <span class="proj__tag-pill">Print Design</span>
-      </div>
-      <div class="proj__overlay">
-        <div class="proj__cat">Print Design · Beauty · 2025</div>
-        <div class="proj__title">Grace Esther Beauty Shop</div>
-        <div class="proj__desc">Promotional flyers and price list design for a beauty salon — striking photography integration, clear service layout, and a visual identity that pulls in walk-in clients.</div>
-        <div class="proj__links">
-          <span class="proj__link proj__link--ghost">Case Study Coming</span>
-        </div>
-      </div>
-    </div>
-
-  </div><!-- /work-grid -->
+  </div><!-- /nx-rows -->
 
   <!-- FOOTER CTA -->
   <div class="work-cta">
@@ -643,7 +727,7 @@
       ring.style.transform = `translate(calc(${rx}px - 50%), calc(${ry}px - 50%))`;
       requestAnimationFrame(tick);
     })();
-    document.querySelectorAll('a,button,.proj,.filter-btn,.back-to-top').forEach(el => {
+    document.querySelectorAll('a,button,.nx-card,.genre-btn,.back-to-top').forEach(el => {
       el.addEventListener('mouseenter', () => cursor.classList.add('cursor--hover'));
       el.addEventListener('mouseleave', () => cursor.classList.remove('cursor--hover'));
     });
@@ -674,31 +758,55 @@
       hb.querySelectorAll('span').forEach(s=>{s.style.transform='';s.style.opacity='';});
     }));
 
-    /* ── FILTER ── */
-    const filterBtns  = document.querySelectorAll('.filter-btn');
-    const projs       = document.querySelectorAll('.proj');
-    const catDividers = document.querySelectorAll('.cat-divider');
-
-    filterBtns.forEach(btn => {
+    /* ── GENRE JUMP ── */
+    const genreBtns = document.querySelectorAll('.genre-btn');
+    genreBtns.forEach(btn => {
       btn.addEventListener('click', () => {
-        filterBtns.forEach(b => b.classList.remove('active'));
+        genreBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        const f = btn.dataset.filter;
-
-        projs.forEach(p => {
-          if (f === 'all' || p.dataset.category === f) {
-            p.classList.remove('hidden');
-            gsap.fromTo(p, {opacity:0, y:16}, {opacity:1, y:0, duration:.42, ease:'power2.out'});
-          } else {
-            p.classList.add('hidden');
-          }
-        });
-
-        catDividers.forEach(div => {
-          div.style.display = (f === 'all' || div.dataset.cat === f) ? '' : 'none';
-        });
+        const target = btn.dataset.jump;
+        if (target === 'top') {
+          document.getElementById('nxRows').scrollIntoView({behavior:'smooth', block:'start'});
+        } else {
+          document.getElementById(target).scrollIntoView({behavior:'smooth', block:'start'});
+        }
       });
     });
+
+    /* ── ROW ARROW SCROLL ── */
+    document.querySelectorAll('.nx-row__arrow').forEach(arrow => {
+      arrow.addEventListener('click', () => {
+        const track = arrow.parentElement.querySelector('.nx-row__track');
+        const dir = parseInt(arrow.dataset.dir, 10);
+        const amount = track.clientWidth * 0.85 * dir;
+        track.scrollBy({ left: amount, behavior: 'smooth' });
+      });
+    });
+
+    /* ── TOUCH: TAP TO EXPAND CARD ── */
+    const isTouch = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+    if (isTouch) {
+      document.querySelectorAll('.nx-card').forEach(card => {
+        card.addEventListener('click', (e) => {
+          const wasOpen = card.classList.contains('is-open');
+          document.querySelectorAll('.nx-card.is-open').forEach(c => c.classList.remove('is-open'));
+          if (!wasOpen) {
+            card.classList.add('is-open');
+            // if the tap landed on a real link, let it navigate
+            if (e.target.closest('a')) return;
+          } else if (e.target.closest('a')) {
+            return;
+          } else {
+            e.preventDefault();
+          }
+        });
+      });
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.nx-card')) {
+          document.querySelectorAll('.nx-card.is-open').forEach(c => c.classList.remove('is-open'));
+        }
+      });
+    }
 
     /* ── HASH SCROLL (from index.html links) ── */
     const hash = location.hash.replace('#','');
@@ -716,15 +824,9 @@
       gsap.from(el, {y:20, opacity:0, duration:.7, ease:'power3.out', delay:.55+i*.1});
     });
 
-    gsap.utils.toArray('.proj').forEach((el, i) => {
+    gsap.utils.toArray('.nx-row').forEach(el => {
       gsap.from(el, {
-        y:55, opacity:0, duration:.85, ease:'power3.out',
-        scrollTrigger: { trigger:el, start:'top 90%' }
-      });
-    });
-
-    gsap.utils.toArray('.cat-divider').forEach(el => {
-      gsap.from(el, {x:-30, opacity:0, duration:.7, ease:'power3.out',
+        y:40, opacity:0, duration:.8, ease:'power3.out',
         scrollTrigger: { trigger:el, start:'top 88%' }
       });
     });
