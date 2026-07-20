@@ -545,6 +545,38 @@
     @media (max-width: 1100px) { .team__grid { grid-template-columns: repeat(2,1fr); } }
     @media (max-width: 640px) { #team { padding: 5rem 1.25rem; } .team__grid { grid-template-columns: 1fr; } }
 
+    /* ── generic content card (path-picker / audience / network) ── */
+    .content-card__title { font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; letter-spacing: -.01em; margin-bottom: .6rem; }
+    .content-card__desc { font-size: .82rem; line-height: 1.7; color: var(--muted); margin-bottom: 1.4rem; }
+
+    /* ── START HERE (path picker) ── */
+    #start-here { padding: 7rem 3rem; border-top: 1px solid var(--border); }
+    .path__intro { max-width: 620px; margin-bottom: 3.5rem; }
+    .path__intro p { font-size: .95rem; line-height: 1.75; color: var(--subtle); margin-top: 1rem; }
+    .path__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; }
+    @media (max-width: 640px) { #start-here { padding: 5rem 1.25rem; } }
+
+    /* ── AUDIENCE (hire us for) ── */
+    #audience { padding: 7rem 3rem; border-top: 1px solid var(--border); }
+    .audience__intro { max-width: 700px; margin-bottom: 3.5rem; }
+    .audience__intro p { font-size: .95rem; line-height: 1.75; color: var(--subtle); margin-top: 1rem; margin-bottom: 2rem; }
+    @media (max-width: 640px) { #audience { padding: 5rem 1.25rem; } }
+
+    /* ── VISION (future direction, numbered) ── */
+    #vision { padding: 7rem 3rem; border-top: 1px solid var(--border); overflow: hidden; }
+    .vision__intro { max-width: 680px; margin-bottom: 3.5rem; }
+    .vision__intro p { font-size: .95rem; line-height: 1.75; color: var(--subtle); margin-top: 1rem; }
+    .vision__track { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; border-top: 1px solid var(--border); }
+    @media (max-width: 900px) { .vision__track { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 640px) { #vision { padding: 5rem 1.25rem; } .vision__track { grid-template-columns: 1fr; } }
+
+    /* ── NETWORK (one studio, many disciplines) ── */
+    #network { padding: 7rem 3rem; border-top: 1px solid var(--border); }
+    .network__intro { max-width: 680px; margin-bottom: 3.5rem; }
+    .network__intro p { font-size: .95rem; line-height: 1.75; color: var(--subtle); margin-top: 1rem; }
+    .network__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; }
+    @media (max-width: 640px) { #network { padding: 5rem 1.25rem; } }
+
     /* ── SERVICES ── */
     #services { padding: 8rem 3rem; border-top: 1px solid var(--border); }
     .services__intro { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-bottom: 6rem; align-items: end; }
@@ -831,6 +863,42 @@
     </div>
   </div>
 
+  <!-- START HERE -->
+  <section id="start-here">
+    <div class="path__intro">
+      <div class="section-label">Start Here</div>
+      <h2 class="section-header">Where Do You Want<br>To <em>Begin?</em></h2>
+      <p>Whatever brought you to Exevo, there's a clear next step. Pick what fits.</p>
+    </div>
+    <div class="path__grid">
+      <div class="team-card">
+        <h3 class="content-card__title">I want to hire you</h3>
+        <p class="content-card__desc">Start with your project brief and we'll scope the right package for your brand.</p>
+        <a href="/inquiry" class="team-card__portfolio">Begin <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+      <div class="team-card">
+        <h3 class="content-card__title">I want to see your work</h3>
+        <p class="content-card__desc">Browse recent branding, web, and campaign work from real Kenyan businesses.</p>
+        <a href="/work" class="team-card__portfolio">Begin <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+      <div class="team-card">
+        <h3 class="content-card__title">I want to explore your services</h3>
+        <p class="content-card__desc">See everything we offer, from brand identity to full digital marketing.</p>
+        <a href="#services" class="team-card__portfolio">Begin <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+      <div class="team-card">
+        <h3 class="content-card__title">I want to meet the team</h3>
+        <p class="content-card__desc">Get to know the designers, strategists, and creatives behind Exevo.</p>
+        <a href="#team" class="team-card__portfolio">Begin <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+      <div class="team-card">
+        <h3 class="content-card__title">I want to know your story</h3>
+        <p class="content-card__desc">Learn how Exevo started and what we believe about design that works.</p>
+        <a href="#about" class="team-card__portfolio">Begin <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </div>
+  </section>
+
   <!-- WORK -->
   <section id="work">
     <div class="work__intro">
@@ -902,6 +970,37 @@
   </section>
 
   <!-- CLIENT LOGOS -->
+  <!-- AUDIENCE -->
+  <section id="audience">
+    <div class="audience__intro">
+      <div class="section-label">Who We Work With</div>
+      <h2 class="section-header">Creative Direction That Turns Ideas Into <em>Brands People Trust.</em></h2>
+      <p>Bring your business, startup, institution, or personal brand. We shape the identity, digital presence, and content direction so the work feels clear, current, and ready to grow.</p>
+      <a href="/inquiry" class="btn-primary">
+        Start a Project
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <div class="team__grid">
+      <div class="team-card">
+        <h3 class="content-card__title">For Brands &amp; Businesses</h3>
+        <p class="content-card__desc">Identity systems, packaging, social media design, and brand storytelling for established businesses.</p>
+      </div>
+      <div class="team-card">
+        <h3 class="content-card__title">For Startups &amp; Founders</h3>
+        <p class="content-card__desc">Logo, brand narrative, pitch-ready visuals, and website concepts for early-stage teams.</p>
+      </div>
+      <div class="team-card">
+        <h3 class="content-card__title">For Institutions</h3>
+        <p class="content-card__desc">Schools, health facilities, and NGOs — clear, professional identity systems built for trust.</p>
+      </div>
+      <div class="team-card">
+        <h3 class="content-card__title">For Creators &amp; Influencers</h3>
+        <p class="content-card__desc">Personal branding, content direction, and visual systems for individual creators and public figures.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- ABOUT -->
   <section id="about">
     <div class="about__grid">
@@ -1125,6 +1224,73 @@
         <div class="service-item__num">06</div>
         <div class="service-item__name">Creative Consulting</div>
         <svg class="service-item__arrow" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H7M17 7v10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISION -->
+  <section id="vision">
+    <div class="vision__intro">
+      <div class="section-label">Where We're Headed</div>
+      <h2 class="section-header">We're Not Just Building Brands. <em>We're Building A Network.</em></h2>
+      <p>Exevo is growing from a design studio into a connected creative network — for clients, and for designers.</p>
+    </div>
+    <div class="vision__track">
+      <div class="process__step">
+        <div class="process__step-num">01</div>
+        <div class="process__step-title">Brand Systems</div>
+        <p class="process__step-desc">Full identity systems, guidelines, and brand documentation built to scale with your business.</p>
+      </div>
+      <div class="process__step">
+        <div class="process__step-num">02</div>
+        <div class="process__step-title">Digital Products</div>
+        <p class="process__step-desc">Websites, web apps, and digital experiences engineered as much as they're designed.</p>
+      </div>
+      <div class="process__step">
+        <div class="process__step-num">03</div>
+        <div class="process__step-title">Creative Education</div>
+        <p class="process__step-desc">Mentorship and training for upcoming Kenyan designers through the Exevo Designers Network.</p>
+      </div>
+      <div class="process__step">
+        <div class="process__step-num">04</div>
+        <div class="process__step-title">Creative Community</div>
+        <p class="process__step-desc">A growing network of designers, strategists, and creators collaborating across East Africa.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- NETWORK -->
+  <section id="network">
+    <div class="network__intro">
+      <div class="section-label">The Exevo Network</div>
+      <h2 class="section-header">One Studio, <em>Many Disciplines.</em></h2>
+      <p>The work connects through brand strategy, design systems, motion, and community — all under one roof.</p>
+    </div>
+    <div class="network__grid">
+      <div class="team-card">
+        <h3 class="content-card__title">Exevo Design</h3>
+        <p class="content-card__desc">Brand identity, logos, print, and visual systems.</p>
+        <a href="#services" class="team-card__portfolio">Explore <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+      <div class="team-card">
+        <h3 class="content-card__title">Exevo Digital</h3>
+        <p class="content-card__desc">Websites, web apps, and digital product design.</p>
+        <a href="#services" class="team-card__portfolio">Explore <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+      <div class="team-card">
+        <h3 class="content-card__title">Exevo Motion</h3>
+        <p class="content-card__desc">Video edits, motion graphics, and campaign visuals.</p>
+        <a href="https://youtube.com/@exevosounds?si=DmWMNShh0QISsQHG" target="_blank" rel="noopener noreferrer" class="team-card__portfolio">Explore <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+      <div class="team-card">
+        <h3 class="content-card__title">Exevo Marketing</h3>
+        <p class="content-card__desc">Social media, digital campaigns, and content strategy.</p>
+        <a href="#services" class="team-card__portfolio">Explore <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+      <div class="team-card">
+        <h3 class="content-card__title">Exevo Network</h3>
+        <p class="content-card__desc">A growing community of designers and creatives across Kenya.</p>
+        <a href="#team" class="team-card__portfolio">Explore <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </div>
     </div>
   </section>
