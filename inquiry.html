@@ -8,7 +8,7 @@
   <link rel="icon" type="image/png" href="ExevoLogo/exevo-logo-profile(2).png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -22,6 +22,7 @@
       --accent: #93278F;
       --accent-light: #C15FB9;
       --green: #10B981;
+      --red: #F87171;
       --border: rgba(245,244,240,0.07);
       --border-hover: rgba(193,95,185,0.35);
       --font-display: 'Inter', system-ui, sans-serif;
@@ -40,7 +41,6 @@
       overflow-x: hidden;
     }
 
-    /* ── NOISE ── */
     body::before {
       content: '';
       position: fixed; inset: 0; z-index: 0; pointer-events: none;
@@ -48,7 +48,7 @@
       opacity: 0.28;
     }
 
-    /* ── NAV — matches index.html / work.html pill, sits in normal flow ── */
+    /* ── NAV ── */
     .nav-wrap { position: relative; z-index: 50; flex-shrink: 0; }
     nav {
       margin: 1.25rem 1.75rem;
@@ -60,8 +60,13 @@
       -webkit-backdrop-filter: blur(22px) saturate(160%);
       border: 1px solid rgba(147,39,143,.4);
       box-shadow: 0 8px 32px rgba(147,39,143,.35), inset 0 1px 0 rgba(255,255,255,.08);
+      animation: navFloat 6s ease-in-out infinite;
     }
-    .nav__logo { display: flex; align-items: center; height: 26px; max-width: 130px; text-decoration: none; }
+    @keyframes navFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+    .nav__logo { display: flex; align-items: center; height: 28px; max-width: 140px; text-decoration: none; }
     .nav__logo img { height: 100%; width: auto; max-width: 100%; object-fit: contain; filter: brightness(0) invert(1); }
     .nav__home {
       display: flex; align-items: center; justify-content: center;
@@ -89,8 +94,6 @@
       padding: 2rem 2.25rem;
       overflow: hidden;
     }
-
-    /* Decorative gradient orb */
     .sidebar::before {
       content: '';
       position: absolute; bottom: -120px; left: -80px;
@@ -98,14 +101,12 @@
       background: radial-gradient(circle, rgba(147,39,143,.18) 0%, transparent 70%);
       pointer-events: none;
     }
-
     .sidebar__eyebrow {
       font-size: .6rem; font-weight: 600; letter-spacing: .26em; text-transform: uppercase;
       color: var(--accent-light); margin-bottom: .75rem;
       display: flex; align-items: center; gap: .6rem;
     }
     .sidebar__eyebrow::before { content: ''; width: 20px; height: 1px; background: var(--accent-light); flex-shrink: 0; }
-
     .sidebar__heading {
       font-family: var(--font-display);
       font-size: clamp(1.5rem, 2.2vw, 2.05rem);
@@ -113,13 +114,10 @@
       margin-bottom: 1rem;
     }
     .sidebar__heading em { font-style: italic; color: var(--subtle); }
-
     .sidebar__desc {
       font-size: .78rem; line-height: 1.68;
       color: var(--subtle); margin-bottom: 1.5rem;
     }
-
-    /* Contact quick-links */
     .sidebar__contacts { display: flex; flex-direction: column; gap: .55rem; }
     .sidebar__contact {
       display: flex; align-items: center; gap: .8rem;
@@ -139,8 +137,6 @@
     }
     .sidebar__contact-label { font-size: .58rem; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: .1rem; }
     .sidebar__contact-value { font-size: .76rem; font-weight: 500; }
-
-    /* Response badge */
     .sidebar__response {
       display: flex; align-items: flex-start; gap: .7rem;
       margin-top: auto; padding: .85rem 1rem;
@@ -157,7 +153,7 @@
     .sidebar__response p { font-size: .72rem; line-height: 1.6; color: var(--subtle); }
     .sidebar__response strong { color: var(--text); font-weight: 600; }
 
-    /* ── RIGHT: FORM AREA ── */
+    /* ── FORM AREA ── */
     .form-area {
       display: flex; flex-direction: column;
       justify-content: center;
@@ -165,7 +161,6 @@
       min-height: 100vh;
     }
 
-    /* Step progress */
     .progress {
       display: flex; align-items: center;
       gap: 0; margin-bottom: 1.75rem;
@@ -196,13 +191,12 @@
       background: rgba(16,185,129,.15); border-color: var(--green); color: var(--green);
     }
     .progress__label {
-      font-size: .56rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+      font-size: .58rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
       color: var(--muted); transition: color .3s; white-space: nowrap;
     }
     .progress__step--active .progress__label { color: var(--text); }
     .progress__step--done .progress__label { color: var(--green); }
 
-    /* Step panels */
     .steps-wrap { flex: 1; display: flex; flex-direction: column; justify-content: center; max-height: 100%; }
     .step {
       display: none; animation: fadeUp .38s cubic-bezier(.25,.46,.45,.94) both;
@@ -226,7 +220,6 @@
       margin-bottom: 1.25rem; max-width: 560px;
     }
 
-    /* Inputs */
     .field { margin-bottom: 1rem; }
     .field__label {
       display: block; font-size: .6rem; font-weight: 600;
@@ -252,7 +245,10 @@
       border-color: rgba(147,39,143,.55);
       box-shadow: 0 0 0 3px rgba(147,39,143,.1);
     }
-    .field__textarea { resize: vertical; min-height: 100px; line-height: 1.65; }
+    .field__input--error,
+    .field__textarea--error,
+    .field__select--error { border-color: rgba(248,113,113,.6); }
+    .field__textarea { resize: vertical; min-height: 110px; line-height: 1.65; }
     .field__select option { background: #0f0f12; }
     .field__row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
     .field__char {
@@ -260,78 +256,92 @@
       margin-top: .3rem; transition: color .25s;
     }
     .field__char--warn { color: var(--accent-light); }
+    .field__char--bad { color: var(--red); }
 
-    /* Error */
-    .field__error { font-size: .7rem; color: #F87171; min-height: .9rem; margin-top: .2rem; }
+    .field__error { font-size: .7rem; color: var(--red); min-height: .9rem; margin-top: .2rem; }
 
-    /* ── BUDGET WIDGET ── */
-    .budget-box {
-      background: #0f0f12; border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 1.25rem;
+    /* ── SERVICE CARDS ── */
+    .service-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: .6rem;
+      margin-bottom: 1.1rem;
+    }
+    .service-card {
+      padding: .75rem .6rem;
+      border: 1px solid var(--border); border-radius: var(--radius);
+      background: #0f0f12; cursor: pointer; text-align: left;
+      transition: border-color .22s, background .22s;
+    }
+    .service-card:hover { border-color: var(--border-hover); }
+    .service-card--active {
+      border-color: rgba(193,95,185,.6);
+      background: rgba(147,39,143,.08);
+    }
+    .service-card__name { font-size: .72rem; font-weight: 600; line-height: 1.3; }
+    .service-card__from { font-size: .6rem; color: var(--muted); margin-top: .25rem; }
+    .service-card--active .service-card__from { color: var(--accent-light); }
+
+    /* ── TIER CARDS ── */
+    .tier-wrap { display: none; }
+    .tier-wrap--show { display: block; animation: fadeUp .3s ease both; }
+    .tier-grid { display: flex; flex-direction: column; gap: .55rem; margin-bottom: 1rem; }
+    .tier-card {
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      padding: .9rem 1.1rem;
+      border: 1px solid var(--border); border-radius: var(--radius);
+      background: #0f0f12; cursor: pointer;
+      transition: border-color .22s, background .22s;
+    }
+    .tier-card:hover { border-color: var(--border-hover); }
+    .tier-card--active {
+      border-color: rgba(193,95,185,.65);
+      background: rgba(147,39,143,.09);
+      box-shadow: 0 0 0 3px rgba(147,39,143,.08);
+    }
+    .tier-card__radio {
+      width: 16px; height: 16px; border-radius: 50%;
+      border: 1px solid var(--border-hover); flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .tier-card--active .tier-card__radio { border-color: var(--accent-light); }
+    .tier-card__radio::after {
+      content: ''; width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent-light); transform: scale(0); transition: transform .18s;
+    }
+    .tier-card--active .tier-card__radio::after { transform: scale(1); }
+    .tier-card__body { flex: 1; }
+    .tier-card__name { font-size: .82rem; font-weight: 600; }
+    .tier-card__desc { font-size: .68rem; color: var(--subtle); margin-top: .15rem; line-height: 1.5; }
+    .tier-card__price { font-family: var(--font-display); font-size: .82rem; letter-spacing: -.02em; white-space: nowrap; flex-shrink: 0; }
+
+    .estimate-box {
+      display: none;
+      align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+      padding: 1rem 1.25rem;
+      border: 1px solid rgba(16,185,129,.22);
+      background: rgba(16,185,129,.05);
+      border-radius: var(--radius);
       margin-bottom: 1rem;
     }
-    .budget-box__top {
-      display: flex; align-items: flex-start; justify-content: space-between;
-      flex-wrap: wrap; gap: .85rem; margin-bottom: 1rem;
-    }
-    .budget-box__amount {
-      font-family: var(--font-display);
-      font-size: clamp(1.5rem, 3vw, 2.2rem);
-      letter-spacing: -.04em; line-height: 1;
-    }
-    .budget-box__currencies {
-      display: flex; flex-wrap: wrap; gap: 4px;
-    }
-    .currency-btn {
-      padding: .26rem .6rem;
-      background: transparent; border: 1px solid var(--border);
-      border-radius: 100px;
-      font-family: var(--font-body); font-size: .58rem; font-weight: 700;
-      letter-spacing: .1em; color: var(--muted); cursor: pointer;
-      transition: all .22s;
-    }
-    .currency-btn:hover,
-    .currency-btn--active {
-      background: rgba(147,39,143,.15);
-      border-color: rgba(193,95,185,.5);
-      color: var(--accent-light);
-    }
-    .budget-box__slider {
-      width: 100%; -webkit-appearance: none; appearance: none;
-      height: 3px; border-radius: 2px; outline: none; cursor: pointer;
-      background: linear-gradient(to right, var(--accent) 0%, var(--accent) var(--pct, 30%), var(--border) var(--pct, 30%));
-    }
-    .budget-box__slider::-webkit-slider-thumb {
-      -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%;
-      background: var(--accent-light); border: 2px solid var(--bg);
-      box-shadow: 0 0 8px rgba(193,95,185,.5); cursor: pointer;
-      transition: transform .2s;
-    }
-    .budget-box__slider::-webkit-slider-thumb:hover { transform: scale(1.2); }
-    .budget-box__slider::-moz-range-thumb {
-      width: 18px; height: 18px; border-radius: 50%;
-      background: var(--accent-light); border: 2px solid var(--bg); cursor: pointer;
-    }
-    .budget-box__ticks {
-      display: flex; justify-content: space-between; margin-top: .55rem;
-    }
-    .budget-box__tick { font-size: .56rem; font-weight: 600; color: var(--muted); }
-    .budget-box__conversions {
-      display: grid; grid-template-columns: repeat(5, 1fr);
-      gap: .45rem; margin-top: 1rem; padding-top: 1rem;
-      border-top: 1px solid var(--border);
-    }
-    .budget-conv {
-      text-align: center; padding: .5rem .35rem;
-      border: 1px solid var(--border); border-radius: var(--radius);
-      background: rgba(255,255,255,.02); transition: border-color .2s;
-    }
-    .budget-conv:hover { border-color: rgba(193,95,185,.2); }
-    .budget-conv__amount { font-family: var(--font-display); font-size: .86rem; letter-spacing: -.02em; line-height: 1; }
-    .budget-conv__cur { font-size: .54rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin-top: .22rem; }
-    .budget-conv__flag { font-size: .78rem; margin-top: .12rem; }
+    .estimate-box--show { display: flex; animation: fadeUp .3s ease both; }
+    .estimate-box__label { font-size: .6rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--subtle); }
+    .estimate-box__value { font-family: var(--font-display); font-size: clamp(1.1rem,2vw,1.5rem); letter-spacing: -.03em; color: var(--green); margin-top: .2rem; }
+    .estimate-box__note { font-size: .68rem; color: var(--muted); max-width: 220px; line-height: 1.5; }
 
-    /* ── NAV BUTTONS ── */
+    /* Timeline pills */
+    .timeline-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: .55rem; }
+    .timeline-pill {
+      padding: .75rem .5rem; text-align: center;
+      border: 1px solid var(--border); border-radius: var(--radius);
+      background: #0f0f12; cursor: pointer; font-size: .68rem; font-weight: 600;
+      color: var(--subtle); transition: all .22s; line-height: 1.35;
+    }
+    .timeline-pill:hover { border-color: var(--border-hover); }
+    .timeline-pill--active {
+      border-color: rgba(193,95,185,.6); background: rgba(147,39,143,.09); color: var(--text);
+    }
+    .timeline-pill span { display: block; font-size: .58rem; font-weight: 500; color: var(--muted); margin-top: .2rem; }
+    .timeline-pill--active span { color: var(--accent-light); }
+
     .step__nav {
       display: flex; align-items: center; justify-content: space-between;
       gap: 1rem; margin-top: 1.5rem;
@@ -358,7 +368,6 @@
     .btn-next:hover { opacity: .88; transform: translateY(-1px); }
     .btn-next:disabled { opacity: .4; cursor: not-allowed; transform: none; }
 
-    /* ── SUCCESS ── */
     .success {
       display: none; text-align: center;
       padding: 2.5rem 2rem; flex-direction: column; align-items: center;
@@ -392,7 +401,6 @@
     }
     .btn-home:hover { background: var(--accent); border-color: var(--accent); }
 
-    /* ── DESKTOP: LOCK TO VIEWPORT, NO PAGE SCROLL ── */
     @media (min-width: 901px) {
       html, body { height: 100%; overflow: hidden; }
       body { display: flex; flex-direction: column; }
@@ -401,7 +409,6 @@
       .form-area { height: 100%; min-height: 0; overflow-y: auto; }
     }
 
-    /* ── MOBILE ── */
     @media (max-width: 900px) {
       nav { margin: 1rem 1rem; padding: .95rem 1.4rem; }
       .page { grid-template-columns: 1fr; }
@@ -413,17 +420,19 @@
       .sidebar::before { display: none; }
       .sidebar__response { margin-top: 1.5rem; }
       .form-area { padding: 2rem 1.5rem; justify-content: flex-start; }
-      .budget-box__conversions { grid-template-columns: repeat(3, 1fr); }
+      .service-grid { grid-template-columns: repeat(2, 1fr); }
+      .timeline-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 600px) {
       nav { margin: .75rem .75rem; padding: .85rem 1.1rem; }
       .nav__logo { height: 22px; max-width: 110px; }
       .form-area { padding: 1.75rem 1.25rem; }
       .field__row { grid-template-columns: 1fr; }
-      .budget-box__conversions { grid-template-columns: repeat(2, 1fr); }
+      .service-grid { grid-template-columns: repeat(2, 1fr); }
       .progress__label { display: none; }
       .step__nav { flex-direction: column-reverse; }
       .btn-back { width: 100%; justify-content: center; }
+      .tier-card { flex-wrap: wrap; }
     }
   </style>
 </head>
@@ -449,7 +458,7 @@
       Tell us what<br>you're <em>building.</em>
     </h1>
     <p class="sidebar__desc">
-      Five quick questions — no fluff. We'll read every word and come back within 24 hours with honest, specific next steps.
+      Three quick steps. Real pricing, not a guessing game — pick your service, see the range, send the brief.
     </p>
 
     <div class="sidebar__contacts">
@@ -482,7 +491,6 @@
   <!-- ── RIGHT: FORM ── -->
   <main class="form-area">
 
-    <!-- Progress bar -->
     <div class="progress" id="progress">
       <div class="progress__step progress__step--active" data-step="0">
         <div class="progress__dot">1</div>
@@ -490,52 +498,45 @@
       </div>
       <div class="progress__step" data-step="1">
         <div class="progress__dot">2</div>
-        <span class="progress__label">Problem</span>
+        <span class="progress__label">Investment</span>
       </div>
       <div class="progress__step" data-step="2">
         <div class="progress__dot">3</div>
-        <span class="progress__label">Journey</span>
-      </div>
-      <div class="progress__step" data-step="3">
-        <div class="progress__dot">4</div>
-        <span class="progress__label">Urgency</span>
-      </div>
-      <div class="progress__step" data-step="4">
-        <div class="progress__dot">5</div>
-        <span class="progress__label">Budget</span>
+        <span class="progress__label">The Brief</span>
       </div>
     </div>
 
-    <!-- Steps -->
     <div class="steps-wrap" id="stepsWrap">
 
       <!-- STEP 0 — Who are you -->
       <div class="step step--active" id="step0">
-        <div class="step__eyebrow">Step 1 of 5 · Introduction</div>
+        <div class="step__eyebrow">Step 1 of 3 · Introduction</div>
         <h2 class="step__question">First, let's get to know you.</h2>
-        <p class="step__hint">We use this to address you properly and follow up on the right channels.</p>
+        <p class="step__hint">We use this to address you properly and follow up on the right channel.</p>
 
         <div class="field__row">
           <div class="field">
             <label class="field__label" for="cf_first">First Name</label>
-            <input id="cf_first" type="text" class="field__input" placeholder="John" autocomplete="given-name" />
+            <input id="cf_first" type="text" class="field__input" placeholder="John" autocomplete="given-name" maxlength="60" />
           </div>
           <div class="field">
             <label class="field__label" for="cf_last">Last Name</label>
-            <input id="cf_last" type="text" class="field__input" placeholder="Doe" autocomplete="family-name" />
+            <input id="cf_last" type="text" class="field__input" placeholder="Doe" autocomplete="family-name" maxlength="60" />
           </div>
         </div>
         <div class="field">
           <label class="field__label" for="cf_email">Email Address</label>
-          <input id="cf_email" type="email" class="field__input" placeholder="john@company.com" autocomplete="email" />
+          <input id="cf_email" type="email" class="field__input" placeholder="john@company.com" autocomplete="email" maxlength="100" />
         </div>
-        <div class="field">
-          <label class="field__label" for="cf_phone">Phone / WhatsApp <span style="color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0;font-size:.75em">(optional)</span></label>
-          <input id="cf_phone" type="tel" class="field__input" placeholder="+254 7XX XXX XXX" autocomplete="tel" />
-        </div>
-        <div class="field">
-          <label class="field__label" for="cf_company">Company / Business <span style="color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0;font-size:.75em">(optional)</span></label>
-          <input id="cf_company" type="text" class="field__input" placeholder="Your business name" autocomplete="organization" />
+        <div class="field__row">
+          <div class="field">
+            <label class="field__label" for="cf_phone">Phone / WhatsApp <span style="color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0;font-size:.75em">(optional)</span></label>
+            <input id="cf_phone" type="tel" class="field__input" placeholder="+254 7XX XXX XXX" autocomplete="tel" maxlength="25" />
+          </div>
+          <div class="field">
+            <label class="field__label" for="cf_company">Company <span style="color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0;font-size:.75em">(optional)</span></label>
+            <input id="cf_company" type="text" class="field__input" placeholder="Business name" autocomplete="organization" maxlength="80" />
+          </div>
         </div>
 
         <div class="field__error" id="err0"></div>
@@ -547,30 +548,38 @@
         </div>
       </div>
 
-      <!-- STEP 1 — Problem -->
+      <!-- STEP 1 — Service, tier, timeline -->
       <div class="step" id="step1">
-        <div class="step__eyebrow">Step 2 of 5 · The Problem</div>
-        <h2 class="step__question">What's the biggest problem you're trying to solve?</h2>
-        <p class="step__hint">Don't filter yourself — describe it the way you'd explain it to a friend. The more honest you are, the better we can help.</p>
+        <div class="step__eyebrow">Step 2 of 3 · Your Investment</div>
+        <h2 class="step__question">What do you need — and what's it likely to cost?</h2>
+        <p class="step__hint">Real pricing, upfront. Pick a service, then a tier, and we'll show you the honest range before you send anything.</p>
 
         <div class="field">
-          <label class="field__label" for="cf_service">Type of Project</label>
-          <select id="cf_service" class="field__select">
-            <option value="" disabled selected>Select a service area</option>
-            <option>Brand Identity</option>
-            <option>Website Design</option>
-            <option>Graphic Design</option>
-            <option>Digital Marketing</option>
-            <option>Business Documentation</option>
-            <option>Creative Consulting</option>
-            <option>Multiple Services</option>
-            <option>Not Sure Yet</option>
-          </select>
+          <label class="field__label">Service Area</label>
+          <div class="service-grid" id="serviceGrid"></div>
         </div>
+
+        <div class="tier-wrap" id="tierWrap">
+          <label class="field__label" id="tierLabel">Choose a Tier</label>
+          <div class="tier-grid" id="tierGrid"></div>
+        </div>
+
+        <div class="estimate-box" id="estimateBox">
+          <div>
+            <div class="estimate-box__label">Estimated Investment</div>
+            <div class="estimate-box__value" id="estimateValue">—</div>
+          </div>
+          <div class="estimate-box__note">This is a starting range — your final quote depends on scope, which we'll confirm after reading your brief.</div>
+        </div>
+
         <div class="field">
-          <label class="field__label" for="cf_problem">Describe the Problem</label>
-          <textarea id="cf_problem" class="field__textarea" placeholder="e.g. My brand looks inconsistent across platforms and I'm losing trust with potential clients — every touchpoint feels slightly different…"></textarea>
-          <div class="field__char" id="cnt_problem">0 / 500</div>
+          <label class="field__label">When do you need this?</label>
+          <div class="timeline-grid" id="timelineGrid">
+            <div class="timeline-pill" data-val="rush">Rush<span>ASAP</span></div>
+            <div class="timeline-pill" data-val="2-4w">2–4 weeks<span>Standard</span></div>
+            <div class="timeline-pill" data-val="1-2m">1–2 months<span>Relaxed</span></div>
+            <div class="timeline-pill" data-val="flex">Flexible<span>No rush</span></div>
+          </div>
         </div>
 
         <div class="field__error" id="err1"></div>
@@ -586,86 +595,26 @@
         </div>
       </div>
 
-      <!-- STEP 2 — What have you tried -->
+      <!-- STEP 2 — The brief -->
       <div class="step" id="step2">
-        <div class="step__eyebrow">Step 3 of 5 · Your Journey So Far</div>
-        <h2 class="step__question">What have you already tried?</h2>
-        <p class="step__hint">This helps us skip what hasn't worked and start from where you actually are — not from zero.</p>
+        <div class="step__eyebrow">Step 3 of 3 · The Brief</div>
+        <h2 class="step__question">In your own words, what are you trying to solve?</h2>
+        <p class="step__hint">Keep it tight and specific — between 20 and 400 characters. That's enough for us to understand the real problem without turning this into homework.</p>
 
         <div class="field">
-          <textarea id="cf_tried" class="field__textarea" style="min-height:130px" placeholder="e.g. I worked with a freelancer before but the results felt too generic. I also tried designing myself in Canva but it looks unprofessional next to my competitors…"></textarea>
-          <div class="field__char" id="cnt_tried">0 / 500</div>
+          <label class="field__label" for="cf_problem">The Problem / Goal</label>
+          <textarea id="cf_problem" class="field__textarea" maxlength="400" placeholder="e.g. My brand looks inconsistent across platforms and I'm losing trust with potential clients before we even talk."></textarea>
+          <div class="field__char" id="cnt_problem">0 / 400 (min 20)</div>
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="cf_extra">Anything else? <span style="color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0;font-size:.75em">(optional, max 200 characters)</span></label>
+          <input type="text" id="cf_extra" class="field__input" maxlength="200" placeholder="Referral source, must-have references, or anything specific." />
         </div>
 
         <div class="field__error" id="err2"></div>
         <div class="step__nav">
           <button type="button" class="btn-back" onclick="goBack(2)">
-            <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M13 8H3M7 4l-4 4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Back
-          </button>
-          <button type="button" class="btn-next" onclick="goNext(2)">
-            Continue
-            <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-        </div>
-      </div>
-
-      <!-- STEP 3 — Why now -->
-      <div class="step" id="step3">
-        <div class="step__eyebrow">Step 4 of 5 · The Urgency</div>
-        <h2 class="step__question">Why is now the right time to address this?</h2>
-        <p class="step__hint">Something made you reach out today. What changed — a deadline, a new opportunity, a competitor move?</p>
-
-        <div class="field">
-          <textarea id="cf_timing" class="field__textarea" style="min-height:130px" placeholder="e.g. We're launching a new product line in 6 weeks and need a brand that matches our new direction before we go live to our investor audience…"></textarea>
-          <div class="field__char" id="cnt_timing">0 / 500</div>
-        </div>
-
-        <div class="field__error" id="err3"></div>
-        <div class="step__nav">
-          <button type="button" class="btn-back" onclick="goBack(3)">
-            <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M13 8H3M7 4l-4 4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Back
-          </button>
-          <button type="button" class="btn-next" onclick="goNext(3)">
-            Continue
-            <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-        </div>
-      </div>
-
-      <!-- STEP 4 — Budget -->
-      <div class="step" id="step4">
-        <div class="step__eyebrow">Step 5 of 5 · Budget</div>
-        <h2 class="step__question">What's your approximate budget?</h2>
-        <p class="step__hint">No wrong answer — this helps us scope the right solution and be upfront about what's realistic.</p>
-
-        <div class="budget-box">
-          <div class="budget-box__top">
-            <div class="budget-box__amount" id="budgetDisplay">KES 25,000</div>
-            <div class="budget-box__currencies" id="currencyBtns">
-              <button type="button" class="currency-btn currency-btn--active" onclick="setCurrency('KES',this)">KES</button>
-              <button type="button" class="currency-btn" onclick="setCurrency('USD',this)">USD</button>
-              <button type="button" class="currency-btn" onclick="setCurrency('GBP',this)">GBP</button>
-              <button type="button" class="currency-btn" onclick="setCurrency('CAD',this)">CAD</button>
-              <button type="button" class="currency-btn" onclick="setCurrency('AED',this)">AED</button>
-              <button type="button" class="currency-btn" onclick="setCurrency('EUR',this)">EUR</button>
-            </div>
-          </div>
-          <input type="range" class="budget-box__slider" id="budgetSlider"
-            min="0" max="100" value="30" oninput="updateBudget(this)" />
-          <div class="budget-box__ticks" id="budgetTicks"></div>
-          <div class="budget-box__conversions" id="budgetConversions"></div>
-        </div>
-
-        <div class="field">
-          <label class="field__label" for="cf_extra">Anything else to add? <span style="color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0;font-size:.75em">(optional)</span></label>
-          <input type="text" id="cf_extra" class="field__input" placeholder="Timeline, special requirements, referral source, or anything you want us to know…" />
-        </div>
-
-        <div class="field__error" id="err4"></div>
-        <div class="step__nav">
-          <button type="button" class="btn-back" onclick="goBack(4)">
             <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M13 8H3M7 4l-4 4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             Back
           </button>
@@ -695,89 +644,152 @@
 </div><!-- /page -->
 
 <script>
-  /* ── BUDGET ── */
-  const CURRENCIES = {
-    KES: { symbol: 'KES ', flag: '🇰🇪', rate: 1 },
-    USD: { symbol: '$',   flag: '🇺🇸', rate: 0.0077 },
-    GBP: { symbol: '£',   flag: '🇬🇧', rate: 0.0062 },
-    CAD: { symbol: 'C$',  flag: '🇨🇦', rate: 0.0105 },
-    AED: { symbol: 'AED ',flag: '🇦🇪', rate: 0.0283 },
-    EUR: { symbol: '€',   flag: '🇪🇺', rate: 0.0071 },
+  /* ── PRICING MODEL ──
+     Every service has tiers with a KES min/max. 1,000 KES is the true floor,
+     used for the smallest single graphic-design item. */
+  const SERVICES = {
+    brand: {
+      label: 'Brand Identity',
+      from: 15000,
+      tiers: [
+        { name: 'Logo Essentials', desc: 'Logo, color palette, basic type system.', min: 15000, max: 30000 },
+        { name: 'Full Identity System', desc: 'Complete brand system across all touchpoints.', min: 40000, max: 75000 },
+        { name: 'Premium Brand + Guidelines', desc: 'Full system plus a documented brand guideline.', min: 90000, max: 180000 },
+      ],
+    },
+    web: {
+      label: 'Web Design',
+      from: 20000,
+      tiers: [
+        { name: 'Landing Page', desc: 'Single high-conversion page.', min: 20000, max: 40000 },
+        { name: 'Multi-Page Website', desc: 'Full site — home, work, about, contact.', min: 55000, max: 120000 },
+        { name: 'E-Commerce / Web App', desc: 'Custom builds with stock, checkout, or logic.', min: 150000, max: 350000 },
+      ],
+    },
+    graphic: {
+      label: 'Graphic Design',
+      from: 1000,
+      tiers: [
+        { name: 'Single Design', desc: 'One poster, flyer, or social tile.', min: 1000, max: 5000 },
+        { name: 'Design Bundle', desc: '10–20 assets for a campaign or launch.', min: 15000, max: 35000 },
+        { name: 'Monthly Retainer', desc: 'Ongoing design support, billed monthly.', min: 30000, max: 60000 },
+      ],
+    },
+    marketing: {
+      label: 'Digital Marketing',
+      from: 20000,
+      tiers: [
+        { name: 'Social Starter', desc: 'Content calendar + posting, monthly.', min: 20000, max: 20000 },
+        { name: 'Growth', desc: 'Content, ads, and monthly strategy.', min: 45000, max: 45000 },
+        { name: 'Full Management', desc: 'End-to-end marketing, monthly.', min: 80000, max: 120000 },
+      ],
+    },
+    docs: {
+      label: 'Business Documentation',
+      from: 10000,
+      tiers: [
+        { name: 'Core Docs', desc: 'Company profile or proposal deck.', min: 10000, max: 20000 },
+        { name: 'Full Suite', desc: 'Policies, templates, and decks — the works.', min: 30000, max: 60000 },
+      ],
+    },
+    consulting: {
+      label: 'Creative Consulting',
+      from: 3000,
+      tiers: [
+        { name: 'Hourly Session', desc: 'Single strategy or feedback session.', min: 3000, max: 3000 },
+        { name: 'Project Consulting', desc: 'Ongoing input across a full project.', min: 15000, max: 40000 },
+      ],
+    },
+    unsure: {
+      label: 'Not Sure Yet',
+      from: null,
+      tiers: [],
+    },
   };
 
-  const STEPS_KES = [
-    5000, 8000, 12000, 15000, 20000, 25000, 30000, 40000,
-    50000, 65000, 80000, 100000, 150000, 200000, 300000, 500000
-  ];
+  const SERVICE_ORDER = ['brand','web','graphic','marketing','docs','consulting','unsure'];
 
-  let activeCur = 'KES';
-  let budgetIdx = 5; // default ~25k
-
-  function fmt(kes, cur) {
-    const c = CURRENCIES[cur];
-    const v = cur === 'KES' ? kes : kes * c.rate;
-    const s = v >= 1000 ? (v / 1000).toFixed(v >= 100000 ? 0 : 1) + 'k' : Math.round(v).toLocaleString();
-    return c.symbol + (cur === 'KES' ? Math.round(kes).toLocaleString() : s);
+  function kesFmt(n) {
+    return 'KES ' + n.toLocaleString();
   }
 
-  function renderBudget() {
-    const kes = STEPS_KES[budgetIdx];
-    document.getElementById('budgetDisplay').textContent = fmt(kes, activeCur);
+  let selectedService = null;
+  let selectedTierIdx = null;
+  let selectedTimeline = null;
 
-    // ticks
-    const ticks = document.getElementById('budgetTicks');
-    ticks.innerHTML = [0, 4, 8, 12, 15].map(i => {
-      const c = CURRENCIES[activeCur];
-      const v = activeCur === 'KES' ? STEPS_KES[i] : STEPS_KES[i] * c.rate;
-      const label = v >= 1000 ? Math.round(v / 1000) + 'k' : Math.round(v);
-      return `<span class="budget-box__tick">${c.symbol}${label}</span>`;
+  function renderServiceGrid() {
+    const grid = document.getElementById('serviceGrid');
+    grid.innerHTML = SERVICE_ORDER.map(key => {
+      const s = SERVICES[key];
+      const fromLabel = s.from ? 'from ' + kesFmt(s.from) : "let's talk";
+      return `<div class="service-card" data-key="${key}" onclick="selectService('${key}')">
+        <div class="service-card__name">${s.label}</div>
+        <div class="service-card__from">${fromLabel}</div>
+      </div>`;
     }).join('');
+  }
 
-    // conversions
-    const conv = document.getElementById('budgetConversions');
-    const others = Object.keys(CURRENCIES).filter(k => k !== activeCur);
-    conv.innerHTML = others.map(cur => {
-      const c = CURRENCIES[cur];
-      const v = cur === 'KES' ? kes : kes * c.rate;
-      const s = v >= 1000 ? (v / 1000).toFixed(v >= 100000 ? 0 : 1) + 'k' : Math.round(v).toLocaleString();
-      return `<div class="budget-conv">
-        <div class="budget-conv__amount">${c.symbol}${s}</div>
-        <div class="budget-conv__cur">${cur}</div>
-        <div class="budget-conv__flag">${c.flag}</div>
+  function selectService(key) {
+    selectedService = key;
+    selectedTierIdx = null;
+    document.querySelectorAll('.service-card').forEach(c => {
+      c.classList.toggle('service-card--active', c.dataset.key === key);
+    });
+
+    const tierWrap = document.getElementById('tierWrap');
+    const tierGrid = document.getElementById('tierGrid');
+    const estimateBox = document.getElementById('estimateBox');
+    const s = SERVICES[key];
+
+    if (!s.tiers.length) {
+      tierWrap.classList.remove('tier-wrap--show');
+      estimateBox.classList.remove('estimate-box--show');
+      return;
+    }
+
+    tierGrid.innerHTML = s.tiers.map((t, i) => {
+      const priceLabel = t.min === t.max ? kesFmt(t.min) + '/mo' : kesFmt(t.min) + ' – ' + kesFmt(t.max);
+      return `<div class="tier-card" data-idx="${i}" onclick="selectTier(${i})">
+        <div class="tier-card__radio"></div>
+        <div class="tier-card__body">
+          <div class="tier-card__name">${t.name}</div>
+          <div class="tier-card__desc">${t.desc}</div>
+        </div>
+        <div class="tier-card__price">${priceLabel}</div>
       </div>`;
     }).join('');
 
-    // slider track
-    const sl = document.getElementById('budgetSlider');
-    const pct = (budgetIdx / (STEPS_KES.length - 1)) * 100;
-    sl.style.setProperty('--pct', pct + '%');
-    sl.value = pct;
+    tierWrap.classList.add('tier-wrap--show');
+    estimateBox.classList.remove('estimate-box--show');
   }
 
-  function updateBudget(sl) {
-    const pct = parseInt(sl.value);
-    sl.style.setProperty('--pct', pct + '%');
-    budgetIdx = Math.round((pct / 100) * (STEPS_KES.length - 1));
-    renderBudget();
-  }
-
-  function setCurrency(cur, btn) {
-    activeCur = cur;
-    document.querySelectorAll('.currency-btn').forEach(b => b.classList.remove('currency-btn--active'));
-    btn.classList.add('currency-btn--active');
-    renderBudget();
-  }
-
-  /* ── CHAR COUNTERS ── */
-  [['cf_problem','cnt_problem'],['cf_tried','cnt_tried'],['cf_timing','cnt_timing']].forEach(([id,cid])=>{
-    const ta = document.getElementById(id);
-    const ct = document.getElementById(cid);
-    if(!ta||!ct) return;
-    ta.addEventListener('input', () => {
-      const l = ta.value.length;
-      ct.textContent = `${l} / 500`;
-      ct.classList.toggle('field__char--warn', l > 425);
+  function selectTier(idx) {
+    selectedTierIdx = idx;
+    document.querySelectorAll('.tier-card').forEach(c => {
+      c.classList.toggle('tier-card--active', parseInt(c.dataset.idx) === idx);
     });
+    const t = SERVICES[selectedService].tiers[idx];
+    const priceLabel = t.min === t.max ? kesFmt(t.min) + ' / month' : kesFmt(t.min) + ' – ' + kesFmt(t.max);
+    document.getElementById('estimateValue').textContent = priceLabel;
+    document.getElementById('estimateBox').classList.add('estimate-box--show');
+  }
+
+  document.getElementById('timelineGrid').addEventListener('click', (e) => {
+    const pill = e.target.closest('.timeline-pill');
+    if (!pill) return;
+    selectedTimeline = pill.dataset.val;
+    document.querySelectorAll('.timeline-pill').forEach(p => p.classList.toggle('timeline-pill--active', p === pill));
+  });
+
+  /* ── CHARACTER LIMITS (block over max via maxlength, flag under min via counter/validation) ── */
+  const problemTa = document.getElementById('cf_problem');
+  const problemCnt = document.getElementById('cnt_problem');
+  problemTa.addEventListener('input', () => {
+    const l = problemTa.value.length;
+    problemCnt.textContent = `${l} / 400 (min 20)`;
+    problemCnt.classList.remove('field__char--warn', 'field__char--bad');
+    if (l < 20) problemCnt.classList.add('field__char--bad');
+    else if (l > 360) problemCnt.classList.add('field__char--warn');
   });
 
   /* ── PROGRESS ── */
@@ -792,12 +804,10 @@
       if (i < n) s.classList.add('progress__step--done');
       if (i === n) s.classList.add('progress__step--active');
     });
-    // Update dot labels
     document.querySelectorAll('.progress__dot').forEach((d, i) => {
       d.textContent = i < n ? '✓' : i + 1;
     });
     current = n;
-    if (n === 4) renderBudget();
     const fa = document.querySelector('.form-area');
     if (fa) fa.scrollTo({ top: 0, behavior: 'smooth' });
   }
@@ -810,21 +820,13 @@
       const first = document.getElementById('cf_first').value.trim();
       const email = document.getElementById('cf_email').value.trim();
       if (!first) { err.textContent = 'Please enter your first name.'; return; }
-      if (!email || !email.includes('@')) { err.textContent = 'Please enter a valid email address.'; return; }
+      if (!email || !email.includes('@') || !email.includes('.')) { err.textContent = 'Please enter a valid email address.'; return; }
     }
+
     if (step === 1) {
-      const svc = document.getElementById('cf_service').value;
-      const prob = document.getElementById('cf_problem').value.trim();
-      if (!svc) { err.textContent = 'Please select a project type.'; return; }
-      if (prob.length < 20) { err.textContent = 'Please describe your problem in a bit more detail.'; return; }
-    }
-    if (step === 2) {
-      const tried = document.getElementById('cf_tried').value.trim();
-      if (tried.length < 10) { err.textContent = 'Please share what you\'ve tried — even briefly.'; return; }
-    }
-    if (step === 3) {
-      const timing = document.getElementById('cf_timing').value.trim();
-      if (timing.length < 10) { err.textContent = 'Help us understand the timing — even one sentence.'; return; }
+      if (!selectedService) { err.textContent = 'Please select a service area.'; return; }
+      if (SERVICES[selectedService].tiers.length && selectedTierIdx === null) { err.textContent = 'Please select a tier so we can give you an honest estimate.'; return; }
+      if (!selectedTimeline) { err.textContent = 'Please let us know your timeline.'; return; }
     }
 
     showStep(step + 1);
@@ -836,55 +838,59 @@
 
   /* ── SUBMIT ── */
   function submitForm() {
+    const err = document.getElementById('err2');
+    err.textContent = '';
+    const problem = document.getElementById('cf_problem').value.trim();
+
+    if (problem.length < 20) { err.textContent = 'Please write at least 20 characters describing the problem.'; return; }
+    if (problem.length > 400) { err.textContent = 'Please keep this under 400 characters.'; return; }
+
     const first   = document.getElementById('cf_first').value.trim();
     const last    = document.getElementById('cf_last').value.trim();
     const email   = document.getElementById('cf_email').value.trim();
     const phone   = document.getElementById('cf_phone').value.trim() || 'Not provided';
     const company = document.getElementById('cf_company').value.trim() || 'Not provided';
-    const service = document.getElementById('cf_service').value || 'Not specified';
-    const problem = document.getElementById('cf_problem').value.trim();
-    const tried   = document.getElementById('cf_tried').value.trim();
-    const timing  = document.getElementById('cf_timing').value.trim();
     const extra   = document.getElementById('cf_extra').value.trim();
-    const budget  = fmt(STEPS_KES[budgetIdx], activeCur) + ` (${activeCur})`;
+
+    const serviceLabel = SERVICES[selectedService].label;
+    let priceLabel = 'To be scoped together';
+    if (selectedTierIdx !== null) {
+      const t = SERVICES[selectedService].tiers[selectedTierIdx];
+      priceLabel = (t.min === t.max ? kesFmt(t.min) + '/mo' : kesFmt(t.min) + ' – ' + kesFmt(t.max)) + ` (${t.name})`;
+    }
+    const timelineLabels = { rush: 'Rush / ASAP', '2-4w': '2–4 weeks', '1-2m': '1–2 months', flex: 'Flexible / No rush' };
+    const timelineLabel = timelineLabels[selectedTimeline] || 'Not specified';
 
     const body = [
       `PROJECT BRIEF — EXEVO DESIGNERS NETWORK`,
       `─────────────────────────────────────────`,
-      `Name:     ${first} ${last}`,
-      `Email:    ${email}`,
-      `Phone:    ${phone}`,
-      `Company:  ${company}`,
-      `Service:  ${service}`,
-      `Budget:   ${budget}`,
+      `Name:      ${first} ${last}`,
+      `Email:     ${email}`,
+      `Phone:     ${phone}`,
+      `Company:   ${company}`,
+      `Service:   ${serviceLabel}`,
+      `Estimate:  ${priceLabel}`,
+      `Timeline:  ${timelineLabel}`,
       ``,
-      `1. BIGGEST PROBLEM`,
+      `THE BRIEF`,
       problem,
-      ``,
-      `2. WHAT THEY'VE TRIED`,
-      tried,
-      ``,
-      `3. WHY NOW`,
-      timing,
-      extra ? `\n4. ADDITIONAL NOTES\n${extra}` : '',
+      extra ? `\nADDITIONAL NOTES\n${extra}` : '',
     ].filter(x => x !== undefined).join('\n');
 
-    const subject = `Project Brief: ${service} — ${first} ${last}`;
+    const subject = `Project Brief: ${serviceLabel} — ${first} ${last}`;
 
-    // Open WhatsApp first, then trigger mailto
     window.open(`https://wa.me/254700552884?text=${encodeURIComponent(body)}`, '_blank');
     setTimeout(() => {
       window.location.href = `mailto:exevodesigners@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     }, 800);
 
-    // Show success
     document.getElementById('stepsWrap').style.display = 'none';
     document.getElementById('progress').style.display = 'none';
     document.getElementById('success').classList.add('success--show');
   }
 
   /* ── INIT ── */
-  renderBudget();
+  renderServiceGrid();
 </script>
 </body>
 </html>
