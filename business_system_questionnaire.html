@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Business System Requirements — EXEVO Designers Network</title>
+  <meta name="description" content="Business Management System requirements questionnaire. Exevo Designers Network." />
+  <link rel="icon" type="image/png" href="ExevoLogo/exevo-logo-profile(2).png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #09090B;
+      --surface: #111113;
+      --text: #F5F4F0;
+      --muted: #5A5A60;
+      --subtle: #A8A8B0;
+      --accent: #93278F;
+      --accent-light: #C15FB9;
+      --green: #10B981;
+      --red: #F87171;
+      --border: rgba(245,244,240,0.07);
+      --border-hover: rgba(193,95,185,0.35);
+      --font-display: 'Inter', system-ui, sans-serif;
+      --font-body: 'Poppins', system-ui, sans-serif;
+      --radius: 4px;
+    }
+
+    html, body { height: 100%; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.28;
+    }
+
+    /* ── NAV ── */
+    .nav-wrap { position: relative; z-index: 50; flex-shrink: 0; }
+    nav {
+      margin: 1.25rem 1.75rem;
+      padding: 1.1rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      border-radius: 100px;
+      background: linear-gradient(135deg, rgba(147,39,143,.9), rgba(0,0,0,.85));
+      backdrop-filter: blur(22px) saturate(160%);
+      -webkit-backdrop-filter: blur(22px) saturate(160%);
+      border: 1px solid rgba(147,39,143,.4);
+      box-shadow: 0 8px 32px rgba(147,39,143,.35), inset 0 1px 0 rgba(255,255,255,.08);
+      animation: navFloat 6s ease-in-out infinite;
+    }
+    @keyframes navFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+    .nav__logo { display: flex; align-items: center; height: 28px; max-width: 140px; text-decoration: none; }
+    .nav__logo img { height: 100%; width: auto; max-width: 100%; object-fit: contain; filter: brightness(0) invert(1); }
+    .nav__home {
+      display: flex; align-items: center; justify-content: center;
+      width: 38px; height: 38px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.4);
+      color: var(--text); text-decoration: none;
+      transition: background .3s, border-color .3s, color .3s;
+    }
+    .nav__home:hover { background: #fff; border-color: #fff; color: var(--accent); }
+
+    /* ── LAYOUT ── */
+    .page {
+      position: relative; z-index: 1;
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      min-height: 100vh;
+    }
+
+    /* ── LEFT PANEL ── */
+    .sidebar {
+      position: sticky; top: 0; height: 100vh;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      display: flex; flex-direction: column;
+      padding: 2rem 2.25rem;
+      overflow: hidden;
+    }
+    .sidebar::before {
+      content: '';
+      position: absolute; bottom: -120px; left: -80px;
+      width: 360px; height: 360px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(147,39,143,.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .sidebar__eyebrow {
+      font-size: .6rem; font-weight: 600; letter-spacing: .26em; text-transform: uppercase;
+      color: var(--accent-light); margin-bottom: .75rem;
+      display: flex; align-items: center; gap: .6rem;
+    }
+    .sidebar__eyebrow::before { content: ''; width: 20px; height: 1px; background: var(--accent-light); flex-shrink: 0; }
+    .sidebar__heading {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 2.2vw, 2.05rem);
+      line-height: 1.2; letter-spacing: -.025em;
+      margin-bottom: 1rem;
+    }
+    .sidebar__heading em { font-style: italic; color: var(--subtle); }
+    .sidebar__desc {
+      font-size: .78rem; line-height: 1.68;
+      color: var(--subtle); margin-bottom: 1.5rem;
+    }
+    .sidebar__contacts { display: flex; flex-direction: column; gap: .55rem; }
+    .sidebar__contact {
+      display: flex; align-items: center; gap: .8rem;
+      padding: .65rem .9rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      text-decoration: none; color: var(--text);
+      font-size: .76rem;
+      transition: border-color .25s, background .25s;
+    }
+    .sidebar__contact:hover { border-color: var(--border-hover); background: rgba(147,39,143,.05); }
+    .sidebar__contact-icon {
+      width: 30px; height: 30px; border-radius: var(--radius);
+      background: rgba(147,39,143,.15);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent-light); flex-shrink: 0;
+    }
+    .sidebar__contact-label { font-size: .58rem; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: .1rem; }
+    .sidebar__contact-value { font-size: .76rem; font-weight: 500; }
+    .sidebar__response {
+      display: flex; align-items: flex-start; gap: .7rem;
+      margin-top: auto; padding: .85rem 1rem;
+      border: 1px solid rgba(16,185,129,.18);
+      background: rgba(16,185,129,.04);
+      border-radius: var(--radius);
+    }
+    .response-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--green); flex-shrink: 0; margin-top: 3px;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.75)} }
+    .sidebar__response p { font-size: .72rem; line-height: 1.6; color: var(--subtle); }
+    .sidebar__response strong { color: var(--text); font-weight: 600; }
+
+    /* ── FORM AREA ── */
+    .form-area {
+      display: flex; flex-direction: column;
+      justify-content: center;
+      padding: 2rem 3rem;
+      min-height: 100vh;
+    }
+
+    .progress {
+      display: flex; align-items: center;
+      gap: 0; margin-bottom: 1.75rem;
+    }
+    .progress__step {
+      display: flex; flex-direction: column; align-items: center;
+      gap: .4rem; flex: 1; position: relative; cursor: default;
+    }
+    .progress__step::after {
+      content: ''; position: absolute; top: 13px; left: 50%;
+      width: 100%; height: 1px;
+      background: var(--border); z-index: 0;
+    }
+    .progress__step:last-child::after { display: none; }
+    .progress__dot {
+      width: 26px; height: 26px; border-radius: 50%;
+      border: 1px solid var(--border); background: #131316;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .6rem; font-weight: 700; color: var(--muted);
+      position: relative; z-index: 1;
+      transition: background .35s, border-color .35s, color .35s, box-shadow .35s;
+    }
+    .progress__step--active .progress__dot {
+      background: var(--accent); border-color: var(--accent); color: #fff;
+      box-shadow: 0 0 0 4px rgba(147,39,143,.2);
+    }
+    .progress__step--done .progress__dot {
+      background: rgba(16,185,129,.15); border-color: var(--green); color: var(--green);
+    }
+    .progress__label {
+      font-size: .58rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--muted); transition: color .3s; white-space: nowrap;
+    }
+    .progress__step--active .progress__label { color: var(--text); }
+    .progress__step--done .progress__label { color: var(--green); }
+
+    .steps-wrap { flex: 1; display: flex; flex-direction: column; justify-content: center; max-height: 100%; }
+    .step {
+      display: none; animation: fadeUp .38s cubic-bezier(.25,.46,.45,.94) both;
+      flex: 1; flex-direction: column; justify-content: center;
+    }
+    .step--active { display: flex; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+
+    .step__eyebrow {
+      font-size: .6rem; font-weight: 600; letter-spacing: .26em; text-transform: uppercase;
+      color: var(--accent-light); margin-bottom: .5rem;
+    }
+    .step__question {
+      font-family: var(--font-display);
+      font-size: clamp(1.2rem, 1.9vw, 1.55rem);
+      line-height: 1.25; letter-spacing: -.02em;
+      margin-bottom: .5rem;
+    }
+    .step__hint {
+      font-size: .78rem; line-height: 1.6; color: var(--subtle);
+      margin-bottom: 1.25rem; max-width: 560px;
+    }
+
+    .field { margin-bottom: 1rem; }
+    .field__label {
+      display: block; font-size: .6rem; font-weight: 600;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: .5rem;
+    }
+    .field__label .opt { color: var(--muted); font-weight: 400; text-transform: none; letter-spacing: 0; font-size: .95em; }
+    .field__input,
+    .field__select,
+    .field__textarea {
+      width: 100%;
+      background: #0f0f12; border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: .8rem 1.1rem;
+      color: var(--text); font-family: var(--font-body); font-size: .86rem;
+      outline: none; appearance: none;
+      transition: border-color .3s, box-shadow .3s;
+    }
+    .field__input::placeholder,
+    .field__textarea::placeholder { color: var(--muted); }
+    .field__input:focus,
+    .field__select:focus,
+    .field__textarea:focus {
+      border-color: rgba(147,39,143,.55);
+      box-shadow: 0 0 0 3px rgba(147,39,143,.1);
+    }
+    .field__textarea { resize: vertical; min-height: 110px; line-height: 1.65; }
+    .field__row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .field__char {
+      font-size: .63rem; color: var(--muted); text-align: right;
+      margin-top: .3rem; transition: color .25s;
+    }
+
+    .field__error { font-size: .7rem; color: var(--red); min-height: .9rem; margin-top: .2rem; }
+
+    /* ── PHOTO UPLOAD ── */
+    .photo-drop {
+      border: 1px dashed var(--border); border-radius: var(--radius);
+      background: #0f0f12; padding: 1.4rem; text-align: center; cursor: pointer;
+      transition: border-color .25s, background .25s;
+    }
+    .photo-drop:hover { border-color: var(--border-hover); background: rgba(147,39,143,.04); }
+    .photo-drop input { display: none; }
+    .photo-drop__prompt { font-size: .76rem; color: var(--subtle); }
+    .photo-drop__file { font-size: .7rem; color: var(--accent-light); margin-top: .4rem; }
+    .photo-note { font-size: .68rem; color: var(--muted); margin-top: .5rem; line-height: 1.55; }
+
+    /* ── TIER CARDS (pricing) ── */
+    .tier-grid { display: flex; flex-direction: column; gap: .55rem; margin-bottom: 1.1rem; }
+    .tier-card {
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      padding: .95rem 1.1rem;
+      border: 1px solid var(--border); border-radius: var(--radius);
+      background: #0f0f12; cursor: pointer;
+      transition: border-color .22s, background .22s;
+    }
+    .tier-card:hover { border-color: var(--border-hover); }
+    .tier-card--active {
+      border-color: rgba(193,95,185,.65);
+      background: rgba(147,39,143,.09);
+      box-shadow: 0 0 0 3px rgba(147,39,143,.08);
+    }
+    .tier-card__radio {
+      width: 16px; height: 16px; border-radius: 50%;
+      border: 1px solid var(--border-hover); flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .tier-card--active .tier-card__radio { border-color: var(--accent-light); }
+    .tier-card__radio::after {
+      content: ''; width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent-light); transform: scale(0); transition: transform .18s;
+    }
+    .tier-card--active .tier-card__radio::after { transform: scale(1); }
+    .tier-card__body { flex: 1; }
+    .tier-card__name { font-size: .84rem; font-weight: 600; }
+    .tier-card__desc { font-size: .7rem; color: var(--subtle); margin-top: .18rem; line-height: 1.5; }
+    .tier-card__price { font-family: var(--font-display); font-size: .86rem; letter-spacing: -.02em; white-space: nowrap; flex-shrink: 0; color: var(--accent-light); font-weight: 600; }
+
+    .estimate-box {
+      display: none;
+      align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+      padding: 1rem 1.25rem;
+      border: 1px solid rgba(16,185,129,.22);
+      background: rgba(16,185,129,.05);
+      border-radius: var(--radius);
+      margin-bottom: 1rem;
+    }
+    .estimate-box--show { display: flex; animation: fadeUp .3s ease both; }
+    .estimate-box__label { font-size: .6rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--subtle); }
+    .estimate-box__value { font-family: var(--font-display); font-size: clamp(1.1rem,2vw,1.5rem); letter-spacing: -.03em; color: var(--green); margin-top: .2rem; }
+    .estimate-box__note { font-size: .68rem; color: var(--muted); max-width: 220px; line-height: 1.5; }
+
+    /* ── REPEATABLE ENTRY CARDS ── */
+    .entry-card {
+      position: relative;
+      border: 1px solid var(--border); border-radius: var(--radius);
+      background: #0f0f12; padding: 1.1rem 1.2rem .3rem;
+      margin-bottom: .85rem;
+    }
+    .entry-card__label {
+      font-size: .58rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--accent-light); margin-bottom: .9rem;
+    }
+    .entry-card__remove {
+      position: absolute; top: 1rem; right: 1.1rem;
+      background: none; border: none; cursor: pointer;
+      font-size: .66rem; font-weight: 600; letter-spacing: .05em;
+      color: var(--muted); text-decoration: underline;
+    }
+    .entry-card__remove:hover { color: var(--red); }
+    .add-entry-btn {
+      width: 100%;
+      background: none; border: 1px dashed var(--border); border-radius: var(--radius);
+      color: var(--accent-light); font-family: var(--font-body); font-size: .74rem; font-weight: 600;
+      letter-spacing: .04em; padding: .8rem; cursor: pointer;
+      transition: border-color .22s, background .22s; margin-bottom: 1.1rem;
+    }
+    .add-entry-btn:hover { border-color: var(--border-hover); background: rgba(147,39,143,.05); }
+
+    .step__nav {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem; margin-top: 1.5rem;
+    }
+    .btn-back {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .75rem 1.4rem;
+      background: transparent; border: 1px solid var(--border); border-radius: var(--radius);
+      font-family: var(--font-body); font-size: .7rem; font-weight: 600;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--muted); cursor: pointer; transition: all .25s;
+    }
+    .btn-back:hover { color: var(--text); border-color: rgba(255,255,255,.18); }
+    .btn-next {
+      flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: .6rem;
+      padding: .9rem 2rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      border: none; border-radius: var(--radius);
+      font-family: var(--font-body); font-size: .76rem; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: #fff; cursor: pointer;
+      transition: opacity .25s, transform .25s;
+    }
+    .btn-next:hover { opacity: .88; transform: translateY(-1px); }
+
+    .success {
+      display: none; text-align: center;
+      padding: 2.5rem 2rem; flex-direction: column; align-items: center;
+      justify-content: center;
+      animation: fadeUp .5s ease both;
+    }
+    .success--show { display: flex; }
+    .success__icon {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: rgba(16,185,129,.1); border: 1px solid rgba(16,185,129,.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem; margin-bottom: 1.5rem;
+    }
+    .success__title {
+      font-family: var(--font-display);
+      font-size: clamp(1.7rem, 3.4vw, 2.5rem);
+      letter-spacing: -.03em; margin-bottom: .85rem;
+    }
+    .success__sub {
+      font-size: .88rem; line-height: 1.75;
+      color: var(--subtle); max-width: 440px;
+      margin-bottom: 2rem;
+    }
+    .btn-home {
+      display: inline-flex; align-items: center; gap: .6rem;
+      padding: .9rem 2rem;
+      border: 1px solid rgba(147,39,143,.5); border-radius: var(--radius);
+      font-family: var(--font-body); font-size: .74rem; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--text); text-decoration: none; transition: all .28s;
+    }
+    .btn-home:hover { background: var(--accent); border-color: var(--accent); }
+
+    @media (min-width: 901px) {
+      html, body { height: 100%; overflow: hidden; }
+      body { display: flex; flex-direction: column; }
+      .page { flex: 1 1 auto; min-height: 0; height: auto; }
+      .sidebar { height: 100%; }
+      .form-area { height: 100%; min-height: 0; overflow-y: auto; }
+    }
+
+    @media (max-width: 900px) {
+      nav { margin: 1rem 1rem; padding: .95rem 1.4rem; }
+      .page { grid-template-columns: 1fr; }
+      .sidebar {
+        position: relative; height: auto;
+        padding: 2rem 1.5rem 1.5rem;
+        border-right: none; border-bottom: 1px solid var(--border);
+      }
+      .sidebar::before { display: none; }
+      .sidebar__response { margin-top: 1.5rem; }
+      .form-area { padding: 2rem 1.5rem; justify-content: flex-start; }
+    }
+    @media (max-width: 600px) {
+      nav { margin: .75rem .75rem; padding: .85rem 1.1rem; }
+      .nav__logo { height: 22px; max-width: 110px; }
+      .form-area { padding: 1.75rem 1.25rem; }
+      .field__row { grid-template-columns: 1fr; }
+      .progress__label { display: none; }
+      .step__nav { flex-direction: column-reverse; }
+      .btn-back { width: 100%; justify-content: center; }
+    }
+
+    /* ── CHECKBOX / RADIO GROUPS ── */
+    .check-group {
+      display: grid; grid-template-columns: 1fr 1fr; gap: .5rem .75rem;
+      margin-bottom: .75rem;
+    }
+    @media (max-width: 640px) { .check-group { grid-template-columns: 1fr; } }
+    .check-item {
+      display: flex; align-items: center; gap: .6rem;
+      padding: .6rem .8rem; border: 1px solid var(--border); border-radius: var(--radius);
+      background: #0f0f12; font-size: .78rem; color: var(--subtle); cursor: pointer;
+      transition: border-color .2s, background .2s, color .2s;
+    }
+    .check-item:hover { border-color: var(--border-hover); }
+    .check-item input { accent-color: var(--accent-light); width: 15px; height: 15px; flex-shrink: 0; }
+    .check-item input:checked ~ span { color: var(--text); }
+    .check-item:has(input:checked) { border-color: rgba(193,95,185,.5); background: rgba(147,39,143,.08); color: var(--text); }
+    .radio-row { display: flex; gap: .75rem; margin-bottom: .75rem; }
+    .radio-pill {
+      flex: 1; text-align: center; padding: .7rem; border: 1px solid var(--border); border-radius: var(--radius);
+      background: #0f0f12; font-size: .78rem; font-weight: 600; color: var(--subtle); cursor: pointer;
+      transition: all .2s;
+    }
+    .radio-pill:hover { border-color: var(--border-hover); }
+    .radio-pill--active { border-color: rgba(193,95,185,.6); background: rgba(147,39,143,.1); color: var(--text); }
+    .section-divider {
+      margin: 1.6rem 0 1rem; padding-top: 1.2rem; border-top: 1px solid var(--border);
+    }
+    .section-divider__title {
+      font-size: .68rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+      color: var(--accent-light); margin-bottom: .9rem;
+    }
+    .field__note { font-size: .7rem; color: var(--muted); margin-top: .4rem; line-height: 1.55; }
+    .required-flag { color: var(--accent-light); margin-left: 2px; }
+  </style>
+</head>
+<body>
+
+<div class="nav-wrap">
+  <nav>
+    <a href="/" class="nav__logo">
+      <img src="ExevoLogo/exevo-logo-png.png" alt="Exevo" />
+    </a>
+    <a href="/" class="nav__home" aria-label="Back to home">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11.5L12 4l9 7.5M5.5 10v9a1 1 0 001 1H9a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1h2.5a1 1 0 001-1v-9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </nav>
+</div>
+
+<div class="page">
+
+  <!-- ── LEFT SIDEBAR ── -->
+  <aside class="sidebar">
+    <div class="sidebar__eyebrow">System Requirements</div>
+    <h1 class="sidebar__heading">
+      Let's understand<br>your <em>business.</em>
+    </h1>
+    <p class="sidebar__desc">
+      This helps us design your Excel management system around how your business actually runs. If a question doesn't apply, just leave it blank or write N/A.
+    </p>
+
+    <div class="sidebar__contacts">
+      <a href="https://wa.me/254700552884" class="sidebar__contact" target="_blank" rel="noopener noreferrer">
+        <div class="sidebar__contact-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </div>
+        <div>
+          <span class="sidebar__contact-label">WhatsApp / Call</span>
+          <span class="sidebar__contact-value">+254 700 552 884</span>
+        </div>
+      </a>
+      <a href="mailto:exevodesigners@gmail.com" class="sidebar__contact">
+        <div class="sidebar__contact-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <span class="sidebar__contact-label">Email</span>
+          <span class="sidebar__contact-value">exevodesigners@gmail.com</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="sidebar__response">
+      <div class="response-dot"></div>
+      <p><strong>Take your time.</strong> The more detail you give us here, the better we can tailor the system to how your business actually operates.</p>
+    </div>
+  </aside>
+
+  <!-- ── RIGHT: FORM ── -->
+  <main class="form-area">
+
+    <div class="progress" id="progress">
+      <div class="progress__step progress__step--active" data-step="0"><div class="progress__dot">1</div><span class="progress__label">Business</span></div>
+      <div class="progress__step" data-step="1"><div class="progress__dot">2</div><span class="progress__label">Income</span></div>
+      <div class="progress__step" data-step="2"><div class="progress__dot">3</div><span class="progress__label">Expenses</span></div>
+      <div class="progress__step" data-step="3"><div class="progress__dot">4</div><span class="progress__label">Workers</span></div>
+      <div class="progress__step" data-step="4"><div class="progress__dot">5</div><span class="progress__label">Inventory</span></div>
+      <div class="progress__step" data-step="5"><div class="progress__dot">6</div><span class="progress__label">Debts</span></div>
+      <div class="progress__step" data-step="6"><div class="progress__dot">7</div><span class="progress__label">Reports</span></div>
+      <div class="progress__step" data-step="7"><div class="progress__dot">8</div><span class="progress__label">Final</span></div>
+    </div>
+
+    <div class="steps-wrap" id="stepsWrap">
+
+      <!-- STEP 0 — BUSINESS INFORMATION -->
+      <div class="step step--active" id="step0">
+        <div class="step__eyebrow">Step 1 of 8 · Business Information</div>
+        <h2 class="step__question">Tell us about the business.</h2>
+        <p class="step__hint">The basics — who you are and how the system will be used.</p>
+
+        <div class="field"><label class="field__label">Business Name <span class="required-flag">*</span></label><input type="text" class="field__input" id="bizName" /></div>
+        <div class="field__row">
+          <div class="field"><label class="field__label">Business Owner <span class="required-flag">*</span></label><input type="text" class="field__input" id="bizOwner" /></div>
+          <div class="field"><label class="field__label">Business Type / Industry <span class="required-flag">*</span></label><input type="text" class="field__input" id="bizType" /></div>
+        </div>
+        <div class="field"><label class="field__label">Main Products / Services <span class="required-flag">*</span></label><textarea class="field__textarea" id="bizProducts" style="min-height:70px;"></textarea></div>
+        <div class="field__row">
+          <div class="field"><label class="field__label">Business Location(s) <span class="required-flag">*</span></label><input type="text" class="field__input" id="bizLocation" /></div>
+          <div class="field"><label class="field__label">How long has the business operated? <span class="required-flag">*</span></label><input type="text" class="field__input" id="bizAge" /></div>
+        </div>
+        <div class="field">
+          <label class="field__label">Who will primarily use the system? <span class="required-flag">*</span></label>
+          <div class="check-group" data-group="bizUsers">
+            <label class="check-item"><input type="checkbox" data-label="Owner"><span>Owner</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Manager"><span>Manager</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Accountant"><span>Accountant</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Other"><span>Other</span></label>
+          </div>
+          <input type="text" class="field__input optional-input" id="bizUsers_other" placeholder="If other, please specify" />
+        </div>
+        <div class="field"><label class="field__label">How many people will enter or view information? <span class="required-flag">*</span></label><input type="text" class="field__input" id="bizUserCount" /></div>
+
+        <div class="field__error" id="err0"></div>
+        <div class="step__nav">
+          <button type="button" class="btn-next" onclick="goNext(0)">Continue
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 1 — INCOME & SALES -->
+      <div class="step" id="step1">
+        <div class="step__eyebrow">Step 2 of 8 · Income &amp; Sales</div>
+        <h2 class="step__question">How does money come into the business?</h2>
+        <p class="step__hint">This shapes how sales and income get recorded in the system.</p>
+
+        <div class="field"><label class="field__label">Main sources of income <span class="required-flag">*</span></label><textarea class="field__textarea" id="incomeSources" placeholder="One per line" style="min-height:70px;"></textarea></div>
+
+        <div class="field">
+          <label class="field__label">What should be recorded for every sale/income transaction? <span class="required-flag">*</span></label>
+          <div class="check-group" data-group="salesFields">
+            <label class="check-item"><input type="checkbox" data-label="Date"><span>Date</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Customer name"><span>Customer name</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Product/service"><span>Product/service</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Quantity"><span>Quantity</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Unit price"><span>Unit price</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Total amount"><span>Total amount</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Amount paid"><span>Amount paid</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Outstanding balance"><span>Outstanding balance</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Payment method"><span>Payment method</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Salesperson/worker"><span>Salesperson/worker</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Other"><span>Other</span></label>
+          </div>
+          <input type="text" class="field__input optional-input" id="salesFields_other" placeholder="If other, please specify" />
+        </div>
+
+        <div class="field">
+          <label class="field__label">How do customers normally pay? <span class="required-flag">*</span></label>
+          <div class="check-group" data-group="paymentMethods">
+            <label class="check-item"><input type="checkbox" data-label="Cash"><span>Cash</span></label>
+            <label class="check-item"><input type="checkbox" data-label="M-Pesa"><span>M-Pesa</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Bank"><span>Bank</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Credit"><span>Credit</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Other"><span>Other</span></label>
+          </div>
+          <input type="text" class="field__input optional-input" id="paymentMethods_other" placeholder="If other, please specify" />
+        </div>
+
+        <div class="section-divider">
+          <div class="section-divider__title">Credit Sales</div>
+          <label class="field__label">Do you allow customers to take goods/services and pay later? <span class="required-flag">*</span></label>
+          <div class="radio-row" id="creditSalesRow" data-key="creditSales">
+            <div class="radio-pill" data-val="Yes" onclick="selectRadio('creditSalesRow','creditSales','Yes')">Yes</div>
+            <div class="radio-pill" data-val="No" onclick="selectRadio('creditSalesRow','creditSales','No')">No</div>
+          </div>
+          <div class="field">
+            <label class="field__label">If yes, what should the system track? <span class="required-flag">*</span></label>
+            <div class="check-group" data-group="creditTracking">
+              <label class="check-item"><input type="checkbox" data-label="Customer name"><span>Customer name</span></label>
+              <label class="check-item"><input type="checkbox" data-label="Amount owed"><span>Amount owed</span></label>
+              <label class="check-item"><input type="checkbox" data-label="Amount paid"><span>Amount paid</span></label>
+              <label class="check-item"><input type="checkbox" data-label="Remaining balance"><span>Remaining balance</span></label>
+              <label class="check-item"><input type="checkbox" data-label="Due date"><span>Due date</span></label>
+              <label class="check-item"><input type="checkbox" data-label="Payment history"><span>Payment history</span></label>
+              <label class="check-item"><input type="checkbox" data-label="Other"><span>Other</span></label>
+            </div>
+            <input type="text" class="field__input optional-input" id="creditTracking_other" placeholder="If other, please specify" />
+          </div>
+        </div>
+
+        <div class="field__error" id="err1"></div>
+        <div class="step__nav">
+          <button type="button" class="btn-back" onclick="goBack(1)"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M13 8H3M7 4l-4 4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Back</button>
+          <button type="button" class="btn-next" onclick="goNext(1)">Continue<svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+      </div>
+
+      <!-- STEP 2 — EXPENSES -->
+      <div class="step" id="step2">
+        <div class="step__eyebrow">Step 3 of 8 · Expenses</div>
+        <h2 class="step__question">What does the business spend on?</h2>
+        <p class="step__hint">List your typical expenses, roughly how much, and how often — one per line (e.g. "Rent — 15,000 — Monthly").</p>
+
+        <div class="field"><label class="field__label">Typical expenses <span class="required-flag">*</span></label><textarea class="field__textarea" id="expensesList" placeholder="Rent — 15,000 — Monthly&#10;Electricity — 3,000 — Monthly&#10;Stock purchases — varies — Weekly" style="min-height:120px;"></textarea></div>
+        <div class="field">
+          <label class="field__label">How would you like expenses categorized? <span class="required-flag">*</span></label>
+          <textarea class="field__textarea" id="expenseCategories" placeholder="List the categories you currently use, one per line — or leave blank and Exevo will structure suitable categories for you." style="min-height:80px;"></textarea>
+        </div>
+
+        <div class="field__error" id="err2"></div>
+        <div class="step__nav">
+          <button type="button" class="btn-back" onclick="goBack(2)"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M13 8H3M7 4l-4 4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Back</button>
+          <button type="button" class="btn-next" onclick="goNext(2)">Continue<svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+      </div>
+
+      <!-- STEP 3 — WORKERS & PAYMENTS -->
+      <div class="step" id="step3">
+        <div class="step__eyebrow">Step 4 of 8 · Workers &amp; Payments</div>
+        <h2 class="step__question">Who works here, and how are they paid?</h2>
+        <p class="step__hint">This section matters most — the system will track agreed pay versus what's actually been paid.</p>
+
+        <label class="field__label" style="margin-bottom:.6rem;display:block;">Workers</label>
+        <div id="workersList"></div>
+        <button type="button" class="add-entry-btn" id="addWorker">+ Add another worker</button>
+
+        <div class="field">
+          <label class="field__label">How are workers normally paid? <span class="required-flag">*</span></label>
+          <div class="check-group" data-group="payStructure">
+            <label class="check-item"><input type="checkbox" data-label="Monthly"><span>Monthly</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Weekly"><span>Weekly</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Daily"><span>Daily</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Combination"><span>Combination</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Other"><span>Other</span></label>
+          </div>
+          <input type="text" class="field__input optional-input" id="payStructure_other" placeholder="If other, please specify" />
+        </div>
+
+        <div class="field">
+          <label class="field__label">If pay comes in installments, what should the system calculate automatically? <span class="required-flag">*</span></label>
+          <p class="field__note">Example: monthly salary is Ksh 45,000, paid as three weekly installments of Ksh 10,000 — what should it work out for you?</p>
+          <div class="check-group" data-group="payCalc">
+            <label class="check-item"><input type="checkbox" data-label="Total paid"><span>Total paid</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Remaining salary"><span>Remaining salary</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Payment history"><span>Payment history</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Amount still owed"><span>Amount still owed</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Percentage paid"><span>Percentage paid</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Monthly worker cost"><span>Monthly worker cost</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Other"><span>Other</span></label>
+          </div>
+          <input type="text" class="field__input optional-input" id="payCalc_other" placeholder="If other, please specify" />
+        </div>
+
+        <div class="field">
+          <label class="field__label">Do workers receive any of the following? <span class="required-flag">*</span></label>
+          <div class="check-group" data-group="workerExtras">
+            <label class="check-item"><input type="checkbox" data-label="Overtime"><span>Overtime</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Allowances"><span>Allowances</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Transport"><span>Transport</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Bonuses"><span>Bonuses</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Advances"><span>Advances</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Deductions"><span>Deductions</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Other"><span>Other</span></label>
+          </div>
+          <textarea class="field__textarea" id="workerExtras_explain" placeholder="Please explain" style="min-height:60px;"></textarea>
+        </div>
+
+        <div class="field__error" id="err3"></div>
+        <div class="step__nav">
+          <button type="button" class="btn-back" onclick="goBack(3)"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M13 8H3M7 4l-4 4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Back</button>
+          <button type="button" class="btn-next" onclick="goNext(3)">Continue<svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+      </div>
+
+      <!-- STEP 4 — INVENTORY -->
+      <div class="step" id="step4">
+        <div class="step__eyebrow">Step 5 of 8 · Inventory / Stock</div>
+        <h2 class="step__question">What does the business stock?</h2>
+        <p class="step__hint">If the business doesn't hold physical stock, feel free to skip ahead.</p>
+
+        <div class="field"><label class="field__label">Main items stocked <span class="required-flag">*</span></label><textarea class="field__textarea" id="stockItems" placeholder="One per line" style="min-height:80px;"></textarea></div>
+
+        <div class="field">
+          <label class="field__label">What would you like to track for each item? <span class="required-flag">*</span></label>
+          <div class="check-group" data-group="stockFields">
+            <label class="check-item"><input type="checkbox" data-label="Item name"><span>Item name</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Category"><span>Category</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Quantity purchased"><span>Quantity purchased</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Quantity sold/used"><span>Quantity sold/used</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Current stock"><span>Current stock</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Buying price"><span>Buying price</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Selling price"><span>Selling price</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Supplier"><span>Supplier</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Stock value"><span>Stock value</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Reorder/low-stock level"><span>Reorder/low-stock level</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Other"><span>Other</span></label>
+          </div>
+          <input type="text" class="field__input optional-input" id="stockFields_other" placeholder="If other, please specify" />
+        </div>
+
+        <div class="section-divider">
+          <label class="field__label">Would you like the system to flag low-stock items? <span class="required-flag">*</span></label>
+          <div class="radio-row" id="stockAlertRow" data-key="stockAlerts">
+            <div class="radio-pill" data-val="Yes" onclick="selectRadio('stockAlertRow','stockAlerts','Yes')">Yes</div>
+            <div class="radio-pill" data-val="No" onclick="selectRadio('stockAlertRow','stockAlerts','No')">No</div>
+          </div>
+          <div class="field"><label class="field__label">If yes, what should count as "low stock"? <span class="required-flag">*</span></label><input type="text" class="field__input" id="stockAlertCriteria" /></div>
+        </div>
+
+        <div class="section-divider">
+          <label class="field__label">Do you purchase stock from different suppliers? <span class="required-flag">*</span></label>
+          <div class="radio-row" id="suppliersRow" data-key="multiSuppliers">
+            <div class="radio-pill" data-val="Yes" onclick="selectRadio('suppliersRow','multiSuppliers','Yes')">Yes</div>
+            <div class="radio-pill" data-val="No" onclick="selectRadio('suppliersRow','multiSuppliers','No')">No</div>
+          </div>
+          <div class="field"><label class="field__label">If yes, what should be recorded? <span class="required-flag">*</span></label><input type="text" class="field__input" id="supplierInfo" /></div>
+        </div>
+
+        <div class="field__error" id="err4"></div>
+        <div class="step__nav">
+          <button type="button" class="btn-back" onclick="goBack(4)"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M13 8H3M7 4l-4 4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Back</button>
+          <button type="button" class="btn-next" onclick="goNext(4)">Continue<svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+      </div>
+
+      <!-- STEP 5 — DEBTS -->
+      <div class="step" id="step5">
+        <div class="step__eyebrow">Step 6 of 8 · Debts</div>
+        <h2 class="step__question">Who owes whom?</h2>
+        <p class="step__hint">Both money the business owes, and money owed to the business.</p>
+
+        <div class="section-divider">
+          <div class="section-divider__title">Money the business owes others</div>
+          <textarea class="field__textarea" id="businessDebts" placeholder="Creditor — Reason — Total owed — Amount paid — Balance — Due date (one per line)" style="min-height:90px;"></textarea>
+          <div class="field" style="margin-top:.75rem;">
+            <label class="field__label">Would you like the system to automatically show: <span class="required-flag">*</span></label>
+            <div class="check-group" data-group="businessDebtAuto">
+              <label class="check-item"><input type="checkbox" data-label="Total business debt"><span>Total business debt</span></label>
+              <label class="check-item"><input type="checkbox" data-label="Amount already paid"><span>Amount already paid</span></label>
+              <label class="check-item"><input type="checkbox" data-label="Remaining balance"><span>Remaining balance</span></label>
+              <label class="check-item"><input type="checkbox" data-label="Due dates"><span>Due dates</span></label>
+              <label class="check-item"><input type="checkbox" data-label="Payment history"><span>Payment history</span></label>
+              <label class="check-item"><input type="checkbox" data-label="Other"><span>Other</span></label>
+            </div>
+            <input type="text" class="field__input optional-input" id="businessDebtAuto_other" placeholder="If other, please specify" />
+          </div>
+        </div>
+
+        <div class="section-divider">
+          <div class="section-divider__title">Money owed to the business</div>
+          <label class="field__label">Does anyone currently owe the business money? <span class="required-flag">*</span></label>
+          <div class="radio-row" id="customerDebtsRow" data-key="customerDebtsExist">
+            <div class="radio-pill" data-val="Yes" onclick="selectRadio('customerDebtsRow','customerDebtsExist','Yes')">Yes</div>
+            <div class="radio-pill" data-val="No" onclick="selectRadio('customerDebtsRow','customerDebtsExist','No')">No</div>
+          </div>
+          <textarea class="field__textarea" id="customerDebts" placeholder="Customer — Reason — Amount — Paid — Balance — Due date (one per line, if applicable)" style="min-height:90px;"></textarea>
+          <div class="field" style="margin-top:.75rem;">
+            <label class="field__label">Would you like automatic tracking of overdue payments? <span class="required-flag">*</span></label>
+            <div class="radio-row" id="overdueRow" data-key="overdueTracking">
+              <div class="radio-pill" data-val="Yes" onclick="selectRadio('overdueRow','overdueTracking','Yes')">Yes</div>
+              <div class="radio-pill" data-val="No" onclick="selectRadio('overdueRow','overdueTracking','No')">No</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field__error" id="err5"></div>
+        <div class="step__nav">
+          <button type="button" class="btn-back" onclick="goBack(5)"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M13 8H3M7 4l-4 4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Back</button>
+          <button type="button" class="btn-next" onclick="goNext(5)">Continue<svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+      </div>
+
+      <!-- STEP 6 — MONTHLY PERFORMANCE, DASHBOARD, REPORTS -->
+      <div class="step" id="step6">
+        <div class="step__eyebrow">Step 7 of 8 · Performance &amp; Reports</div>
+        <h2 class="step__question">What should the system show you automatically?</h2>
+        <p class="step__hint">This is where the automation becomes most useful.</p>
+
+        <div class="field">
+          <label class="field__label">Monthly financial performance — what should be shown? <span class="required-flag">*</span></label>
+          <div class="check-group" data-group="finPerformance">
+            <label class="check-item"><input type="checkbox" data-label="Total income"><span>Total income</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Total expenses"><span>Total expenses</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Total worker payments"><span>Total worker payments</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Total stock purchases"><span>Total stock purchases</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Net profit/loss"><span>Net profit/loss</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Total outstanding customer debts"><span>Outstanding customer debts</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Total business debts"><span>Total business debts</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Cash position"><span>Cash position</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Other"><span>Other</span></label>
+          </div>
+          <input type="text" class="field__input optional-input" id="finPerformance_other" placeholder="If other, please specify" />
+        </div>
+
+        <div class="field">
+          <label class="field__label">Would you like to compare: <span class="required-flag">*</span></label>
+          <div class="check-group" data-group="comparisons">
+            <label class="check-item"><input type="checkbox" data-label="This month vs previous month"><span>This month vs previous</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Month-by-month performance"><span>Month-by-month</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Year-to-date performance"><span>Year-to-date</span></label>
+            <label class="check-item"><input type="checkbox" data-label="This year vs previous year"><span>This year vs last</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Other"><span>Other</span></label>
+          </div>
+          <input type="text" class="field__input optional-input" id="comparisons_other" placeholder="If other, please specify" />
+        </div>
+
+        <div class="field">
+          <label class="field__label">What would you like to see immediately on the dashboard? <span class="required-flag">*</span></label>
+          <textarea class="field__textarea" id="dashboardWants" placeholder="e.g. Total Income, Total Expenses, Net Profit, Money Owed to Business, Inventory Value, Low Stock Items..." style="min-height:80px;"></textarea>
+        </div>
+
+        <div class="field">
+          <label class="field__label">Which reports would you like the system to generate? <span class="required-flag">*</span></label>
+          <div class="check-group" data-group="reportsWanted">
+            <label class="check-item"><input type="checkbox" data-label="Monthly financial summary"><span>Monthly financial summary</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Worker payment summary"><span>Worker payment summary</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Inventory report"><span>Inventory report</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Income report"><span>Income report</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Expense report"><span>Expense report</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Debt report"><span>Debt report</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Customer outstanding balances"><span>Customer outstanding balances</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Annual summary"><span>Annual summary</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Other"><span>Other</span></label>
+          </div>
+          <input type="text" class="field__input optional-input" id="reportsWanted_other" placeholder="If other, please specify" />
+        </div>
+        <div class="field">
+          <label class="field__label">Should reports be printable/exportable to PDF? <span class="required-flag">*</span></label>
+          <div class="radio-row" id="printableRow" data-key="printableReports">
+            <div class="radio-pill" data-val="Yes" onclick="selectRadio('printableRow','printableReports','Yes')">Yes</div>
+            <div class="radio-pill" data-val="No" onclick="selectRadio('printableRow','printableReports','No')">No</div>
+          </div>
+        </div>
+
+        <div class="field__error" id="err6"></div>
+        <div class="step__nav">
+          <button type="button" class="btn-back" onclick="goBack(6)"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M13 8H3M7 4l-4 4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Back</button>
+          <button type="button" class="btn-next" onclick="goNext(6)">Continue<svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+      </div>
+
+      <!-- STEP 7 — RECORDS, AUTOMATION, FUTURE, FINAL -->
+      <div class="step" id="step7">
+        <div class="step__eyebrow">Step 8 of 8 · Final Details</div>
+        <h2 class="step__question">Last few things.</h2>
+        <p class="step__hint">This rounds out what we need to design the full system.</p>
+
+        <div class="field">
+          <label class="field__label">Existing records you already have <span class="required-flag">*</span></label>
+          <div class="check-group" data-group="existingRecords">
+            <label class="check-item"><input type="checkbox" data-label="Previous Excel files"><span>Previous Excel files</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Sales records"><span>Sales records</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Expense records"><span>Expense records</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Worker payment records"><span>Worker payment records</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Inventory records"><span>Inventory records</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Debt records"><span>Debt records</span></label>
+            <label class="check-item"><input type="checkbox" data-label="M-Pesa statements"><span>M-Pesa statements</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Receipts"><span>Receipts</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Manual books"><span>Manual books</span></label>
+            <label class="check-item"><input type="checkbox" data-label="Other"><span>Other</span></label>
+          </div>
+          <input type="text" class="field__input optional-input" id="existingRecords_other" placeholder="If other, please specify" />
+          <p class="field__note">This form can't accept file uploads — if you have any of these on hand, please send them directly over WhatsApp or email so we can review them.</p>
+        </div>
+
+        <div class="field">
+          <label class="field__label">Anything else you'd like calculated or automated? <span class="required-flag">*</span></label>
+          <textarea class="field__textarea" id="automationWants" placeholder="e.g. automatic totals, remaining worker salaries, debt balances, monthly profit/loss, low-stock notifications, charts/graphs..." style="min-height:80px;"></textarea>
+        </div>
+
+        <div class="field">
+          <label class="field__label">Any areas you may want to add later? <span class="required-flag">*</span></label>
+          <textarea class="field__textarea" id="futureExpansion" placeholder="One per line" style="min-height:60px;"></textarea>
+        </div>
+
+        <div class="section-divider">
+          <div class="section-divider__title">Final Requirements</div>
+          <div class="field"><label class="field__label">1. Most important thing you want this system to help you accomplish <span class="required-flag">*</span></label><input type="text" class="field__input" id="final1" /></div>
+          <div class="field"><label class="field__label">2. Second most important thing <span class="required-flag">*</span></label><input type="text" class="field__input" id="final2" /></div>
+          <div class="field"><label class="field__label">3. Third most important thing <span class="required-flag">*</span></label><input type="text" class="field__input" id="final3" /></div>
+          <div class="field"><label class="field__label">Anything currently done manually you'd like simplified or automated? <span class="required-flag">*</span></label><textarea class="field__textarea" id="manualPain" style="min-height:60px;"></textarea></div>
+          <div class="field"><label class="field__label">Anything else we should know about how the business operates? <span class="required-flag">*</span></label><textarea class="field__textarea" id="anythingElse" style="min-height:60px;"></textarea></div>
+        </div>
+
+        <div class="field__error" id="err7"></div>
+        <div class="step__nav">
+          <button type="button" class="btn-back" onclick="goBack(7)"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M13 8H3M7 4l-4 4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Back</button>
+          <button type="button" class="btn-next" onclick="submitForm()">Email My Answers<svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+      </div>
+
+    </div><!-- /steps-wrap -->
+
+    <!-- Success -->
+    <div class="success" id="success">
+      <div class="success__icon">✓</div>
+      <h2 class="success__title">Answers sent.</h2>
+      <p class="success__sub">
+        Your email app should now be open with all your answers ready to send. If you mentioned any existing records or files, remember to attach or send those separately.
+      </p>
+      <a href="/" class="btn-home">
+        Back to Exevo
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+
+  </main>
+</div><!-- /page -->
+
+<script>
+  const EXEVO_EMAIL = "exevodesigners@gmail.com";
+
+  /* ── RADIO PILL HELPER ── */
+  const radioValues = {};
+  function selectRadio(rowId, key, val) {
+    radioValues[key] = val;
+    document.querySelectorAll(`#${rowId} .radio-pill`).forEach(p => {
+      p.classList.toggle('radio-pill--active', p.dataset.val === val);
+    });
+  }
+
+  /* ── CHECK GROUP COMPILE HELPER ── */
+  function compileGroup(groupName, otherInputId) {
+    const checked = Array.from(document.querySelectorAll(`[data-group="${groupName}"] input:checked`)).map(el => el.dataset.label);
+    const otherEl = otherInputId ? document.getElementById(otherInputId) : null;
+    if (otherEl && otherEl.value.trim() && checked.includes('Other')) {
+      const idx = checked.indexOf('Other');
+      checked[idx] = 'Other: ' + otherEl.value.trim();
+    }
+    return checked.length ? checked.join(', ') : 'None selected';
+  }
+
+  /* ── REPEATABLE WORKERS ── */
+  let workerCount = 0;
+  function makeWorkerCard(i) {
+    const div = document.createElement('div');
+    div.className = 'entry-card';
+    div.innerHTML = `
+      <div class="entry-card__label">Worker ${i}</div>
+      ${i > 1 ? '<button type="button" class="entry-card__remove">Remove</button>' : ''}
+      <div class="field__row">
+        <div class="field"><label class="field__label">Name <span class="required-flag">*</span></label><input type="text" class="field__input" name="worker_name_${i}" /></div>
+        <div class="field"><label class="field__label">Role <span class="required-flag">*</span></label><input type="text" class="field__input" name="worker_role_${i}" /></div>
+      </div>
+      <div class="field__row">
+        <div class="field"><label class="field__label">Pay Frequency <span class="required-flag">*</span></label><input type="text" class="field__input" name="worker_freq_${i}" placeholder="Monthly / Weekly / Daily" /></div>
+        <div class="field"><label class="field__label">Agreed Amount <span class="required-flag">*</span></label><input type="text" class="field__input" name="worker_amount_${i}" placeholder="Ksh" /></div>
+      </div>
+    `;
+    const removeBtn = div.querySelector('.entry-card__remove');
+    if (removeBtn) removeBtn.addEventListener('click', () => div.remove());
+    return div;
+  }
+  function addWorker() {
+    workerCount++;
+    document.getElementById('workersList').appendChild(makeWorkerCard(workerCount));
+  }
+  document.getElementById('addWorker').addEventListener('click', addWorker);
+  addWorker();
+
+  /* ── STEP NAV ── */
+  function showStep(n) {
+    document.querySelectorAll('.step').forEach((s, i) => s.classList.toggle('step--active', i === n));
+    document.querySelectorAll('.progress__step').forEach((s, i) => {
+      s.classList.remove('progress__step--active', 'progress__step--done');
+      if (i < n) s.classList.add('progress__step--done');
+      if (i === n) s.classList.add('progress__step--active');
+    });
+    document.querySelectorAll('.progress__dot').forEach((d, i) => { d.textContent = i < n ? '✓' : i + 1; });
+    const fa = document.querySelector('.form-area');
+    if (fa) fa.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function validateStep(step) {
+    const stepEl = document.getElementById('step' + step);
+
+    // Required text inputs & textareas (skip "other" specify boxes)
+    const textFields = stepEl.querySelectorAll('input[type="text"]:not(.optional-input), input[type="email"], textarea');
+    for (const el of textFields) {
+      if (!el.value.trim()) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        el.focus();
+        return 'Please fill in all required fields (marked with *) — write N/A if something doesn\'t apply.';
+      }
+    }
+
+    // Required checkbox groups — at least one option selected
+    const groups = stepEl.querySelectorAll('.check-group');
+    for (const g of groups) {
+      const checked = g.querySelectorAll('input:checked');
+      if (checked.length === 0) {
+        g.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return 'Please select at least one option for each checklist above.';
+      }
+    }
+
+    // Required Yes/No radio rows
+    const radios = stepEl.querySelectorAll('.radio-row');
+    for (const r of radios) {
+      const key = r.dataset.key;
+      if (!radioValues[key]) {
+        r.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return 'Please answer every Yes/No question above.';
+      }
+    }
+
+    return null;
+  }
+
+  function goNext(step) {
+    const err = document.getElementById('err' + step);
+    if (err) err.textContent = '';
+    const message = validateStep(step);
+    if (message) { err.textContent = message; return; }
+    showStep(step + 1);
+  }
+  function goBack(step) { showStep(step - 1); }
+
+  /* ── COMPILE + SUBMIT ── */
+  function compileBody() {
+    const g = (id) => (document.getElementById(id)?.value || '').trim();
+    const lines = [];
+
+    lines.push(`BUSINESS SYSTEM REQUIREMENTS — ${g('bizName') || 'Unnamed business'}`);
+    lines.push('─────────────────────────────────────────');
+    lines.push('');
+    lines.push('1. BUSINESS INFORMATION');
+    lines.push(`Business Name: ${g('bizName')}`);
+    lines.push(`Owner: ${g('bizOwner')}`);
+    lines.push(`Type/Industry: ${g('bizType')}`);
+    lines.push(`Products/Services: ${g('bizProducts')}`);
+    lines.push(`Location(s): ${g('bizLocation')}`);
+    lines.push(`Operating for: ${g('bizAge')}`);
+    lines.push(`System users: ${compileGroup('bizUsers','bizUsers_other')}`);
+    lines.push(`Number of users: ${g('bizUserCount')}`);
+    lines.push('');
+    lines.push('2. INCOME & SALES');
+    lines.push(`Income sources: ${g('incomeSources')}`);
+    lines.push(`Sale record fields: ${compileGroup('salesFields','salesFields_other')}`);
+    lines.push(`Payment methods: ${compileGroup('paymentMethods','paymentMethods_other')}`);
+    lines.push(`Credit sales allowed: ${radioValues.creditSales || 'Not specified'}`);
+    lines.push(`Credit tracking fields: ${compileGroup('creditTracking','creditTracking_other')}`);
+    lines.push('');
+    lines.push('3. EXPENSES');
+    lines.push(`Typical expenses:\n${g('expensesList')}`);
+    lines.push(`Expense categories: ${g('expenseCategories')}`);
+    lines.push('');
+    lines.push('4. WORKERS & PAYMENTS');
+    for (let i = 1; i <= workerCount; i++) {
+      const nameEl = document.querySelector(`[name="worker_name_${i}"]`);
+      if (!nameEl) continue;
+      const name = nameEl.value.trim();
+      const role = document.querySelector(`[name="worker_role_${i}"]`).value.trim();
+      const freq = document.querySelector(`[name="worker_freq_${i}"]`).value.trim();
+      const amount = document.querySelector(`[name="worker_amount_${i}"]`).value.trim();
+      if (!name && !role) continue;
+      lines.push(`- ${name || '(name)'} — ${role || '(role)'} — ${freq || 'freq n/a'} — ${amount || 'amount n/a'}`);
+    }
+    lines.push(`Payment structure: ${compileGroup('payStructure','payStructure_other')}`);
+    lines.push(`Auto-calculate: ${compileGroup('payCalc','payCalc_other')}`);
+    lines.push(`Worker extras: ${compileGroup('workerExtras', null)}`);
+    lines.push(`Worker extras explained: ${g('workerExtras_explain')}`);
+    lines.push('');
+    lines.push('5. INVENTORY / STOCK');
+    lines.push(`Items stocked: ${g('stockItems')}`);
+    lines.push(`Track fields: ${compileGroup('stockFields','stockFields_other')}`);
+    lines.push(`Low-stock alerts: ${radioValues.stockAlerts || 'Not specified'}`);
+    lines.push(`Low-stock criteria: ${g('stockAlertCriteria')}`);
+    lines.push(`Multiple suppliers: ${radioValues.multiSuppliers || 'Not specified'}`);
+    lines.push(`Supplier info to record: ${g('supplierInfo')}`);
+    lines.push('');
+    lines.push('6. DEBTS');
+    lines.push(`Business owes others:\n${g('businessDebts')}`);
+    lines.push(`Auto-show for business debts: ${compileGroup('businessDebtAuto','businessDebtAuto_other')}`);
+    lines.push(`Customers owe business: ${radioValues.customerDebtsExist || 'Not specified'}`);
+    lines.push(`Customer debts:\n${g('customerDebts')}`);
+    lines.push(`Overdue tracking: ${radioValues.overdueTracking || 'Not specified'}`);
+    lines.push('');
+    lines.push('7. MONTHLY PERFORMANCE, DASHBOARD & REPORTS');
+    lines.push(`Financial performance to show: ${compileGroup('finPerformance','finPerformance_other')}`);
+    lines.push(`Comparisons wanted: ${compileGroup('comparisons','comparisons_other')}`);
+    lines.push(`Dashboard wants: ${g('dashboardWants')}`);
+    lines.push(`Reports wanted: ${compileGroup('reportsWanted','reportsWanted_other')}`);
+    lines.push(`Printable/exportable: ${radioValues.printableReports || 'Not specified'}`);
+    lines.push('');
+    lines.push('8. EXISTING RECORDS, AUTOMATION, FUTURE & FINAL');
+    lines.push(`Existing records: ${compileGroup('existingRecords','existingRecords_other')}`);
+    lines.push(`Automation wants: ${g('automationWants')}`);
+    lines.push(`Future expansion: ${g('futureExpansion')}`);
+    lines.push(`Top priority 1: ${g('final1')}`);
+    lines.push(`Top priority 2: ${g('final2')}`);
+    lines.push(`Top priority 3: ${g('final3')}`);
+    lines.push(`Manual pain points: ${g('manualPain')}`);
+    lines.push(`Anything else: ${g('anythingElse')}`);
+
+    return lines.join('\n');
+  }
+
+  function submitForm() {
+    const err = document.getElementById('err7');
+    const message = validateStep(7);
+    if (message) { err.textContent = message; return; }
+
+    const bizName = document.getElementById('bizName').value.trim() || 'Client';
+    const subject = `Business System Requirements — ${bizName}`;
+    const body = compileBody();
+
+    document.getElementById('stepsWrap').style.display = 'none';
+    document.getElementById('progress').style.display = 'none';
+    document.getElementById('success').classList.add('success--show');
+
+    window.location.href = `mailto:${EXEVO_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  }
+</script>
+</body>
+</html>
