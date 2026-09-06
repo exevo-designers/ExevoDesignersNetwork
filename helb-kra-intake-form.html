@@ -242,7 +242,7 @@
         <input type="hidden" name="_subject" value="New HELB/HEF Application Submission" />
         <input type="hidden" name="_template" value="table" />
         <input type="hidden" name="_captcha" value="false" />
-        <input type="hidden" name="_next" value="https://exevodesigners.online/helb-kra-intake-form?submitted=1#helb-link" />
+        <input type="hidden" name="_next" value="https://www.exevodesigners.online/helb-kra-intake-form?submitted=1#helb-link" />
         <input type="hidden" name="Form Type" value="HELB/HEF First-Time Application" />
 
         <div class="form-section">
@@ -401,11 +401,11 @@
         <p>Choose what you need below — the form adjusts to show exactly what we require for that service.</p>
       </div>
 
-      <form action="https://formsubmit.co/editornjoro@gmail.com" method="POST" enctype="multipart/form-data">
+      <form action="https://formsubmit.co/exevodesigners@gmail.com" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="_subject" value="New KRA Service Request Submission" />
         <input type="hidden" name="_template" value="table" />
         <input type="hidden" name="_captcha" value="false" />
-        <input type="hidden" name="_next" value="https://exevodesigners.online/helb-kra-intake-form?submitted=1#kra-link" />
+        <input type="hidden" name="_next" value="https://www.exevodesigners.online/helb-kra-intake-form?submitted=1#kra-link" />
         <input type="hidden" name="Form Type" value="KRA Service Request" />
 
         <div class="service-select-box">
@@ -455,12 +455,12 @@
           <div class="form-section__head"><h3>Section C — Return Filing Information</h3></div>
           <div class="field-grid field-grid--2">
             <div class="field"><label>Return Type <span class="req">*</span></label>
-              <select name="Return Type" id="kraReturnType" onchange="updateKraReturnType()" required>
+              <select name="Return Type" id="kraReturnType" onchange="updateKraReturnType()">
                 <option value="">Select</option><option>Nil Return</option><option>Employment Return</option><option>Business Return</option><option>Rental Return</option>
               </select>
             </div>
             <div class="field"><label>Tax Year <span class="req">*</span></label>
-              <select name="Tax Year" required><option value="">Select</option><option>2024</option><option>2025</option><option>2026</option></select>
+              <select name="Tax Year" id="kraTaxYear"><option value="">Select</option><option>2024</option><option>2025</option><option>2026</option></select>
             </div>
           </div>
 
@@ -591,9 +591,12 @@
       const returnSection = document.getElementById('kraReturnSection');
       const employmentSection = document.getElementById('kraEmploymentSection');
       const returnTypeSelect = document.getElementById('kraReturnType');
+      const taxYearSelect = document.getElementById('kraTaxYear');
       const isReturn = v.startsWith('KRA Return Filing');
       returnSection.classList.toggle('hidden', !isReturn);
       employmentSection.classList.toggle('hidden', v !== 'KRA Return Filing (Employment)');
+      returnTypeSelect.required = isReturn;
+      taxYearSelect.required = isReturn;
       if (isReturn) {
         if (v.includes('Nil')) returnTypeSelect.value = 'Nil Return';
         else if (v.includes('Employment')) returnTypeSelect.value = 'Employment Return';
@@ -612,6 +615,8 @@
       document.getElementById('kraBusinessBlock').classList.toggle('hidden', v !== 'Business Return');
       document.getElementById('kraRentalBlock').classList.toggle('hidden', v !== 'Rental Return');
     }
+
+    updateKraForm();
 
     // Show success banner + open the right panel after a FormSubmit redirect
     const params = new URLSearchParams(window.location.search);
