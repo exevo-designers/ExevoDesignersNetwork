@@ -618,7 +618,7 @@
             <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M13 8H3M7 4l-4 4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             Back
           </button>
-          <button type="button" class="btn-next" onclick="submitForm()">
+          <button type="button" class="btn-next" id="submitBtn" onclick="submitForm()">
             Send Project Brief
             <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
@@ -644,14 +644,21 @@
 </div><!-- /page -->
 
 <script>
+  /* ── FORMSUBMIT CONFIG ──
+     Swap this for your own FormSubmit-registered inbox if it ever changes.
+     The FIRST submission to a new address requires a one-time activation click
+     from an email FormSubmit sends to that inbox — after that, it's automatic. */
+  const FORMSUBMIT_ENDPOINT = 'https://formsubmit.co/ajax/exevodesigners@gmail.com';
+
   /* ── PRICING MODEL ──
      Every service has tiers with a KES min/max. 1,000 KES is the true floor,
      used for the smallest single graphic-design item. */
   const SERVICES = {
     brand: {
       label: 'Brand Identity',
-      from: 15000,
+      from: 5000,
       tiers: [
+        { name: 'Single Logo', desc: 'One standalone logo design — no palette or type system.', min: 5000, max: 5000, recurring: false },
         { name: 'Logo Essentials', desc: 'Logo, color palette, basic type system.', min: 15000, max: 30000 },
         { name: 'Full Identity System', desc: 'Complete brand system across all touchpoints.', min: 40000, max: 75000 },
         { name: 'Premium Brand + Guidelines', desc: 'Full system plus a documented brand guideline.', min: 90000, max: 180000 },
@@ -672,16 +679,16 @@
       tiers: [
         { name: 'Single Design', desc: 'One poster, flyer, or social tile.', min: 1000, max: 5000 },
         { name: 'Design Bundle', desc: '10–20 assets for a campaign or launch.', min: 15000, max: 35000 },
-        { name: 'Monthly Retainer', desc: 'Ongoing design support, billed monthly.', min: 30000, max: 60000 },
+        { name: 'Monthly Retainer', desc: 'Ongoing design support, billed monthly.', min: 30000, max: 60000, recurring: true },
       ],
     },
     marketing: {
       label: 'Digital Marketing',
       from: 20000,
       tiers: [
-        { name: 'Social Starter', desc: 'Content calendar + posting, monthly.', min: 20000, max: 20000 },
-        { name: 'Growth', desc: 'Content, ads, and monthly strategy.', min: 45000, max: 45000 },
-        { name: 'Full Management', desc: 'End-to-end marketing, monthly.', min: 80000, max: 120000 },
+        { name: 'Social Starter', desc: 'Content calendar + posting, monthly.', min: 20000, max: 20000, recurring: true },
+        { name: 'Growth', desc: 'Content, ads, and monthly strategy.', min: 45000, max: 45000, recurring: true },
+        { name: 'Full Management', desc: 'End-to-end marketing, monthly.', min: 80000, max: 120000, recurring: true },
       ],
     },
     docs: {
@@ -696,7 +703,7 @@
       label: 'Creative Consulting',
       from: 3000,
       tiers: [
-        { name: 'Hourly Session', desc: 'Single strategy or feedback session.', min: 3000, max: 3000 },
+        { name: 'Hourly Session', desc: 'Single strategy or feedback session.', min: 3000, max: 3000, recurring: false },
         { name: 'Project Consulting', desc: 'Ongoing input across a full project.', min: 15000, max: 40000 },
       ],
     },
@@ -748,7 +755,8 @@
     }
 
     tierGrid.innerHTML = s.tiers.map((t, i) => {
-      const priceLabel = t.min === t.max ? kesFmt(t.min) + '/mo' : kesFmt(t.min) + ' – ' + kesFmt(t.max);
+      const base = t.min === t.max ? kesFmt(t.min) : kesFmt(t.min) + ' – ' + kesFmt(t.max);
+      const priceLabel = t.recurring ? base + '/mo' : base;
       return `<div class="tier-card" data-idx="${i}" onclick="selectTier(${i})">
         <div class="tier-card__radio"></div>
         <div class="tier-card__body">
@@ -769,7 +777,8 @@
       c.classList.toggle('tier-card--active', parseInt(c.dataset.idx) === idx);
     });
     const t = SERVICES[selectedService].tiers[idx];
-    const priceLabel = t.min === t.max ? kesFmt(t.min) + ' / month' : kesFmt(t.min) + ' – ' + kesFmt(t.max);
+    const base = t.min === t.max ? kesFmt(t.min) : kesFmt(t.min) + ' – ' + kesFmt(t.max);
+    const priceLabel = t.recurring ? base + ' / month' : base;
     document.getElementById('estimateValue').textContent = priceLabel;
     document.getElementById('estimateBox').classList.add('estimate-box--show');
   }
@@ -837,7 +846,7 @@
   }
 
   /* ── SUBMIT ── */
-  function submitForm() {
+  async function submitForm() {
     const err = document.getElementById('err2');
     err.textContent = '';
     const problem = document.getElementById('cf_problem').value.trim();
@@ -856,37 +865,55 @@
     let priceLabel = 'To be scoped together';
     if (selectedTierIdx !== null) {
       const t = SERVICES[selectedService].tiers[selectedTierIdx];
-      priceLabel = (t.min === t.max ? kesFmt(t.min) + '/mo' : kesFmt(t.min) + ' – ' + kesFmt(t.max)) + ` (${t.name})`;
+      const base = t.min === t.max ? kesFmt(t.min) : kesFmt(t.min) + ' – ' + kesFmt(t.max);
+      priceLabel = (t.recurring ? base + '/mo' : base) + ` (${t.name})`;
     }
     const timelineLabels = { rush: 'Rush / ASAP', '2-4w': '2–4 weeks', '1-2m': '1–2 months', flex: 'Flexible / No rush' };
     const timelineLabel = timelineLabels[selectedTimeline] || 'Not specified';
 
-    const body = [
-      `PROJECT BRIEF — EXEVO DESIGNERS NETWORK`,
-      `─────────────────────────────────────────`,
-      `Name:      ${first} ${last}`,
-      `Email:     ${email}`,
-      `Phone:     ${phone}`,
-      `Company:   ${company}`,
-      `Service:   ${serviceLabel}`,
-      `Estimate:  ${priceLabel}`,
-      `Timeline:  ${timelineLabel}`,
-      ``,
-      `THE BRIEF`,
-      problem,
-      extra ? `\nADDITIONAL NOTES\n${extra}` : '',
-    ].filter(x => x !== undefined).join('\n');
-
     const subject = `Project Brief: ${serviceLabel} — ${first} ${last}`;
 
-    window.open(`https://wa.me/254700552884?text=${encodeURIComponent(body)}`, '_blank');
-    setTimeout(() => {
-      window.location.href = `mailto:exevodesigners@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    }, 800);
+    const payload = {
+      name: `${first} ${last}`.trim(),
+      email: email,
+      phone: phone,
+      company: company,
+      service: serviceLabel,
+      estimate: priceLabel,
+      timeline: timelineLabel,
+      problem: problem,
+      additional_notes: extra || 'None',
+      _subject: subject,
+      _template: 'table',
+      _captcha: 'false',
+    };
 
-    document.getElementById('stepsWrap').style.display = 'none';
-    document.getElementById('progress').style.display = 'none';
-    document.getElementById('success').classList.add('success--show');
+    const submitBtn = document.getElementById('submitBtn');
+    const originalLabel = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+
+    try {
+      const response = await fetch(FORMSUBMIT_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) throw new Error('FormSubmit request failed with status ' + response.status);
+
+      document.getElementById('stepsWrap').style.display = 'none';
+      document.getElementById('progress').style.display = 'none';
+      document.getElementById('success').classList.add('success--show');
+    } catch (e) {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalLabel;
+      err.textContent = "Something went wrong sending your brief. Please try again, or reach us directly on WhatsApp/email in the sidebar.";
+      console.error('FormSubmit error:', e);
+    }
   }
 
   /* ── INIT ── */
