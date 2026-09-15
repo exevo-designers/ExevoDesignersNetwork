@@ -192,6 +192,9 @@
     .success-banner__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--success); flex-shrink: 0; }
     .form-error { display: none; margin-top: 1rem; padding: .9rem 1rem; border: 1px solid rgba(248,113,113,.35); background: rgba(248,113,113,.08); border-radius: var(--radius); color: #FCA5A5; font-size: .78rem; line-height: 1.6; }
     .form-error.show { display: block; }
+    .field-error { display: none; margin-top: -.15rem; font-size: .72rem; line-height: 1.5; color: #FCA5A5; }
+    .field-error.show { display: block; }
+    .field input:invalid.touched, .field input.invalid { border-color: rgba(248,113,113,.6); background: rgba(248,113,113,.06); }
   </style>
 </head>
 <body>
@@ -254,7 +257,7 @@
           <div class="field-grid">
             <div class="field"><label>Full Name (as per ID) <span class="req">*</span></label><input type="text" name="Full Name" required /></div>
             <div class="field"><label>National ID Number <span class="req">*</span></label><input type="text" name="National ID Number" required pattern="^\d{7,8}$" title="Enter a valid National ID number — 7 or 8 digits, no spaces" /></div>
-            <div class="field"><label>Date of Birth <span class="req">*</span></label><input type="date" name="Date of Birth" id="helbDob" required /></div>
+            <div class="field"><label>Date of Birth <span class="req">*</span></label><input type="date" name="Date of Birth" id="helbDob" required /><p class="field-error" id="helbDobError"></p></div>
             <div class="field"><label>Gender <span class="req">*</span></label><select name="Gender" required><option value="">Select</option><option>Male</option><option>Female</option></select></div>
             <div class="field"><label>Phone Number <span class="req">*</span></label><input type="tel" name="Phone Number" required pattern="^(?:\+254|0)[17]\d{8}$" title="Enter a valid Kenyan number, e.g. 0712345678 or +254712345678" /></div>
             <div class="field"><label>Alternative Phone Number <span class="opt">(optional)</span></label><input type="tel" name="Alternative Phone Number" pattern="^(?:\+254|0)[17]\d{8}$" title="Enter a valid Kenyan number, e.g. 0712345678 or +254712345678" /></div>
@@ -418,7 +421,7 @@
             <div class="field"><label>Full Name <span class="req">*</span></label><input type="text" name="Full Name" required /></div>
             <div class="field"><label>National ID Number <span class="req">*</span></label><input type="text" name="National ID Number" required pattern="^\d{7,8}$" title="Enter a valid National ID number — 7 or 8 digits, no spaces" /></div>
             <div class="field"><label>KRA PIN <span class="opt">(if available)</span></label><input type="text" name="KRA PIN" pattern="^[A-Za-z]\d{9}[A-Za-z]$" title="Format: one letter, 9 digits, one letter — e.g. A123456789Z" /></div>
-            <div class="field"><label>Date of Birth <span class="opt">(optional)</span></label><input type="date" name="Date of Birth" id="kraDob" /></div>
+            <div class="field"><label>Date of Birth <span class="opt">(optional)</span></label><input type="date" name="Date of Birth" id="kraDob" /><p class="field-error" id="kraDobError"></p></div>
             <div class="field"><label>Gender <span class="opt">(optional)</span></label><select name="Gender"><option value="">Select</option><option>Male</option><option>Female</option></select></div>
             <div class="field"><label>Phone Number <span class="req">*</span></label><input type="tel" name="Phone Number" required pattern="^(?:\+254|0)[17]\d{8}$" title="Enter a valid Kenyan number, e.g. 0712345678 or +254712345678" /></div>
             <div class="field"><label>Email Address <span class="req">*</span></label><input type="email" name="Email Address" required /></div>
@@ -607,6 +610,7 @@
     function setupAdultDobConstraint(inputId) {
       const input = document.getElementById(inputId);
       if (!input) return;
+      const errorEl = document.getElementById(inputId + 'Error');
       const today = new Date();
       const maxDob = new Date(today.getFullYear() - 17, today.getMonth(), today.getDate());
       const minDob = new Date(today.getFullYear() - 100, today.getMonth(), today.getDate());
@@ -614,13 +618,17 @@
       input.max = toIso(maxDob);
       input.min = toIso(minDob);
       const validate = () => {
-        if (!input.value) { input.setCustomValidity(''); return; }
-        if (input.value > input.max) {
-          input.setCustomValidity('You must be at least 17 years old to apply.');
-        } else if (input.value < input.min) {
-          input.setCustomValidity('Please enter a valid date of birth.');
-        } else {
-          input.setCustomValidity('');
+        let message = '';
+        if (input.value && input.value > input.max) {
+          message = 'You must be at least 17 years old to apply — please check the date.';
+        } else if (input.value && input.value < input.min) {
+          message = 'Please enter a valid date of birth.';
+        }
+        input.setCustomValidity(message);
+        input.classList.toggle('invalid', !!message);
+        if (errorEl) {
+          errorEl.textContent = message;
+          errorEl.classList.toggle('show', !!message);
         }
       };
       input.addEventListener('input', validate);
