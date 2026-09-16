@@ -813,7 +813,7 @@
         event.preventDefault();
         errorEl.classList.remove('show');
 
-        if (!GAS_WEB_APP_URL || GAS_WEB_APP_URL.indexOf('PASTE_YOUR') === 0) {
+        if (!GAS_WEB_APP_URL || GAS_WEB_APP_URL.indexOf('https://script.google.com/macros/s/AKfycbwZrxLgqX3x5bSBRZJHnVgTCSxj4jrUwoxB_RS9H5a1g6c_XMfrJ65LmWfYrDkohx8/exec') === 0) {
           errorEl.textContent = 'This form is not connected to a backend yet — add your Google Apps Script Web App URL in the page code.';
           errorEl.classList.add('show');
           return;
