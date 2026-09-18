@@ -318,6 +318,15 @@
       transition: opacity .25s, transform .25s;
     }
     .btn-next:hover { opacity: .88; transform: translateY(-1px); }
+    .btn-next:disabled { opacity: .55; cursor: not-allowed; transform: none; }
+    .btn-next .spinner {
+      width: 13px; height: 13px; border-radius: 50%;
+      border: 2px solid rgba(255,255,255,.35); border-top-color: #fff;
+      animation: spin .7s linear infinite; display: none;
+    }
+    .btn-next.loading .spinner { display: inline-block; }
+    .btn-next.loading .btn-next__label { display: none; }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
     .success {
       display: none; text-align: center;
@@ -351,6 +360,14 @@
       color: var(--text); text-decoration: none; transition: all .28s;
     }
     .btn-home:hover { background: var(--accent); border-color: var(--accent); }
+
+    .submit-error {
+      display: none;
+      font-size: .74rem; color: var(--red);
+      background: rgba(248,113,113,.06); border: 1px solid rgba(248,113,113,.25);
+      border-radius: var(--radius); padding: .7rem 1rem; margin-top: 1rem;
+    }
+    .submit-error--show { display: block; }
 
     @media (min-width: 901px) {
       html, body { height: 100%; overflow: hidden; }
@@ -507,7 +524,7 @@
             <div class="photo-drop__prompt" id="photoPrompt">Click to choose a photo</div>
             <div class="photo-drop__file" id="photoFilename"></div>
           </div>
-          <div class="photo-note">This form emails as text, so the photo won't attach automatically — after you click send, just attach the file to that email before it goes out.</div>
+          <div class="photo-note">Your photo is embedded directly into the CV PDF we generate — no need to attach anything separately.</div>
         </div>
 
         <div class="field__error" id="err0"></div>
@@ -610,14 +627,15 @@
         </div>
 
         <div class="field__error" id="err3"></div>
+        <div class="submit-error" id="submitError"></div>
         <div class="step__nav">
           <button type="button" class="btn-back" onclick="goBack(3)">
             <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M13 8H3M7 4l-4 4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             Back
           </button>
-          <button type="button" class="btn-next" onclick="submitForm()">
-            Email My Details
-            <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <button type="button" class="btn-next" id="submitBtn" onclick="submitForm()">
+            <span class="spinner"></span>
+            <span class="btn-next__label">Submit My Details</span>
           </button>
         </div>
       </div>
@@ -627,9 +645,9 @@
     <!-- Success -->
     <div class="success" id="success">
       <div class="success__icon">✓</div>
-      <h2 class="success__title">Details sent.</h2>
+      <h2 class="success__title">Details received.</h2>
       <p class="success__sub">
-        Your email app should now be open with your CV details ready to send. If you added a photo, remember to attach it before hitting send.
+        Your CV details have been logged and a formatted PDF is being generated automatically. Our team will review it and be in touch within 24 hours.
       </p>
       <a href="/" class="btn-home">
         Back to Exevo
@@ -641,15 +659,24 @@
 </div><!-- /page -->
 
 <script>
-  const EXEVO_EMAIL = "exevodesigners@gmail.com";
+  /* ── CONFIG ──
+     Paste your deployed Google Apps Script Web App URL here after step 4 of setup.
+     It looks like: https://script.google.com/macros/s/XXXXXXXXXXXX/exec
+  */
+  const GAS_URL = "https://script.google.com/macros/s/AKfycbyCARge2Gu1SA5-6-F54hKAQ2mauxHIcMM3FVA7xgOBowfkzjmvLbH2f0q2TT2zwE_N/exec";
 
   /* ── PHOTO PICKER ── */
+  let photoBase64 = null;
   const photoInput = document.getElementById('photoInput');
   const photoDrop = document.getElementById('photoDrop');
   photoDrop.addEventListener('click', () => photoInput.click());
   photoInput.addEventListener('change', () => {
     const f = photoInput.files[0];
     document.getElementById('photoFilename').textContent = f ? ('Selected: ' + f.name) : '';
+    if (!f) { photoBase64 = null; return; }
+    const reader = new FileReader();
+    reader.onload = () => { photoBase64 = reader.result; }; // data:image/...;base64,....
+    reader.readAsDataURL(f);
   });
 
   /* ── SUMMARY CHAR COUNT ── */
@@ -756,81 +783,106 @@
     showStep(step - 1);
   }
 
-  /* ── COMPILE + SUBMIT ── */
-  function compileBody() {
-    const g = (id) => (document.getElementById(id)?.value || '').trim();
-
-    const first = g('cf_first'), last = g('cf_last');
-    const lines = [];
-    lines.push(`CV DETAILS — ${first} ${last}`.trim());
-    lines.push('─────────────────────────────────────────');
-    lines.push(`Name:      ${first} ${last}`);
-    lines.push(`Title:     ${g('cf_title')}`);
-    lines.push(`Email:     ${g('cf_email')}`);
-    lines.push(`Phone:     ${g('cf_phone')}`);
-    lines.push(`Location:  ${g('cf_location')}`);
-    if (g('cf_linkedin')) lines.push(`LinkedIn:  ${g('cf_linkedin')}`);
-    lines.push('');
-    lines.push('SUMMARY');
-    lines.push(g('cf_summary'));
-    lines.push('');
-    lines.push('SKILLS & LANGUAGES');
-    lines.push(`Hard skills: ${g('cf_hardskills')}`);
-    lines.push(`Soft skills: ${g('cf_softskills')}`);
-    lines.push(`Languages:   ${g('cf_languages')}`);
-    lines.push('');
-    lines.push('WORK EXPERIENCE');
+  /* ── COLLECT STRUCTURED DATA ── */
+  function collectExperience() {
+    const out = [];
     for (let i = 1; i <= expCount; i++) {
       const companyEl = document.querySelector(`[name="exp_company_${i}"]`);
       if (!companyEl) continue;
       const company = companyEl.value.trim();
       const title = document.querySelector(`[name="exp_title_${i}"]`).value.trim();
       const dates = document.querySelector(`[name="exp_dates_${i}"]`).value.trim();
+      const responsibilities = document.querySelector(`[name="exp_responsibilities_${i}"]`).value.trim();
+      const achievements = document.querySelector(`[name="exp_achievements_${i}"]`).value.trim();
       if (!company && !title) continue;
-      lines.push(`- ${title || '(role)'} at ${company || '(company)'} (${dates || 'dates n/a'})`);
-      const resp = document.querySelector(`[name="exp_responsibilities_${i}"]`).value.trim();
-      if (resp) lines.push('  Responsibilities: ' + resp.replace(/\n/g, ' / '));
-      const ach = document.querySelector(`[name="exp_achievements_${i}"]`).value.trim();
-      if (ach) lines.push('  Achievements: ' + ach.replace(/\n/g, ' / '));
+      out.push({ company, title, dates, responsibilities, achievements });
     }
-    lines.push('');
-    lines.push('EDUCATION');
+    return out;
+  }
+
+  function collectEducation() {
+    const out = [];
     for (let i = 1; i <= eduCount; i++) {
       const instEl = document.querySelector(`[name="edu_institution_${i}"]`);
       if (!instEl) continue;
-      const inst = instEl.value.trim();
+      const institution = instEl.value.trim();
       const degree = document.querySelector(`[name="edu_degree_${i}"]`).value.trim();
       const field = document.querySelector(`[name="edu_field_${i}"]`).value.trim();
       const year = document.querySelector(`[name="edu_year_${i}"]`).value.trim();
-      if (!inst && !degree) continue;
-      lines.push(`- ${degree || '(qualification)'} in ${field || '(field)'}, ${inst || '(institution)'} (${year || 'year n/a'})`);
+      if (!institution && !degree) continue;
+      out.push({ institution, degree, field, year });
     }
-    lines.push('');
-    lines.push('EXTRAS');
-    if (g('cf_certifications')) lines.push(`Certifications: ${g('cf_certifications')}`);
-    if (g('cf_awards')) lines.push(`Awards: ${g('cf_awards')}`);
-    if (g('cf_volunteer')) lines.push(`Volunteer: ${g('cf_volunteer')}`);
-    if (g('cf_references')) lines.push(`References: ${g('cf_references')}`);
-
-    return lines.join('\n');
+    return out;
   }
 
+  function buildPayload() {
+    const g = (id) => (document.getElementById(id)?.value || '').trim();
+    return {
+      firstName: g('cf_first'),
+      lastName: g('cf_last'),
+      title: g('cf_title'),
+      email: g('cf_email'),
+      phone: g('cf_phone'),
+      location: g('cf_location'),
+      linkedin: g('cf_linkedin'),
+      summary: g('cf_summary'),
+      hardSkills: g('cf_hardskills'),
+      softSkills: g('cf_softskills'),
+      languages: g('cf_languages'),
+      experience: collectExperience(),
+      education: collectEducation(),
+      certifications: g('cf_certifications'),
+      awards: g('cf_awards'),
+      volunteer: g('cf_volunteer'),
+      references: g('cf_references'),
+      photoBase64: photoBase64
+    };
+  }
+
+  /* ── SUBMIT ── */
   function submitForm() {
     const err = document.getElementById('err3');
+    const submitError = document.getElementById('submitError');
     err.textContent = '';
+    submitError.classList.remove('submit-error--show');
+    submitError.textContent = '';
 
-    const first = document.getElementById('cf_first').value.trim();
-    const last = document.getElementById('cf_last').value.trim();
-    const subject = `CV Details — ${first} ${last}`.trim();
-    const body = compileBody();
+    if (GAS_URL.indexOf('PASTE_YOUR') === 0) {
+      submitError.textContent = 'This form is not connected to a backend yet — paste your Apps Script Web App URL into GAS_URL in the code.';
+      submitError.classList.add('submit-error--show');
+      return;
+    }
 
-    // Clear the form UI and show success first
-    document.getElementById('stepsWrap').style.display = 'none';
-    document.getElementById('progress').style.display = 'none';
-    document.getElementById('success').classList.add('success--show');
+    const btn = document.getElementById('submitBtn');
+    btn.classList.add('loading');
+    btn.disabled = true;
 
-    // Redirect to the email app
-    window.location.href = `mailto:${EXEVO_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const payload = buildPayload();
+
+    fetch(GAS_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // avoids CORS preflight against Apps Script
+      body: JSON.stringify(payload)
+    })
+      .then((r) => r.json())
+      .then((data) => {
+        btn.classList.remove('loading');
+        btn.disabled = false;
+        if (data && data.status === 'success') {
+          document.getElementById('stepsWrap').style.display = 'none';
+          document.getElementById('progress').style.display = 'none';
+          document.getElementById('success').classList.add('success--show');
+        } else {
+          submitError.textContent = 'Something went wrong on our end: ' + (data && data.message ? data.message : 'unknown error') + '. Please try again or WhatsApp us your details.';
+          submitError.classList.add('submit-error--show');
+        }
+      })
+      .catch((error) => {
+        btn.classList.remove('loading');
+        btn.disabled = false;
+        submitError.textContent = 'Could not reach the server. Please check your connection and try again, or WhatsApp us your details.';
+        submitError.classList.add('submit-error--show');
+      });
   }
 </script>
 </body>
